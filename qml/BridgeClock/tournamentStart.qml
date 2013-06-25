@@ -1,0 +1,190 @@
+import QtQuick 2.0
+import QtQuick.Controls 1.0
+
+Item {
+    anchors.fill: parent
+    anchors.margins: 5
+
+    Text {
+        id: header
+        anchors.margins: 10
+        anchors.top: parent.top
+        anchors.horizontalCenter: parent.horizontalCenter
+        text: "Kilpailun pituus"
+        font.pointSize: 16
+    }
+
+    Text {
+        id: roundsHeader
+        anchors.verticalCenter: roundsText.verticalCenter
+        anchors.left: parent.left
+        anchors.margins: 5
+        text: "Kierroksia"
+    }
+    TextField {
+        id: roundsText
+        width: 50
+        anchors.margins: 5
+        anchors.top: header.bottom
+        anchors.left: roundsHeader.right
+        text: rounds.value
+        validator: IntValidator {
+            bottom: rounds.minimumValue;
+            top: rounds.maximumValue;
+        }
+    }
+    Slider {
+        anchors.top: roundsText.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottomMargin: 10
+        id: rounds
+        value: 13
+        stepSize: 1
+        minimumValue: 1
+        maximumValue: 30
+    }
+    Binding {
+        target: rounds
+        property: "value"
+        value: roundsText.text
+    }
+
+    Text {
+        id: timeHeader
+        anchors.verticalCenter: timeText.verticalCenter
+        anchors.left: parent.left
+        anchors.margins: 5
+        text: "Kierrosaika"
+    }
+    TextField {
+        id: timeText
+        text: time.value
+        width: 50
+        anchors.margins: 5
+        anchors.top: rounds.bottom
+        anchors.left: timeHeader.right
+        validator: DoubleValidator {
+            bottom: rounds.minimumValue;
+            top: rounds.maximumValue;
+            decimals: 1;
+        }
+    }
+    Slider {
+        anchors.top: timeText.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottomMargin: 10
+        id: time
+        value: 15
+        stepSize: 0.5
+        minimumValue: 1
+        maximumValue: 130
+    }
+    Binding {
+        target: time
+        property: "value"
+        value: timeText.text
+    }
+
+
+    Text {
+        id: breaksHeader
+        anchors.verticalCenter: breaksText.verticalCenter
+        anchors.left: parent.left
+        anchors.margins: 5
+        text: "Vaihtoaika"
+    }
+    TextField {
+        id: breaksText
+        text: breaks.value
+        width: 50
+        anchors.margins: 5
+        anchors.top: time.bottom
+        anchors.left: breaksHeader.right
+        validator: IntValidator {
+            bottom: breaks.minimumValue;
+            top: breaks.maximumValue;
+        }
+    }
+    Slider {
+        anchors.top: breaksText.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottomMargin: 10
+        id: breaks
+        value: 2
+        stepSize: 0.5
+        minimumValue: 0
+        maximumValue: 20
+   }
+    Binding {
+        target: breaks
+        property: "value"
+        value: breaksText.text
+    }
+
+    Row {
+        id: startHeader
+        anchors.top: breaks.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+        Text {
+            anchors.verticalCenter: parent.verticalCenter
+            text: "Alkamisaika"
+            font.pixelSize: 14
+        }
+        Button {
+            text: "Nyt"
+            onClicked: {
+                var time = new Date();
+                startTime.hour = time.getHours();
+                startTime.minute = time.getMinutes();
+            }
+        }
+    }
+
+    DatePicker {
+        id: startTime
+        anchors.top: startHeader.bottom
+        anchors.bottom: parent.bottom
+        anchors.margins: 10
+        anchors.horizontalCenter: parent.horizontalCenter
+    }
+
+    Button {
+        anchors.left: parent.left
+        anchors.bottom: parent.bottom
+        text: "Aloita kilpailu"
+    }
+
+    Binding {
+        target: timeController
+        property: "rounds"
+        value: rounds.value
+    }
+
+    Binding {
+        target: timeController
+        property: "roundTime"
+        value: time.value * 2
+    }
+
+    Binding {
+        target: timeController
+        property: "roundBreak"
+        value: breaks.value * 2
+    }
+
+    Binding {
+        target: timeController
+        property: "startTime"
+        value: {
+            var date = new Date();
+            date.setHours(Math.floor(startTime.hour));
+            date.setMinutes(Math.floor(startTime.minute));
+            date.setSeconds(0);
+            date.setMilliseconds(0);
+            return date;
+        }
+    }
+}

@@ -1,11 +1,4 @@
 # Add more folders to ship with the application, here
-folder_01.source = qml/BridgeClock
-folder_01.target = qml
-DEPLOYMENTFOLDERS = folder_01
-
-# Additional import path used to resolve QML modules in Creator's code model
-QML_IMPORT_PATH =
-
 # If your application uses the Qt Mobility libraries, uncomment the following
 # lines and add the respective components to the MOBILITY variable.
 # CONFIG += mobility
@@ -14,12 +7,27 @@ QML_IMPORT_PATH =
 # Speed up launching on MeeGo/Harmattan when using applauncherd daemon
 # CONFIG += qdeclarative-boostable
 
+!win32 {
+LIBS += -lX11
+}
+
+QT += quick widgets
+
 # The .cpp file which was generated for your project. Feel free to hack it.
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    timecontroller.cpp \
+    timemodel.cpp \
+    roundinfo.cpp
 
 # Installation path
 # target.path =
 
 # Please do not modify the following two lines. Required for deployment.
-include(qmlapplicationviewer/qmlapplicationviewer.pri)
-qtcAddDeployment()
+
+OTHER_FILES += \
+    qml/BridgeClock/*
+
+HEADERS += \
+    timecontroller.h \
+    timemodel.h \
+    roundinfo.h

@@ -7,8 +7,11 @@
 # Speed up launching on MeeGo/Harmattan when using applauncherd daemon
 # CONFIG += qdeclarative-boostable
 
-!win32 {
-LIBS += -lX11
+TARGET = BridgeClock
+
+linux {
+
+	QMAKE_LFLAGS += -Wl,--rpath=\\\$\$ORIGIN/lib
 }
 
 QT += quick widgets
@@ -25,7 +28,8 @@ SOURCES += main.cpp \
 # Please do not modify the following two lines. Required for deployment.
 
 OTHER_FILES += \
-    qml/BridgeClock/*
+    qml/BridgeClock/* \
+    LICENSE
 
 HEADERS += \
     timecontroller.h \

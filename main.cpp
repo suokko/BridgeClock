@@ -1,3 +1,24 @@
+/*
+Copyright (c) 2013 Pauli Nieminen <suokkos@gmail.com>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+*/
 
 #include <QGuiApplication>
 
@@ -7,36 +28,23 @@
 #include "timecontroller.h"
 #include "timemodel.h"
 #include "roundinfo.h"
-
-#ifndef WIN32
-extern "C" {
-    int XInitThreads();
-}
-#endif
+#include <stdlib.h>
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
+    QGuiApplication app(argc, argv);
 #ifndef WIN32
-    XInitThreads();
+    QByteArray arr = (QCoreApplication::applicationDirPath() + "/lib").toUtf8();
+    const char *path = arr.data();
+    setenv("LD_LIBRARY_PATH", path, 1);
 #endif
-    QScopedPointer<QGuiApplication> app(new QGuiApplication(argc, argv));
     qmlRegisterType<RoundInfo>();
-    qmlRegisterType<TimeModel>();
+    qmlRegisterType<TimeModel>("org.bridgeClock.TimeModel", 1, 0, "TimeModel");
 
     QQmlApplicationEngine eng;
     TimeController timeController;
     eng.rootContext()->setContextProperty("timeController", &timeController);
     eng.load("qml/BridgeClock/main.qml");
 
-#if 0
-    viewer.setStyleSheet("background:transparent");
-    viewer.setAttribute(Qt::WA_TranslucentBackground);
-    viewer.setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
-
-    viewer2.setFlags(Qt::FramelessWindowHint);
-    viewer2.connect(&viewer, SIGNAL(closing(QQuickCloseEvent*)), SLOT(close()));
-    viewer2.show();
-    viewer.show();
-#endif
-    return app->exec();
+    return app.exec();
 }

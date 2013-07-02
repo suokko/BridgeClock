@@ -1,3 +1,25 @@
+/*
+Copyright (c) 2013 Pauli Nieminen <suokkos@gmail.com>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+*/
+
 import QtQuick 2.0
 import QtQuick.Controls 1.0
 
@@ -11,7 +33,7 @@ Item {
         anchors.top: parent.top
         anchors.horizontalCenter: parent.horizontalCenter
         text: "Kilpailun pituus"
-        font.pointSize: 16
+        font.pointSize: 20
     }
 
     Text {
@@ -70,6 +92,12 @@ Item {
             decimals: 1;
         }
     }
+    Text {
+        anchors.verticalCenter: timeText.verticalCenter
+        anchors.left: timeText.right
+        anchors.margins: 5
+        text: "minuuttia"
+    }
     Slider {
         anchors.top: timeText.bottom
         anchors.left: parent.left
@@ -107,6 +135,12 @@ Item {
             top: breaks.maximumValue;
         }
     }
+    Text {
+        anchors.verticalCenter: breaksText.verticalCenter
+        anchors.left: breaksText.right
+        anchors.margins: 5
+        text: "minuuttia"
+    }
     Slider {
         anchors.top: breaksText.bottom
         anchors.left: parent.left
@@ -131,10 +165,11 @@ Item {
         Text {
             anchors.verticalCenter: parent.verticalCenter
             text: "Alkamisaika"
-            font.pixelSize: 14
+            font.pixelSize: 16
         }
         Button {
             text: "Nyt"
+            width: 30
             onClicked: {
                 var time = new Date();
                 startTime.hour = time.getHours();
@@ -146,15 +181,17 @@ Item {
     DatePicker {
         id: startTime
         anchors.top: startHeader.bottom
-        anchors.bottom: parent.bottom
-        anchors.margins: 10
+        height: Math.min(parent.width, resetTime.y - startTime.y - 5)
+        anchors.margins: 5
         anchors.horizontalCenter: parent.horizontalCenter
     }
 
     Button {
+        id: resetTime
         anchors.left: parent.left
         anchors.bottom: parent.bottom
-        text: "Aloita kilpailu"
+        text: "Poista aikataulu muokkaukset"
+        onPressedChanged: if (pressed) timeController.resetModel();
     }
 
     Binding {

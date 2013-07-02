@@ -1,3 +1,25 @@
+/*
+Copyright (c) 2013 Pauli Nieminen <suokkos@gmail.com>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+*/
+
 import QtQuick 2.0
 import QtWebKit 3.0
 import QtWebKit.experimental 1.0
@@ -9,6 +31,7 @@ Window {
     width: 640
     height: 480
     visible: true
+    title: "Aika näkymä"
     flags: Qt.FramelessWindowHint
 
     Rectangle {
@@ -22,8 +45,9 @@ Window {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
             anchors.margins: 3*zoomFactor
+            visible: timeController.roundInfo.playing < 2
             id: current
-            text: "Kierros 1";
+            text: timeController.roundInfo.name;
             font.pixelSize: 40*zoomFactor;
         }
 
@@ -32,7 +56,9 @@ Window {
             anchors.top: current.bottom
             anchors.margins: 3*zoomFactor
             id: time
-            text: "13:40";
+            text: timeController.roundInfo.playing < 2 ?
+                      timeController.roundInfo.timeLeft :
+                      timeController.roundInfo.name;
             font.pixelSize: 90*zoomFactor;
         }
 
@@ -42,13 +68,15 @@ Window {
             anchors.margins: 10*zoomFactor
             Text {
                 id: nextHeading
+                visible: timeController.roundInfo.playing < 2
                 text: "Seuraavaksi:"
                 font.pixelSize: 18*zoomFactor
             }
 
             Text {
                 id: next
-                text: "Kierros 2";
+                visible: timeController.roundInfo.playing < 2
+                text: timeController.roundInfo.nextName;
                 font.pixelSize: 30*zoomFactor
             }
         }
@@ -226,44 +254,5 @@ Window {
         anchors.left: mover.right
         anchors.right: parent.right
         direction: "BR"
-    }
-
-
-    Timer {
-        interval: 1000;
-        repeat: true;
-        running: true;
-        onTriggered: {
-            var info = timeController.getRoundInfo();
-            var date = new Date();
-            if (info.playing == 2) {
-                time.text = info.name;
-                current.text = "";
-                next.text = "";
-                nextHeading.opacity = 0
-            } else {
-                nextHeading.opacity = 1
-
-                var t = info.end - date.getTime() / 1000;
-                var diff = "";
-                var hours = Math.floor(t/3600);
-                var mins = Math.floor((t - hours*3600)/60);
-                var secs = Math.floor(t - hours*3600 - mins*60);
-                if (hours >= 1)
-                    diff = diff + hours + ":";
-                if (mins > 9)
-                    diff = diff + mins + ":";
-                else
-                    diff = diff + "0" + mins + ":";
-                if (secs > 9)
-                    diff = diff + secs;
-                else
-                    diff = diff + "0" + secs;
-                time.text = diff
-                current.text = info.name
-                next.text = info.nextName
-            }
-            interval = 1050 - date.getMilliseconds();
-        }
     }
 }

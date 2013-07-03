@@ -68,6 +68,7 @@ Window {
         }
     }
     Clock {
+        x: controlView.x + controlView.width
 
     }
 }

@@ -24,10 +24,29 @@ import QtQuick 2.0
 
 MouseArea {
     id: resizer
-    anchors.margins: 10
+    anchors.margins: 3
+    hoverEnabled: true
     enabled: clockWindow.visibility != Qt.WindowFullScreen
     property variant startPosition
     property string direction: ""
+
+    Rectangle {
+        id: visual
+        anchors.fill: parent
+        visible: helpVisible.running && resizer.containsMouse
+        border.width: 2
+        border.color: "black"
+        color: "transparent"
+        radius: 5
+    }
+
+    Timer {
+        id: helpVisible
+        interval: 5000
+        repeat: false
+        running: false
+    }
+
 
     function setCursor() {
         timeController.setItemCursor(resizer,
@@ -43,6 +62,7 @@ MouseArea {
         if (pressedButtons == Qt.LeftButton && !parent.fullScreen) {
             timeController.resizeWindow(clockWindow, resizer, mouseX, mouseY, direction)
         }
+        helpVisible.restart()
     }
     Component.onCompleted: {
         mover.windowState.connect(setCursor)

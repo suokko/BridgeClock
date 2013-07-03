@@ -21,8 +21,6 @@ THE SOFTWARE.
 */
 
 import QtQuick 2.0
-import QtWebKit 3.0
-import QtWebKit.experimental 1.0
 import QtQuick.Window 2.0
 
 Window {
@@ -33,33 +31,50 @@ Window {
     visible: true
     title: "Aika näkymä"
     flags: Qt.FramelessWindowHint
+    readonly property double scrollSpeed: 30
+    property bool animationDown: true
 
     Rectangle {
         id: timeView
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
-        height: current.font.pixelSize + time.font.pixelSize + 12*zoomFactor
+        height: time.font.pixelSize + 12*zoomFactor
+        onHeightChanged: results.doScale();
+
+        Text {
+            anchors.left: parent.left
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.margins: 2*zoomFactor
+            visible: timeController.roundInfo.playing < 2
+            id: current
+            text: timeController.roundInfo.name;
+            font.pixelSize: 35*zoomFactor;
+            font.weight: Font.DemiBold;
+            transform: Scale {
+                origin.x: 0;
+                xScale: time.totalWidth <= clockWindow.width/2
+                        ? 1 :
+                          1 - (time.totalWidth - clockWindow.width/2)/(width / 2)/2;
+            }
+        }
 
         Text {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
             anchors.margins: 3*zoomFactor
-            visible: timeController.roundInfo.playing < 2
-            id: current
-            text: timeController.roundInfo.name;
-            font.pixelSize: 40*zoomFactor;
-        }
-
-        Text {
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: current.bottom
-            anchors.margins: 3*zoomFactor
             id: time
             text: timeController.roundInfo.playing < 2 ?
                       timeController.roundInfo.timeLeft :
                       timeController.roundInfo.name;
-            font.pixelSize: 90*zoomFactor;
+            font.pixelSize: 120*zoomFactor;
+            readonly property double totalWidth: width/2 + current.width;
+            transform: Scale {
+                origin.x: width/2;
+                xScale: time.totalWidth <= clockWindow.width/2
+                        ? 1 :
+                          1 - (time.totalWidth - clockWindow.width/2)/(width / 2)/2;
+            }
         }
 
         Column {
@@ -70,105 +85,98 @@ Window {
                 id: nextHeading
                 visible: timeController.roundInfo.playing < 2
                 text: "Seuraavaksi:"
-                font.pixelSize: 18*zoomFactor
+                font.pixelSize: 15*zoomFactor
+                font.weight: Font.Light
             }
 
             Text {
                 id: next
                 visible: timeController.roundInfo.playing < 2
                 text: timeController.roundInfo.nextName;
-                font.pixelSize: 30*zoomFactor
+                font.pixelSize: 25*zoomFactor
+                font.italic: true;
+                font.weight: Font.Light;
             }
         }
     }
-    WebView {
+
+    Connections {
+        target: timeController
+        onUpdateResults: {
+            if (resultsHidden.loadTarget)
+                resultsHidden.url = url;
+            else if (results.loadTarget)
+                results.url = url;
+            else
+                console.log("NO LOAD TARGET")
+        }
+    }
+
+    Timer {
+         id: scrollTimer
+         running: false
+         repeat: false
+         interval: 2000
+         onTriggered: {
+             if (!resultsHidden.loadTarget)
+                 resultsHidden.animationSwitch();
+             else
+                 results.animationSwitch();
+         }
+    }
+
+    ResultView {
         id: results
-        anchors.top: timeView.bottom
-        anchors.bottom: parent.bottom
-        anchors.horizontalCenter: parent.horizontalCenter
-        clip: true
-        pixelAligned: true
-        interactive: true
-        url: "http://www.bridgefinland.fi"
-        property bool animationDown: true
-        Connections {
-            target: timeController
-            onUpdateResults: {
-                console.log(url)
-                if (results.url == url) {
-                    results.reload.trigger();
-                } else {
-                    results.url = url;
-                }
-            }
-        }
+    }
 
-        onLoadingChanged: {
-            switch (loadRequest.status)
-            {
-            case WebView.LoadSucceededStatus:
-                var size = results.experimental.test.contentsSize;
-                results.width = clockWindow.width < size.width ? clockWindow.width : size.width
-                if (contentY != 0)
-                    fixAnimation();
-                else
-                    scrollTimer.running = true
-                break
-            case WebView.LoadStartedStatus:
-            case WebView.LoadStoppedStatus:
-                break
-            case WebView.LoadFailedStatus:
-                console.log("Failed to load " + url);
-                break
-            }
-        }
-
-       Timer {
-            id: scrollTimer
-            running: false
-            repeat: false
-            interval: 2000
-            onTriggered: {
-                if (results.contentY == 0) {
-                    if (results.contentHeight > results.height) {
-                        results.animationDown = true
-                        results.contentY = results.contentHeight - results.height
-                    }
-                } else {
-                    results.animationDown = false
-                    results.contentY = 0;
-                }
-            }
-        }
-        function fixAnimation() {
-            if (results.animationDown && !scrollTimer.running) {
-                results.contentY = results.contentHeight - results.height
-            }
-        }
-
-        onHeightChanged: fixAnimation();
-
-        Behavior on contentY {
-            NumberAnimation {
-                duration: results.animationDown ?
-                              results.contentHeight > results.height ?
-                                  (results.contentHeight - results.height) * 20 :
-                                  0 :
-                              200
-                easing.type: Easing.Linear
-                onRunningChanged: {
-                    if (!running)
-                        scrollTimer.running = true
-                }
-            }
-        }
+    ResultView {
+        id: resultsHidden
+        loadTarget: true
     }
 
     MouseArea {
         id: mover
         anchors.fill: parent
-        anchors.margins: 50
+        anchors.margins: 50*zoomFactor
+        hoverEnabled: true
         property variant startPosition
+        Rectangle {
+            id: moverVisual
+            anchors.fill: parent
+            visible: resizeHelpVisible.running && mover.containsMouse
+            border.width: 2
+            border.color: "black"
+            color: "transparent"
+            radius: 5
+
+            Rectangle {
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.verticalCenter: parent.verticalCenter
+                width: fullScreenHelp.width + 10*zoomFactor
+                height: fullScreenHelp.height + 10*zoomFactor
+                color: "white"
+                opacity: 0.90
+                radius: 10
+
+                Text {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.verticalCenter: parent.verticalCenter
+                    id: fullScreenHelp
+                    opacity: 1.0
+                    font.pixelSize: 20*zoomFactor
+                    text: clockWindow.visibility !== Qt.WindowFullScreen
+                          ? "Kaksoisnäpäytyksellä täyttää ruudun" :
+                            "Kaksoisnäpäytyksellä ikkunaksi";
+                }
+            }
+        }
+
+        Timer {
+            id: resizeHelpVisible
+            interval: 5000
+            repeat: false
+            running: false
+        }
 
         signal windowState
         onDoubleClicked: {
@@ -187,16 +195,14 @@ Window {
                 var dy = mouseY - startPosition.y
                 timeController.moveWindow(clockWindow, dx, dy)
             }
+            resizeHelpVisible.restart()
         }
         Component.onCompleted: {
             timeController.setItemCursor(mover, "move");
         }
     }
 
-    onWidthChanged: {
-        var size = results.experimental.test.contentsSize;
-        results.width = clockWindow.width < size.width ? clockWindow.width : size.width
-    }
+    onWidthChanged: results.doScale();
 
     Resizer {
         anchors.top: parent.top

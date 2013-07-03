@@ -51,7 +51,9 @@ TimeController::TimeController() :
     QObject(),
     d(new TimeControllerPrivate)
 {
-    d->urlTimer_ = NULL;
+    d->urlTimer_ = new QTimer(this);
+    d->urlTimer_->setSingleShot(true);
+    connect(d->urlTimer_, SIGNAL(timeout()), SLOT(urlUpdate()));
     d->watcher_ = NULL,
     d->model_ = new TimeModel();
     d->roundInfo_ = NULL;
@@ -60,6 +62,7 @@ TimeController::TimeController() :
 TimeController::~TimeController()
 {
     delete d->model_;
+    delete d->urlTimer_;
 }
 
 unsigned TimeController::rounds() const
@@ -200,8 +203,6 @@ const QString &TimeController::resultUrl() const
 
 void TimeController::urlUpdate()
 {
-    delete d->urlTimer_;
-    d->urlTimer_ = NULL;
     delete d->watcher_;
     d->watcher_ = NULL;
     if (d->resultUrl_.startsWith("file://")) {
@@ -224,8 +225,8 @@ void TimeController::fileChanged(const QString &path)
         d->watcher_->removePath(info.absoluteFilePath());
         return;
     }
+    QFileInfo cur = d->resultUrl_.right(d->resultUrl_.size() - 7);
     if (info.isDir()) {
-        QFileInfo cur = d->resultUrl_.right(d->resultUrl_.size() - 7);
         if (!cur.exists()) {
             qDebug() << "File not existing";
             return;
@@ -236,20 +237,13 @@ void TimeController::fileChanged(const QString &path)
             d->watcher_->removePath(cur.absolutePath());
         }
     }
-    emit updateResults(d->resultUrl_);
+    d->urlTimer_->start(100);
 }
 
 void TimeController::setResultUrl(const QString &url)
 {
     d->resultUrl_ = url;
-    if (d->urlTimer_)
-        d->urlTimer_->stop();
-    delete d->urlTimer_;
-    d->urlTimer_ = new QTimer(this);
-    d->urlTimer_->setSingleShot(true);
-    d->urlTimer_->setInterval(2000);
-    connect(d->urlTimer_, SIGNAL(timeout()), SLOT(urlUpdate()));
-    d->urlTimer_->start();
+    d->urlTimer_->start(1000);
 }
 
 void TimeController::moveWindow(QQuickWindow *w, int dx, int dy)
@@ -309,4 +303,3 @@ void TimeController::resizeWindow(QQuickWindow *w, QQuickItem *obj, int dx, int 
 
     w->setGeometry(newSize);
 }
-

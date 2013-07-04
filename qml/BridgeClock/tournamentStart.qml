@@ -29,11 +29,11 @@ Item {
 
     Text {
         id: header
-        anchors.margins: 10
+        anchors.margins: 5
         anchors.top: parent.top
         anchors.horizontalCenter: parent.horizontalCenter
         text: "Kilpailun pituus"
-        font.pointSize: 20
+        font.pixelSize: 20
     }
 
     Text {

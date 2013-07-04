@@ -20,7 +20,9 @@ QT += quick widgets
 SOURCES += main.cpp \
     timecontroller.cpp \
     timemodel.cpp \
-    roundinfo.cpp
+    roundinfo.cpp \
+    globalmousearea.cpp \
+    mouseevent.cpp
 
 # Installation path
 # target.path =
@@ -28,10 +30,26 @@ SOURCES += main.cpp \
 # Please do not modify the following two lines. Required for deployment.
 
 OTHER_FILES += \
-    qml/BridgeClock/* \
-    LICENSE
+    bonjour/LICENSE.bonjour.helper \
+    LICENSE \
+    qml/BridgeClock/ResultView.qml \
+    qml/BridgeClock/fn.js \
+    qml/BridgeClock/circularSliderHandle.png \
+    qml/BridgeClock/circularSlider.png \
+    qml/BridgeClock/tournamentTime.qml \
+    qml/BridgeClock/tournamentStart.qml \
+    qml/BridgeClock/tournamentResults.qml \
+    qml/BridgeClock/Resizer.qml \
+    qml/BridgeClock/PseudoTime.qml \
+    qml/BridgeClock/main.qml \
+    qml/BridgeClock/DatePicker.qml \
+    qml/BridgeClock/Clock.qml \
+    qml/BridgeClock/CircularSlider.qml \
+    qml/BridgeClock/tournamentConnection.qml
 
 HEADERS += \
     timecontroller.h \
     timemodel.h \
-    roundinfo.h
+    roundinfo.h \
+    globalmousearea.h \
+    mouseevent.h

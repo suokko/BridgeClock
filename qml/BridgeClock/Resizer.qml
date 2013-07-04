@@ -21,14 +21,16 @@ THE SOFTWARE.
 */
 
 import QtQuick 2.0
+import org.bridgeClock 1.0
 
-MouseArea {
+GlobalMouseArea {
     id: resizer
     anchors.margins: 3
     hoverEnabled: true
     enabled: clockWindow.visibility != Qt.WindowFullScreen
-    property variant startPosition
     property string direction: ""
+    property variant startPosition
+    property variant windowPosition
 
     Rectangle {
         id: visual
@@ -55,12 +57,26 @@ MouseArea {
     }
 
     onPressed: {
-        startPosition = Qt.point(mouseX, mouseY)
-        timeController.startResize(clockWindow, resizer, mouseX, mouseY);
+        startPosition = Qt.point(mouse.x, mouse.y)
+        windowPosition = Qt.rect(clockWindow.x, clockWindow.y, clockWindow.width, clockWindow.height);
     }
     onPositionChanged: {
-        if (pressedButtons == Qt.LeftButton && !parent.fullScreen) {
-            timeController.resizeWindow(clockWindow, resizer, mouseX, mouseY, direction)
+        if (mouse.buttons == Qt.LeftButton && !parent.fullScreen) {
+            var dx = mouse.x - startPosition.x
+            var dy = mouse.y - startPosition.y
+
+            if (direction.indexOf("T") >= 0) {
+                clockWindow.y = windowPosition.y + dy
+                clockWindow.height = windowPosition.height - dy
+            } else if (direction.indexOf("B") >= 0) {
+                clockWindow.height = windowPosition.height + dy
+            }
+            if (direction.indexOf("L") >= 0) {
+                clockWindow.x = windowPosition.x + dx
+                clockWindow.width = windowPosition.width - dx
+            } else if (direction.indexOf("R") >= 0) {
+                clockWindow.width = windowPosition.width + dx
+            }
         }
         helpVisible.restart()
     }

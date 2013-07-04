@@ -61,10 +61,6 @@ public:
     Q_INVOKABLE RoundInfo *getRoundInfo();
     Q_INVOKABLE void setItemCursor(QQuickItem *obj, const QString &cursor);
 
-    Q_INVOKABLE void moveWindow(QQuickWindow *w, int dx, int dy);
-    Q_INVOKABLE void startResize(QQuickWindow *w, QQuickItem *obj, int x, int y);
-    Q_INVOKABLE void resizeWindow(QQuickWindow *w, QQuickItem *obj, int dx, int dy, const QString &dir);
-
 signals:
     void updateResults(const QString &url);
     void modelChanged();

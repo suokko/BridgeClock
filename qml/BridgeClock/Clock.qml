@@ -22,6 +22,7 @@ THE SOFTWARE.
 
 import QtQuick 2.0
 import QtQuick.Window 2.0
+import org.bridgeClock 1.0
 
 Window {
     id: clockWindow
@@ -134,12 +135,13 @@ Window {
         loadTarget: true
     }
 
-    MouseArea {
+    GlobalMouseArea {
         id: mover
         anchors.fill: parent
         anchors.margins: 50*zoomFactor
         hoverEnabled: true
         property variant startPosition
+        property variant windowPosition
         Rectangle {
             id: moverVisual
             anchors.fill: parent
@@ -187,13 +189,15 @@ Window {
             mover.windowState();
         }
         onPressed: {
-            startPosition = Qt.point(mouseX, mouseY)
+            startPosition = Qt.point(mouse.x, mouse.y)
+            windowPosition = Qt.point(clockWindow.x, clockWindow.y);
         }
         onPositionChanged: {
-            if (pressedButtons == Qt.LeftButton) {
-                var dx = mouseX - startPosition.x
-                var dy = mouseY - startPosition.y
-                timeController.moveWindow(clockWindow, dx, dy)
+            if (mouse.buttons == Qt.LeftButton) {
+                var dx = mouse.x - startPosition.x
+                var dy = mouse.y - startPosition.y
+                clockWindow.x = windowPosition.x + dx;
+                clockWindow.y = windowPosition.y + dy;
             }
             resizeHelpVisible.restart()
         }

@@ -28,6 +28,8 @@ THE SOFTWARE.
 #include "timecontroller.h"
 #include "timemodel.h"
 #include "roundinfo.h"
+#include "globalmousearea.h"
+#include "mouseevent.h"
 #include <stdlib.h>
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
@@ -39,7 +41,9 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     setenv("LD_LIBRARY_PATH", path, 1);
 #endif
     qmlRegisterType<RoundInfo>();
-    qmlRegisterType<TimeModel>("org.bridgeClock.TimeModel", 1, 0, "TimeModel");
+    qmlRegisterType<TimeModel>("org.bridgeClock", 1, 0, "TimeModel");
+    qmlRegisterType<GlobalMouseArea>("org.bridgeClock", 1, 0, "GlobalMouseArea");
+    qmlRegisterType<MouseEvent>();
 
     QQmlApplicationEngine eng;
     TimeController timeController;

@@ -203,8 +203,6 @@ const QString &TimeController::resultUrl() const
 
 void TimeController::urlUpdate()
 {
-    delete d->watcher_;
-    d->watcher_ = NULL;
     if (d->resultUrl_.startsWith("file://")) {
         QFileInfo path = d->resultUrl_.right(d->resultUrl_.size() - 7);
         d->watcher_ = new QFileSystemWatcher(this);
@@ -243,63 +241,7 @@ void TimeController::fileChanged(const QString &path)
 void TimeController::setResultUrl(const QString &url)
 {
     d->resultUrl_ = url;
+    delete d->watcher_;
+    d->watcher_ = NULL;
     d->urlTimer_->start(1000);
-}
-
-void TimeController::moveWindow(QQuickWindow *w, int dx, int dy)
-{
-    if (!w) {
-        qWarning("Window object missing");
-        return;
-    }
-    QPoint p = w->mapToGlobal(QPoint(dx,dy));
-    QRect rect = w->geometry();
-    rect.translate(p.rx() - rect.x(), p.ry() - rect.y());
-    w->setGeometry(rect);
-}
-
-void TimeController::startResize(QQuickWindow *w, QQuickItem *obj, int x, int y)
-{
-    if (!w) {
-        qWarning("Window object missing");
-        return;
-    }
-
-    if (!obj) {
-        qWarning("QML object missing");
-        return;
-    }
-    d->origWindow = w->geometry();
-    QPointF pf(x, y);
-    pf = obj->mapToItem(NULL, pf);
-    d->resizePoint = w->mapToGlobal(QPoint(pf.rx(), pf.ry()));
-}
-
-void TimeController::resizeWindow(QQuickWindow *w, QQuickItem *obj, int dx, int dy, const QString &top)
-{
-    if (!w) {
-        qWarning("Window object missing");
-        return;
-    }
-
-    if (!obj) {
-        qWarning("QML object missing");
-        return;
-    }
-    QPointF pf(dx, dy);
-    pf = obj->mapToItem(NULL, pf);
-    QPoint p = w->mapToGlobal(QPoint(pf.rx(),pf.ry()));
-    p -= d->resizePoint;
-    QRect newSize = d->origWindow;
-
-    if (top.contains("T"))
-        newSize.adjust(0, p.ry(), 0, 0);
-    else if (top.contains("B"))
-        newSize.adjust(0, 0, 0, p.ry());
-    if (top.contains("L"))
-        newSize.adjust(p.rx(), 0, 0, 0);
-    else if (top.contains("R"))
-        newSize.adjust(0, 0, p.rx(), 0);
-
-    w->setGeometry(newSize);
 }

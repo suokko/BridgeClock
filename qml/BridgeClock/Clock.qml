@@ -41,7 +41,10 @@ Window {
         anchors.right: parent.right
         anchors.top: parent.top
         height: time.font.pixelSize + 12*zoomFactor
-        onHeightChanged: results.doScale();
+        onHeightChanged: {
+            results.doScale();
+            resultsHidden.doScale();
+        }
 
         Text {
             anchors.left: parent.left
@@ -206,7 +209,10 @@ Window {
         }
     }
 
-    onWidthChanged: results.doScale();
+    onWidthChanged: {
+        results.doScale();
+        resultsHidden.doScale();
+    }
 
     Resizer {
         anchors.top: parent.top

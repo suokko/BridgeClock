@@ -266,8 +266,10 @@ bool GlobalMouseArea::sendMouseEvent(QMouseEvent *event)
         default:
             break;
         }
-
-        return false;
+        grabber = c->mouseGrabberItem();
+        if (grabber && !grabber->keepMouseGrab() && grabber != this)
+            grabMouse();
+        return true;
     }
     if (event->type() == QEvent::MouseButtonRelease) {
         if (d->pressed_) {

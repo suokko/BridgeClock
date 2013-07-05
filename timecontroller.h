@@ -38,6 +38,7 @@ class TimeController : public QObject
     Q_PROPERTY(unsigned roundBreak READ roundBreak WRITE setRoundBreak)
     Q_PROPERTY(QDateTime startTime READ startTime WRITE setStartTime)
     Q_PROPERTY(QString resultUrl READ resultUrl WRITE setResultUrl)
+    Q_PROPERTY(bool showResults READ showResults WRITE setShowResults NOTIFY showResultsChanged)
     Q_PROPERTY(TimeModel *model READ getModel NOTIFY modelChanged)
     Q_PROPERTY(RoundInfo *roundInfo READ getRoundInfo NOTIFY roundInfoChanged)
 
@@ -48,10 +49,12 @@ public:
     void setRoundTime(unsigned);
     void setRoundBreak(unsigned);
     void setStartTime(const QDateTime &);
+    void setShowResults(bool v);
     unsigned rounds() const;
     unsigned roundTime() const;
     unsigned roundBreak() const;
     const QDateTime &startTime() const;
+    bool showResults() const;
 
     const QString &resultUrl() const;
     void setResultUrl(const QString &url);
@@ -65,6 +68,7 @@ signals:
     void updateResults(const QString &url);
     void modelChanged();
     void roundInfoChanged();
+    void showResultsChanged();
 
 public slots:
     void urlUpdate();

@@ -37,6 +37,7 @@ THE SOFTWARE.
 #include <QQuickWindow>
 
 class TimeControllerPrivate {
+    bool showResults_;
     QString resultUrl_;
     QTimer *urlTimer_;
     QFileSystemWatcher *watcher_;
@@ -51,6 +52,7 @@ TimeController::TimeController() :
     QObject(),
     d(new TimeControllerPrivate)
 {
+    d->showResults_ = true;
     d->urlTimer_ = new QTimer(this);
     d->urlTimer_->setSingleShot(true);
     connect(d->urlTimer_, SIGNAL(timeout()), SLOT(urlUpdate()));
@@ -103,6 +105,19 @@ void TimeController::setRoundBreak(unsigned v)
 void TimeController::setStartTime(const QDateTime & v)
 {
     d->model_->setStartTime(v);
+}
+
+bool TimeController::showResults() const
+{
+    return d->showResults_;
+}
+
+void TimeController::setShowResults(bool v)
+{
+    if (v == d->showResults_)
+        return;
+    d->showResults_ = v;
+    emit showResultsChanged();
 }
 
 void TimeController::updateRoundInfo()

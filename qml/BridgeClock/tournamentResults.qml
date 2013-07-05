@@ -33,9 +33,17 @@ Item {
         anchors.right: parent.right
         anchors.margins: 10
         height: 50
-        Text {
+        CheckBox {
             anchors.top: parent.top
+            id: showResults
+            checked: true
+            text: "Näytä tulokset"
+        }
+
+        Text {
+            anchors.top: showResults.bottom
             anchors.left: parent.left
+            opacity: showResults.checked ? 1 : 0.5
             id: head
             text: "Tulokset: "
             font.pixelSize: 16
@@ -43,7 +51,8 @@ Item {
         Button {
             id: resultButton
             text: "Selaa tiedostoja"
-            anchors.top: parent.top
+            enabled: showResults.checked
+            anchors.top: showResults.bottom
             anchors.left: head.right
             onClicked: loadResults.open()
         }
@@ -53,6 +62,7 @@ Item {
             anchors.right: parent.right
             anchors.top: resultButton.bottom
             anchors.left: parent.left
+            enabled: showResults.checked
             font.pixelSize: 16
             text: "http://www.bridgefinland.fi"
         }
@@ -62,6 +72,12 @@ Item {
         target: timeController
         property: "resultUrl"
         value: resultFile.text
+    }
+
+    Binding {
+        target: timeController
+        property: "showResults"
+        value: showResults.checked
     }
 
     FileDialog {

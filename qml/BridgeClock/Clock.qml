@@ -40,56 +40,75 @@ Window {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
-        height: time.font.pixelSize + 12*zoomFactor
+        z: 2
+        height: timeController.showResults
+                ? time.font.pixelSize + 12*zoomFactor :
+                  clockWindow.height
         onHeightChanged: {
             results.doScale();
             resultsHidden.doScale();
         }
 
         Text {
-            anchors.left: parent.left
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.margins: 2*zoomFactor
+            y: timeController.showResults
+               ? parent.height/2 - height/2 :
+                 time.y/2 - height/2
+            x: timeController.showResults
+               ? 2*zoomFactor :
+                 parent.width/2 - width/2
             visible: timeController.roundInfo.playing < 2
             id: current
             text: timeController.roundInfo.name;
-            font.pixelSize: 35*zoomFactor;
+            font.pixelSize: timeController.showResults
+                            ? 35*zoomFactor :
+                              80*zoomFactor;
             font.weight: Font.DemiBold;
             transform: Scale {
-                origin.x: 0;
-                xScale: time.totalWidth <= clockWindow.width/2
-                        ? 1 :
-                          1 - (time.totalWidth - clockWindow.width/2)/(width / 2)/2;
+                origin.x: timeController.showResults ? 0 : current.width/2;
+                xScale: timeController.showResults
+                        ? (time.totalWidth <= clockWindow.width/2
+                           ? 1 :
+                             1 - (time.totalWidth - clockWindow.width/2)/(width / 2)/2)
+                        : clockWindow.width - 5*zoomFactor < current.width
+                          ? (clockWindow.width - 5*zoomFactor) / current.width
+                          : 1;
             }
         }
 
         Text {
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: parent.top
+            anchors.verticalCenter: parent.verticalCenter
             anchors.margins: 3*zoomFactor
             id: time
             text: timeController.roundInfo.playing < 2 ?
                       timeController.roundInfo.timeLeft :
                       timeController.roundInfo.name;
-            font.pixelSize: 120*zoomFactor;
+            font.pixelSize: timeController.showResults ? 120*zoomFactor : 240*zoomFactor;
             readonly property double totalWidth: width/2 + current.width;
             transform: Scale {
                 origin.x: width/2;
-                xScale: time.totalWidth <= clockWindow.width/2
-                        ? 1 :
-                          1 - (time.totalWidth - clockWindow.width/2)/(width / 2)/2;
+                xScale: timeController.showResults
+                        ? (time.totalWidth <= clockWindow.width/2
+                           ? 1 :
+                             1 - (time.totalWidth - clockWindow.width/2)/(width / 2)/2)
+                        : (clockWindow.width - 5*zoomFactor) / time.width ;
             }
         }
 
         Column {
-            anchors.right: parent.right
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.margins: 10*zoomFactor
+            y: timeController.showResults
+               ? parent.height/2 - height/2 :
+                 clockWindow.height - time.y/2 - height/2
+            x: timeController.showResults
+               ? clockWindow.width - 5*zoomFactor - width :
+                 parent.width/2 - width/2
             Text {
                 id: nextHeading
                 visible: timeController.roundInfo.playing < 2
                 text: "Seuraavaksi:"
-                font.pixelSize: 15*zoomFactor
+                font.pixelSize: timeController.showResults
+                                ? 15*zoomFactor :
+                                  30*zoomFactor
                 font.weight: Font.Light
             }
 
@@ -97,7 +116,9 @@ Window {
                 id: next
                 visible: timeController.roundInfo.playing < 2
                 text: timeController.roundInfo.nextName;
-                font.pixelSize: 25*zoomFactor
+                font.pixelSize: timeController.showResults
+                                ? 25*zoomFactor :
+                                  50*zoomFactor
                 font.italic: true;
                 font.weight: Font.Light;
             }
@@ -140,6 +161,7 @@ Window {
 
     GlobalMouseArea {
         id: mover
+        z: 3
         anchors.fill: parent
         anchors.margins: 50*zoomFactor
         hoverEnabled: true
@@ -215,6 +237,7 @@ Window {
     }
 
     Resizer {
+        z: 3
         anchors.top: parent.top
         anchors.bottom: mover.top
         anchors.left: mover.left
@@ -222,6 +245,7 @@ Window {
         direction: "T"
     }
     Resizer {
+        z: 3
         anchors.top: mover.bottom
         anchors.bottom: parent.bottom
         anchors.left: mover.left
@@ -229,6 +253,7 @@ Window {
         direction: "B"
     }
     Resizer {
+        z: 3
         anchors.top: mover.top
         anchors.bottom: mover.bottom
         anchors.left: parent.left
@@ -236,6 +261,7 @@ Window {
         direction: "L"
     }
     Resizer {
+        z: 3
         anchors.top: mover.top
         anchors.bottom: mover.bottom
         anchors.left: mover.right
@@ -243,6 +269,7 @@ Window {
         direction: "R"
     }
     Resizer {
+        z: 3
         anchors.top: parent.top
         anchors.bottom: mover.top
         anchors.left: parent.left
@@ -250,6 +277,7 @@ Window {
         direction: "TL"
     }
     Resizer {
+        z: 3
         anchors.top: parent.top
         anchors.bottom: mover.top
         anchors.left: mover.right
@@ -257,6 +285,7 @@ Window {
         direction: "TR"
     }
     Resizer {
+        z: 3
         anchors.top: mover.bottom
         anchors.bottom: parent.bottom
         anchors.left: parent.left
@@ -265,6 +294,7 @@ Window {
     }
 
     Resizer {
+        z: 3
         anchors.top: mover.bottom
         anchors.bottom: parent.bottom
         anchors.left: mover.right

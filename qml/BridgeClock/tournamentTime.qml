@@ -42,7 +42,7 @@ Item {
                       (timeController.roundInfo.name + " -> " +
                        timeController.roundInfo.nextName) :
                       timeController.roundInfo.name
-            font.pixelSize: timeController.roundInfo.playing === 0 ? 14 : 20
+            font.pixelSize: timeController.roundInfo.playing === 0 ? 18 : 24
             height: 24
             anchors.top: parent.top
             anchors.margins: 5

@@ -53,6 +53,7 @@ public:
     void setRoundTime(unsigned);
     void setRoundBreak(unsigned);
     void setStartTime(const QDateTime &);
+    void setPaused(bool v);
     unsigned rounds() const;
     unsigned roundTime() const;
     unsigned roundBreak() const;
@@ -70,9 +71,11 @@ public slots:
     void onDataChangeTimeout();
 
 private:
-    unsigned rounds_;
-    unsigned roundTime_;
-    unsigned roundBreak_;
+    unsigned rounds_ : 8;
+    unsigned roundTime_ : 8;
+    unsigned roundBreak_ : 8;
+    unsigned paused_ : 1;
+    QTime pauseTime_;
     QDateTime startTime_;
     class QTimer *dataChangeTimer_;
 
@@ -93,5 +96,17 @@ struct TimeItem {
              const QString & name = QString());
 
     void appendTime(int diff);
+};
+
+
+enum Roles {
+    NameRole = Qt::UserRole+1,
+    StartRole,
+    EndRole,
+    PreviousNameRole,
+    EndMinuteRole,
+    EndHourRole,
+    TypeRole,
+    StartTimeRole,
 };
 

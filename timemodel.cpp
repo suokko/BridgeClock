@@ -29,17 +29,6 @@ THE SOFTWARE.
 
 #include <cassert>
 
-enum Roles {
-    NameRole = Qt::UserRole+1,
-    StartRole,
-    EndRole,
-    PreviousNameRole,
-    EndMinuteRole,
-    EndHourRole,
-    TypeRole,
-    StartTimeRole,
-};
-
 TimeItem::TimeItem(TimeModel::Type type, const QDateTime &start, const QString &name) :
     type_(type),
     start_(start),
@@ -80,6 +69,7 @@ TimeModel::TimeModel() :
     rounds_(13),
     roundTime_(15*2),
     roundBreak_(2*2),
+    paused_(false),
     startTime_(QDateTime::currentDateTime()),
     dataChangeTimer_(new QTimer)
 {
@@ -107,9 +97,15 @@ void TimeModel::onDataChangeTimeout()
 {
     int row;
     int msecs;
+    if (paused_) {
+        int row;
+        getCurrent(row);
+        emit dataChanged(index(row + 1), index(list_.size() - 1));
+        return;
+    }
     QDateTime dt = QDateTime::currentDateTime();
     const TimeItem *item = getCurrent(row);
-    if (row  + 1 == list_.size()) {
+    if (row  + 1 == (int)list_.size()) {
         // End of tournament
         dataChangeTimer_->stop();
         return;
@@ -131,13 +127,17 @@ int TimeModel::rowCount(const QModelIndex &parent) const
     return list_.size();
 }
 
+#define align_to(v, a) ((v / a) * a)
+
 QVariant TimeModel::data(const QModelIndex &index, int role) const
 {
     switch (role) {
     case NameRole:
     {
         QDateTime dt = QDateTime::currentDateTime();
-        if (index.row() + 1 < list_.size() &&
+        if (paused_)
+            dt = dt.addMSecs(-1 * align_to(pauseTime_.elapsed(), 1000));
+        if (index.row() + 1 < (int)list_.size() &&
                 list_[index.row()].start_ < dt &&
                 list_[index.row() + 1].start_ > dt) {
             return QString("<b>") + list_[index.row()].name_ + QString("</b>");
@@ -146,35 +146,88 @@ QVariant TimeModel::data(const QModelIndex &index, int role) const
     }
     case StartRole:
     {
-        QString start = list_[index.row()].start_.toString("HH:mm:ss");
+        QDateTime start = list_[index.row()].start_;
+        int elapsed;
         QDateTime dt = QDateTime::currentDateTime();
-        if (index.row() + 1 < list_.size() &&
+        if (paused_) {
+            elapsed = align_to(pauseTime_.elapsed(), 1000);
+            dt = dt.addMSecs(-1 * elapsed);
+            if (start > dt)
+                start = start.addMSecs(elapsed);
+        }
+        if (index.row() + 1 < (int)list_.size() &&
                 list_[index.row()].start_ < dt &&
                 list_[index.row() + 1].start_ > dt) {
-            return QString("<b>") + start + QString("</b>");
+            return QString("<b>") + start.toString("HH:mm:ss") + QString("</b>");
         }
-        return start;
+        return start.toString("HH:mm:ss");
     }
     case EndRole:
-        if (index.row() + 1 == list_.size())
-            return list_[index.row()].start_.toString("HH:mm:ss");
-        return list_[index.row() + 1].start_.toString("HH:mm:ss");
+    {
+        QDateTime start;
+        if (index.row() + 1 == (int)list_.size())
+            start = list_[index.row()].start_;
+        else
+            start = list_[index.row() + 1].start_;
+        if (paused_) {
+            QDateTime dt = QDateTime::currentDateTime();
+            int elapsed = align_to(pauseTime_.elapsed(), 1000);
+            dt = dt.addMSecs(-1 * elapsed);
+            if (start > dt)
+                start = start.addMSecs(elapsed);
+        }
+        return start.toString("HH:mm:ss");
+    }
     case PreviousNameRole:
         if (index.row() == 0)
             return "Alku";
         return list_[index.row() - 1].name_;
     case EndMinuteRole:
-        if (index.row() + 1 == list_.size())
-            return list_[index.row()].start_.time().minute();
-        return list_[index.row() + 1].start_.time().minute();
+    {
+        QDateTime start;
+        if (index.row() + 1 == (int)list_.size())
+            start = list_[index.row()].start_;
+        else
+            start = list_[index.row() + 1].start_;
+        if (paused_) {
+            QDateTime dt = QDateTime::currentDateTime();
+            int elapsed = align_to(pauseTime_.elapsed(), 1000);
+            dt = dt.addMSecs(-1 * elapsed);
+            if (start > dt)
+                start = start.addMSecs(elapsed);
+        }
+        return start.time().minute();
+    }
     case EndHourRole:
-        if (index.row() + 1 == list_.size())
-            return list_[index.row()].start_.time().hour();
-        return list_[index.row() + 1].start_.time().hour();
+    {
+        QDateTime start;
+        if (index.row() + 1 == (int)list_.size())
+            start = list_[index.row()].start_;
+        else
+            start = list_[index.row() + 1].start_;
+        if (paused_) {
+            QDateTime dt = QDateTime::currentDateTime();
+            int elapsed = align_to(pauseTime_.elapsed(), 1000);
+            dt = dt.addMSecs(-1 * elapsed);
+            if (start > dt)
+                start = start.addMSecs(elapsed);
+        }
+        return start.time().hour();
+    }
     case TypeRole:
         return list_[index.row()].type_;
     case StartTimeRole:
-        return list_[index.row()].start_.toMSecsSinceEpoch();
+    {
+        QDateTime start = list_[index.row()].start_;
+        if (paused_) {
+            QDateTime dt = QDateTime::currentDateTime();
+            int elapsed = align_to(pauseTime_.elapsed(), 1000);
+            dt = dt.addMSecs(-1 * elapsed);
+            if (start > dt)
+                start = start.addMSecs(elapsed);
+        }
+        return start.toMSecsSinceEpoch();
+    }
     default:
         return QVariant();
     }
@@ -326,7 +379,10 @@ struct cmpTime {
 
 const TimeItem *TimeModel::getCurrent(int &row) const
 {
-    cmpTime c(QDateTime::currentDateTime());
+    int elapsed = 0;
+    if (paused_)
+        elapsed = pauseTime_.elapsed();
+    cmpTime c(QDateTime::currentDateTime().addMSecs(-1* elapsed));
     std::vector<TimeItem>::const_iterator iter =
             std::find_if(list_.begin(), list_.end(),
                          c);
@@ -353,11 +409,35 @@ void TimeModel::changeType(int row, TimeModel::Type type,
     }
 }
 
+void TimeModel::setPaused(bool v)
+{
+    if (v) {
+        paused_ = v;
+        pauseTime_.restart();
+        dataChangeTimer_->setSingleShot(false);
+        dataChangeTimer_->start(1000);
+    } else {
+        int row;
+        const TimeItem *item = getCurrent(row);
+        /* Has to be after getCurrent but before changeEnd */
+        paused_ = v;
+        QDateTime end;
+        if (row + 1 != (int)list_.size()) {
+            int elapsed = pauseTime_.elapsed();
+            end = item[1].start_;
+            end = end.addMSecs(elapsed);
+            changeEnd(row, end);
+        }
+        dataChangeTimer_->setSingleShot(true);
+        onDataChangeTimeout();
+    }
+}
+
 void TimeModel::changeEnd(int row, QDateTime end)
 {
     bool set = false;
     QDateTime dt = QDateTime::currentDateTime();
-    if (row + 1 == list_.size()) {
+    if (row + 1 == (int)list_.size()) {
         qWarning("The last entry shouldn't possible to modify. This is a bug!");
         return;
     }

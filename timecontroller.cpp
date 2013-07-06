@@ -37,7 +37,8 @@ THE SOFTWARE.
 #include <QQuickWindow>
 
 class TimeControllerPrivate {
-    bool showResults_;
+    bool showResults_ : 1;
+    bool paused_ : 1;
     QString resultUrl_;
     QTimer *urlTimer_;
     QFileSystemWatcher *watcher_;
@@ -53,6 +54,7 @@ TimeController::TimeController() :
     d(new TimeControllerPrivate)
 {
     d->showResults_ = true;
+    d->paused_ = false;
     d->urlTimer_ = new QTimer(this);
     d->urlTimer_->setSingleShot(true);
     connect(d->urlTimer_, SIGNAL(timeout()), SLOT(urlUpdate()));
@@ -120,6 +122,21 @@ void TimeController::setShowResults(bool v)
     emit showResultsChanged();
 }
 
+bool TimeController::paused() const
+{
+    return d->paused_;
+}
+
+void TimeController::setPaused(bool v)
+{
+    if (v == d->paused_)
+        return;
+    d->paused_ = v;
+    d->roundInfo_->setPaused(v);
+    d->model_->setPaused(v);
+    emit pausedChanged(v);
+}
+
 void TimeController::updateRoundInfo()
 {
     int row;
@@ -146,10 +163,16 @@ void TimeController::updateRoundInfo()
         playing = 2;
     }
     d->roundInfo_->setRow(row);
-    d->roundInfo_->setEnd(end.toTime_t());
+    qulonglong e = d->model_->data(
+                d->model_->index(
+                    row + 1 < d->model_->rowCount(QModelIndex()) ?
+                        row + 1 : row),
+                StartTimeRole).toULongLong() / 1000;
+    d->roundInfo_->setEnd(e);
     d->roundInfo_->setName(name);
     d->roundInfo_->setNextName(nextName);
     d->roundInfo_->setPlaying(playing);
+    d->roundInfo_->setPaused(d->paused_);
 }
 
 RoundInfo *TimeController::getRoundInfo()
@@ -176,6 +199,7 @@ void TimeController::resetModel()
     d->model_->setRoundTime(m->roundTime());
     d->model_->setRoundBreak(m->roundBreak());
     d->model_->setStartTime(m->startTime());
+    d->model_->setPaused(d->paused_);
     emit modelChanged();
     updateRoundInfo();
     d->roundInfo_->connect(d->model_, SIGNAL(dataChanged(QModelIndex,QModelIndex)), SIGNAL(roundInfoChanged()));

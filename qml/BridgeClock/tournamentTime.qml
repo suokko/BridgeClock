@@ -64,6 +64,21 @@ Item {
             anchors.margins: 3
             text: timeController.roundInfo.timeLeft
         }
+        CheckBox {
+            anchors.top: header.bottom
+            anchors.right: parent.right
+            anchors.margins: 5
+            visible: timeController.roundInfo.playing < 2
+            id: pause
+            text: "Pysäytä aika"
+            checked: false
+        }
+
+        Binding {
+            target: timeController
+            property: "paused"
+            value: pause.checked
+        }
 
         GridLayout {
             id: roundGrid

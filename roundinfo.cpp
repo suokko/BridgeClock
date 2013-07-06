@@ -31,6 +31,7 @@ RoundInfo::RoundInfo() :
     name_(),
     nextName_(),
     playing_(-1),
+    paused_(false),
     timeLeftTimer_(new QTimer())
 {
     timeLeftTimer_->setSingleShot(false);
@@ -75,7 +76,7 @@ void RoundInfo::setRow(int v)
     emit rowChanged();
 }
 
-void RoundInfo::setEnd(const uint &v)
+void RoundInfo::setEnd(const qulonglong &v)
 {
     if (end_ == v)
         return;
@@ -118,9 +119,18 @@ void RoundInfo::setPlaying(int v)
     emit playingChanged();
 }
 
+void RoundInfo::setPaused(bool v)
+{
+    paused_ = v;
+    if (paused_)
+        timeLeftTimer_->stop();
+    else if (playing_ < 2)
+        timeLeftTimer_->start(1000);
+}
+
 QString RoundInfo::timeLeft() const
 {
-    if (playing_ < 2)
+    if (playing_ < 2 && !paused_)
         timeLeftTimer_->start(1000);
     QDateTime end;
     end.setMSecsSinceEpoch(end_*1000);

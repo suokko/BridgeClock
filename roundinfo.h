@@ -47,10 +47,11 @@ public:
     QString timeLeft() const;
 
     void setRow(int row);
-    void setEnd(const uint &v);
+    void setEnd(const qulonglong &v);
     void setName(const QString &v);
     void setNextName(const QString &v);
     void setPlaying(int v);
+    void setPaused(bool v);
 signals:
     void rowChanged() const;
     void endChanged() const;
@@ -71,6 +72,7 @@ private:
     qint64 end_;
     QString name_;
     QString nextName_;
-    int playing_;
+    int playing_ : 3;
+    bool paused_ : 1;
     class QTimer *timeLeftTimer_;
 };

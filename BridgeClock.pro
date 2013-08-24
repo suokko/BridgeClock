@@ -14,7 +14,7 @@ linux {
 	QMAKE_LFLAGS += -Wl,--rpath=\\\$\$ORIGIN/lib
 }
 
-QT += quick widgets
+QT += quick webkit
 
 # The .cpp file which was generated for your project. Feel free to hack it.
 SOURCES += main.cpp \
@@ -45,7 +45,8 @@ OTHER_FILES += \
     qml/BridgeClock/DatePicker.qml \
     qml/BridgeClock/Clock.qml \
     qml/BridgeClock/CircularSlider.qml \
-    qml/BridgeClock/tournamentConnection.qml
+    qml/BridgeClock/tournamentConnection.qml \
+    user.settings.pri
 
 HEADERS += \
     timecontroller.h \

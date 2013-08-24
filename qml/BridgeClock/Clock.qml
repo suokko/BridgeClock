@@ -31,8 +31,8 @@ Window {
     height: 480
     visible: true
     title: "Aika näkymä"
-    flags: Qt.FramelessWindowHint
-    readonly property double scrollSpeed: 30
+    flags: Qt.WindowStaysOnTopHint + Qt.CustomizeWindowHint /*+ Qt.FramelessWindowHint + Qt.X11BypassWindowManagerHint */
+    readonly property double msForAPixel: 40
     property bool animationDown: true
 
     Rectangle {
@@ -86,12 +86,12 @@ Window {
             font.pixelSize: timeController.showResults ? 120*zoomFactor : 240*zoomFactor;
             readonly property double totalWidth: width/2 + current.width;
             transform: Scale {
-                origin.x: width/2;
+                origin.x: time.width/2;
                 xScale: timeController.showResults
                         ? (time.totalWidth <= clockWindow.width/2
                            ? 1 :
                              1 - (time.totalWidth - clockWindow.width/2)/(width / 2)/2)
-                        : (clockWindow.width - 5*zoomFactor) / time.width ;
+                        : (clockWindow.width - 10*zoomFactor) / time.width ;
             }
         }
 

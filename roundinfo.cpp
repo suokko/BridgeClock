@@ -137,9 +137,9 @@ QString RoundInfo::timeLeft() const
     QTime r(0, 0);
     r = r.addMSecs(QDateTime::currentDateTime().msecsTo(end));
     if (r.hour() > 0)
-        return r.toString("hh:mm:ss");
+        return r.toString("H:mm:ss");
     else
-        return r.toString("mm:ss");
+        return r.toString("m:ss");
 }
 
 void RoundInfo::onTimeLeftTimer()

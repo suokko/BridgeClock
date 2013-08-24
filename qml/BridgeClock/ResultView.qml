@@ -55,6 +55,8 @@ WebView {
     function doAnimation() {
         if (view.url == "")
             return;
+        if (view.loadTarget)
+            return;
         if (!scrollTimer.running && !scroller.running) {
             scrollTimer.running = true;
             return;
@@ -73,7 +75,7 @@ WebView {
 
         scroller.stop()
         var duration = (view.contentHeight - view.height - view.contentY) /
-                scaler.xScale * clockWindow.scrollSpeed
+                scaler.xScale * clockWindow.msForAPixel
         if (duration < 0) {
             duration = 0;
         }
@@ -99,22 +101,24 @@ WebView {
     }
 
     function animationSwitch() {
+        if (view.loadTarget)
+            return;
         if (clockWindow.animationDown) {
             if (view.contentHeight <= view.height)
                 return;
             var scale = view.experimental.test.contentsScale
             scroller.duration = (view.contentHeight - view.height) /
-                    scaler.xScale * clockWindow.scrollSpeed / scale
+                    scaler.xScale * clockWindow.msForAPixel / scale
             scroller.to = view.contentHeight - view.height
             scroller.from = 0;
             if (scroller.duration == 0)
-                scroller.duration = 200;
+                scroller.duration = 2000;
         } else {
             if (view.contentY === 0) {
                 clockWindow.animationDown = true;
                 return;
             }
-            scroller.duration = 200;
+            scroller.duration = 2000;
             scroller.to = 0;
             scroller.from = view.contentY
         }
@@ -195,14 +199,21 @@ WebView {
     onContentHeightChanged: doAnimation();
 
     onNavigationRequested: {
-        if (request.navigationType != WebView.OtherNavigation)
+        if (request.navigationType == WebView.OtherNavigation && !view.loadTarget) {
+            if (results.loadTarget)
+                results.url = request.url
+            else
+                resultsHidden.url = request.url
+        }
+
+        if (request.navigationType != WebView.OtherNavigation || !view.loadTarget)
             request.action = WebView.IgnoreRequest;
         else
             request.action = WebView.AcceptRequest;
     }
 
     Component.onCompleted: {
-        view.experimental.preferences.javascriptEnabled = false;
+        //view.experimental.preferences.javascriptEnabled = false;
         view.doScale()
     }
 
@@ -214,6 +225,10 @@ WebView {
             if (!running && !view.loadTarget) {
                 scrollTimer.running = true;
                 clockWindow.animationDown = !clockWindow.animationDown;
+                if (clockWindow.animationDown)
+                    scrollTimer.interval = 2000;
+                else
+                    scrollTimer.interval = 10000;
             }
         }
     }

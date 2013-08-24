@@ -35,6 +35,7 @@ THE SOFTWARE.
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
+
 #ifndef WIN32
     QByteArray arr = (QCoreApplication::applicationDirPath() + "/lib").toUtf8();
     const char *path = arr.data();

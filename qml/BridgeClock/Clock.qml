@@ -137,6 +137,16 @@ Window {
         }
     }
 
+    Connections {
+        target: timeController
+        onZoomLimitChanged: {
+            if (!resultsHidden.loadTarget)
+                resultsHidden.doScale();
+            else
+                results.doScale();
+        }
+    }
+
     Timer {
          id: scrollTimer
          running: false

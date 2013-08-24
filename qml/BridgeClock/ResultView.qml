@@ -44,12 +44,21 @@ WebView {
         if (width !== clockWindow.width)
             scale = clockWindow.width / width;
 
+        var contentscale = view.experimental.test.contentsScale;
+        var limitsize = timeController.zoomLimit;
+        var limitwidth = limitsize.width;
+
+        var upscale = scale;
+        if (size.width > limitwidth)
+            scale *= size.width/limitwidth;
+
         view.width = view.visible ? width : 640
         view.height = height / scale;
         view.y = y;
         view.x = 0;
         scaler.xScale = scale;
         scaler.yScale = scale;
+        view.contentX = limitsize.x * contentscale;
     }
 
     function doAnimation() {
@@ -69,6 +78,8 @@ WebView {
         if (!clockWindow.animationDown) {
             if (!scroller.running) {
                 scrollTimer.start();
+            } else {
+                scroller.to = timeController.zoomLimit.y;
             }
             return;
         }
@@ -83,7 +94,7 @@ WebView {
         scroller.duration = duration / scale
 
         if (scroller.duration == 0)
-            scroller.duration = 200;
+            scroller.duration = 2000;
 
         scroller.to = view.contentHeight - view.height
         scroller.from = view.contentY;
@@ -110,8 +121,8 @@ WebView {
             scroller.duration = (view.contentHeight - view.height) /
                     scaler.xScale * clockWindow.msForAPixel / scale
             scroller.to = view.contentHeight - view.height
-            scroller.from = 0;
-            if (scroller.duration == 0)
+            scroller.from = view.contentY;
+            if (scroller.duration <= 0)
                 scroller.duration = 2000;
         } else {
             if (view.contentY === 0) {
@@ -119,7 +130,7 @@ WebView {
                 return;
             }
             scroller.duration = 2000;
-            scroller.to = 0;
+            scroller.to = timeController.zoomLimit.y;
             scroller.from = view.contentY
         }
         scroller.start();
@@ -134,7 +145,7 @@ WebView {
             if (!running) {
                 view.visible = false;
                 scroller.stop();
-                view.doScale();
+                scaleTimeout.restart();
             }
         }
     }
@@ -178,7 +189,7 @@ WebView {
                 ypos = results.contentY
             results.startSwitch(resultsHidden);
             resultsHidden.startSwitch(results);
-            doScale();
+            scaleTimeout.restart();
             if (ypos !== undefined) {
                 view.contentY = ypos;
                 if (!scrollTimer.running)
@@ -197,6 +208,24 @@ WebView {
 
     onHeightChanged: doAnimation();
     onContentHeightChanged: doAnimation();
+    onWidthChanged: scaleTimeout.restart();
+    onContentWidthChanged: scaleTimeout.restart();
+
+    Connections {
+        target: view.experimental.test
+        onContentsScaleChanged: scaleTimeout.restart();
+    }
+
+    Timer {
+        id: scaleTimeout
+        interval: 30
+        running: false
+        repeat: false
+        onTriggered: {
+            doScale();
+        }
+
+    }
 
     onNavigationRequested: {
         if (request.navigationType == WebView.OtherNavigation && !view.loadTarget) {
@@ -214,7 +243,8 @@ WebView {
 
     Component.onCompleted: {
         //view.experimental.preferences.javascriptEnabled = false;
-        view.doScale()
+        scaleTimeout.restart()
+        timeController.zoomLimitChanged.connect
     }
 
     NumberAnimation on contentY {

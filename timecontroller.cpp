@@ -46,6 +46,7 @@ class TimeControllerPrivate {
     QRect origWindow;
     QPoint resizePoint;
     RoundInfo *roundInfo_;
+    QRect zoomLimit_;
     friend class TimeController;
 };
 
@@ -120,6 +121,19 @@ void TimeController::setShowResults(bool v)
         return;
     d->showResults_ = v;
     emit showResultsChanged();
+}
+
+QRect TimeController::getZoomLimit() const
+{
+    return d->zoomLimit_;
+}
+
+void TimeController::setZoomLimit(QRect &v)
+{
+    if (v == d->zoomLimit_)
+        return;
+    d->zoomLimit_ = v;
+    emit zoomLimitChanged();
 }
 
 bool TimeController::paused() const

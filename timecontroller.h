@@ -22,6 +22,7 @@ THE SOFTWARE.
 
 #include <QObject>
 #include <QDateTime>
+#include <QRect>
 
 class TimeModel;
 class RoundInfo;
@@ -42,7 +43,7 @@ class TimeController : public QObject
     Q_PROPERTY(bool paused READ paused WRITE setPaused NOTIFY pausedChanged)
     Q_PROPERTY(TimeModel *model READ getModel NOTIFY modelChanged)
     Q_PROPERTY(RoundInfo *roundInfo READ getRoundInfo NOTIFY roundInfoChanged)
-
+    Q_PROPERTY(QRect zoomLimit READ getZoomLimit WRITE setZoomLimit NOTIFY zoomLimitChanged)
 public:
     explicit TimeController();
     ~TimeController();
@@ -52,12 +53,14 @@ public:
     void setStartTime(const QDateTime &);
     void setShowResults(bool v);
     void setPaused(bool v);
+    void setZoomLimit(QRect &);
     unsigned rounds() const;
     unsigned roundTime() const;
     unsigned roundBreak() const;
     const QDateTime &startTime() const;
     bool showResults() const;
     bool paused() const;
+    QRect getZoomLimit() const;
 
     const QString &resultUrl() const;
     void setResultUrl(const QString &url);
@@ -73,6 +76,7 @@ signals:
     void roundInfoChanged();
     void showResultsChanged();
     void pausedChanged(bool paused);
+    void zoomLimitChanged();
 
 public slots:
     void urlUpdate();

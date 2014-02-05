@@ -14,6 +14,8 @@ linux {
 	QMAKE_LFLAGS += -Wl,--rpath=\\\$\$ORIGIN/lib
 }
 
+QMAKE_CXXFLAGS += -g
+
 QT += quick webkit
 
 # The .cpp file which was generated for your project. Feel free to hack it.

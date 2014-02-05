@@ -38,6 +38,10 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
 #ifndef WIN32
     QByteArray arr = (QCoreApplication::applicationDirPath() + "/lib").toUtf8();
+    const char *cur = getenv("LD_LIBRARY_PATH");
+    if (cur) {
+        arr = arr + ":" + cur;
+    }
     const char *path = arr.data();
     setenv("LD_LIBRARY_PATH", path, 1);
 #endif

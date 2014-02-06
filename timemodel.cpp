@@ -55,6 +55,7 @@ QHash<int, QByteArray> TimeModel::roleNames() const
         names[EndHourRole] = "endHour";
         names[TypeRole] = "type";
         names[StartTimeRole] = "startTime";
+        names[NameRawRole] = "nameRaw";
     }
     return names;
 }
@@ -133,11 +134,12 @@ QVariant TimeModel::data(const QModelIndex &index, int role) const
 {
     switch (role) {
     case NameRole:
+    case NameRawRole:
     {
         QDateTime dt = QDateTime::currentDateTime();
         if (paused_)
             dt = dt.addMSecs(-1 * align_to(pauseTime_.elapsed(), 1000));
-        if (index.row() + 1 < (int)list_.size() &&
+        if (role == NameRole && index.row() + 1 < (int)list_.size() &&
                 list_[index.row()].start_ < dt &&
                 list_[index.row() + 1].start_ > dt) {
             return QString("<b>") + list_[index.row()].name_ + QString("</b>");

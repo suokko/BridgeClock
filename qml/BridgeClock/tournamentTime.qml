@@ -225,7 +225,7 @@ Item {
                     itemType.current.checked = false
                 var item = view.contentItem.currentItem.itemModel;
                 var type = item["type"];
-                var name = item["name"];
+                var name = item["nameRaw"];
                 breakEndTime.hour = item["endHour"];
                 breakEndTime.minute = item ["endMinute"];
                 customName.text = "";

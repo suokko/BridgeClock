@@ -108,5 +108,6 @@ enum Roles {
     EndHourRole,
     TypeRole,
     StartTimeRole,
+    NameRawRole,
 };
 

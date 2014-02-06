@@ -29,6 +29,8 @@ THE SOFTWARE.
 
 #include <cassert>
 
+static const QString vaihto = "Vaihto";
+
 TimeItem::TimeItem(TimeModel::Type type, const QDateTime &start, const QString &name) :
     type_(type),
     start_(start),
@@ -82,7 +84,6 @@ TimeModel::TimeModel() :
     list_.reserve(rounds_*2 + 2);
     QDateTime start = startTime_;
     const QString kierros = "Kierros ";
-    const QString vaihto = "Vaihto";
     for (r = 0; r < rounds_; r++) {
         list_.push_back(TimeItem(Play, start, kierros + QString::number(r + 1)));
         start = start.addSecs(30 * roundTime_);
@@ -458,4 +459,18 @@ void TimeModel::changeEnd(int row, QDateTime end)
         list_[row].appendTime(list_[row + 1].start_.secsTo(end));
         timeFixUp();
     }
+}
+
+void TimeModel::reset()
+{
+    for (TimeItem &t : list_) {
+        t.timeDiff_ = 0;
+        if (t.type_ == TimeModel::Break) {
+            t.type_ = TimeModel::Change;
+            t.name_ = vaihto;
+        }
+    }
+    QModelIndex end;
+    timeFixUp();
+    emit dataChanged(index(0), index(list_.size() - 1));
 }

@@ -228,17 +228,9 @@ TimeModel * TimeController::getModel()
 
 void TimeController::resetModel()
 {
-    TimeModel *m = d->model_;
-    d->model_ = new TimeModel();
-    d->model_->setRounds(m->rounds());
-    d->model_->setRoundTime(m->roundTime());
-    d->model_->setRoundBreak(m->roundBreak());
-    d->model_->setStartTime(m->startTime());
-    d->model_->setPaused(d->paused_);
-    emit modelChanged();
+    d->model_->reset();
     updateRoundInfo();
-    d->roundInfo_->connect(d->model_, SIGNAL(dataChanged(QModelIndex,QModelIndex)), SIGNAL(roundInfoChanged()));
-    m->deleteLater();
+    emit modelChanged();
 }
 
 void TimeController::setItemCursor(QQuickItem *obj, const QString &cursor)

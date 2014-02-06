@@ -14,7 +14,7 @@ linux {
 	QMAKE_LFLAGS += -Wl,--rpath=\\\$\$ORIGIN/lib
 }
 
-QMAKE_CXXFLAGS += -g
+QMAKE_CXXFLAGS += -std=c++11 -g
 
 QT += quick webkit
 

@@ -49,6 +49,7 @@ public:
         End,
     };
 
+    void reset();
     void setRounds(unsigned);
     void setRoundTime(unsigned);
     void setRoundBreak(unsigned);

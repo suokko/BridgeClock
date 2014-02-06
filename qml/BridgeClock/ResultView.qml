@@ -122,16 +122,18 @@ WebView {
                     scaler.xScale * clockWindow.msForAPixel / scale
             scroller.to = view.contentHeight - view.height
             scroller.from = view.contentY;
-            if (scroller.duration <= 0)
+            if (scroller.duration <= 2000)
                 scroller.duration = 2000;
         } else {
             if (view.contentY === 0) {
                 clockWindow.animationDown = true;
                 return;
             }
-            scroller.duration = 2000;
-            scroller.to = timeController.zoomLimit.y;
-            scroller.from = view.contentY
+            scroller.to = 0;
+            scroller.duration = 0;
+            clockWindow.animationDown = !clockWindow.animationDown;
+            scrollTimer.interval = 10000;
+            scrollTimer.running = true;
         }
         scroller.start();
     }
@@ -253,12 +255,9 @@ WebView {
         easing.type: Easing.Linear
         onRunningChanged: {
             if (!running && !view.loadTarget) {
-                scrollTimer.running = true;
                 clockWindow.animationDown = !clockWindow.animationDown;
-                if (clockWindow.animationDown)
-                    scrollTimer.interval = 2000;
-                else
-                    scrollTimer.interval = 10000;
+                scrollTimer.interval = 10000;
+                scrollTimer.running = true;
             }
         }
     }

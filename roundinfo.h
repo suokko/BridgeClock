@@ -32,6 +32,9 @@ class RoundInfo : public QObject
     Q_PROPERTY(qint64 end READ end NOTIFY endChanged)
     Q_PROPERTY(QString name READ name NOTIFY nameChanged)
     Q_PROPERTY(QString nextName READ nextName NOTIFY nextNameChanged)
+    Q_PROPERTY(QString nextBreakName READ nextBreakName NOTIFY nextBreakNameChanged)
+    Q_PROPERTY(QString nextBreakEnd READ nextBreakEnd NOTIFY nextBreakEndChanged)
+    Q_PROPERTY(QString nextBreakStart READ nextBreakStart NOTIFY nextBreakStartChanged)
     Q_PROPERTY(int playing READ playing NOTIFY playingChanged)
     Q_PROPERTY(QString timeLeft READ timeLeft NOTIFY timeLeftChanged)
 
@@ -43,6 +46,9 @@ public:
     qint64 end() const;
     const QString &name() const;
     const QString &nextName() const;
+    const QString &nextBreakName() const;
+    const QString &nextBreakEnd() const;
+    const QString &nextBreakStart() const;
     int playing() const;
     QString timeLeft() const;
 
@@ -50,6 +56,9 @@ public:
     void setEnd(const qulonglong &v);
     void setName(const QString &v);
     void setNextName(const QString &v);
+    void setNextBreakName(const QString &v);
+    void setNextBreakEnd(const QString &v);
+    void setNextBreakStart(const QString &v);
     void setPlaying(int v);
     void setPaused(bool v);
 signals:
@@ -57,6 +66,9 @@ signals:
     void endChanged() const;
     void nameChanged() const;
     void nextNameChanged() const;
+    void nextBreakNameChanged() const;
+    void nextBreakEndChanged() const;
+    void nextBreakStartChanged() const;
     void playingChanged() const;
     void timeLeftChanged() const;
     /**
@@ -72,6 +84,9 @@ private:
     qint64 end_;
     QString name_;
     QString nextName_;
+    QString nextBreakName_;
+    QString nextBreakEnd_;
+    QString nextBreakStart_;
     int playing_ : 3;
     bool paused_ : 1;
     class QTimer *timeLeftTimer_;

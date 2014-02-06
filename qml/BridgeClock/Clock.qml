@@ -49,29 +49,53 @@ Window {
             resultsHidden.doScale();
         }
 
-        Text {
+        Column {
             y: timeController.showResults
                ? parent.height/2 - height/2 :
                  time.y/2 - height/2
             x: timeController.showResults
                ? 2*zoomFactor :
-                 parent.width/2 - width/2
-            visible: timeController.roundInfo.playing < 2
-            id: current
-            text: timeController.roundInfo.name;
-            font.pixelSize: timeController.showResults
-                            ? 35*zoomFactor :
-                              80*zoomFactor;
-            font.weight: Font.DemiBold;
-            transform: Scale {
-                origin.x: timeController.showResults ? 0 : current.width/2;
-                xScale: timeController.showResults
+               parent.width/2 - width/2
+            Text {
+                visible: timeController.roundInfo.playing < 2
+                id: current
+                text: timeController.roundInfo.name;
+                font.pixelSize: timeController.showResults
+                ? 35*zoomFactor :
+                55*zoomFactor;
+                font.weight: Font.DemiBold;
+                transform: Scale {
+                    origin.x: timeController.showResults ? 0 : current.width/2;
+                    xScale: timeController.showResults
                         ? (time.totalWidth <= clockWindow.width/2
-                           ? 1 :
-                             1 - (time.totalWidth - clockWindow.width/2)/(width / 2)/2)
-                        : clockWindow.width - 5*zoomFactor < current.width
-                          ? (clockWindow.width - 5*zoomFactor) / current.width
-                          : 1;
+                            ? 1 :
+                                1 - (time.totalWidth - clockWindow.width/2)/(width / 2)/2)
+                                : clockWindow.width - 5*zoomFactor < current.width
+                                    ? (clockWindow.width - 5*zoomFactor) / current.width
+                                        : 1;
+                }
+            }
+            Grid {
+                columns: timeController.showResults ? 1 : 2
+                Text {
+                    id: endHeading
+                    visible: true
+                    text: "Kilpailu loppuu: "
+                    font.pixelSize: timeController.showResults
+                        ? 15*zoomFactor :
+                          25*zoomFactor
+                    font.weight: Font.Light
+                }
+
+                Text {
+                    id: end
+                    visible: true
+                    text: timeController.tournamentEnd.replace(/:[^:]*$/,'')
+                    font.pixelSize: timeController.showResults
+                        ? 25*zoomFactor :
+                          30*zoomFactor
+                    font.weight: Font.Light;
+                }
             }
         }
 
@@ -95,32 +119,54 @@ Window {
             }
         }
 
-        Column {
+        Grid {
             y: timeController.showResults
-               ? parent.height/2 - height/2 :
-                 clockWindow.height - time.y/2 - height/2
+               ? (parent.height - height)/2 :
+                 clockWindow.height - height - ((clockWindow.height - (time.y + time.height)) - height)/2
             x: timeController.showResults
-               ? clockWindow.width - 5*zoomFactor - width :
-                 parent.width/2 - width/2
-            Text {
-                id: nextHeading
-                visible: timeController.roundInfo.playing < 2
-                text: "Seuraavaksi:"
-                font.pixelSize: timeController.showResults
-                                ? 15*zoomFactor :
-                                  30*zoomFactor
-                font.weight: Font.Light
-            }
+               ? time.x + time.width + 10*zoomFactor :
+               parent.width/2 - width/2
+            columns: timeController.showResults ? 1 : 2
 
-            Text {
-                id: next
-                visible: timeController.roundInfo.playing < 2
-                text: timeController.roundInfo.nextName;
-                font.pixelSize: timeController.showResults
-                                ? 25*zoomFactor :
-                                  50*zoomFactor
-                font.italic: true;
-                font.weight: Font.Light;
+            Rectangle {
+                height: timeController.showResults ? nextHeading.height : next.height;
+                width: nextHeading.width
+                Text {
+                    y: (parent.height - height)/2
+                    id: nextHeading
+                    visible: timeController.roundInfo.playing < 2
+                    text: "Seuraava tauko: "
+                    font.pixelSize: timeController.showResults
+                                    ? 15*zoomFactor :
+                                      25*zoomFactor
+                    font.weight: Font.Light
+                }
+            }
+            Column {
+                Text {
+                    id: next
+                    visible: timeController.roundInfo.playing < 2
+                    text: timeController.roundInfo.nextBreakName;
+                    font.pixelSize: timeController.showResults
+                                    ? 25*zoomFactor :
+                                      40*zoomFactor
+                    font.italic: true;
+                    font.weight: Font.Light;
+                
+                }
+
+                Text {
+                    id: nextBreakEnd
+                    visible: timeController.roundInfo.playing < 2 &&
+                        timeController.roundInfo.nextBreakStart != ""
+                        text: timeController.roundInfo.nextBreakStart.replace(/:[^:]*$/,'') + 
+                        (timeController.roundInfo.nextBreakEnd != "" ? " - " + 
+                        timeController.roundInfo.nextBreakEnd.replace(/:[^:]*$/,'') : "");
+                    font.pixelSize: timeController.showResults
+                                    ? 20*zoomFactor :
+                                      40*zoomFactor
+                    font.weight: Font.Light;
+                }
             }
         }
     }

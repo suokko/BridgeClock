@@ -40,7 +40,7 @@ Item {
         CheckBox {
             anchors.top: parent.top
             id: showResults
-            checked: true
+            checked: false
             text: "Näytä tulokset"
         }
 

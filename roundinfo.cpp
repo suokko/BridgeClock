@@ -30,6 +30,9 @@ RoundInfo::RoundInfo() :
     end_(0),
     name_(),
     nextName_(),
+    nextBreakName_(),
+    nextBreakEnd_(),
+    nextBreakStart_(),
     playing_(-1),
     paused_(false),
     timeLeftTimer_(new QTimer())
@@ -61,6 +64,21 @@ const QString &RoundInfo::name() const
 const QString &RoundInfo::nextName() const
 {
     return nextName_;
+}
+
+const QString &RoundInfo::nextBreakName() const
+{
+    return nextBreakName_;
+}
+
+const QString &RoundInfo::nextBreakEnd() const
+{
+    return nextBreakEnd_;
+}
+
+const QString &RoundInfo::nextBreakStart() const
+{
+    return nextBreakStart_;
 }
 
 int RoundInfo::playing() const
@@ -102,6 +120,30 @@ void RoundInfo::setNextName(const QString &v)
         return;
     nextName_ = v;
     emit nextNameChanged();
+}
+
+void RoundInfo::setNextBreakName(const QString &v)
+{
+    if (nextBreakName_ == v)
+        return;
+    nextBreakName_ = v;
+    emit nextBreakNameChanged();
+}
+
+void RoundInfo::setNextBreakStart(const QString &v)
+{
+    if (nextBreakStart_ == v)
+        return;
+    nextBreakStart_ = v;
+    emit nextBreakStartChanged();
+}
+
+void RoundInfo::setNextBreakEnd(const QString &v)
+{
+    if (nextBreakEnd_ == v)
+        return;
+    nextBreakEnd_ = v;
+    emit nextBreakEndChanged();
 }
 
 void RoundInfo::setPlaying(int v)

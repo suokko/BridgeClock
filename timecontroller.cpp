@@ -54,7 +54,7 @@ TimeController::TimeController() :
     QObject(),
     d(new TimeControllerPrivate)
 {
-    d->showResults_ = true;
+    d->showResults_ = false;
     d->paused_ = false;
     d->urlTimer_ = new QTimer(this);
     d->urlTimer_->setSingleShot(true);
@@ -62,6 +62,8 @@ TimeController::TimeController() :
     d->watcher_ = NULL,
     d->model_ = new TimeModel();
     d->roundInfo_ = NULL;
+
+    connect(d->model_, SIGNAL(dataChanged(QModelIndex,QModelIndex)), SIGNAL(tournamentEndChanged()));
 }
 
 TimeController::~TimeController()
@@ -155,22 +157,32 @@ void TimeController::updateRoundInfo()
 {
     int row;
     const TimeItem *item = d->model_->getCurrent(row);
-    QDateTime end(QDateTime::currentDateTime());
-    QString nextName = "";
+    QDateTime end, cur(QDateTime::currentDateTime());
+    QString nextName = "", nextBreakName = "", nextBreakEnd = "", nextBreakStart;
     QString name = item[0].name_;
     int playing = item[0].type_ == TimeModel::Play ? 1 : 0;
+    int next = 1;
+    end = cur;
 
 
     if (item[0].type_ != TimeModel::End) {
-        if (item[0].start_ < end) {
-            int next = 1;
-            while (item[next].type_ == TimeModel::Change)
-                next++;
-            end = item[1].start_;
-            nextName = item[next].name_;
-        } else {
+
+        while (item[next].type_ == TimeModel::Change)
+            next++;
+        nextName = item[next].name_;
+        while (item[next].type_ == TimeModel::Change ||
+                item[next].type_ == TimeModel::Play)
+            next++;
+        nextBreakName = item[next].name_;
+        end = item[1].start_;
+        if (item[next].type_ == TimeModel::Break)
+            nextBreakEnd = d->model_->data(d->model_->index(row + next), EndRole).toString();
+        if (item[next].type_ == TimeModel::Break ||
+                item[next].type_ == TimeModel::End)
+            nextBreakStart = d->model_->data(d->model_->index(row + next), StartRole).toString();
+
+        if (item[0].start_ >= cur) {
             end = item[0].start_;
-            nextName = item[0].name_;
             name = "Kilpailun alkuun";
         }
     } else {
@@ -185,6 +197,9 @@ void TimeController::updateRoundInfo()
     d->roundInfo_->setEnd(e);
     d->roundInfo_->setName(name);
     d->roundInfo_->setNextName(nextName);
+    d->roundInfo_->setNextBreakName(nextBreakName);
+    d->roundInfo_->setNextBreakEnd(nextBreakEnd);
+    d->roundInfo_->setNextBreakStart(nextBreakStart);
     d->roundInfo_->setPlaying(playing);
     d->roundInfo_->setPaused(d->paused_);
 }
@@ -198,6 +213,12 @@ RoundInfo *TimeController::getRoundInfo()
     d->roundInfo_->connect(d->model_, SIGNAL(dataChanged(QModelIndex,QModelIndex)), SIGNAL(roundInfoChanged()));
     connect(d->roundInfo_, SIGNAL(roundInfoChanged()), SLOT(updateRoundInfo()));
     return d->roundInfo_;
+}
+
+QString TimeController::tournamentEnd() const
+{
+    return d->model_->data(d->model_->index(d->model_->rowCount(QModelIndex()) - 1),
+            StartRole).toString();
 }
 
 TimeModel * TimeController::getModel()

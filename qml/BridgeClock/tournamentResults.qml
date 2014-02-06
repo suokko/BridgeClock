@@ -80,11 +80,18 @@ Item {
             visible: true
             z: -1
             url: resultFile.text
-            onLoadingChanged: {
-                if (loadRequest.status == WebView.LoadSucceededStatus) {
+            function setSize() {
                     var scale = view.experimental.test.contentsScale;
-                    timeController.zoomLimit = Qt.rect(resultLimiterBorder.x/scale, resultLimiterBorder.y/scale, resultLimiterBorder.width/scale, resultLimiter.height/scale);
-                }
+                    resultLimiterBorder.x = 0
+                    resultLimiterBorder.y = 0
+                    resultLimiterBorder.height = view.contentHeight
+                    resultLimiterBorder.width = view.contentWidth
+                    timeController.zoomLimit = Qt.rect(resultLimiterBorder.x/scale, resultLimiterBorder.y/scale, resultLimiterBorder.width/scale, resultLimiterBorder.height/scale);
+            }
+            onContentHeightChanged: setSize()
+            onContentWidthChanged: setSize()
+            Component.onCompleted: {
+                view.experimental.preferences.javascriptEnabled = false;
             }
         }
         MouseArea {
@@ -95,43 +102,53 @@ Item {
             id: resultLimiter
             hoverEnabled: true
             property string direction: ""
+            property variant panstart: Qt.point(0, 0)
             property bool directionLock: false
 
             Rectangle {
                 id: resultLimiterBorder
                 x: 0
                 y: 0
-                width: parent.width
-                height: parent.height
+                width: view.contentWidth
+                height: view.contentHeight
                 border.width: 2
                 border.color: "black"
                 color: "transparent"
             }
 
             onPressed: {
-                if (mouse.buttons == Qt.LeftButton)
+                if (mouse.buttons == Qt.LeftButton) {
                     directionLock = true;
+                    panstart = Qt.point(mouse.x + view.contentX, mouse.y + view.contentY);
+                }
             }
 
             onReleased: {
                 if (mouse.buttons != Qt.LeftButton) {
                     directionLock = false;
                     var scale = view.experimental.test.contentsScale;
-                    timeController.zoomLimit = Qt.rect(resultLimiterBorder.x/scale, resultLimiterBorder.y/scale, resultLimiterBorder.width/scale, resultLimiter.height/scale);
+                    timeController.zoomLimit = Qt.rect(resultLimiterBorder.x/scale, resultLimiterBorder.y/scale, resultLimiterBorder.width/scale, resultLimiterBorder.height/scale);
                 }
             }
 
             onPositionChanged: {
                 var dir = "";
-                var left = Math.abs(mouse.x - resultLimiterBorder.x);
-                var right = Math.abs(mouse.x - resultLimiterBorder.x - resultLimiterBorder.width);
-                var top = Math.abs(mouse.y - resultLimiterBorder.y);
-                var bottom = Math.abs(mouse.y - resultLimiterBorder.y - resultLimiterBorder.height);
-                var activeArea = 15;
+                /* Either border of mouse area or limit is active zone */
+                var rx = resultLimiterBorder.x > 0 ? resultLimiterBorder.x : 0;
+                var ry = resultLimiterBorder.y > 0 ? resultLimiterBorder.y : 0;
+                var rw = resultLimiterBorder.x + resultLimiterBorder.width < width ?
+                    resultLimiterBorder.x + resultLimiterBorder.width : width;
+                var rh = resultLimiterBorder.y + resultLimiterBorder.height < height ?
+                    resultLimiterBorder.y + resultLimiterBorder.height : height;
+                var left = Math.abs(mouse.x - rx);
+                var right = Math.abs(mouse.x - rw);
+                var top = Math.abs(mouse.y - ry);
+                var bottom = Math.abs(mouse.y - rh);
+                var activeArea = 30;
                 if (top < bottom && top < activeArea) {
                     dir = dir + "T";
                 } else if (top > bottom && bottom < activeArea) {
-                    //dir = dir + "B";
+                    dir = dir + "B";
                 }
                 if ( left < right && left < activeArea) {
                     dir = dir + "L";
@@ -139,21 +156,40 @@ Item {
                     dir = dir + "R";
                 }
                 if (dir != direction && !directionLock) {
-                    console.log(dir);
                     direction = dir;
                     timeController.setItemCursor(resultLimiter, direction);
+                    if (direction != "")
+                        resultLimiterBorder.border.color = "blue"
+                    else
+                        resultLimiterBorder.border.color = "black"
+                } else if (directionLock && direction == "") {
+                    var dy = panstart.y - (mouse.y + view.contentY)
+                    if (dy < -view.contentY)
+                        dy = -view.contentY;
+                    else if (view.contentY + dy > view.contentHeight - view.height)
+                        dy = (view.contentHeight - view.height) - view.contentY;
+                    view.contentY += dy;
+                    resultLimiterBorder.y -= dy;
+
+                    var dx = panstart.x - (mouse.x + view.contentX)
+                    if (dx < -view.contentX)
+                        dx = -view.contentX;
+                    else if (view.contentX + dx > view.contentWidth - view.width)
+                        dx = (view.contentWidth - view.width) - view.contentX;
+                    view.contentX += dx;
+                    resultLimiterBorder.x -= dx;
                 } else if (directionLock) {
                     var y = mouse.y;
                     var x = mouse.x;
                     /* Clip to mousearea */
-                    if (y < 0)
-                        y = 0
-                    else if (y > height)
-                        y = height
-                    if (x < 0)
-                        x = 0
-                    else if (x > width)
-                        x = width
+                    if (y < -view.contentY)
+                        y = -view.contentY
+                    else if (y > view.contentHeight - view.contentY)
+                        y = view.contentHeight - view.contentY
+                    if (x < -view.contentX)
+                        x = -view.contentX
+                    else if (x > view.contentWidth - view.contentX)
+                        x = view.contentWidth - view.contentX
                     var change;
                     if (direction.indexOf("T") >= 0) {
                         change = y - resultLimiterBorder.y;

@@ -197,7 +197,7 @@ Window {
          id: scrollTimer
          running: false
          repeat: false
-         interval: 2000
+         interval: clockWindow.animationDown ? 10000 : 5000;
          onTriggered: {
              if (!resultsHidden.loadTarget)
                  resultsHidden.animationSwitch();

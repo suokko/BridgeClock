@@ -45,10 +45,8 @@ WebView {
             scale = clockWindow.width / width;
 
         var contentscale = view.experimental.test.contentsScale;
-        var limitsize = timeController.zoomLimit;
-        var limitwidth = limitsize.width;
+        var limitwidth = timeController.zoomLimit.width
 
-        var upscale = scale;
         if (size.width > limitwidth)
             scale *= size.width/limitwidth;
 
@@ -58,7 +56,8 @@ WebView {
         view.x = 0;
         scaler.xScale = scale;
         scaler.yScale = scale;
-        view.contentX = limitsize.x * contentscale;
+        view.contentX = zoomLimitx();
+        doAnimation();
     }
 
     function doAnimation() {
@@ -67,7 +66,7 @@ WebView {
         if (view.loadTarget)
             return;
         if (!scrollTimer.running && !scroller.running) {
-            scrollTimer.running = true;
+            scrollTimer.start();
             return;
         }
 
@@ -76,16 +75,12 @@ WebView {
         }
 
         if (!clockWindow.animationDown) {
-            if (!scroller.running) {
-                scrollTimer.start();
-            } else {
-                scroller.to = timeController.zoomLimit.y;
-            }
+            scrollTimer.start();
             return;
         }
 
         scroller.stop()
-        var duration = (view.contentHeight - view.height - view.contentY) /
+        var duration = (zoomLimity() + zoomLimitheight() - view.height - view.contentY) /
                 scaler.xScale * clockWindow.msForAPixel
         if (duration < 0) {
             duration = 0;
@@ -93,10 +88,10 @@ WebView {
         var scale = view.experimental.test.contentsScale
         scroller.duration = duration / scale
 
-        if (scroller.duration == 0)
+        if (scroller.duration <= 2000)
             scroller.duration = 2000;
 
-        scroller.to = view.contentHeight - view.height
+        scroller.to = zoomLimity() + zoomLimitheight() - view.height
         scroller.from = view.contentY;
         scrollTimer.stop()
         clockWindow.animationDown = true;
@@ -115,27 +110,25 @@ WebView {
         if (view.loadTarget)
             return;
         if (clockWindow.animationDown) {
-            if (view.contentHeight <= view.height)
+            if (zoomLimitheight() <= view.height)
                 return;
-            var scale = view.experimental.test.contentsScale
-            scroller.duration = (view.contentHeight - view.height) /
-                    scaler.xScale * clockWindow.msForAPixel / scale
-            scroller.to = view.contentHeight - view.height
+            var scale = view.experimental.test.contentsScale;
+            scroller.duration = (zoomLimity() + zoomLimitheight() - view.height - view.contentY) /
+                    scaler.xScale * clockWindow.msForAPixel / scale;
+            scroller.to = zoomLimity() + zoomLimitheight() - view.height;
             scroller.from = view.contentY;
             if (scroller.duration <= 2000)
                 scroller.duration = 2000;
+            scroller.start();
         } else {
             if (view.contentY === 0) {
                 clockWindow.animationDown = true;
                 return;
             }
-            scroller.to = 0;
-            scroller.duration = 0;
-            clockWindow.animationDown = !clockWindow.animationDown;
-            scrollTimer.interval = 10000;
-            scrollTimer.running = true;
+            contentY = zoomLimity();
+            clockWindow.animationDown = true;
+            scrollTimer.start();
         }
-        scroller.start();
     }
 
     NumberAnimation on opacity {
@@ -155,6 +148,19 @@ WebView {
     function getScroller()
     {
         return scroller;
+    }
+
+    function zoomLimity() {
+        return timeController.zoomLimit.y*view.experimental.test.contentsScale
+    }
+    function zoomLimitx() {
+        return timeController.zoomLimit.x*view.experimental.test.contentsScale
+    }
+    function zoomLimitheight() {
+        return timeController.zoomLimit.height*view.experimental.test.contentsScale
+    }
+    function zoomLimitwidth() {
+        return timeController.zoomLimit.width*view.experimental.test.contentsScale
     }
 
     function startSwitch(other) {
@@ -244,9 +250,8 @@ WebView {
     }
 
     Component.onCompleted: {
-        //view.experimental.preferences.javascriptEnabled = false;
+        view.experimental.preferences.javascriptEnabled = false;
         scaleTimeout.restart()
-        timeController.zoomLimitChanged.connect
     }
 
     NumberAnimation on contentY {
@@ -256,8 +261,8 @@ WebView {
         onRunningChanged: {
             if (!running && !view.loadTarget) {
                 clockWindow.animationDown = !clockWindow.animationDown;
-                scrollTimer.interval = 10000;
-                scrollTimer.running = true;
+                if (!clockWindow.animationDown)
+                    scrollTimer.start();
             }
         }
     }

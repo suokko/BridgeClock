@@ -83,6 +83,7 @@ private:
 
     void timeFixUp();
 
+    QDateTime pauseTimeAdjust(QDateTime t) const;
 };
 
 struct TimeItem {
@@ -109,5 +110,6 @@ enum Roles {
     TypeRole,
     StartTimeRole,
     NameRawRole,
+    LengthRole,
 };
 

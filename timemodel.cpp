@@ -56,6 +56,7 @@ QHash<int, QByteArray> TimeModel::roleNames() const
         names[TypeRole] = "type";
         names[StartTimeRole] = "startTime";
         names[NameRawRole] = "nameRaw";
+        names[LengthRole] = "length";
     }
     return names;
 }
@@ -130,6 +131,19 @@ int TimeModel::rowCount(const QModelIndex &parent) const
 
 #define align_to(v, a) ((v / a) * a)
 
+QDateTime TimeModel::pauseTimeAdjust(QDateTime t) const
+{
+    QDateTime dt = QDateTime::currentDateTime();
+    int elapsed;
+    if (paused_) {
+        elapsed = align_to(pauseTime_.elapsed(), 1000);
+        dt = dt.addMSecs(-1 * elapsed);
+        if (t > dt)
+            t = t.addMSecs(elapsed);
+    }
+    return t;
+}
+
 QVariant TimeModel::data(const QModelIndex &index, int role) const
 {
     switch (role) {
@@ -149,14 +163,10 @@ QVariant TimeModel::data(const QModelIndex &index, int role) const
     case StartRole:
     {
         QDateTime start = list_[index.row()].start_;
-        int elapsed;
+        start = pauseTimeAdjust(start);
         QDateTime dt = QDateTime::currentDateTime();
-        if (paused_) {
-            elapsed = align_to(pauseTime_.elapsed(), 1000);
-            dt = dt.addMSecs(-1 * elapsed);
-            if (start > dt)
-                start = start.addMSecs(elapsed);
-        }
+        if (paused_)
+            dt = dt.addMSecs(-1 * align_to(pauseTime_.elapsed(), 1000));
         if (index.row() + 1 < (int)list_.size() &&
                 list_[index.row()].start_ < dt &&
                 list_[index.row() + 1].start_ > dt) {
@@ -171,13 +181,7 @@ QVariant TimeModel::data(const QModelIndex &index, int role) const
             start = list_[index.row()].start_;
         else
             start = list_[index.row() + 1].start_;
-        if (paused_) {
-            QDateTime dt = QDateTime::currentDateTime();
-            int elapsed = align_to(pauseTime_.elapsed(), 1000);
-            dt = dt.addMSecs(-1 * elapsed);
-            if (start > dt)
-                start = start.addMSecs(elapsed);
-        }
+        start = pauseTimeAdjust(start);
         return start.toString("HH:mm:ss");
     }
     case PreviousNameRole:
@@ -191,13 +195,7 @@ QVariant TimeModel::data(const QModelIndex &index, int role) const
             start = list_[index.row()].start_;
         else
             start = list_[index.row() + 1].start_;
-        if (paused_) {
-            QDateTime dt = QDateTime::currentDateTime();
-            int elapsed = align_to(pauseTime_.elapsed(), 1000);
-            dt = dt.addMSecs(-1 * elapsed);
-            if (start > dt)
-                start = start.addMSecs(elapsed);
-        }
+        start = pauseTimeAdjust(start);
         return start.time().minute();
     }
     case EndHourRole:
@@ -207,13 +205,7 @@ QVariant TimeModel::data(const QModelIndex &index, int role) const
             start = list_[index.row()].start_;
         else
             start = list_[index.row() + 1].start_;
-        if (paused_) {
-            QDateTime dt = QDateTime::currentDateTime();
-            int elapsed = align_to(pauseTime_.elapsed(), 1000);
-            dt = dt.addMSecs(-1 * elapsed);
-            if (start > dt)
-                start = start.addMSecs(elapsed);
-        }
+        start = pauseTimeAdjust(start);
         return start.time().hour();
     }
     case TypeRole:
@@ -221,14 +213,22 @@ QVariant TimeModel::data(const QModelIndex &index, int role) const
     case StartTimeRole:
     {
         QDateTime start = list_[index.row()].start_;
-        if (paused_) {
-            QDateTime dt = QDateTime::currentDateTime();
-            int elapsed = align_to(pauseTime_.elapsed(), 1000);
-            dt = dt.addMSecs(-1 * elapsed);
-            if (start > dt)
-                start = start.addMSecs(elapsed);
-        }
+        start = pauseTimeAdjust(start);
         return start.toMSecsSinceEpoch();
+    }
+    case LengthRole:
+    {
+        QDateTime end;
+        if (index.row() + 1 == (int)list_.size())
+            end = list_[index.row()].start_;
+        else
+            end = list_[index.row() + 1].start_;
+        QDateTime start = list_[index.row()].start_;
+        end = pauseTimeAdjust(end);
+        start = pauseTimeAdjust(start);
+        QTime diff(0,0);
+        diff = diff.addSecs(start.secsTo(end));
+        return diff.toString("HH:mm:ss");
     }
     default:
         return QVariant();

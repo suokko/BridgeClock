@@ -188,10 +188,28 @@ Item {
                       "Ei valintaa"
         }
         Label {
+            id: timeLabel
+            anchors.margins: 3
+            anchors.top: selectionHeader.bottom
+            x: parent.width/2
+            visible: view.currentRow >= 0
+            text: "Kesto:"
+        }
+        Text {
+            id: time
+            anchors.verticalCenter: timeLabel.verticalCenter
+            anchors.left: timeLabel.right
+            anchors.margins: 3
+            visible: view.currentRow >= 0
+            text: view.contentItem.currentItem && view.contentItem.currentItem.itemModel ?
+                      view.contentItem.currentItem.itemModel["length"] :
+                      "Ei valintaa"
+        }
+        Label {
             id: prevLabel
             anchors.margins: 3
-            anchors.top: endLabel.bottom
-            anchors.left: parent.left
+            anchors.top: timeLabel.bottom
+            anchors.left: timeLabel.left
             visible: view.currentRow >= 0
             text: "Edellinen:"
         }

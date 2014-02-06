@@ -6,6 +6,7 @@ Rectangle {
     color: "transparent"
     property alias hour : csH.value
     property alias minute : cs.value
+    property int prevMinutes : -1
     CircularSlider {
         id: cs
         minimumValue: 0
@@ -13,6 +14,26 @@ Rectangle {
         value: new Date().getMinutes()
         width: parent.width
         height: parent.height
+        onValueChanged: {
+            if (prevMinutes == -1 ||
+                (prevMinutes > 10 && prevMinutes < 50)) {
+                prevMinutes = value
+                return;
+            }
+            if (prevMinutes >= 50 && value <= 10) {
+                var hour = csH.value + 1;
+                if (hour > csH.maximumValue)
+                    hour = csH.minimumValue;
+                csH.value = hour;
+            } else if (prevMinutes <= 10 && value >= 50) {
+                var hour = csH.value - 1;
+                if (hour < csH.minimumValue)
+                    hour = csH.maximumValue;
+                csH.value = hour;
+            }
+            prevMinutes = value
+
+        }
     }
     CircularSlider {
         id: csH

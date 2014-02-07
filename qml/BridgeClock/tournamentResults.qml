@@ -112,7 +112,6 @@ Item {
                     (resultLimiterBorder.y + view.contentY)/scale,
                     resultLimiterBorder.width/scale,
                     resultLimiterBorder.height/scale);
-                console.log("setSize " + initialLoad + " " + settingsZoomLimit.x + " -> " + timeController.zoomLimit);
             }
             onContentHeightChanged: setSize()
             onContentWidthChanged: setSize()
@@ -167,7 +166,6 @@ Item {
                             (resultLimiterBorder.y + view.contentY)/scale,
                             resultLimiterBorder.width/scale,
                             resultLimiterBorder.height/scale);
-                        console.log("mouseReleased " + initialLoad + " -> " + timeController.zoomLimit);
                     }
                 }
             }

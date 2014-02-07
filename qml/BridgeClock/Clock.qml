@@ -171,17 +171,22 @@ Window {
         }
     }
 
-    Connections {
-        target: timeController
-        onUpdateResults: {
-            if (resultsHidden.loadTarget)
-                resultsHidden.url = url;
-            else if (results.loadTarget)
-                results.url = url;
-            else
-                console.log("NO LOAD TARGET")
+    function setUrl(url) {
+        if (resultsHidden.loadTarget) {
+            resultsHidden.url = url;
+        } else if (results.loadTarget) {
+            results.url = url;
+        } else {
+            console.log("NO LOAD TARGET")
         }
     }
+
+    Connections {
+        target: timeController
+        onUpdateResults: setUrl(url)
+    }
+
+    Component.onCompleted: setUrl(timeController.resultUrl)
 
     Connections {
         target: timeController

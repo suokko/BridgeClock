@@ -34,10 +34,10 @@ class TimeController : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(unsigned rounds READ rounds WRITE setRounds)
-    Q_PROPERTY(unsigned roundTime READ roundTime WRITE setRoundTime)
-    Q_PROPERTY(unsigned roundBreak READ roundBreak WRITE setRoundBreak)
-    Q_PROPERTY(QDateTime startTime READ startTime WRITE setStartTime)
+    Q_PROPERTY(unsigned rounds READ rounds WRITE setRounds NOTIFY roundsChanged())
+    Q_PROPERTY(unsigned roundTime READ roundTime WRITE setRoundTime NOTIFY roundTimeChanged())
+    Q_PROPERTY(unsigned roundBreak READ roundBreak WRITE setRoundBreak NOTIFY roundBreakChanged())
+    Q_PROPERTY(QDateTime startTime READ startTime WRITE setStartTime NOTIFY startTimeChanged())
     Q_PROPERTY(QString resultUrl READ resultUrl WRITE setResultUrl)
     Q_PROPERTY(QString tournamentEnd READ tournamentEnd NOTIFY tournamentEndChanged)
     Q_PROPERTY(bool showResults READ showResults WRITE setShowResults NOTIFY showResultsChanged)
@@ -80,6 +80,11 @@ signals:
     void showResultsChanged();
     void pausedChanged(bool paused);
     void zoomLimitChanged();
+
+    void roundsChanged();
+    void roundTimeChanged();
+    void roundBreakChanged();
+    void startTimeChanged();
 
 public slots:
     void urlUpdate();

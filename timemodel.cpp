@@ -24,6 +24,7 @@ THE SOFTWARE.
 #include <QDateTime>
 #include <QTimer>
 #include <QDebug>
+#include <QSettings>
 
 #include <algorithm>
 
@@ -43,6 +44,32 @@ TimeItem::TimeItem(TimeModel::Type type, const QDateTime &start, const QString &
 void TimeItem::appendTime(int diff)
 {
     timeDiff_ += diff;
+}
+
+namespace {
+template<class T>
+class registerType {
+public:
+    registerType() {
+        qRegisterMetaTypeStreamOperators<T>();
+    }
+};
+
+registerType<TimeItem> timeItemRegister;
+
+}
+
+QDataStream &operator<<(QDataStream &ds, const TimeItem &v)
+{
+    int type = v.type_;
+    return ds << type << v.name_ << v.timeDiff_;
+}
+QDataStream &operator>>(QDataStream &ds, TimeItem &v)
+{
+    int type;
+    ds >> type >> v.name_ >> v.timeDiff_;
+    v.type_ = static_cast<TimeModel::Type>(type);
+    return ds;
 }
 
 TimeModelVariant::TimeModelVariant(const TimeModel *p, int row, const QVariant &v) :
@@ -114,7 +141,29 @@ TimeModel::TimeModel() :
         start = start.addSecs(30 * roundBreak_);
     }
     list_.push_back(TimeItem(End, start, "Loppu"));
+    readSettings();
     onDataChangeTimeout();
+}
+
+void TimeModel::readSettings()
+{
+    int rounds = settings_.value("rounds", rounds_).toInt();
+    setRounds(rounds);
+    int roundTime = settings_.value("roundTime", roundTime_).toInt();
+    setRoundTime(roundTime);
+    int roundBreak = settings_.value("roundBreak", roundBreak_).toInt();
+    setRoundBreak(roundBreak);
+    QTime startTime = settings_.value("startTime", startTime_).toTime();
+    QDateTime dt = QDateTime::currentDateTime();
+    dt.setTime(startTime);
+    setStartTime(dt);
+    int size = settings_.beginReadArray("timeItems");
+    for (int i = 0; i < size; i++) {
+        settings_.setArrayIndex(i);
+        list_[i] = settings_.value("item").value<TimeItem>();
+    }
+    settings_.endArray();
+    timeFixUp();
 }
 
 void TimeModel::onDataChangeTimeout()
@@ -309,7 +358,7 @@ void TimeModel::setRounds(unsigned v)
         /* Append */
         unsigned nr = v - rounds_;
         list_.reserve(v*2 + 2);
-        unsigned r;
+        unsigned r, begin = list_.size() - 2, endrow;
         QDateTime start = startTime_;
         const QString kierros = "Kierros ";
         const QString vaihto = "Vaihto";
@@ -324,6 +373,8 @@ void TimeModel::setRounds(unsigned v)
         }
         list_.push_back(end);
         endInsertRows();
+        endrow = list_.size() - 1;
+        writeTimeItem(begin, endrow);
         timeFixUp();
     } else if (v < rounds_) {
         /* Delete */
@@ -338,9 +389,14 @@ void TimeModel::setRounds(unsigned v)
         list_.resize(size - toDelete);
         list_.push_back(end);
         endRemoveRows();
+        deleteTimeItem(size -  toDelete + 1, size);
+        writeTimeItem(size - toDelete);
         timeFixUp();
-    }
+    } else
+        return;
     rounds_ = v;
+    settings_.setValue("rounds", rounds_);
+    emit roundsChanged();
 }
 
 void TimeModel::timeFixUp()
@@ -381,20 +437,32 @@ void TimeModel::timeFixUp()
 
 void TimeModel::setRoundTime(unsigned v)
 {
+    if (roundTime_ == v)
+        return;
     roundTime_ = v;
     timeFixUp();
+    settings_.setValue("roundTime", v);
+    emit roundTimeChanged();
 }
 
 void TimeModel::setRoundBreak(unsigned v)
 {
+    if (roundBreak_ == v)
+        return;
     roundBreak_ = v;
     timeFixUp();
+    settings_.setValue("roundBreak", v);
+    emit roundBreakChanged();
 }
 
 void TimeModel::setStartTime(const QDateTime &v)
 {
+    if (startTime_ == v)
+        return;
     startTime_ = v;
     timeFixUp();
+    settings_.setValue("startTime", v.time());
+    emit startTimeChanged();
 }
 
 struct cmpTime {
@@ -437,6 +505,7 @@ void TimeModel::changeType(int row, TimeModel::Type type,
         list_[row].name_ = name;
         if (type == Change)
             list_[row].timeDiff_ = 0;
+        writeTimeItem(row);
         emit dataChanged(index(row), index(row));
         timeFixUp();
     }
@@ -487,19 +556,58 @@ void TimeModel::changeEnd(int row, QDateTime end)
     set = set || end == list_[row].start_;
     if (set || list_[row + 1].start_ != end) {
         list_[row].appendTime(list_[row + 1].start_.secsTo(end));
+        writeTimeItem(row);
         timeFixUp();
     }
 }
 
+void TimeModel::writeTimeItem(int start, int end)
+{
+    if (end == -1)
+        end = start + 1;
+    else
+        end++;
+    settings_.beginWriteArray("timeItems");
+    for (int row = start; row < end; row++) {
+        settings_.setArrayIndex(row);
+        QVariant v;
+        v.setValue(list_[row]);
+        settings_.setValue("item", v);
+    }
+    settings_.setArrayIndex(list_.size() - 1);
+    settings_.endArray();
+}
+
+void TimeModel::deleteTimeItem(int start, int end)
+{
+    if (end == -1)
+        end = start + 1;
+    else
+        end++;
+    settings_.beginWriteArray("timeItems");
+    for (int row = start; row < end; row++) {
+        settings_.setArrayIndex(row);
+        settings_.remove("item");
+    }
+    settings_.endArray();
+}
+
 void TimeModel::reset()
 {
+    int i = 0;
+    settings_.beginWriteArray("timeItems");
     for (TimeItem &t : list_) {
         t.timeDiff_ = 0;
         if (t.type_ == TimeModel::Break) {
             t.type_ = TimeModel::Change;
             t.name_ = vaihto;
         }
+        settings_.setArrayIndex(i++);
+        QVariant v;
+        v.setValue(t);
+        settings_.setValue("item", v);
     }
+    settings_.endArray();
     QModelIndex end;
     timeFixUp();
     emit dataChanged(index(0), index(list_.size() - 1));

@@ -61,7 +61,7 @@ Item {
         anchors.right: parent.right
         anchors.bottomMargin: 10
         id: rounds
-        value: 13
+        value: timeController.rounds
         stepSize: 1
         minimumValue: 1
         maximumValue: 30
@@ -104,7 +104,7 @@ Item {
         anchors.right: parent.right
         anchors.bottomMargin: 10
         id: time
-        value: 15
+        value: timeController.roundTime / 2
         stepSize: 0.5
         minimumValue: 1
         maximumValue: 130
@@ -147,7 +147,7 @@ Item {
         anchors.right: parent.right
         anchors.bottomMargin: 10
         id: breaks
-        value: 2
+        value: timeController.roundBreak / 2
         stepSize: 0.5
         minimumValue: 0
         maximumValue: 20
@@ -184,6 +184,14 @@ Item {
         height: Math.min(parent.width, resetTime.y - startTime.y - 5)
         anchors.margins: 5
         anchors.horizontalCenter: parent.horizontalCenter
+        hour: timeController.startTime.getHours()
+        minute: timeController.startTime.getMinutes()
+
+        Component.onCompleted: {
+            /* Break the bidning loop */
+            hour = timeController.startTime.getHours()
+            minute = timeController.startTime.getMinutes()
+        }
     }
 
     Button {

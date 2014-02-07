@@ -35,6 +35,7 @@ THE SOFTWARE.
 #include <QCursor>
 #include <QQuickItem>
 #include <QQuickWindow>
+#include <QSettings>
 
 class TimeControllerPrivate {
     bool showResults_ : 1;
@@ -47,6 +48,7 @@ class TimeControllerPrivate {
     QPoint resizePoint;
     RoundInfo *roundInfo_;
     QRect zoomLimit_;
+    QSettings settings_;
     friend class TimeController;
 };
 
@@ -62,8 +64,17 @@ TimeController::TimeController() :
     d->watcher_ = NULL,
     d->model_ = new TimeModel();
     d->roundInfo_ = NULL;
+    d->zoomLimit_ = d->settings_.value("zoomLimit", QRect(-1,-1,-1,-1)).value<QRect>();
+    d->resultUrl_ = d->settings_.value("url", "http://www.bridgefinland.fi").value<QString>();
+    d->showResults_ = d->settings_.value("showResults", d->showResults_).value<bool>();
 
     connect(d->model_, SIGNAL(dataChanged(QModelIndex,QModelIndex)), SIGNAL(tournamentEndChanged()));
+    connect(d->model_, SIGNAL(roundsChanged()), SIGNAL(roundsChanged()));
+    connect(d->model_, SIGNAL(roundTimeChanged()), SIGNAL(roundTimeChanged()));
+    connect(d->model_, SIGNAL(roundBreakChanged()), SIGNAL(roundBreakChanged()));
+    connect(d->model_, SIGNAL(startTimeChanged()), SIGNAL(startTimeChanged()));
+
+    urlUpdate();
 }
 
 TimeController::~TimeController()
@@ -122,6 +133,7 @@ void TimeController::setShowResults(bool v)
     if (v == d->showResults_)
         return;
     d->showResults_ = v;
+    d->settings_.setValue("showResults", (bool)d->showResults_);
     emit showResultsChanged();
 }
 
@@ -135,6 +147,7 @@ void TimeController::setZoomLimit(QRect &v)
     if (v == d->zoomLimit_)
         return;
     d->zoomLimit_ = v;
+    d->settings_.setValue("zoomLimit", v);
     emit zoomLimitChanged();
 }
 
@@ -306,6 +319,8 @@ void TimeController::fileChanged(const QString &path)
 
 void TimeController::setResultUrl(const QString &url)
 {
+    if (d->resultUrl_ != url)
+        d->settings_.setValue("url", url);
     d->resultUrl_ = url;
     delete d->watcher_;
     d->watcher_ = NULL;

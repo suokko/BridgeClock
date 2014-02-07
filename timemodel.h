@@ -69,6 +69,10 @@ public:
     Q_INVOKABLE QHash<int, QByteArray> roleNames() const;
     Q_INVOKABLE TimeModelVariant *qmlData(int row, QString role) const;
 signals:
+    void roundsChanged();
+    void roundTimeChanged();
+    void roundBreakChanged();
+    void startTimeChanged();
 
 public slots:
     void onDataChangeTimeout();
@@ -81,10 +85,14 @@ private:
     QTime pauseTime_;
     QDateTime startTime_;
     class QTimer *dataChangeTimer_;
+    QSettings settings_;
 
     std::vector<TimeItem> list_;
 
     void timeFixUp();
+    void readSettings();
+    void writeTimeItem(int row, int end = -1);
+    void deleteTimeItem(int row, int end = -1);
 
     QDateTime pauseTimeAdjust(QDateTime t) const;
 };
@@ -119,6 +127,7 @@ struct TimeItem {
     void appendTime(int diff);
 };
 
+Q_DECLARE_METATYPE(TimeItem);
 
 enum Roles {
     NameRole = Qt::UserRole+1,

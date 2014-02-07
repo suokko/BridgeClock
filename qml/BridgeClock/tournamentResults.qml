@@ -28,6 +28,13 @@ import QtWebKit.experimental 1.0
 
 Item {
     anchors.fill: parent
+    property var settingsUrl: timeController.resultUrl
+    property var settingsZoomLimit: timeController.zoomLimit
+    property bool initialLoad: true
+    Component.onCompleted: {
+        settingsUrl = timeController.resultUrl
+        settingsZoomLimit = timeController.zoomLimit
+    }
     Item {
         id: resultSelector
         anchors.top: parent.top
@@ -40,7 +47,7 @@ Item {
         CheckBox {
             anchors.top: parent.top
             id: showResults
-            checked: false
+            checked: timeController.showResults
             text: "Näytä tulokset"
         }
 
@@ -68,7 +75,14 @@ Item {
             anchors.left: parent.left
             enabled: showResults.checked
             font.pixelSize: 16
-            text: "http://www.bridgefinland.fi"
+            text: timeController.resultUrl
+
+            onTextChanged: {
+                if (settingsUrl !== undefined && text != settingsUrl)
+                    initialLoad = false;
+            }
+
+            Component.onCompleted: {text = timeController.resultUrl}
         }
         WebView {
             anchors.fill: resultLimiter
@@ -81,12 +95,20 @@ Item {
             z: -1
             url: resultFile.text
             function setSize() {
-                    var scale = view.experimental.test.contentsScale;
-                    resultLimiterBorder.x = 0
-                    resultLimiterBorder.y = 0
-                    resultLimiterBorder.height = view.contentHeight
-                    resultLimiterBorder.width = view.contentWidth
-                    timeController.zoomLimit = Qt.rect(resultLimiterBorder.x/scale, resultLimiterBorder.y/scale, resultLimiterBorder.width/scale, resultLimiterBorder.height/scale);
+                var scale = view.experimental.test.contentsScale;
+                if (initialLoad && settingsZoomLimit.x != -1) {
+                    resultLimiterBorder.x = settingsZoomLimit.x * scale
+                    resultLimiterBorder.y = settingsZoomLimit.y * scale
+                    resultLimiterBorder.width = settingsZoomLimit.width * scale
+                    resultLimiterBorder.height = settingsZoomLimit.height * scale
+                    return;
+                }
+                resultLimiterBorder.x = 0
+                resultLimiterBorder.y = 0
+                resultLimiterBorder.height = view.contentHeight
+                resultLimiterBorder.width = view.contentWidth
+                timeController.zoomLimit = Qt.rect(resultLimiterBorder.x/scale, resultLimiterBorder.y/scale, resultLimiterBorder.width/scale, resultLimiterBorder.height/scale);
+                console.log("setSize " + initialLoad + " " + settingsZoomLimit.x + " -> " + timeController.zoomLimit);
             }
             onContentHeightChanged: setSize()
             onContentWidthChanged: setSize()
@@ -107,13 +129,20 @@ Item {
 
             Rectangle {
                 id: resultLimiterBorder
-                x: 0
-                y: 0
-                width: view.contentWidth
-                height: view.contentHeight
+                x: timeController.zoomLimit.x
+                y: timeController.zoomLimit.y
+                width: timeController.zoomLimit.width
+                height: timeController.zoomLimit.height
                 border.width: 2
                 border.color: "black"
                 color: "transparent"
+
+                Component.onCompleted: {
+                    x = timeController.zoomLimit.x
+                    y = timeController.zoomLimit.y
+                    width = timeController.zoomLimit.width
+                    height = timeController.zoomLimit.height
+                }
             }
 
             onPressed: {
@@ -128,6 +157,7 @@ Item {
                     directionLock = false;
                     var scale = view.experimental.test.contentsScale;
                     timeController.zoomLimit = Qt.rect(resultLimiterBorder.x/scale, resultLimiterBorder.y/scale, resultLimiterBorder.width/scale, resultLimiterBorder.height/scale);
+                    console.log("mouseReleased " + initialLoad + " -> " + timeController.zoomLimit);
                 }
             }
 

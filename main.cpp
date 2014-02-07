@@ -45,6 +45,11 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     const char *path = arr.data();
     setenv("LD_LIBRARY_PATH", path, 1);
 #endif
+
+    QCoreApplication::setOrganizationDomain("bridgefinland.fi");
+    QCoreApplication::setOrganizationName("SBL");
+    QCoreApplication::setApplicationName("BridgeClock");
+
     qmlRegisterType<RoundInfo>();
     qmlRegisterType<TimeModel>("org.bridgeClock", 1, 0, "TimeModel");
     qmlRegisterType<GlobalMouseArea>("org.bridgeClock", 1, 0, "GlobalMouseArea");

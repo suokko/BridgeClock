@@ -255,8 +255,10 @@ Item {
                     change.checked = true;
                     break
                 case TimeModel.Break:
-                    if (name === "Ruokatauko") {
-                        food.checked = true;
+                    if (name === "Lounas") {
+                        lunch.checked = true;
+                    } else if (name === "Päivällinen") {
+                        dinner.checked = true;
                     } else if (name === "Kahvitauko") {
                         coffee.checked = true;
                     } else {
@@ -282,10 +284,15 @@ Item {
                                               TimeModel.Change,
                                               "Vaihto");
                         break;
-                    case food:
+                    case lunch:
                         view.model.changeType(view.currentRow,
                                               TimeModel.Break,
-                                              "Ruokatauko");
+                                              "Lounas");
+                        break;
+                    case dinner:
+                        view.model.changeType(view.currentRow,
+                                              TimeModel.Break,
+                                              "Päivällinen");
                         break;
                     case coffee:
                         view.model.changeType(view.currentRow,
@@ -307,15 +314,22 @@ Item {
                 exclusiveGroup: itemType
             }
             RadioButton {
-                id: food
+                id: lunch
                 anchors.top: change.bottom
                 anchors.margins: 3
-                text: "Ruokatauko"
+                text: "Lounas"
+                exclusiveGroup: itemType
+            }
+            RadioButton {
+                id: dinner
+                anchors.top: lunch.bottom
+                anchors.margins: 3
+                text: "Päivällinen"
                 exclusiveGroup: itemType
             }
             RadioButton {
                 id: coffee
-                anchors.top: food.bottom
+                anchors.top: dinner.bottom
                 anchors.margins: 3
                 text: "Kahvitauko"
                 exclusiveGroup: itemType

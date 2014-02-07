@@ -23,6 +23,7 @@ THE SOFTWARE.
 import QtQuick 2.0
 import QtQuick.Layouts 1.0
 import QtQuick.Controls 1.0
+import QtQuick.Controls.Styles 1.0
 import org.bridgeClock 1.0
 
 Item {
@@ -51,18 +52,19 @@ Item {
         Label {
             id: timeLeftLabel
             anchors.margins: 5
-            anchors.top: header.bottom
+            anchors.verticalCenter: timeLeft.verticalCenter
             anchors.left: parent.left
             visible: timeController.roundInfo.playing < 2
             text: "Jäljellä:"
         }
         Text {
             id: timeLeft
-            anchors.verticalCenter: timeLeftLabel.verticalCenter
+            anchors.top: header.bottom
             anchors.left: timeLeftLabel.right
             visible: timeController.roundInfo.playing < 2
             anchors.margins: 3
             text: timeController.roundInfo.timeLeft
+            font.pointSize: 14
         }
         CheckBox {
             anchors.top: header.bottom
@@ -72,6 +74,12 @@ Item {
             id: pause
             text: "Pysäytä aika"
             checked: false
+            style: CheckBoxStyle {
+                label: Text {
+                    text: control.text
+                    font.pointSize: 14
+                }
+            }
         }
 
         Binding {

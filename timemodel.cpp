@@ -334,7 +334,7 @@ void TimeModel::setRounds(unsigned v)
         unsigned toDelete = iter - list_.rbegin();
         unsigned size = list_.size();
         TimeItem end = list_.back();
-        beginRemoveRows(QModelIndex(), size - toDelete - 1, size - 2);
+        beginRemoveRows(QModelIndex(), size - toDelete, size - 2);
         list_.resize(size - toDelete);
         list_.push_back(end);
         endRemoveRows();

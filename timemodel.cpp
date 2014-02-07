@@ -45,6 +45,27 @@ void TimeItem::appendTime(int diff)
     timeDiff_ += diff;
 }
 
+TimeModelVariant::TimeModelVariant(const TimeModel *p, int row, const QVariant &v) :
+    QObject(),
+    row_(row),
+    value_(v)
+{
+    connect(p, SIGNAL(dataChanged(QModelIndex,QModelIndex)),SIGNAL(valueChanged()));
+}
+
+QVariant TimeModelVariant::value()
+{
+    return value_;
+}
+
+void TimeModelVariant::setValue(const QVariant &v)
+{
+    if (v == value_)
+        return;
+    value_ = v;
+    emit valueChanged();
+}
+
 QHash<int, QByteArray> TimeModel::roleNames() const
 {
     static QHash<int, QByteArray> names;
@@ -143,6 +164,15 @@ QDateTime TimeModel::pauseTimeAdjust(QDateTime t) const
             t = t.addMSecs(elapsed);
     }
     return t;
+}
+
+TimeModelVariant *TimeModel::qmlData(int row, QString role) const
+{
+    if (row == -1 || row >= list_.size()) {
+        qWarning() << row << "passed for a row with role " << role;
+        return new TimeModelVariant(this, -1, QVariant());
+    }
+    return new TimeModelVariant(this, row, data(index(row), roleNames().key(role.toUtf8().data(), -1)));
 }
 
 QVariant TimeModel::data(const QModelIndex &index, int role) const

@@ -30,6 +30,7 @@ THE SOFTWARE.
 #include <stdint.h>
 
 struct TimeItem;
+class TimeModelVariant;
 
 class TimeModel : public QAbstractListModel
 {
@@ -66,6 +67,7 @@ public:
     Q_INVOKABLE void changeEnd(int row, QDateTime end);
 
     Q_INVOKABLE QHash<int, QByteArray> roleNames() const;
+    Q_INVOKABLE TimeModelVariant *qmlData(int row, QString role) const;
 signals:
 
 public slots:
@@ -85,6 +87,23 @@ private:
     void timeFixUp();
 
     QDateTime pauseTimeAdjust(QDateTime t) const;
+};
+
+class TimeModelVariant : public QObject
+{
+    Q_OBJECT
+
+    Q_PROPERTY(QVariant value READ value WRITE setValue NOTIFY valueChanged)
+public:
+    TimeModelVariant(const TimeModel *parent, int row, const QVariant &value);
+
+    QVariant value();
+    void setValue(const QVariant &v);
+signals:
+    void valueChanged();
+private:
+    int row_;
+    QVariant value_;
 };
 
 struct TimeItem {

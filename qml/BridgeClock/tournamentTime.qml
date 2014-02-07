@@ -145,10 +145,10 @@ Item {
             anchors.top: splitLine.bottom
             anchors.topMargin: 5
             anchors.horizontalCenter: parent.horizontalCenter
-            visible: view.currentRow >= 0
+            visible: view.currentRow != -1
             font.pixelSize: 20
-            text: view.contentItem.currentItem && view.contentItem.currentItem.itemModel ?
-                      view.contentItem.currentItem.itemModel["name"] :
+            text: view.currentRow != -1 ?
+                      view.model.qmlData(view.currentRow, "name").value :
                       "Ei valintaa"
         }
         Label {
@@ -156,7 +156,7 @@ Item {
             anchors.margins: 3
             anchors.top: selectionHeader.bottom
             anchors.left: parent.left
-            visible: view.currentRow >= 0
+            visible: view.currentRow != -1
             text: "Alku:"
         }
         Text {
@@ -164,9 +164,9 @@ Item {
             anchors.verticalCenter: startLabel.verticalCenter
             anchors.left: startLabel.right
             anchors.margins: 3
-            visible: view.currentRow >= 0
-            text: view.contentItem.currentItem && view.contentItem.currentItem.itemModel ?
-                      view.contentItem.currentItem.itemModel["start"] :
+            visible: view.currentRow != -1
+            text: view.currentRow != -1 ?
+                      view.model.qmlData(view.currentRow, "start").value :
                       "Ei valintaa"
         }
         Label {
@@ -174,7 +174,7 @@ Item {
             anchors.margins: 3
             anchors.top: startLabel.bottom
             anchors.left: parent.left
-            visible: view.currentRow >= 0
+            visible: view.currentRow != -1
             text: "Loppu:"
         }
         Text {
@@ -182,9 +182,9 @@ Item {
             anchors.verticalCenter: endLabel.verticalCenter
             anchors.left: endLabel.right
             anchors.margins: 3
-            visible: view.currentRow >= 0
-            text: view.contentItem.currentItem && view.contentItem.currentItem.itemModel ?
-                      view.contentItem.currentItem.itemModel["end"] :
+            visible: view.currentRow != -1
+            text: view.currentRow != -1 ?
+                      view.model.qmlData(view.currentRow, "end").value :
                       "Ei valintaa"
         }
         Label {
@@ -192,7 +192,7 @@ Item {
             anchors.margins: 3
             anchors.top: selectionHeader.bottom
             x: parent.width/2
-            visible: view.currentRow >= 0
+            visible: view.currentRow != -1
             text: "Kesto:"
         }
         Text {
@@ -200,9 +200,9 @@ Item {
             anchors.verticalCenter: timeLabel.verticalCenter
             anchors.left: timeLabel.right
             anchors.margins: 3
-            visible: view.currentRow >= 0
-            text: view.contentItem.currentItem && view.contentItem.currentItem.itemModel ?
-                      view.contentItem.currentItem.itemModel["length"] :
+            visible: view.currentRow != -1
+            text: view.currentRow != -1 ?
+                      view.model.qmlData(view.currentRow, "length").value :
                       "Ei valintaa"
         }
         Label {
@@ -210,7 +210,7 @@ Item {
             anchors.margins: 3
             anchors.top: timeLabel.bottom
             anchors.left: timeLabel.left
-            visible: view.currentRow >= 0
+            visible: view.currentRow != -1
             text: "Edellinen:"
         }
         Text {
@@ -218,34 +218,33 @@ Item {
             anchors.verticalCenter: prevLabel.verticalCenter
             anchors.left: prevLabel.right
             anchors.margins: 3
-            visible: view.currentRow >= 0
-            text: view.contentItem.currentItem && view.contentItem.currentItem.itemModel ?
-                      view.contentItem.currentItem.itemModel["previous"] :
+            visible: view.currentRow != -1
+            text: view.currentRow != -1 ?
+                      view.model.qmlData(view.currentRow, "previous").value :
                       "Ei valintaa"
         }
 
         GroupBox {
             id: itemTypeBox
             anchors.top: prev.bottom
-            enabled: view.contentItem.currentItem && view.contentItem.currentItem.itemModel ?
-                         view.contentItem.currentItem.itemModel["type"] === TimeModel.Break ||
-                         view.contentItem.currentItem.itemModel["type"] === TimeModel.Change :
+            enabled: view.currentRow != -1 ?
+                         view.model.qmlData(view.currentRow, "type").value === TimeModel.Break ||
+                         view.model.qmlData(view.currentRow, "type").value === TimeModel.Change :
                          false
-            visible: view.currentRow >= 0
+            visible: view.currentRow != -1
             width: parent.width - 6
 
             function updateSelection() {
-                if (!view.contentItem.currentItem ||
-                        !view.contentItem.currentItem.itemModel)
+                if (view.currentRow == -1 || view.currentRow >= view.rowCount)
                     return;
                 __updatingUI++;
                 if (itemType.current)
                     itemType.current.checked = false
-                var item = view.contentItem.currentItem.itemModel;
-                var type = item["type"];
-                var name = item["nameRaw"];
-                breakEndTime.hour = item["endHour"];
-                breakEndTime.minute = item ["endMinute"];
+                var model = view.model;
+                var type = model.qmlData(view.currentRow, "type").value;
+                var name = model.qmlData(view.currentRow, "nameRaw").value;
+                breakEndTime.hour = model.qmlData(view.currentRow, "endHour").value;
+                breakEndTime.minute = model.qmlData(view.currentRow, "endMinute").value;
                 customName.text = "";
                 switch (type) {
                 case TimeModel.Play:
@@ -345,9 +344,9 @@ Item {
                 height: Math.min(parent.width, itemTypeBox.parent.height - itemTypeBox.y - y - 22)
 
                 function updateEnd() {
-                    if (!view.contentItem.currentItem || __updatingUI > 0)
+                    if (view.currentRow == -1 || __updatingUI > 0)
                         return;
-                    var startSecs = view.contentItem.currentItem.itemModel["startTime"];
+                    var startSecs = view.model.qmlData(view.currentRow, "startTime").value;
                     var end = new Date();
                     var start = new Date();
                     start.setTime(startSecs);

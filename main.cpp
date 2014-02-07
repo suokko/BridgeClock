@@ -49,6 +49,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     qmlRegisterType<TimeModel>("org.bridgeClock", 1, 0, "TimeModel");
     qmlRegisterType<GlobalMouseArea>("org.bridgeClock", 1, 0, "GlobalMouseArea");
     qmlRegisterType<MouseEvent>();
+    qmlRegisterType<TimeModelVariant>();
 
     TimeController timeController;
     QQmlApplicationEngine eng;

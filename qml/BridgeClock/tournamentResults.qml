@@ -107,7 +107,11 @@ Item {
                 resultLimiterBorder.y = 0
                 resultLimiterBorder.height = view.contentHeight
                 resultLimiterBorder.width = view.contentWidth
-                timeController.zoomLimit = Qt.rect(resultLimiterBorder.x/scale, resultLimiterBorder.y/scale, resultLimiterBorder.width/scale, resultLimiterBorder.height/scale);
+                timeController.zoomLimit = Qt.rect(
+                    (resultLimiterBorder.x + view.contentX)/scale,
+                    (resultLimiterBorder.y + view.contentY)/scale,
+                    resultLimiterBorder.width/scale,
+                    resultLimiterBorder.height/scale);
                 console.log("setSize " + initialLoad + " " + settingsZoomLimit.x + " -> " + timeController.zoomLimit);
             }
             onContentHeightChanged: setSize()
@@ -156,8 +160,14 @@ Item {
                 if (mouse.buttons != Qt.LeftButton) {
                     directionLock = false;
                     var scale = view.experimental.test.contentsScale;
-                    timeController.zoomLimit = Qt.rect(resultLimiterBorder.x/scale, resultLimiterBorder.y/scale, resultLimiterBorder.width/scale, resultLimiterBorder.height/scale);
-                    console.log("mouseReleased " + initialLoad + " -> " + timeController.zoomLimit);
+                    if (direction != "") {
+                        timeController.zoomLimit = Qt.rect(
+                            (resultLimiterBorder.x + view.contentX)/scale,
+                            (resultLimiterBorder.y + view.contentY)/scale,
+                            resultLimiterBorder.width/scale,
+                            resultLimiterBorder.height/scale);
+                        console.log("mouseReleased " + initialLoad + " -> " + timeController.zoomLimit);
+                    }
                 }
             }
 

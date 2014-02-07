@@ -198,7 +198,7 @@ Item {
         id: resetTime
         anchors.left: parent.left
         anchors.bottom: parent.bottom
-        text: "Poista aikataulu muokkaukset"
+        text: "Aloita uusi kilpailu"
         onPressedChanged: if (pressed) timeController.resetModel();
     }
 

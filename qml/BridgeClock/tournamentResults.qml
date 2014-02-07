@@ -90,7 +90,7 @@ Item {
             clip: true
             pixelAligned: false
             interactive: false
-            opacity: 1.0
+            opacity: showResults.checked ? 1 : 0.5
             visible: true
             z: -1
             url: resultFile.text
@@ -137,6 +137,7 @@ Item {
                 y: timeController.zoomLimit.y
                 width: timeController.zoomLimit.width
                 height: timeController.zoomLimit.height
+                opacity: showResults.checked ? 1 : 0.5
                 border.width: 2
                 border.color: "black"
                 color: "transparent"
@@ -195,6 +196,8 @@ Item {
                 } else if ( left > right && right < activeArea) {
                     dir = dir + "R";
                 }
+                if (!showResults.checked)
+                    dir = ""
                 if (dir != direction && !directionLock) {
                     direction = dir;
                     timeController.setItemCursor(resultLimiter, direction);

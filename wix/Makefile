@@ -50,7 +50,7 @@ COMMONSRC := BridgeClock80.png \
 	$(subst ../,,$(wildcard ../qml/BridgeClock/*))
 
 LINUXCHROOTPATH := $(shell schroot -i -c $(LINUXCHROOT) | grep "^[ \t]*Directory" | sed 's/^[^\/]*//')
-VERSION := $(shell date +'%y.%m.%d')
+VERSION := $(shell date +'%Y.%m.%d')
 
 all: BridgeClock.msi BridgeClock-linux-${VERSION}.tar.gz BridgeClock-src-$(VERSION).tar.gz
 

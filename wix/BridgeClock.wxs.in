@@ -1,22 +1,22 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
 <Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'>
-	<Product Name='BridgeClock ${VERSION}' Id='${PRODUCT_UUID}' UpgradeCode='${UPGRADE_UUID}'
+	<Product Name='BridgeClock ${VERSIONFULL}' Id='${PRODUCT_UUID}' UpgradeCode='${UPGRADE_UUID}'
 		Language='1033' Version='${VERSION}' Manufacturer='SBL ry'>
 	
-		<Package Id='*' Keywords='Installer' Description="BridgeClock ${VERSION} Installer"
+		<Package Id='*' Keywords='Installer' Description="BridgeClock ${VERSIONFULL} Installer"
 			Comments='BridgeClock is provided as is without any warranty.' Manufacturer='SBL ry'
 			Languages='1033' InstallerVersion='100' Compressed='yes' />
 		<Media Id='1' Cabinet='BridgeClock.cab' EmbedCab='yes' DiskPrompt='CD-ROM #1' />
-		<Property Id='DiskPrompt' Value='BridgeClock ${VERSION} Instalation [1]' />
+		<Property Id='DiskPrompt' Value='BridgeClock ${VERSIONFULL} Instalation [1]' />
 
 		<Directory Id='TARGETDIR' Name='SourceDir'>
 			<Directory Id='ProgramFilesFolder' Name='PFiles'>
 				<Directory Id='INSTALLDIR' Name='BridgeClock'>
 					<Component Id='BridgeClockBinary' Guid='${MAINBIN_UUID}'>
 						<File Id='BridgeClockEXE' Name='BridgeClock.exe' DiskId='1' Source='BridgeClock.exe' KeyPath='yes'>
-							<Shortcut Id='startmenuBridgeClock' Directory='ProgramMenuDir' Name='BridgeClock ${VERSION}'
+							<Shortcut Id='startmenuBridgeClock' Directory='ProgramMenuDir' Name='BridgeClock ${VERSIONFULL}'
 								WorkingDirectory='INSTALLDIR' Icon='BridgeClock80.png' IconIndex='0' Advertise='yes' />
-							<Shortcut Id='desktopBridgeClock' Directory='DesktopFolder' Name='BridgeClock ${VERSION}'
+							<Shortcut Id='desktopBridgeClock' Directory='DesktopFolder' Name='BridgeClock ${VERSIONFULL}'
 								WorkingDirectory='INSTALLDIR' Icon='BridgeClock80.png' IconIndex='0' Advertise='yes' />
 						</File>
 					</Component>
@@ -24,7 +24,7 @@
 			</Directory>
 
 			<Directory Id='ProgramMenuFolder' Name='Programs'>
-				<Directory Id='ProgramMenuDir' Name='BridgeClock ${VERSION}'>
+				<Directory Id='ProgramMenuDir' Name='BridgeClock ${VERSIONFULL}'>
 					<Component Id='ProgramMenuDir' Guid='${MENUDIR_UUID}'>
 						<RemoveFolder Id='ProgramMenuDir' On='uninstall' />
 						<RegistryValue Root='HKCU' Key='software\[Manufacturer]\[ProductName]' Type='string' Value='' KeyPath='yes' />

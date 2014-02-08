@@ -1,18 +1,7 @@
-# Add more folders to ship with the application, here
-# If your application uses the Qt Mobility libraries, uncomment the following
-# lines and add the respective components to the MOBILITY variable.
-# CONFIG += mobility
-# MOBILITY +=
-
-# Speed up launching on MeeGo/Harmattan when using applauncherd daemon
-# CONFIG += qdeclarative-boostable
 
 TARGET = BridgeClock
 
-linux {
-
-	QMAKE_LFLAGS += -Wl,--rpath=\\\$\$ORIGIN/lib
-}
+linux: QMAKE_LFLAGS += -Wl,--rpath=\\\$\$ORIGIN/lib
 
 QMAKE_CXXFLAGS += -std=c++11 -g
 
@@ -47,7 +36,6 @@ OTHER_FILES += \
     qml/BridgeClock/DatePicker.qml \
     qml/BridgeClock/Clock.qml \
     qml/BridgeClock/CircularSlider.qml \
-    qml/BridgeClock/tournamentConnection.qml \
     user.settings.pri
 
 HEADERS += \

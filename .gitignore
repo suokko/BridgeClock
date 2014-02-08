@@ -1,0 +1,14 @@
+wix/user.mk
+BridgeClock.pro.user*
+tags
+wix/win
+wix/win-build
+wix/*.wixobj
+.clang_complete
+wix/BridgeClock.msi
+wix/*.wixpdb
+wix/*.wxs
+*.swp
+*.orig
+*~
+wix/varsub

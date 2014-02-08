@@ -12,3 +12,7 @@ wix/*.wxs
 *.orig
 *~
 wix/varsub
+wix/linux
+wix/linux-build
+wix/BridgeClock-linux*
+wix/BridgeClock-src*

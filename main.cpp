@@ -36,7 +36,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
-#ifndef WIN32
+#if !defined(WIN32) && !defined(__WIN32)
     QByteArray arr = (QCoreApplication::applicationDirPath() + "/lib").toUtf8();
     const char *cur = getenv("LD_LIBRARY_PATH");
     if (cur) {

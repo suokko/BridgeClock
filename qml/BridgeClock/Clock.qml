@@ -32,9 +32,109 @@ Window {
     visible: true
     title: "Aika näkymä"
     flags: Qt.WindowStaysOnTopHint + Qt.CustomizeWindowHint /*+ Qt.FramelessWindowHint + Qt.X11BypassWindowManagerHint */
-    readonly property double msForAPixel: 40
-    property bool animationDown: true
 
+    /* The state of scrolling animation */
+    readonly property double msForAPixel: 30
+    property bool animationDown: true
+    property double ypos: -1
+    property bool firstLoad: true
+
+    /* Calculate initial position */
+    function pageLoaded(view) {
+        if (!firstLoad) {
+            return;
+        }
+        firstLoad = false;
+        ypos = view.zoomLimity();
+        view.contentY = view.zoomLimity();
+        calculateAnimation();
+    }
+
+    /* Do a linear animation */
+    NumberAnimation on ypos {
+        id: scroller
+        running: false
+        easing.type: Easing.Linear
+
+        onRunningChanged: {
+            if (!running) {
+                switchAnimationDirection();
+            }
+        }
+    }
+
+    onYposChanged: {
+        /* Forward ypos to the visible webview(s) */
+        if (!results.loadTarget || results.getHide().running) {
+            results.contentY = ypos;
+        }
+        if (!resultsHidden.loadTarget || resultsHidden.getHide().running) {
+            resultsHidden.contentY = ypos;
+        }
+    }
+
+    Timer {
+        id: scrollTimer
+        running: true
+        repeat: false
+        interval: clockWindow.animationDown ? 10000 : 5000;
+        onTriggered: {
+            calculateAnimation();
+        }
+    }
+
+    /* Helper to return correct active result view */
+    function chooseVisibleResults()
+    {
+        if (!resultsHidden.loadTarget) {
+            return resultsHidden;
+        }
+        return results;
+    }
+
+    function calculateAnimation()
+    {
+        if (scrollTimer.running) {
+            return;
+        }
+        var view = chooseVisibleResults();
+
+
+        if (animationDown) {
+            /* Check if we need to scroll or not */
+            if (view.zoomLimitheight() <= view.height) {
+                return;
+            }
+            var scale = view.experimental.test.contentsScale;
+            /* Calculate pixels to score and multiply that with scroll speed constant */
+            scroller.duration = (view.zoomLimity() + view.zoomLimitheight() - view.height - view.contentY) /
+                view.getScaler().xScale * msForAPixel / scale;
+            /* set scrolling target */
+            scroller.to = view.zoomLimity() + view.zoomLimitheight() - view.height;
+            /* We scroll from current position */
+            scroller.from = ypos;
+            /* Don't allow duration to be below 10 milliseconds */
+            if (scroller.duration <= 10) {
+                scroller.duration = 10;
+            }
+            /* The animation is ready to roll */
+            scroller.start();
+        } else {
+            /* Up going is a simple jump */
+            ypos = view.zoomLimity();
+            switchAnimationDirection();
+            /* After jump we have to start the timer for next animation stage */
+            scrollTimer.restart();
+        }
+    }
+
+    function switchAnimationDirection()
+    {
+        animationDown = !animationDown
+        /* Always wait timer after moving */
+        scrollTimer.restart();
+    }
+    
     Rectangle {
         id: timeView
         anchors.left: parent.left
@@ -196,19 +296,6 @@ Window {
             else
                 results.doScale();
         }
-    }
-
-    Timer {
-         id: scrollTimer
-         running: false
-         repeat: false
-         interval: clockWindow.animationDown ? 10000 : 5000;
-         onTriggered: {
-             if (!resultsHidden.loadTarget)
-                 resultsHidden.animationSwitch();
-             else
-                 results.animationSwitch();
-         }
     }
 
     ResultView {

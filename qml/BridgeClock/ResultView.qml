@@ -29,12 +29,18 @@ WebView {
     pixelAligned: false
     interactive: false
     opacity: 0.0
-    visible: false
+    visible: true
     property bool loadTarget: false
-    property double ypos: -1
 
     transform: Scale {id: scaler; origin.x: 0; origin.y: 0; xScale: 1.0; yScale: 1.0}
 
+    function getScaler() {return scaler;}
+    function getHide() {return hide;}
+
+    function log(msg) {
+            var d = new Date();
+            console.log(view + " " + d.getSeconds() + "." + d.getMilliseconds() + " " + msg);
+    }
     function doScale() {
         var size = view.experimental.test.contentsSize;
         var y = timeView.y + timeView.height;
@@ -50,84 +56,15 @@ WebView {
         if (size.width > limitwidth)
             scale *= size.width/limitwidth;
 
-        view.width = view.visible ? width : 640
+        view.width = view.opacity  == 1.0 ? width : 640
         view.height = height / scale;
         view.y = y;
         view.x = 0;
         scaler.xScale = scale;
         scaler.yScale = scale;
         view.contentX = zoomLimitx();
-        doAnimation();
-    }
-
-    function doAnimation() {
-        if (view.url == "")
-            return;
-        if (view.loadTarget)
-            return;
-        if (!scrollTimer.running && !scroller.running) {
-            scrollTimer.start();
-            return;
-        }
-
-        if (scrollTimer.running) {
-            return;
-        }
-
-        if (!clockWindow.animationDown) {
-            scrollTimer.start();
-            return;
-        }
-
-        scroller.stop()
-        var duration = (zoomLimity() + zoomLimitheight() - view.height - view.contentY) /
-                scaler.xScale * clockWindow.msForAPixel
-        if (duration < 0) {
-            duration = 0;
-        }
-        var scale = view.experimental.test.contentsScale
-        scroller.duration = duration / scale
-
-        if (scroller.duration <= 2000)
-            scroller.duration = 2000;
-
-        scroller.to = zoomLimity() + zoomLimitheight() - view.height
-        scroller.from = view.contentY;
-        scrollTimer.stop()
-        clockWindow.animationDown = true;
-        scroller.start()
-    }
-
-    onContentYChanged: {
-
-        if (contentY == 0 && !view.loadTarget && ypos > 0) {
-            contentY = ypos;
-            ypos = -1;
-        }
-    }
-
-    function animationSwitch() {
-        if (view.loadTarget)
-            return;
-        if (clockWindow.animationDown) {
-            if (zoomLimitheight() <= view.height)
-                return;
-            var scale = view.experimental.test.contentsScale;
-            scroller.duration = (zoomLimity() + zoomLimitheight() - view.height - view.contentY) /
-                    scaler.xScale * clockWindow.msForAPixel / scale;
-            scroller.to = zoomLimity() + zoomLimitheight() - view.height;
-            scroller.from = view.contentY;
-            if (scroller.duration <= 2000)
-                scroller.duration = 2000;
-            scroller.start();
-        } else {
-            if (view.contentY === 0) {
-                clockWindow.animationDown = true;
-                return;
-            }
-            contentY = zoomLimity();
-            clockWindow.animationDown = true;
-            scrollTimer.start();
+        if (!view.loadTarget) {
+            clockWindow.calculateAnimation();
         }
     }
 
@@ -138,16 +75,9 @@ WebView {
         to: 0
         onRunningChanged: {
             if (!running) {
-                view.visible = false;
-                scroller.stop();
                 scaleTimeout.restart();
             }
         }
-    }
-
-    function getScroller()
-    {
-        return scroller;
     }
 
     function zoomLimity() {
@@ -163,61 +93,73 @@ WebView {
         return timeController.zoomLimit.width*view.experimental.test.contentsScale
     }
 
+    function reorderForSwitch() {
+        var other = view == results ? resultsHidden : results;
+        if (other.z <= view.z) {
+            other.z = 1;
+            view.z = 0;
+        }
+
+        view.opacity = 1.0
+    }
+
     function startSwitch(other) {
+        /* Is still animating previous switch ? */
         if (hide.running)
             hide.complete()
         if (!view.loadTarget) {
-            if (view.visible) {
+            /* If we were visible before start hiding animation */
+            if (view.opacity == 1.0) {
                 hide.start();
             }
         } else {
-            var s = other.getScroller();
-            scroller.from = s.from;
-            scroller.to = s.to;
-            scroller.duration = s.duration;
-            scroller.running = s.running;
-            if (other.z <= view.z) {
-                other.z = 1;
-                view.z = 0;
-            }
-
-            view.visible = true;
-            view.opacity = 1.0
+            /* We have to be below current results to appear smoothly durring animation */
         }
         view.loadTarget = !view.loadTarget
+    }
+
+    /* Move load target to other webview after first frame completed */
+    function targetSwitch() {
+            if (results.loadTarget) {
+                results.startSwitch(resultsHidden);
+                resultsHidden.startSwitch(results);
+            } else {
+                resultsHidden.startSwitch(results);
+                results.startSwitch(resultsHidden);
+            }
     }
 
     onLoadingChanged: {
         switch (loadRequest.status)
         {
         case WebView.LoadSucceededStatus:
-            if (results.loadTarget)
-                ypos = resultsHidden.contentY
-            else
-                ypos = results.contentY
-            results.startSwitch(resultsHidden);
-            resultsHidden.startSwitch(results);
-            scaleTimeout.restart();
-            if (ypos !== undefined) {
-                view.contentY = ypos;
-                if (!scrollTimer.running)
-                    ypos = -1;
-            }
-            doAnimation();
+            reorderForSwitch();
             break
         case WebView.LoadStartedStatus:
         case WebView.LoadStoppedStatus:
             break
         case WebView.LoadFailedStatus:
-            console.log("Failed to load " + url);
+            log("Failed to load " + url);
             break
         }
     }
 
-    onHeightChanged: doAnimation();
-    onContentHeightChanged: doAnimation();
+    onContentYChanged: {
+        if (view.loadTartget) {
+            return;
+        }
+        if (view.contentY == clockWindow.ypos) {
+            return;
+        }
+        log("Fixing contentY " + view.contentY+" = "+clockWindow.ypos);
+        view.contentY = clockWindow.ypos;
+    }
+
+    onHeightChanged: scaleTimeout.restart();
+    onContentHeightChanged: scaleTimeout.restart();
     onWidthChanged: scaleTimeout.restart();
     onContentWidthChanged: scaleTimeout.restart();
+    experimental.onLoadVisuallyCommitted: {scaleTimeout.stop(); targetSwitch(); doScale(); clockWindow.pageLoaded(view);}
 
     Connections {
         target: view.experimental.test
@@ -226,13 +168,12 @@ WebView {
 
     Timer {
         id: scaleTimeout
-        interval: 30
+        interval: 36
         running: false
         repeat: false
         onTriggered: {
             doScale();
         }
-
     }
 
     onNavigationRequested: {
@@ -251,19 +192,5 @@ WebView {
 
     Component.onCompleted: {
         view.experimental.preferences.javascriptEnabled = false;
-        scaleTimeout.restart()
-    }
-
-    NumberAnimation on contentY {
-        id: scroller
-        running: false
-        easing.type: Easing.Linear
-        onRunningChanged: {
-            if (!running && !view.loadTarget) {
-                clockWindow.animationDown = !clockWindow.animationDown;
-                if (!clockWindow.animationDown)
-                    scrollTimer.start();
-            }
-        }
     }
 }

@@ -224,7 +224,7 @@ Window {
                ? (parent.height - height)/2 :
                  clockWindow.height - height - ((clockWindow.height - (time.y + time.height)) - height)/2
             x: timeController.showResults
-               ? time.x + time.width + 10*zoomFactor :
+               ? clockWindow.width - width - 2*zoomFactor :
                parent.width/2 - width/2
             columns: timeController.showResults ? 1 : 2
 

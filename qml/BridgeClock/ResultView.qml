@@ -73,6 +73,7 @@ WebView {
         duration: 1000
         from: 1
         to: 0
+        running: false
         onRunningChanged: {
             if (!running) {
                 scaleTimeout.restart();

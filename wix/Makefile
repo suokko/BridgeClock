@@ -165,6 +165,7 @@ win/qt.conf: qt.conf
 win/BridgeClock.exe: win-build/BridgeClock.exe $(addprefix win/,$(WIN32ALL))
 	mkdir -p $(dir $@)
 	cp $< $@
+	sed -i 's/\$$(VERSION)/$(VERSION)/' $(dir $@)/qml/BridgeClock/main.qml
 
 # Always try rebuild the binary
 .PHONY: win-build/BridgeClock.exe
@@ -251,6 +252,7 @@ linux/qt.conf: qt.conf
 linux/BridgeClock: linux-build/BridgeClock ldddeps $(addprefix linux/,$(LINUXALL))
 	mkdir -p $(dir $@)
 	cp $< $@
+	sed -i 's/\$$(VERSION)/$(VERSION)/' $(dir $@)/qml/BridgeClock/main.qml
 
 ldddeps: linux-build/BridgeClock
 	mkdir -p linux/lib/
@@ -270,7 +272,8 @@ source: BridgeClock-src-$(VERSION).tar.gz
 
 BridgeClock-src-$(VERSION).tar.gz: BridgeClock-src-$(VERSION) ../.git/refs/heads/master
 	cd $< && git fetch origin && git reset --hard origin/master
-	tar --exclude-vcs -cf - BridgeClock-src-$(VERSION) | pigz -c -9 > $@
+	sed -i 's/\$$(VERSION)/$(VERSION)/' $</qml/BridgeClock/main.qml
+	tar --exclude-vcs -cf - $< | pigz -c -9 > $@
 
 BridgeClock-src-$(VERSION):
 	git clone ../.git BridgeClock-src-$(VERSION)

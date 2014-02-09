@@ -45,6 +45,7 @@ class TimeController : public QObject
     Q_PROPERTY(TimeModel *model READ getModel NOTIFY modelChanged)
     Q_PROPERTY(RoundInfo *roundInfo READ getRoundInfo NOTIFY roundInfoChanged)
     Q_PROPERTY(QRect zoomLimit READ getZoomLimit WRITE setZoomLimit NOTIFY zoomLimitChanged)
+    Q_PROPERTY(QString version READ getVersion WRITE setVersion NOTIFY versionChanged)
 public:
     explicit TimeController();
     ~TimeController();
@@ -55,6 +56,8 @@ public:
     void setShowResults(bool v);
     void setPaused(bool v);
     void setZoomLimit(QRect &);
+    void setVersion(const QString &v);
+
     unsigned rounds() const;
     unsigned roundTime() const;
     unsigned roundBreak() const;
@@ -63,6 +66,7 @@ public:
     bool paused() const;
     QRect getZoomLimit() const;
     QString tournamentEnd() const;
+    QString getVersion() const;
 
     const QString &resultUrl() const;
     void setResultUrl(const QString &url);
@@ -80,6 +84,7 @@ signals:
     void showResultsChanged();
     void pausedChanged(bool paused);
     void zoomLimitChanged();
+    void versionChanged();
 
     void roundsChanged();
     void roundTimeChanged();

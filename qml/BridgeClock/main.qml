@@ -29,7 +29,10 @@ Window {
     width: 480
     height: 640
     visible: true
-    title: "Bridge kellon asetukset"
+    title: "Bridgekello \'" + timeController.version + "\'"
+    readonly property string version: "$(VERSION)"
+
+    Component.onCompleted: timeController.version = version
 
     TabView {
         anchors.fill: parent

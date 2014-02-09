@@ -49,6 +49,7 @@ class TimeControllerPrivate {
     RoundInfo *roundInfo_;
     QRect zoomLimit_;
     QSettings settings_;
+    QString version_;
     friend class TimeController;
 };
 
@@ -126,6 +127,25 @@ void TimeController::setStartTime(const QDateTime & v)
 bool TimeController::showResults() const
 {
     return d->showResults_;
+}
+
+QString TimeController::getVersion() const
+{
+    return d->version_;
+}
+
+void TimeController::setVersion(const QString &v)
+{
+    QString ver = v;
+    if (v == "$(VERSION)")
+        ver = "julkaisematon";
+    if (d->version_ == ver)
+        return;
+    if (d->version_.isEmpty()) {
+        /* Schedule version check */
+    }
+    d->version_ = ver;
+    emit versionChanged();
 }
 
 void TimeController::setShowResults(bool v)

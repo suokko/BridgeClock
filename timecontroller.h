@@ -91,6 +91,7 @@ signals:
     void roundBreakChanged();
     void startTimeChanged();
 
+    void newversion(const QString &url, const QString &version);
 public slots:
     void urlUpdate();
     void fileChanged(const QString &path);

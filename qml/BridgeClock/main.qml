@@ -29,13 +29,78 @@ Window {
     width: 480
     height: 640
     visible: true
-    title: "Bridgekello \'" + timeController.version + "\'"
+    title: "Bridgekello " + timeController.version
     readonly property string version: "$(VERSION)"
+    property string newversion: ""
+    property string versionurl: ""
 
     Component.onCompleted: timeController.version = version
 
+    Rectangle {
+        id: versiondlg
+
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+
+        anchors.margins: 3
+        antialiasing: true
+
+        height: visible ? msg.height + msg.y*2 : 0
+        visible: newversion != ""
+
+        border.width: 1
+        border.color: "black"
+        color: "yellow"
+        radius: 5
+
+        clip: true
+
+        Text {
+            x: versiondlg.radius
+            y: versiondlg.radius
+            id: msg
+            text: "<html><span style=\"font-size:large\">Bridgekellosta on uusi versio " +
+                "<a href='" + versionurl +"'>" + newversion + "</a> ladattavana.</span>" +
+                "<br />\n<a href='" + versionurl + "' style=\"font-size:small\">" + versionurl + "</a></html>"
+
+            textFormat: Text.RichText
+            onLinkActivated: {
+                Qt.openUrlExternally(link)
+                versiondlg.height = 0
+            }
+        }
+
+        Behavior on height {
+            NumberAnimation {
+                duration: 2000
+                easing.type: Easing.InOutQuad
+
+                onRunningChanged: {
+                    if (!running && versiondlg.visible && versiondlg.height == 0) {
+                        versiondlg.visible = false
+                    }
+                }
+            }
+        }
+    }
+
+    Connections {
+        target: timeController
+        onNewversion: {
+            newversion = version
+            versionurl = url
+        }
+    }
+
     TabView {
-        anchors.fill: parent
+        anchors.top: versiondlg.visible ? versiondlg.bottom : parent.top
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+        anchors.left: parent.left
+
+        anchors.topMargin: versiondlg.visible ? versiondlg.anchors.margins : 0
+
         Tab {
             title: "Aloitus"
             Item {

@@ -16,3 +16,4 @@ wix/linux
 wix/linux-build
 wix/BridgeClock-linux*
 wix/BridgeClock-src*
+wix/BridgeClock-versions.xml

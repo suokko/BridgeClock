@@ -40,7 +40,7 @@ int main(void)
 	}
 
 nextfile:
-
+	int ending;
 	while ((c = getchar()) != EOF) {
 		if (c == '\r')
 			continue;
@@ -52,9 +52,10 @@ nextfile:
 				putchar(c);
 			break;
 		case 1:
-			if (c == '{') {
+			if (c == '{' || c == '(') {
 				name = "";
 				state = 2;
+				ending = c == '{' ? '}' : ')';
 			} else {
 				putchar('$');
 				putchar(c);
@@ -62,7 +63,7 @@ nextfile:
 			}
 			break;
 		case 2:
-			if (c != '}')
+			if (c != ending)
 				name += c;
 			else {
 				if (vars.count(name) == 0) {

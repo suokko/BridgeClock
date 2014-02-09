@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BridgeClock>
+	<build version="$(VERSIONFULL)">
+		<Linux file="https://googledrive.com/host/0B4izKEmfNQIBajhOOGZqR2JmNXM/BridgeClock-linux-$(VERSIONFULL).tar.gz" />
+		<Windows file="https://googledrive.com/host/0B4izKEmfNQIBajhOOGZqR2JmNXM/BridgeClock.msi" />
+	</build>
+</BridgeClock>

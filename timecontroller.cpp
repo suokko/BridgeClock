@@ -24,6 +24,7 @@ THE SOFTWARE.
 
 #include "timemodel.h"
 #include "roundinfo.h"
+#include "versionchecker.h"
 
 #include <QDateTime>
 #include <QTimer>
@@ -136,13 +137,16 @@ QString TimeController::getVersion() const
 
 void TimeController::setVersion(const QString &v)
 {
+    const QString nonpublish = "julkaisematon";
     QString ver = v;
     if (v == "$(VERSION)")
-        ver = "julkaisematon";
+        ver = nonpublish;
     if (d->version_ == ver)
         return;
     if (d->version_.isEmpty()) {
         /* Schedule version check */
+        connect(new VersionChecker(ver == nonpublish ? "0" : ver), SIGNAL(newversion(const QString&, const QString&)),
+                SIGNAL(newversion(const QString&, const QString&)));
     }
     d->version_ = ver;
     emit versionChanged();

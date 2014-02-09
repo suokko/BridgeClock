@@ -13,7 +13,8 @@ SOURCES += main.cpp \
     timemodel.cpp \
     roundinfo.cpp \
     globalmousearea.cpp \
-    mouseevent.cpp
+    mouseevent.cpp \
+    versionchecker.cpp
 
 # Installation path
 # target.path =
@@ -43,4 +44,5 @@ HEADERS += \
     timemodel.h \
     roundinfo.h \
     globalmousearea.h \
-    mouseevent.h
+    mouseevent.h \
+    versionchecker.h

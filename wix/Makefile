@@ -52,7 +52,7 @@ COMMONSRC := BridgeClock80.png \
 LINUXCHROOTPATH := $(shell schroot -i -c $(LINUXCHROOT) | grep "^[ \t]*Directory" | sed 's/^[^\/]*//')
 VERSION := $(shell date +'%Y.%m.%d')
 
-all: BridgeClock.msi BridgeClock-linux-${VERSION}.tar.gz BridgeClock-src-$(VERSION).tar.gz
+all: BridgeClock.msi BridgeClock-linux-${VERSION}.tar.gz BridgeClock-src-$(VERSION).tar.gz BridgeClock-versions.xml
 
 # msi packaging
 BridgeClock.msi: files.wixobj BridgeClock.wixobj
@@ -62,8 +62,8 @@ BridgeClock.msi: files.wixobj BridgeClock.wixobj
 %.wixobj: %.wxs
 	WINEDEBUG=fixme-all candle.exe $<
 
-BridgeClock.wxs: BridgeClock.wxs.in vars.sh varsub
-	(sh < vars.sh; cat BridgeClock.wxs.in;) | ./varsub > BridgeClock.wxs
+BridgeClock.wxs Bridgeclock-versions.xml: %: %.in vars.sh varsub
+	(sh < vars.sh; cat $<) | ./varsub > $@
 
 DEST= \
       $(wildcard win/*) \

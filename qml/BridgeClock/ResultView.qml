@@ -149,10 +149,9 @@ WebView {
         if (view.loadTartget) {
             return;
         }
-        if (view.contentY == clockWindow.ypos) {
+        if (Math.abs(view.contentY - clockWindow.ypos) < 1) {
             return;
         }
-        log("Fixing contentY " + view.contentY+" = "+clockWindow.ypos);
         view.contentY = clockWindow.ypos;
     }
 

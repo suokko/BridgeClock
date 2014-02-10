@@ -2,4 +2,6 @@
 * Windows webkit skaalaus ongelma
 * Tulosten rajaussivun liikuminen muuten kuin panamällä
 * Käännökset
+* Kellon ja tulosten jako toisille koneille sisäverkossa
+* Kellon ja tulosten jako toisille koneille palvelimen kautta
 * Macigin tietokannan lukeminen

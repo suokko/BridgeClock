@@ -107,16 +107,17 @@ Window {
             }
             var scale = view.experimental.test.contentsScale;
             /* Calculate pixels to score and multiply that with scroll speed constant */
-            scroller.duration = (view.zoomLimity() + view.zoomLimitheight() - view.height - view.contentY) /
-                view.getScaler().xScale * msForAPixel / scale;
+            var duration = (view.zoomLimity() + view.zoomLimitheight() - view.height - view.contentY) /
+            view.getScaler().xScale * msForAPixel / scale;
             /* set scrolling target */
             scroller.to = view.zoomLimity() + view.zoomLimitheight() - view.height;
             /* We scroll from current position */
             scroller.from = ypos;
             /* Don't allow duration to be below 10 milliseconds */
-            if (scroller.duration <= 10) {
-                scroller.duration = 10;
+            if (duration <= 10) {
+                duration = 10;
             }
+            scroller.duration = duration;
             /* The animation is ready to roll */
             scroller.start();
         } else {

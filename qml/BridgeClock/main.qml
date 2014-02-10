@@ -22,7 +22,7 @@ THE SOFTWARE.
 
 import QtQuick 2.1
 import QtQuick.Controls 1.0
-import QtQuick.Window 2.0
+import QtQuick.Window 2.1
 
 Window {
     id: controlView
@@ -108,6 +108,7 @@ Window {
 
                 Loader {
                     anchors.fill: parent
+                    asynchronous: true
                     source: "tournamentStart.qml"
                 }
             }
@@ -119,6 +120,7 @@ Window {
 
                 Loader {
                     anchors.fill: parent
+                    asynchronous: true
                     source: "tournamentTime.qml"
                 }
             }
@@ -130,13 +132,23 @@ Window {
 
                 Loader {
                     anchors.fill: parent
+                    asynchronous: true
                     source: "tournamentResults.qml"
                 }
             }
         }
     }
-    Clock {
+    Loader {
+        asynchronous: true
+        sourceComponent: clock
         x: controlView.x + controlView.width
-
     }
+    Component {
+        id: clock
+        Clock {
+            x: controlView.x + controlView.width
+        }
+    }
+
+    onClosing: Qt.quit()
 }

@@ -62,7 +62,6 @@ Item {
         Button {
             id: resultButton
             text: "Selaa tiedostoja"
-            enabled: showResults.checked
             anchors.top: showResults.bottom
             anchors.left: head.right
             onClicked: loadResults.open()
@@ -73,7 +72,6 @@ Item {
             anchors.right: parent.right
             anchors.top: resultButton.bottom
             anchors.left: parent.left
-            enabled: showResults.checked
             font.pixelSize: 16
             text: timeController.resultUrl
 
@@ -194,8 +192,6 @@ Item {
                 } else if ( left > right && right < activeArea) {
                     dir = dir + "R";
                 }
-                if (!showResults.checked)
-                    dir = ""
                 if (dir != direction && !directionLock) {
                     direction = dir;
                     timeController.setItemCursor(resultLimiter, direction);

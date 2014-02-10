@@ -135,69 +135,139 @@ Window {
         /* Always wait timer after moving */
         scrollTimer.restart();
     }
-    
+
+    readonly property int transduration: 5000
+    readonly property var transtype: Easing.InOutQuad
+
     Rectangle {
         id: timeView
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
         z: 2
-        height: timeController.showResults
-                ? time.font.pixelSize + 12*zoomFactor :
-                  clockWindow.height
-        onHeightChanged: {
-            results.doScale();
-            resultsHidden.doScale();
+        height: clockWindow.height
+
+        states: State {
+            name: "showRes"; when: timeController.showResults && timeView.width > 0
+            PropertyChanges {
+                target: timeView
+                height: time.font.pixelSize + 12*zoomFactor
+            }
+            AnchorChanges {
+                target: current
+                anchors.horizontalCenter: undefined
+                anchors.left: parent.left
+            }
+            PropertyChanges {
+                target: current
+                anchors.leftMargin: 2*zoomFactor
+                anchors.topMargin: (parent.height - (height + endHeading.height +  end.height))/2
+                font.pixelSize: 35*zoomFactor
+            }
+            PropertyChanges {
+                target: currentScale;
+                origin.x: 0;
+                xScale: (time.totalWidth <= clockWindow.width/2 ? 1 : (current.width - (time.totalWidth - clockWindow.width/2)/2)/current.width)
+            }
+            PropertyChanges { target: endHeading; font.pixelSize: 15*zoomFactor; }
+            AnchorChanges {
+                target: end
+                anchors.top: endHeading.bottom
+                anchors.left: current.left
+            }
+            PropertyChanges { target: end; font.pixelSize: 25*zoomFactor; }
+            PropertyChanges {
+                target: time
+                font.pixelSize: 120*zoomFactor
+            }
+            PropertyChanges {
+                target: timeScale;
+                xScale: (time.totalWidth <= clockWindow.width/2 ? 1 : (time.width/2 - (time.totalWidth - clockWindow.width/2)/2)/(time.width/2))
+            }
+            AnchorChanges {
+                target: nextHeading
+                anchors.bottom: undefined
+                anchors.top: parent.top
+                anchors.left: undefined
+                anchors.right: parent.right
+            }
+            PropertyChanges {
+                target: nextHeading
+                font.pixelSize: 15*zoomFactor
+
+                anchors.bottomMargin: undefined
+                anchors.leftMargin: undefined
+                anchors.topMargin: (parent.height - (height + next.height + nextBreakEnd.height))/2
+                anchors.rightMargin: 3*zoomFactor + Math.max(Math.max(next.width - width, nextBreakEnd.width - width), 0);
+            }
+            AnchorChanges {
+                target: next
+                anchors.top: nextHeading.bottom
+                anchors.left: nextHeading.left
+            }
+            PropertyChanges {
+                target: next
+                font.pixelSize: 25*zoomFactor
+                anchors.topMargin: undefined
+            }
+            PropertyChanges {
+                target: nextBreakEnd
+                font.pixelSize: 20*zoomFactor
+            }
+        }
+        transitions: [
+            Transition {
+                to: "showRes"
+                SequentialAnimation {
+                    PropertyAction { target: currentScale; property: "origin.x" }
+                    ParallelShowRes {}
+                }
+            },
+            Transition {
+                from: "showRes"
+                SequentialAnimation {
+                    ParallelShowRes {}
+                    PropertyAction { target: currentScale; property: "origin.x" }
+                }
+            }
+        ]
+
+        Text {
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.topMargin: (time.y - height - Math.max(endHeading.height, end.height))/2
+            anchors.top: parent.top
+
+            visible: timeController.roundInfo.playing < 2
+            id: current
+            text: timeController.roundInfo.name;
+            font.pixelSize: 55*zoomFactor;
+            font.weight: Font.DemiBold;
+            transform: Scale {
+                id: currentScale
+                origin.x: current.width;
+                xScale: clockWindow.width - 5*zoomFactor < current.width
+                ? (clockWindow.width - 5*zoomFactor) / current.width
+                : 1;
+            }
+        }
+        Text {
+            anchors.top: current.bottom
+            anchors.left: current.left
+            id: endHeading
+            visible: true
+            text: "Kilpailu loppuu: "
+            font.pixelSize: 25*zoomFactor
+            font.weight: Font.Light
         }
 
-        Column {
-            y: timeController.showResults
-               ? parent.height/2 - height/2 :
-                 time.y/2 - height/2
-            x: timeController.showResults
-               ? 2*zoomFactor :
-               parent.width/2 - width/2
-            Text {
-                visible: timeController.roundInfo.playing < 2
-                id: current
-                text: timeController.roundInfo.name;
-                font.pixelSize: timeController.showResults
-                ? 35*zoomFactor :
-                55*zoomFactor;
-                font.weight: Font.DemiBold;
-                transform: Scale {
-                    origin.x: timeController.showResults ? 0 : current.width/2;
-                    xScale: timeController.showResults
-                        ? (time.totalWidth <= clockWindow.width/2
-                            ? 1 :
-                                1 - (time.totalWidth - clockWindow.width/2)/(width / 2)/2)
-                                : clockWindow.width - 5*zoomFactor < current.width
-                                    ? (clockWindow.width - 5*zoomFactor) / current.width
-                                        : 1;
-                }
-            }
-            Grid {
-                columns: timeController.showResults ? 1 : 2
-                Text {
-                    id: endHeading
-                    visible: true
-                    text: "Kilpailu loppuu: "
-                    font.pixelSize: timeController.showResults
-                        ? 15*zoomFactor :
-                          25*zoomFactor
-                    font.weight: Font.Light
-                }
-
-                Text {
-                    id: end
-                    visible: true
-                    text: timeController.tournamentEnd.replace(/:[^:]*$/,'')
-                    font.pixelSize: timeController.showResults
-                        ? 25*zoomFactor :
-                          30*zoomFactor
-                    font.weight: Font.Light;
-                }
-            }
+        Text {
+            anchors.top: current.bottom
+            anchors.left: endHeading.right
+            id: end
+            visible: true
+            text: timeController.tournamentEnd.replace(/:[^:]*$/,'')
+            font.pixelSize: 30*zoomFactor
+            font.weight: Font.Light;
         }
 
         Text {
@@ -206,69 +276,55 @@ Window {
             anchors.margins: 3*zoomFactor
             id: time
             text: timeController.roundInfo.playing < 2 ?
-                      timeController.roundInfo.timeLeft :
-                      timeController.roundInfo.name;
-            font.pixelSize: timeController.showResults ? 120*zoomFactor : 240*zoomFactor;
+            timeController.roundInfo.timeLeft :
+            timeController.roundInfo.name;
+            font.pixelSize: 240*zoomFactor;
             readonly property double totalWidth: width/2 + current.width;
             transform: Scale {
+                id: timeScale
                 origin.x: time.width/2;
-                xScale: timeController.showResults
-                        ? (time.totalWidth <= clockWindow.width/2
-                           ? 1 :
-                             1 - (time.totalWidth - clockWindow.width/2)/(width / 2)/2)
-                        : (clockWindow.width - 10*zoomFactor) / time.width ;
+                xScale: (clockWindow.width - 10*zoomFactor) / time.width ;
             }
         }
 
-        Grid {
-            y: timeController.showResults
-               ? (parent.height - height)/2 :
-                 clockWindow.height - height - ((clockWindow.height - (time.y + time.height)) - height)/2
-            x: timeController.showResults
-               ? clockWindow.width - width - 2*zoomFactor :
-               parent.width/2 - width/2
-            columns: timeController.showResults ? 1 : 2
 
-            Rectangle {
-                height: timeController.showResults ? nextHeading.height : next.height;
-                width: nextHeading.width
-                Text {
-                    y: (parent.height - height)/2
-                    id: nextHeading
-                    visible: timeController.roundInfo.playing < 2
-                    text: "Seuraava tauko: "
-                    font.pixelSize: timeController.showResults
-                                    ? 15*zoomFactor :
-                                      25*zoomFactor
-                    font.weight: Font.Light
-                }
-            }
-            Column {
-                Text {
-                    id: next
-                    visible: timeController.roundInfo.playing < 2
-                    text: timeController.roundInfo.nextBreakName;
-                    font.pixelSize: timeController.showResults
-                                    ? 25*zoomFactor :
-                                      40*zoomFactor
-                    font.italic: true;
-                    font.weight: Font.Light;
-                
-                }
+        Text {
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: (clockWindow.height - (time.y + time.height) - Math.max(height, next.height + nextBreakEnd.height))/2 +
+            nextBreakEnd.height + (next.height - nextHeading.height)/2
+            anchors.left: parent.left
+            anchors.leftMargin: (clockWindow.width - (width + Math.max(next.width, nextBreakEnd.width)))/2
 
-                Text {
-                    id: nextBreakEnd
-                    visible: timeController.roundInfo.playing < 2 &&
-                        timeController.roundInfo.nextBreakStart != ""
-                        text: timeController.roundInfo.nextBreakStart.replace(/:[^:]*$/,'') + 
-                        (timeController.roundInfo.nextBreakEnd != "" ? " - " + 
-                        timeController.roundInfo.nextBreakEnd.replace(/:[^:]*$/,'') : "");
-                    font.pixelSize: timeController.showResults
-                                    ? 20*zoomFactor :
-                                      40*zoomFactor
-                    font.weight: Font.Light;
-                }
-            }
+            id: nextHeading
+            visible: timeController.roundInfo.playing < 2
+            text: "Seuraava tauko: "
+            font.pixelSize: 25*zoomFactor
+            font.weight: Font.Light
+        }
+        Text {
+            anchors.top: nextHeading.top
+            anchors.topMargin: -(height - nextHeading.height)/2
+            anchors.left: nextHeading.right
+
+            id: next
+            visible: timeController.roundInfo.playing < 2
+            text: timeController.roundInfo.nextBreakName;
+            font.pixelSize: 40*zoomFactor
+            font.italic: true;
+            font.weight: Font.Light;
+        }
+
+        Text {
+            anchors.top: next.bottom
+            anchors.left: next.left
+            id: nextBreakEnd
+            visible: timeController.roundInfo.playing < 2 &&
+            timeController.roundInfo.nextBreakStart != ""
+            text: timeController.roundInfo.nextBreakStart.replace(/:[^:]*$/,'') + 
+            (timeController.roundInfo.nextBreakEnd != "" ? " - " + 
+            timeController.roundInfo.nextBreakEnd.replace(/:[^:]*$/,'') : "");
+            font.pixelSize: 40*zoomFactor
+            font.weight: Font.Light;
         }
     }
 

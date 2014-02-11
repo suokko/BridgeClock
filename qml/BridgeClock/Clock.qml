@@ -30,7 +30,7 @@ Window {
     width: 640
     height: 480
     visible: true
-    title: "Aika näkymä"
+    title: qsTr("The time view")
     flags: Qt.WindowStaysOnTopHint + Qt.CustomizeWindowHint /*+ Qt.FramelessWindowHint + Qt.X11BypassWindowManagerHint */
 
     /* The state of scrolling animation */
@@ -255,7 +255,7 @@ Window {
             anchors.left: current.left
             id: endHeading
             visible: true
-            text: "Kilpailu loppuu: "
+            text: qsTr("Tournamen will end: ")
             font.pixelSize: 25*zoomFactor
             font.weight: Font.Light
         }
@@ -297,7 +297,7 @@ Window {
 
             id: nextHeading
             visible: timeController.roundInfo.playing < 2
-            text: "Seuraava tauko: "
+            text: qsTr("The next break: ")
             font.pixelSize: 25*zoomFactor
             font.weight: Font.Light
         }
@@ -321,7 +321,7 @@ Window {
             visible: timeController.roundInfo.playing < 2 &&
             timeController.roundInfo.nextBreakStart != ""
             text: timeController.roundInfo.nextBreakStart.replace(/:[^:]*$/,'') + 
-            (timeController.roundInfo.nextBreakEnd != "" ? " - " + 
+            (timeController.roundInfo.nextBreakEnd != "" ? qsTr(" - ") + 
             timeController.roundInfo.nextBreakEnd.replace(/:[^:]*$/,'') : "");
             font.pixelSize: 40*zoomFactor
             font.weight: Font.Light;
@@ -397,8 +397,8 @@ Window {
                     opacity: 1.0
                     font.pixelSize: 20*zoomFactor
                     text: clockWindow.visibility !== Qt.WindowFullScreen
-                          ? "Kaksoisnäpäytyksellä täyttää ruudun" :
-                            "Kaksoisnäpäytyksellä ikkunaksi";
+                          ? qsTr("Double click to make fullscreen") :
+                            qsTr("Double click to restore back to window");
                 }
             }
         }

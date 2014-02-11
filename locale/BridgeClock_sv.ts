@@ -9,7 +9,7 @@
         <location line="+30"/>
         <location filename="../timemodel.cpp" line="+245"/>
         <source>Lunch</source>
-        <translation type="unfinished"></translation>
+        <translation>Lunch</translation>
     </message>
     <message>
         <location line="-60"/>
@@ -17,7 +17,7 @@
         <location line="+32"/>
         <location filename="../timemodel.cpp" line="+1"/>
         <source>Dinner</source>
-        <translation type="unfinished"></translation>
+        <translation>Middag</translation>
     </message>
     <message>
         <location line="-65"/>
@@ -25,7 +25,7 @@
         <location line="+34"/>
         <location filename="../timemodel.cpp" line="+1"/>
         <source>Coffee</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaffepause</translation>
     </message>
     <message>
         <location line="-49"/>
@@ -33,18 +33,18 @@
         <location filename="../timemodel.cpp" line="+142"/>
         <location line="+242"/>
         <source>Change</source>
-        <translation type="unfinished"></translation>
+        <translation>Byte</translation>
     </message>
     <message>
         <location filename="../timemodel.cpp" line="-235"/>
         <location line="+237"/>
         <source>Round %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Rund %1</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>End</source>
-        <translation type="unfinished"></translation>
+        <translation>Slut</translation>
     </message>
 </context>
 <context>
@@ -52,32 +52,32 @@
     <message>
         <location filename="../qml/BridgeClock/Clock.qml" line="+33"/>
         <source>The time view</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiden vy</translation>
     </message>
     <message>
         <location line="+225"/>
         <source>Tournamen will end: </source>
-        <translation type="unfinished"></translation>
+        <translation>Turnering ska slutas</translation>
     </message>
     <message>
         <location line="+42"/>
         <source>The next break: </source>
-        <translation type="unfinished"></translation>
+        <translation>Nästa paus: </translation>
     </message>
     <message>
         <location line="+24"/>
         <source> - </source>
-        <translation type="unfinished"></translation>
+        <translation> - </translation>
     </message>
     <message>
         <location line="+76"/>
         <source>Double click to make fullscreen</source>
-        <translation type="unfinished"></translation>
+        <translation>Dubbelklicka på helskärm</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Double click to restore back to window</source>
-        <translation type="unfinished"></translation>
+        <translation>Dubbelklicka för att återställa fönstret till</translation>
     </message>
 </context>
 <context>
@@ -85,7 +85,7 @@
     <message>
         <location filename="../timecontroller.cpp" line="+228"/>
         <source>Tournament begins</source>
-        <translation type="unfinished"></translation>
+        <translation>Turneringen ska Börjar</translation>
     </message>
 </context>
 <context>
@@ -93,7 +93,7 @@
     <message>
         <location filename="../timemodel.cpp" line="-344"/>
         <source>Begin</source>
-        <translation type="unfinished"></translation>
+        <translation>Börjar</translation>
     </message>
 </context>
 <context>
@@ -102,7 +102,7 @@
         <location filename="../qml/BridgeClock/main.qml" line="+33"/>
         <source>Bridge clock %1</source>
         <extracomment>The window header including version number as parameter %1</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Bridge klocka %1</translation>
     </message>
     <message>
         <location line="+33"/>
@@ -113,17 +113,17 @@
     <message>
         <location line="+42"/>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Början</translation>
     </message>
     <message>
         <location line="+12"/>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Tid</translation>
     </message>
     <message>
         <location line="+11"/>
         <source>Results</source>
-        <translation type="unfinished"></translation>
+        <translation>Resultat</translation>
     </message>
 </context>
 <context>
@@ -131,17 +131,17 @@
     <message>
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="+51"/>
         <source>Show results</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa resultat</translation>
     </message>
     <message>
         <location line="+8"/>
         <source>Result address: </source>
-        <translation type="unfinished"></translation>
+        <translation>De resultat adress:</translation>
     </message>
     <message>
         <location line="+5"/>
         <source>Browse files</source>
-        <translation type="unfinished"></translation>
+        <translation>Sök bland filer</translation>
     </message>
     <message>
         <location line="+203"/>
@@ -164,43 +164,43 @@
     <message>
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="+35"/>
         <source>Tournament time</source>
-        <translation type="unfinished"></translation>
+        <translation>Turnering tidtabell</translation>
     </message>
     <message>
         <location line="+9"/>
         <source>Number of rounds</source>
-        <translation type="unfinished"></translation>
+        <translation>Antal runden</translation>
     </message>
     <message>
         <location line="+36"/>
         <source>Round time</source>
-        <translation type="unfinished"></translation>
+        <translation>Rund tid</translation>
     </message>
     <message>
         <location line="+19"/>
         <location line="+43"/>
         <source>minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>minuter</translation>
     </message>
     <message>
         <location line="-18"/>
         <source>Change time</source>
-        <translation type="unfinished"></translation>
+        <translation>Byte tid</translation>
     </message>
     <message>
         <location line="+41"/>
         <source>Start time</source>
-        <translation type="unfinished"></translation>
+        <translation>Starttid</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Now</source>
-        <translation type="unfinished"></translation>
+        <translation>Ny</translation>
     </message>
     <message>
         <location line="+28"/>
         <source>Start a new tournament</source>
-        <translation type="unfinished"></translation>
+        <translation>Börja en ny tournering</translation>
     </message>
 </context>
 <context>
@@ -208,47 +208,47 @@
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="-278"/>
         <source> -&gt; </source>
-        <translation type="unfinished"></translation>
+        <translation> -&gt; </translation>
     </message>
     <message>
         <location line="+15"/>
         <source>Remaining:</source>
-        <translation type="unfinished"></translation>
+        <translation>Återstående</translation>
     </message>
     <message>
         <location line="+17"/>
         <source>Stop the clock</source>
-        <translation type="unfinished"></translation>
+        <translation>Stoppa klockan</translation>
     </message>
     <message>
         <location line="+34"/>
         <source>+10s</source>
-        <translation type="unfinished"></translation>
+        <translation>+10s</translation>
     </message>
     <message>
         <location line="+5"/>
         <source>+1m</source>
-        <translation type="unfinished"></translation>
+        <translation>+1m</translation>
     </message>
     <message>
         <location line="+5"/>
         <source>+5m</source>
-        <translation type="unfinished"></translation>
+        <translation>+5m</translation>
     </message>
     <message>
         <location line="+5"/>
         <source>-10s</source>
-        <translation type="unfinished"></translation>
+        <translation>-10s</translation>
     </message>
     <message>
         <location line="+5"/>
         <source>-1m</source>
-        <translation type="unfinished"></translation>
+        <translation>-1m</translation>
     </message>
     <message>
         <location line="+5"/>
         <source>-5m</source>
-        <translation type="unfinished"></translation>
+        <translation>-5m</translation>
     </message>
     <message>
         <location line="+26"/>
@@ -257,42 +257,42 @@
         <location line="+18"/>
         <location line="+18"/>
         <source>No choice</source>
-        <translation type="unfinished"></translation>
+        <translation>Inget val</translation>
     </message>
     <message>
         <location line="-64"/>
         <source>Begin:</source>
-        <translation type="unfinished"></translation>
+        <translation>Början:</translation>
     </message>
     <message>
         <location line="+18"/>
         <source>End:</source>
-        <translation type="unfinished"></translation>
+        <translation>Slut: </translation>
     </message>
     <message>
         <location line="+18"/>
         <source>Length:</source>
-        <translation type="unfinished"></translation>
+        <translation>Längd</translation>
     </message>
     <message>
         <location line="+18"/>
         <source>Previous:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location line="+186"/>
         <source>Begin</source>
-        <translation type="unfinished"></translation>
+        <translation>Början</translation>
     </message>
     <message>
         <location line="+5"/>
         <source>Happening</source>
-        <translation type="unfinished"></translation>
+        <translation>Händelse</translation>
     </message>
     <message>
         <location line="-64"/>
         <source>Custom:</source>
-        <translation type="unfinished"></translation>
+        <translation>Andra:</translation>
     </message>
 </context>
 </TS>

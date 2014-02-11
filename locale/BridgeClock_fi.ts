@@ -2,47 +2,302 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="fi_FI">
 <context>
+    <name>Clock</name>
+    <message>
+        <location filename="../qml/BridgeClock/Clock.qml" line="+33"/>
+        <source>The time view</source>
+        <translation>Aikanäkymä</translation>
+    </message>
+    <message>
+        <location line="+225"/>
+        <source>Tournamen will end: </source>
+        <translation>Kilpailu loppuu: </translation>
+    </message>
+    <message>
+        <location line="+42"/>
+        <source>The next break: </source>
+        <translation>Seuraava tauko: </translation>
+    </message>
+    <message>
+        <location line="+24"/>
+        <source> - </source>
+        <translation> - </translation>
+    </message>
+    <message>
+        <location line="+76"/>
+        <source>Double click to make fullscreen</source>
+        <translation>Kaksoisnäpäytyksellä kokoruudun kokoiseksi</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Double click to restore back to window</source>
+        <translation>Kaksoisnäpäytyksellä taikasin ikkunaksi</translation>
+    </message>
+</context>
+<context>
+    <name>TimeController</name>
+    <message>
+        <location filename="../timecontroller.cpp" line="+228"/>
+        <source>Tournament begins</source>
+        <translation>Kilpailun alkuun</translation>
+    </message>
+</context>
+<context>
+    <name>TimeModel</name>
+    <message>
+        <location filename="../timemodel.cpp" line="+287"/>
+        <source>Begin</source>
+        <translation>Alku</translation>
+    </message>
+    <message>
+        <location line="+97"/>
+        <location line="+241"/>
+        <source>Change</source>
+        <translation>Vaihto</translation>
+    </message>
+    <message>
+        <location line="-234"/>
+        <location line="+236"/>
+        <source>Round %1</source>
+        <translation>Kierros %1</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>End</source>
+        <translation>Loppu</translation>
+    </message>
+</context>
+<context>
+    <name>main</name>
+    <message>
+        <location filename="../qml/BridgeClock/main.qml" line="+33"/>
+        <source>Bridge clock %1</source>
+        <extracomment>The window header including version number as parameter %1</extracomment>
+        <translation>Bridgekello %1</translation>
+    </message>
+    <message>
+        <location line="+33"/>
+        <source>A new version of bridge clock %1 is available for download.</source>
+        <extracomment>The parameter is a new version number with download link</extracomment>
+        <translation>Bridgekello uusi versio %1 on ladattavissa.</translation>
+    </message>
+    <message>
+        <location line="+42"/>
+        <source>Start</source>
+        <translation>Aloitus</translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>Time</source>
+        <translation>Aika</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Results</source>
+        <translation>Tulokset</translation>
+    </message>
+</context>
+<context>
+    <name>tournamentResults</name>
+    <message>
+        <location filename="../qml/BridgeClock/tournamentResults.qml" line="+51"/>
+        <source>Show results</source>
+        <translation>Näytä tulokset</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Result address: </source>
+        <translation>Tulosten osoite:</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Browse files</source>
+        <translation>Selaa tiedostoja</translation>
+    </message>
+    <message>
+        <location line="+203"/>
+        <source>Select a file to be shown in result view</source>
+        <translation>Valitse tulostiedosto näytettäväksi</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>HTML-files (*.htm *.html)</source>
+        <translation>HTML-tiedostot (*.htm *html)</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>All files (*)</source>
+        <translation>Kaikki (*)</translation>
+    </message>
+</context>
+<context>
     <name>tournamentStart</name>
     <message>
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="+35"/>
-        <source>Kilpailun pituus</source>
-        <translation type="unfinished"></translation>
+        <source>Tournament time</source>
+        <translation>Kilpailun kesto</translation>
     </message>
     <message>
         <location line="+9"/>
-        <source>Kierroksia</source>
-        <translation type="unfinished"></translation>
+        <source>Number of rounds</source>
+        <translation>Kierroksia</translation>
     </message>
     <message>
         <location line="+36"/>
-        <source>Kierrosaika</source>
-        <translation type="unfinished"></translation>
+        <source>Round time</source>
+        <translation>Kierrosaika</translation>
     </message>
     <message>
         <location line="+19"/>
         <location line="+43"/>
-        <source>minuuttia</source>
-        <translation type="unfinished"></translation>
+        <source>minutes</source>
+        <translation>minuuttia</translation>
     </message>
     <message>
         <location line="-18"/>
-        <source>Vaihtoaika</source>
-        <translation type="unfinished"></translation>
+        <source>Change time</source>
+        <translation>Vaihtoaika</translation>
     </message>
     <message>
-        <location line="+43"/>
-        <source>Alkamisaika</source>
-        <translation type="unfinished"></translation>
+        <location line="+41"/>
+        <source>Start time</source>
+        <translation>Aloitus aika</translation>
     </message>
     <message>
-        <location line="+4"/>
-        <source>Nyt</source>
-        <translation type="unfinished"></translation>
+        <location line="+7"/>
+        <source>Now</source>
+        <translation>Nyt</translation>
     </message>
     <message>
+        <location line="+28"/>
+        <source>Start a new tournament</source>
+        <translation>Aloita uusi kilpailu</translation>
+    </message>
+</context>
+<context>
+    <name>tournamentTime</name>
+    <message>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="+43"/>
+        <source> -&gt; </source>
+        <translation> -&gt; </translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Remaining:</source>
+        <comment>The time remaining</comment>
+        <translation>Jäljellä:</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Stop the clock</source>
+        <translation>Pysäytä kello</translation>
+    </message>
+    <message>
+        <location line="+34"/>
+        <source>+10s</source>
+        <translation>+10s</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>+1m</source>
+        <translation>+1m</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>+5m</source>
+        <translation>+5m</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>-10s</source>
+        <translation>-10s</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>-1m</source>
+        <translation>-1m</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>-5m</source>
+        <translation>-5m</translation>
+    </message>
+    <message>
+        <location line="+26"/>
+        <location line="+18"/>
+        <location line="+18"/>
+        <location line="+18"/>
+        <location line="+18"/>
+        <source>No choice</source>
+        <translation>Ei valintaa</translation>
+    </message>
+    <message>
+        <location line="-64"/>
+        <source>Begin:</source>
+        <comment>The time of begin of round</comment>
+        <translation>Alku: </translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>End:</source>
+        <comment>The time of end of round</comment>
+        <translation>Loppu: </translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>Length:</source>
+        <comment>The lenght of round</comment>
+        <translation>Kesto:</translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>Previous:</source>
+        <comment>The previous round</comment>
+        <translation>Edellinen:</translation>
+    </message>
+    <message>
+        <location line="+44"/>
+        <location line="+32"/>
         <location line="+30"/>
-        <source>Aloita uusi kilpailu</source>
-        <translation type="unfinished"></translation>
+        <source>Lunch</source>
+        <translation>Lounas</translation>
+    </message>
+    <message>
+        <location line="-60"/>
+        <location line="+35"/>
+        <location line="+32"/>
+        <source>Dinner</source>
+        <translation>Päivällinen</translation>
+    </message>
+    <message>
+        <location line="-65"/>
+        <location line="+38"/>
+        <location line="+34"/>
+        <source>Coffee</source>
+        <translation>Kahvitauko</translation>
+    </message>
+    <message>
+        <location line="-49"/>
+        <location line="+28"/>
+        <source>Change</source>
+        <translation>Vaihto</translation>
+    </message>
+    <message>
+        <location line="+28"/>
+        <source>Custom:</source>
+        <translation>Muu:</translation>
+    </message>
+    <message>
+        <location line="+59"/>
+        <source>Begin</source>
+        <comment>The time of begin of round</comment>
+        <translation>Alku</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Happening</source>
+        <comment>The header for name of round or break</comment>
+        <translation>Tapahtuma</translation>
     </message>
 </context>
 </TS>

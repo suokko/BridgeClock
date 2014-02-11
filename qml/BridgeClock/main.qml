@@ -29,7 +29,8 @@ Window {
     width: 480
     height: 640
     visible: true
-    title: "Bridgekello " + timeController.version
+    //: The window header including version number as parameter %1
+    title: qsTr("Bridge clock %1").arg(timeController.version)
     readonly property string version: "$(VERSION)"
     property string newversion: ""
     property string versionurl: ""
@@ -60,8 +61,10 @@ Window {
             x: versiondlg.radius
             y: versiondlg.radius
             id: msg
-            text: "<html><span style=\"font-size:large\">Bridgekellosta on uusi versio " +
-                "<a href='" + versionurl +"'>" + newversion + "</a> ladattavana.</span>" +
+            text: "<html><span style=\"font-size:large\">" +
+                //: The parameter is a new version number with download link
+                qsTr("A new version of bridge clock %1 is available for download.").arg(
+                "<a href='" + versionurl +"'>" + newversion + "</a>") + "</span>" +
                 "<br />\n<a href='" + versionurl + "' style=\"font-size:small\">" + versionurl + "</a></html>"
 
             textFormat: Text.RichText
@@ -102,7 +105,7 @@ Window {
         anchors.topMargin: versiondlg.visible ? versiondlg.anchors.margins : 0
 
         Tab {
-            title: "Aloitus"
+            title: qsTr("Start")
             Item {
                 anchors.fill: parent
 
@@ -114,7 +117,7 @@ Window {
             }
         }
         Tab {
-            title: "Aika"
+            title: qsTr("Time")
             Item {
                 anchors.fill: parent
 
@@ -126,7 +129,7 @@ Window {
             }
         }
         Tab {
-            title: "Tulokset"
+            title: qsTr("Results")
             Item {
                 anchors.fill: parent
 

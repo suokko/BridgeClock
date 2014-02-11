@@ -32,7 +32,7 @@ Item {
         anchors.margins: 5
         anchors.top: parent.top
         anchors.horizontalCenter: parent.horizontalCenter
-        text: qsTr("Kilpailun pituus")
+        text: qsTr("Tournament time")
         font.pixelSize: 20
     }
 
@@ -41,7 +41,7 @@ Item {
         anchors.verticalCenter: roundsText.verticalCenter
         anchors.left: parent.left
         anchors.margins: 5
-        text: qsTr("Kierroksia")
+        text: qsTr("Number of rounds")
     }
     TextField {
         id: roundsText
@@ -77,7 +77,7 @@ Item {
         anchors.verticalCenter: timeText.verticalCenter
         anchors.left: parent.left
         anchors.margins: 5
-        text: qsTr("Kierrosaika")
+        text: qsTr("Round time")
     }
     TextField {
         id: timeText
@@ -96,7 +96,7 @@ Item {
         anchors.verticalCenter: timeText.verticalCenter
         anchors.left: timeText.right
         anchors.margins: 5
-        text: qsTr("minuuttia")
+        text: qsTr("minutes")
     }
     Slider {
         anchors.top: timeText.bottom
@@ -121,7 +121,7 @@ Item {
         anchors.verticalCenter: breaksText.verticalCenter
         anchors.left: parent.left
         anchors.margins: 5
-        text: qsTr("Vaihtoaika")
+        text: qsTr("Change time")
     }
     TextField {
         id: breaksText
@@ -139,7 +139,7 @@ Item {
         anchors.verticalCenter: breaksText.verticalCenter
         anchors.left: breaksText.right
         anchors.margins: 5
-        text: qsTr("minuuttia")
+        text: qsTr("minutes")
     }
     Slider {
         anchors.top: breaksText.bottom
@@ -158,23 +158,22 @@ Item {
         value: breaksText.text
     }
 
-    Row {
+    Text {
         id: startHeader
         anchors.top: breaks.bottom
         anchors.horizontalCenter: parent.horizontalCenter
-        Text {
-            anchors.verticalCenter: parent.verticalCenter
-            text: qsTr("Alkamisaika")
-            font.pixelSize: 16
-        }
-        Button {
-            text: qsTr("Nyt")
-            width: 30
-            onClicked: {
-                var time = new Date();
-                startTime.hour = time.getHours();
-                startTime.minute = time.getMinutes();
-            }
+        text: qsTr("Start time")
+        font.pixelSize: 16
+    }
+    Button {
+        anchors.top: startHeader.top
+        anchors.left: startHeader.right
+        anchors.leftMargin: 20
+        text: qsTr("Now")
+        onClicked: {
+            var time = new Date();
+            startTime.hour = time.getHours();
+            startTime.minute = time.getMinutes();
         }
     }
 
@@ -198,7 +197,7 @@ Item {
         id: resetTime
         anchors.left: parent.left
         anchors.bottom: parent.bottom
-        text: qsTr("Aloita uusi kilpailu")
+        text: qsTr("Start a new tournament")
         onPressedChanged: if (pressed) timeController.resetModel();
     }
 

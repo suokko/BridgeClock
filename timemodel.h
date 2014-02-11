@@ -118,11 +118,13 @@ struct TimeItem {
     TimeModel::Type type_;
 
     QDateTime start_;
-    QString name_;
+    std::string name_;
     int timeDiff_;
+    int nr_;
     TimeItem(TimeModel::Type t = TimeModel::None,
              const QDateTime &start = QDateTime(),
-             const QString & name = QString());
+             const std::string &name = "",
+             int nr = -1);
 
     void appendTime(int diff);
 };

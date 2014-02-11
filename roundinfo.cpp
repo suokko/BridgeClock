@@ -94,7 +94,7 @@ void RoundInfo::setRow(int v)
     emit rowChanged();
 }
 
-void RoundInfo::setEnd(const qulonglong &v)
+void RoundInfo::setEnd(const qint64 &v)
 {
     if (end_ == v)
         return;

@@ -217,7 +217,7 @@ Item {
             id: prevLabel
             anchors.margins: 3
             anchors.top: timeLabel.bottom
-            anchors.left: timeLabel.left
+            x: parent.width/2
             visible: view.currentRow != -1
             text: qsTr("Previous:", "The previous round")
         }

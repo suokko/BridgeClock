@@ -30,13 +30,12 @@ THE SOFTWARE.
 
 #include <cassert>
 
-static const QString vaihto = "Vaihto";
-
-TimeItem::TimeItem(TimeModel::Type type, const QDateTime &start, const QString &name) :
+TimeItem::TimeItem(TimeModel::Type type, const QDateTime &start, const std::string &name, int nr) :
     type_(type),
     start_(start),
     name_(name),
-    timeDiff_(0)
+    timeDiff_(0),
+    nr_(nr)
 {
 
 }
@@ -59,15 +58,29 @@ registerType<TimeItem> timeItemRegister;
 
 }
 
+QDataStream &operator<<(QDataStream &ds, const std::string &v)
+{
+    QByteArray str(v.c_str(), v.length());
+    return ds << str;
+}
+
+QDataStream &operator>>(QDataStream &ds, std::string &v)
+{
+    QByteArray str;
+    ds >> str;
+    v = std::string(str.constData(), str.length());
+    return ds;
+}
+
 QDataStream &operator<<(QDataStream &ds, const TimeItem &v)
 {
     int type = v.type_;
-    return ds << type << v.name_ << v.timeDiff_;
+    return ds << type << v.name_ << v.timeDiff_ << v.nr_;
 }
 QDataStream &operator>>(QDataStream &ds, TimeItem &v)
 {
     int type;
-    ds >> type >> v.name_ >> v.timeDiff_;
+    ds >> type >> v.name_ >> v.timeDiff_ >> v.nr_;
     v.type_ = static_cast<TimeModel::Type>(type);
     return ds;
 }
@@ -131,16 +144,15 @@ TimeModel::TimeModel() :
     unsigned r;
     list_.reserve(rounds_*2 + 2);
     QDateTime start = startTime_;
-    const QString kierros = "Kierros ";
     for (r = 0; r < rounds_; r++) {
-        list_.push_back(TimeItem(Play, start, kierros + QString::number(r + 1)));
+        list_.push_back(TimeItem(Play, start, "Round %1", r + 1));
         start = start.addSecs(30 * roundTime_);
         if (r + 1 == rounds_)
             break;
-        list_.push_back(TimeItem(Change, start, vaihto));
+        list_.push_back(TimeItem(Change, start, "Change"));
         start = start.addSecs(30 * roundBreak_);
     }
-    list_.push_back(TimeItem(End, start, "Loppu"));
+    list_.push_back(TimeItem(End, start, "End"));
     readSettings();
     onDataChangeTimeout();
 }
@@ -217,7 +229,7 @@ QDateTime TimeModel::pauseTimeAdjust(QDateTime t) const
 
 TimeModelVariant *TimeModel::qmlData(int row, QString role) const
 {
-    if (row == -1 || row >= list_.size()) {
+    if (row == -1 || row >= (int)list_.size()) {
         qWarning() << row << "passed for a row with role " << role;
         return new TimeModelVariant(this, -1, QVariant());
     }
@@ -231,14 +243,20 @@ QVariant TimeModel::data(const QModelIndex &index, int role) const
     case NameRawRole:
     {
         QDateTime dt = QDateTime::currentDateTime();
+        QString translate;
+        if (list_[index.row()].nr_ >= 0)
+            translate = tr(list_[index.row()].name_.c_str()).arg(list_[index.row()].nr_);
+        else
+            translate = tr(list_[index.row()].name_.c_str());
+
         if (paused_)
             dt = dt.addMSecs(-1 * align_to(pauseTime_.elapsed(), 1000));
         if (role == NameRole && index.row() + 1 < (int)list_.size() &&
                 list_[index.row()].start_ < dt &&
                 list_[index.row() + 1].start_ > dt) {
-            return QString("<b>") + list_[index.row()].name_ + QString("</b>");
+            return QString("<b>") + translate + QString("</b>");
         }
-        return list_[index.row()].name_;
+        return translate;
     }
     case StartRole:
     {
@@ -266,8 +284,11 @@ QVariant TimeModel::data(const QModelIndex &index, int role) const
     }
     case PreviousNameRole:
         if (index.row() == 0)
-            return "Alku";
-        return list_[index.row() - 1].name_;
+            return tr("Begin");
+        if (list_[index.row() - 1].nr_ >= 0)
+            return tr(list_[index.row() - 1].name_.c_str()).arg(list_[index.row() - 1].nr_);
+        else
+            return tr(list_[index.row() - 1].name_.c_str());
     case EndMinuteRole:
     {
         QDateTime start;
@@ -360,15 +381,14 @@ void TimeModel::setRounds(unsigned v)
         list_.reserve(v*2 + 2);
         unsigned r, begin = list_.size() - 2, endrow;
         QDateTime start = startTime_;
-        const QString kierros = "Kierros ";
-        const QString vaihto = "Vaihto";
+        const std::string vaihto = QT_TR_NOOP("Change");
         TimeItem end = list_.back();
         beginInsertRows(QModelIndex(), list_.size() - 1, list_.size() + nr*2 - 2);
         list_.pop_back();
         for (r = 0; r < nr; r++) {
             list_.push_back(TimeItem(Change, start, vaihto));
             start.setTime(start.time().addSecs(30 * roundBreak_));
-            list_.push_back(TimeItem(Play, start, kierros + QString::number(r + rounds_ + 1)));
+            list_.push_back(TimeItem(Play, start, QT_TR_NOOP("Round %1"), (r + rounds_ + 1)));
             start.setTime(start.time().addSecs(30 * roundTime_));
         }
         list_.push_back(end);
@@ -500,9 +520,9 @@ void TimeModel::changeType(int row, TimeModel::Type type,
                            const QString &name)
 {
     if (list_[row].type_ != type ||
-            list_[row].name_ != name) {
+            list_[row].name_.compare(name.toUtf8().data()) != 0) {
         list_[row].type_ = type;
-        list_[row].name_ = name;
+        list_[row].name_ = name.toUtf8().data();
         if (type == Change)
             list_[row].timeDiff_ = 0;
         writeTimeItem(row);
@@ -595,12 +615,19 @@ void TimeModel::deleteTimeItem(int start, int end)
 void TimeModel::reset()
 {
     int i = 0;
+    int nr = 1;
     settings_.beginWriteArray("timeItems");
     for (TimeItem &t : list_) {
         t.timeDiff_ = 0;
-        if (t.type_ == TimeModel::Break) {
+        t.nr_ = -1;
+        if (t.type_ == TimeModel::Break || t.type_ == TimeModel::Change) {
             t.type_ = TimeModel::Change;
-            t.name_ = vaihto;
+            t.name_ = QT_TR_NOOP("Change");
+        } else if (t.type_ == TimeModel::Play) {
+            t.name_ = QT_TR_NOOP("Round %1");
+            t.nr_ = nr++;
+        } else if (t.type_ == TimeModel::End) {
+            t.name_ = QT_TR_NOOP("End");
         }
         settings_.setArrayIndex(i++);
         QVariant v;

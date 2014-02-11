@@ -195,8 +195,11 @@ void TimeController::updateRoundInfo()
     int row;
     const TimeItem *item = d->model_->getCurrent(row);
     QDateTime end, cur(QDateTime::currentDateTime());
-    QString nextName = "", nextBreakName = "", nextBreakEnd = "", nextBreakStart;
-    QString name = item[0].name_;
+    std::string nextName = "", nextBreakName = "";
+    QString nextBreakEnd = "", nextBreakStart = "";
+    int nrNext = -1, nrBreak = -1;
+    std::string name = item[0].name_;
+    int nr = item[0].nr_;
     int playing = item[0].type_ == TimeModel::Play ? 1 : 0;
     int next = 1;
     end = cur;
@@ -207,10 +210,12 @@ void TimeController::updateRoundInfo()
         while (item[next].type_ == TimeModel::Change)
             next++;
         nextName = item[next].name_;
+        nrNext = item[next].nr_;
         while (item[next].type_ == TimeModel::Change ||
                 item[next].type_ == TimeModel::Play)
             next++;
         nextBreakName = item[next].name_;
+        nrBreak = item[next].nr_;
         end = item[1].start_;
         if (item[next].type_ == TimeModel::Break)
             nextBreakEnd = d->model_->data(d->model_->index(row + next), EndRole).toString();
@@ -220,7 +225,7 @@ void TimeController::updateRoundInfo()
 
         if (item[0].start_ >= cur) {
             end = item[0].start_;
-            name = "Kilpailun alkuun";
+            name = QT_TR_NOOP("Tournament begins");
         }
     } else {
         playing = 2;
@@ -232,9 +237,9 @@ void TimeController::updateRoundInfo()
                         row + 1 : row),
                 StartTimeRole).toULongLong() / 1000;
     d->roundInfo_->setEnd(e);
-    d->roundInfo_->setName(name);
-    d->roundInfo_->setNextName(nextName);
-    d->roundInfo_->setNextBreakName(nextBreakName);
+    d->roundInfo_->setName(nr >= 0 ? tr(name.c_str()).arg(nr) : tr(name.c_str()));
+    d->roundInfo_->setNextName(nrNext >= 0 ? tr(nextName.c_str()).arg(nrNext) : tr(nextName.c_str()));
+    d->roundInfo_->setNextBreakName(nrBreak >= 0 ? tr(nextBreakName.c_str()).arg(nrBreak) : tr(nextBreakName.c_str()));
     d->roundInfo_->setNextBreakEnd(nextBreakEnd);
     d->roundInfo_->setNextBreakStart(nextBreakStart);
     d->roundInfo_->setPlaying(playing);

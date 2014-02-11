@@ -53,7 +53,7 @@ public:
     QString timeLeft() const;
 
     void setRow(int row);
-    void setEnd(const qulonglong &v);
+    void setEnd(const qint64 &v);
     void setName(const QString &v);
     void setNextName(const QString &v);
     void setNextBreakName(const QString &v);

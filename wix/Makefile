@@ -47,12 +47,28 @@ COMMONQML := \
 COMMONSRC := BridgeClock80.png \
 	LICENSE \
 	LICENSE.QT.LGPL \
-	$(subst ../,,$(wildcard ../qml/BridgeClock/*))
+	$(subst ../,,$(wildcard ../qml/BridgeClock/*)) \
+	$(subst ../,,$(wildcard ../locale/*.qm))
 
 LINUXCHROOTPATH := $(shell schroot -i -c $(LINUXCHROOT) | grep "^[ \t]*Directory" | sed 's/^[^\/]*//')
 VERSION := $(shell date +'%Y.%m.%d')
 
 all: BridgeClock.msi BridgeClock-linux-${VERSION}.tar.gz BridgeClock-src-$(VERSION).tar.gz BridgeClock-versions.xml
+
+#Localization rules
+$(wildcard ../locale/*.qm): ../locale/stamp.release
+
+../locale/stamp.release: ../BridgeClock.pro $(wildcard ../locale/*.ts)
+	touch $@.tmp
+	cd .. && lrelease $<
+	mv $@.tmp $@
+
+$(wildcard ../locale/*.ts): ../locale/stamp.update
+
+../locale/stamp.update: ../BridgeClock.pro $(wildcard ../*.cpp ../qml/BridgeClock/*.qml)
+	touch $@.tmp
+	lupdate -locations relative $<
+	mv $@.tmp $@
 
 # msi packaging
 BridgeClock.msi: files.wixobj BridgeClock.wixobj

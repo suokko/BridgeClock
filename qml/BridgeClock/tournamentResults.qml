@@ -48,7 +48,7 @@ Item {
             anchors.top: parent.top
             id: showResults
             checked: timeController.showResults
-            text: "Näytä tulokset"
+            text: qsTr("Show results")
         }
 
         Text {
@@ -56,12 +56,12 @@ Item {
             anchors.left: parent.left
             opacity: showResults.checked ? 1 : 0.5
             id: head
-            text: "Tulokset: "
+            text: qsTr("Result address: ")
             font.pixelSize: 16
         }
         Button {
             id: resultButton
-            text: "Selaa tiedostoja"
+            text: qsTr("Browse files")
             anchors.top: showResults.bottom
             anchors.left: head.right
             onClicked: loadResults.open()
@@ -264,9 +264,9 @@ Item {
     FileDialog {
         id: loadResults
         /*        folder: "/tmp"*/
-        title: "Valitse tulokset näytettäväksi"
+        title: qsTr("Select a file to be shown in result view")
         selectMultiple: false
-        nameFilters: [ "HTML-tiedostot (*.htm *.html)", "Kaikki (*)" ]
+        nameFilters: [ qsTr("HTML-files (*.htm *.html)"), qsTr("All files (*)") ]
 
         onAccepted: { resultFile.text = fileUrl }
     }

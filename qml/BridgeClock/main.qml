@@ -123,7 +123,6 @@ Window {
 
                 Loader {
                     anchors.fill: parent
-                    asynchronous: true
                     source: "tournamentTime.qml"
                 }
             }

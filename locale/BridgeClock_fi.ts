@@ -2,6 +2,52 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="fi_FI">
 <context>
+    <name>Break</name>
+    <message>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="+266"/>
+        <location line="+32"/>
+        <location line="+30"/>
+        <location filename="../timemodel.cpp" line="+245"/>
+        <source>Lunch</source>
+        <translation>Lounas</translation>
+    </message>
+    <message>
+        <location line="-60"/>
+        <location line="+35"/>
+        <location line="+32"/>
+        <location filename="../timemodel.cpp" line="+1"/>
+        <source>Dinner</source>
+        <translation>Päivällinen</translation>
+    </message>
+    <message>
+        <location line="-65"/>
+        <location line="+38"/>
+        <location line="+34"/>
+        <location filename="../timemodel.cpp" line="+1"/>
+        <source>Coffee</source>
+        <translation>Kahvitauko</translation>
+    </message>
+    <message>
+        <location line="-49"/>
+        <location line="+28"/>
+        <location filename="../timemodel.cpp" line="+142"/>
+        <location line="+242"/>
+        <source>Change</source>
+        <translation>Vaihto</translation>
+    </message>
+    <message>
+        <location filename="../timemodel.cpp" line="-235"/>
+        <location line="+237"/>
+        <source>Round %1</source>
+        <translation>Kierros %1</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>End</source>
+        <translation>Loppu</translation>
+    </message>
+</context>
+<context>
     <name>Clock</name>
     <message>
         <location filename="../qml/BridgeClock/Clock.qml" line="+33"/>
@@ -45,26 +91,21 @@
 <context>
     <name>TimeModel</name>
     <message>
-        <location filename="../timemodel.cpp" line="+287"/>
+        <location filename="../timemodel.cpp" line="-344"/>
         <source>Begin</source>
         <translation>Alku</translation>
     </message>
     <message>
-        <location line="+97"/>
-        <location line="+241"/>
         <source>Change</source>
-        <translation>Vaihto</translation>
+        <translation type="vanished">Vaihto</translation>
     </message>
     <message>
-        <location line="-234"/>
-        <location line="+236"/>
         <source>Round %1</source>
-        <translation>Kierros %1</translation>
+        <translation type="vanished">Kierros %1</translation>
     </message>
     <message>
-        <location line="+3"/>
         <source>End</source>
-        <translation>Loppu</translation>
+        <translation type="vanished">Loppu</translation>
     </message>
 </context>
 <context>
@@ -177,14 +218,18 @@
 <context>
     <name>tournamentTime</name>
     <message>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="+43"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="-278"/>
         <source> -&gt; </source>
         <translation> -&gt; </translation>
     </message>
     <message>
-        <location line="+15"/>
         <source>Remaining:</source>
         <comment>The time remaining</comment>
+        <translation type="vanished">Jäljellä:</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Remaining:</source>
         <translation>Jäljellä:</translation>
     </message>
     <message>
@@ -234,70 +279,83 @@
     <message>
         <location line="-64"/>
         <source>Begin:</source>
-        <comment>The time of begin of round</comment>
-        <translation>Alku: </translation>
+        <translation>Alku:</translation>
     </message>
     <message>
         <location line="+18"/>
         <source>End:</source>
-        <comment>The time of end of round</comment>
-        <translation>Loppu: </translation>
+        <translation>Loppu:</translation>
     </message>
     <message>
         <location line="+18"/>
         <source>Length:</source>
-        <comment>The lenght of round</comment>
         <translation>Kesto:</translation>
     </message>
     <message>
         <location line="+18"/>
         <source>Previous:</source>
-        <comment>The previous round</comment>
         <translation>Edellinen:</translation>
     </message>
     <message>
-        <location line="+44"/>
-        <location line="+32"/>
-        <location line="+30"/>
-        <source>Lunch</source>
-        <translation>Lounas</translation>
-    </message>
-    <message>
-        <location line="-60"/>
-        <location line="+35"/>
-        <location line="+32"/>
-        <source>Dinner</source>
-        <translation>Päivällinen</translation>
-    </message>
-    <message>
-        <location line="-65"/>
-        <location line="+38"/>
-        <location line="+34"/>
-        <source>Coffee</source>
-        <translation>Kahvitauko</translation>
-    </message>
-    <message>
-        <location line="-49"/>
-        <location line="+28"/>
-        <source>Change</source>
-        <translation>Vaihto</translation>
-    </message>
-    <message>
-        <location line="+28"/>
-        <source>Custom:</source>
-        <translation>Muu:</translation>
-    </message>
-    <message>
-        <location line="+59"/>
+        <location line="+186"/>
         <source>Begin</source>
-        <comment>The time of begin of round</comment>
         <translation>Alku</translation>
     </message>
     <message>
         <location line="+5"/>
         <source>Happening</source>
-        <comment>The header for name of round or break</comment>
         <translation>Tapahtuma</translation>
+    </message>
+    <message>
+        <source>Begin:</source>
+        <comment>The time of begin of round</comment>
+        <translation type="vanished">Alku: </translation>
+    </message>
+    <message>
+        <source>End:</source>
+        <comment>The time of end of round</comment>
+        <translation type="vanished">Loppu: </translation>
+    </message>
+    <message>
+        <source>Length:</source>
+        <comment>The lenght of round</comment>
+        <translation type="vanished">Kesto:</translation>
+    </message>
+    <message>
+        <source>Previous:</source>
+        <comment>The previous round</comment>
+        <translation type="vanished">Edellinen:</translation>
+    </message>
+    <message>
+        <source>Lunch</source>
+        <translation type="vanished">Lounas</translation>
+    </message>
+    <message>
+        <source>Dinner</source>
+        <translation type="vanished">Päivällinen</translation>
+    </message>
+    <message>
+        <source>Coffee</source>
+        <translation type="vanished">Kahvitauko</translation>
+    </message>
+    <message>
+        <source>Change</source>
+        <translation type="vanished">Vaihto</translation>
+    </message>
+    <message>
+        <location line="-64"/>
+        <source>Custom:</source>
+        <translation>Muu:</translation>
+    </message>
+    <message>
+        <source>Begin</source>
+        <comment>The time of begin of round</comment>
+        <translation type="vanished">Alku</translation>
+    </message>
+    <message>
+        <source>Happening</source>
+        <comment>The header for name of round or break</comment>
+        <translation type="vanished">Tapahtuma</translation>
     </message>
 </context>
 </TS>

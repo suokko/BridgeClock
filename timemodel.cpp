@@ -242,12 +242,17 @@ QVariant TimeModel::data(const QModelIndex &index, int role) const
     case NameRole:
     case NameRawRole:
     {
+        (void)QT_TRANSLATE_NOOP("Break","Lunch");
+        (void)QT_TRANSLATE_NOOP("Break","Dinner");
+        (void)QT_TRANSLATE_NOOP("Break","Coffee");
         QDateTime dt = QDateTime::currentDateTime();
         QString translate;
-        if (list_[index.row()].nr_ >= 0)
-            translate = tr(list_[index.row()].name_.c_str()).arg(list_[index.row()].nr_);
+        if (role == NameRawRole)
+            translate = list_[index.row()].name_.c_str();
+        else if (list_[index.row()].nr_ >= 0)
+            translate = qApp->translate("Break",list_[index.row()].name_.c_str()).arg(list_[index.row()].nr_);
         else
-            translate = tr(list_[index.row()].name_.c_str());
+            translate = qApp->translate("Break",list_[index.row()].name_.c_str());
 
         if (paused_)
             dt = dt.addMSecs(-1 * align_to(pauseTime_.elapsed(), 1000));
@@ -286,9 +291,9 @@ QVariant TimeModel::data(const QModelIndex &index, int role) const
         if (index.row() == 0)
             return tr("Begin");
         if (list_[index.row() - 1].nr_ >= 0)
-            return tr(list_[index.row() - 1].name_.c_str()).arg(list_[index.row() - 1].nr_);
+            return qApp->translate("Break",list_[index.row() - 1].name_.c_str()).arg(list_[index.row() - 1].nr_);
         else
-            return tr(list_[index.row() - 1].name_.c_str());
+            return qApp->translate("Break",list_[index.row() - 1].name_.c_str());
     case EndMinuteRole:
     {
         QDateTime start;
@@ -381,14 +386,14 @@ void TimeModel::setRounds(unsigned v)
         list_.reserve(v*2 + 2);
         unsigned r, begin = list_.size() - 2, endrow;
         QDateTime start = startTime_;
-        const std::string vaihto = QT_TR_NOOP("Change");
+        const std::string vaihto = QT_TRANSLATE_NOOP("Break","Change");
         TimeItem end = list_.back();
         beginInsertRows(QModelIndex(), list_.size() - 1, list_.size() + nr*2 - 2);
         list_.pop_back();
         for (r = 0; r < nr; r++) {
             list_.push_back(TimeItem(Change, start, vaihto));
             start.setTime(start.time().addSecs(30 * roundBreak_));
-            list_.push_back(TimeItem(Play, start, QT_TR_NOOP("Round %1"), (r + rounds_ + 1)));
+            list_.push_back(TimeItem(Play, start, QT_TRANSLATE_NOOP("Break","Round %1"), (r + rounds_ + 1)));
             start.setTime(start.time().addSecs(30 * roundTime_));
         }
         list_.push_back(end);
@@ -622,12 +627,12 @@ void TimeModel::reset()
         t.nr_ = -1;
         if (t.type_ == TimeModel::Break || t.type_ == TimeModel::Change) {
             t.type_ = TimeModel::Change;
-            t.name_ = QT_TR_NOOP("Change");
+            t.name_ = QT_TRANSLATE_NOOP("Break","Change");
         } else if (t.type_ == TimeModel::Play) {
-            t.name_ = QT_TR_NOOP("Round %1");
+            t.name_ = QT_TRANSLATE_NOOP("Break","Round %1");
             t.nr_ = nr++;
         } else if (t.type_ == TimeModel::End) {
-            t.name_ = QT_TR_NOOP("End");
+            t.name_ = QT_TRANSLATE_NOOP("Break","End");
         }
         settings_.setArrayIndex(i++);
         QVariant v;

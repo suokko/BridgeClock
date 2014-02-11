@@ -55,7 +55,7 @@ Item {
             anchors.verticalCenter: timeLeft.verticalCenter
             anchors.left: parent.left
             visible: timeController.roundInfo.playing < 2
-            text: qsTr("Remaining:", "The time remaining")
+            text: qsTr("Remaining:")
         }
         Text {
             id: timeLeft
@@ -165,7 +165,7 @@ Item {
             anchors.top: selectionHeader.bottom
             anchors.left: parent.left
             visible: view.currentRow != -1
-            text: qsTr("Begin:", "The time of begin of round")
+            text: qsTr("Begin:")
         }
         Text {
             id: start
@@ -183,7 +183,7 @@ Item {
             anchors.top: startLabel.bottom
             anchors.left: parent.left
             visible: view.currentRow != -1
-            text: qsTr("End:", "The time of end of round")
+            text: qsTr("End:")
         }
         Text {
             id: end
@@ -201,7 +201,7 @@ Item {
             anchors.top: selectionHeader.bottom
             x: parent.width/2
             visible: view.currentRow != -1
-            text: qsTr("Length:", "The lenght of round")
+            text: qsTr("Length:")
         }
         Text {
             id: time
@@ -219,7 +219,7 @@ Item {
             anchors.top: timeLabel.bottom
             x: parent.width/2
             visible: view.currentRow != -1
-            text: qsTr("Previous:", "The previous round")
+            text: qsTr("Previous:")
         }
         Text {
             id: prev
@@ -263,11 +263,11 @@ Item {
                     change.checked = true;
                     break
                 case TimeModel.Break:
-                    if (name === QT_TR_NOOP("Lunch")) {
+                    if (name === QT_TRANSLATE_NOOP("Break","Lunch")) {
                         lunch.checked = true;
-                    } else if (name === QT_TR_NOOP("Dinner")) {
+                    } else if (name === QT_TRANSLATE_NOOP("Break","Dinner")) {
                         dinner.checked = true;
-                    } else if (name === QT_TR_NOOP("Coffee")) {
+                    } else if (name === QT_TRANSLATE_NOOP("Break","Coffee")) {
                         coffee.checked = true;
                     } else {
                         custom.checked = true;
@@ -290,22 +290,22 @@ Item {
                     case change:
                         view.model.changeType(view.currentRow,
                                               TimeModel.Change,
-                                              QT_TR_NOOP("Change"));
+                                              QT_TRANSLATE_NOOP("Break","Change"));
                         break;
                     case lunch:
                         view.model.changeType(view.currentRow,
                                               TimeModel.Break,
-                                              QT_TR_NOOP("Lunch"));
+                                              QT_TRANSLATE_NOOP("Break","Lunch"));
                         break;
                     case dinner:
                         view.model.changeType(view.currentRow,
                                               TimeModel.Break,
-                                              QT_TR_NOOP("Dinner"));
+                                              QT_TRANSLATE_NOOP("Break","Dinner"));
                         break;
                     case coffee:
                         view.model.changeType(view.currentRow,
                                               TimeModel.Break,
-                                              QT_TR_NOOP("Coffee"));
+                                              QT_TRANSLATE_NOOP("Break","Coffee"));
                         break;
                     case custom:
                         view.model.changeType(view.currentRow,
@@ -318,28 +318,28 @@ Item {
             RadioButton {
                 id: change
                 anchors.margins: 3
-                text: qsTr("Change")
+                text: qsTranslate("Break","Change")
                 exclusiveGroup: itemType
             }
             RadioButton {
                 id: lunch
                 anchors.top: change.bottom
                 anchors.margins: 3
-                text: qsTr("Lunch")
+                text: qsTranslate("Break","Lunch")
                 exclusiveGroup: itemType
             }
             RadioButton {
                 id: dinner
                 anchors.top: lunch.bottom
                 anchors.margins: 3
-                text: qsTr("Dinner")
+                text: qsTranslate("Break","Dinner")
                 exclusiveGroup: itemType
             }
             RadioButton {
                 id: coffee
                 anchors.top: dinner.bottom
                 anchors.margins: 3
-                text: qsTr("Coffee")
+                text: qsTranslate("Break","Coffee")
                 exclusiveGroup: itemType
             }
             RadioButton {
@@ -405,12 +405,12 @@ Item {
         model: timeController.model
         TableViewColumn {
             role: "start";
-            title: qsTr("Begin", "The time of begin of round");
+            title: qsTr("Begin");
             width: 70;
         }
         TableViewColumn {
             role: "name";
-            title: qsTr("Happening", "The header for name of round or break");
+            title: qsTr("Happening");
             width: 83;
         }
 

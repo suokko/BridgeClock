@@ -40,7 +40,7 @@ Item {
         Text {
             id: header
             text: timeController.roundInfo.playing === 0 ?
-                      (timeController.roundInfo.name + " -> " +
+                      (timeController.roundInfo.name + qsTr(" -> ") +
                        timeController.roundInfo.nextName) :
                       timeController.roundInfo.name
             font.pixelSize: timeController.roundInfo.playing === 0 ? 18 : 24
@@ -55,7 +55,7 @@ Item {
             anchors.verticalCenter: timeLeft.verticalCenter
             anchors.left: parent.left
             visible: timeController.roundInfo.playing < 2
-            text: "Jäljellä:"
+            text: qsTr("Remaining:", "The time remaining")
         }
         Text {
             id: timeLeft
@@ -72,7 +72,7 @@ Item {
             anchors.margins: 5
             visible: timeController.roundInfo.playing < 2
             id: pause
-            text: "Pysäytä aika"
+            text: qsTr("Stop the clock")
             checked: false
             style: CheckBoxStyle {
                 label: Text {
@@ -106,32 +106,32 @@ Item {
             }
 
             Button {
-                text: "+10s"
+                text: qsTr("+10s")
                 Layout.fillWidth: true
                 onPressedChanged: if (pressed) roundGrid.appendTime(10*1000);
             }
             Button {
-                text: "+1m"
+                text: qsTr("+1m")
                 Layout.fillWidth: true
                 onPressedChanged: if (pressed) roundGrid.appendTime(60*1000);
             }
             Button {
-                text: "+5m"
+                text: qsTr("+5m")
                 Layout.fillWidth: true
                 onPressedChanged: if (pressed) roundGrid.appendTime(5*60*1000);
             }
             Button {
-                text: "-10s"
+                text: qsTr("-10s")
                 Layout.fillWidth: true
                 onPressedChanged: if (pressed) roundGrid.appendTime(-10*1000);
             }
             Button {
-                text: "-1m"
+                text: qsTr("-1m")
                 Layout.fillWidth: true
                 onPressedChanged: if (pressed) roundGrid.appendTime(-60*1000);
             }
             Button {
-                text: "-5m"
+                text: qsTr("-5m")
                 Layout.fillWidth: true
                 onPressedChanged: if (pressed) roundGrid.appendTime(-5*60*1000);
             }
@@ -157,7 +157,7 @@ Item {
             font.pixelSize: 20
             text: view.currentRow != -1 ?
                       view.model.qmlData(view.currentRow, "name").value :
-                      "Ei valintaa"
+                      qsTr("No choice")
         }
         Label {
             id: startLabel
@@ -165,7 +165,7 @@ Item {
             anchors.top: selectionHeader.bottom
             anchors.left: parent.left
             visible: view.currentRow != -1
-            text: "Alku:"
+            text: qsTr("Begin:", "The time of begin of round")
         }
         Text {
             id: start
@@ -175,7 +175,7 @@ Item {
             visible: view.currentRow != -1
             text: view.currentRow != -1 ?
                       view.model.qmlData(view.currentRow, "start").value :
-                      "Ei valintaa"
+                      qsTr("No choice")
         }
         Label {
             id: endLabel
@@ -183,7 +183,7 @@ Item {
             anchors.top: startLabel.bottom
             anchors.left: parent.left
             visible: view.currentRow != -1
-            text: "Loppu:"
+            text: qsTr("End:", "The time of end of round")
         }
         Text {
             id: end
@@ -193,7 +193,7 @@ Item {
             visible: view.currentRow != -1
             text: view.currentRow != -1 ?
                       view.model.qmlData(view.currentRow, "end").value :
-                      "Ei valintaa"
+                      qsTr("No choice")
         }
         Label {
             id: timeLabel
@@ -201,7 +201,7 @@ Item {
             anchors.top: selectionHeader.bottom
             x: parent.width/2
             visible: view.currentRow != -1
-            text: "Kesto:"
+            text: qsTr("Length:", "The lenght of round")
         }
         Text {
             id: time
@@ -211,7 +211,7 @@ Item {
             visible: view.currentRow != -1
             text: view.currentRow != -1 ?
                       view.model.qmlData(view.currentRow, "length").value :
-                      "Ei valintaa"
+                      qsTr("No choice")
         }
         Label {
             id: prevLabel
@@ -219,7 +219,7 @@ Item {
             anchors.top: timeLabel.bottom
             anchors.left: timeLabel.left
             visible: view.currentRow != -1
-            text: "Edellinen:"
+            text: qsTr("Previous:", "The previous round")
         }
         Text {
             id: prev
@@ -229,7 +229,7 @@ Item {
             visible: view.currentRow != -1
             text: view.currentRow != -1 ?
                       view.model.qmlData(view.currentRow, "previous").value :
-                      "Ei valintaa"
+                      qsTr("No choice")
         }
 
         GroupBox {
@@ -263,11 +263,11 @@ Item {
                     change.checked = true;
                     break
                 case TimeModel.Break:
-                    if (name === "Lounas") {
+                    if (name === QT_TR_NOOP("Lunch")) {
                         lunch.checked = true;
-                    } else if (name === "Päivällinen") {
+                    } else if (name === QT_TR_NOOP("Dinner")) {
                         dinner.checked = true;
-                    } else if (name === "Kahvitauko") {
+                    } else if (name === QT_TR_NOOP("Coffee")) {
                         coffee.checked = true;
                     } else {
                         custom.checked = true;
@@ -290,22 +290,22 @@ Item {
                     case change:
                         view.model.changeType(view.currentRow,
                                               TimeModel.Change,
-                                              "Vaihto");
+                                              QT_TR_NOOP("Change"));
                         break;
                     case lunch:
                         view.model.changeType(view.currentRow,
                                               TimeModel.Break,
-                                              "Lounas");
+                                              QT_TR_NOOP("Lunch"));
                         break;
                     case dinner:
                         view.model.changeType(view.currentRow,
                                               TimeModel.Break,
-                                              "Päivällinen");
+                                              QT_TR_NOOP("Dinner"));
                         break;
                     case coffee:
                         view.model.changeType(view.currentRow,
                                               TimeModel.Break,
-                                              "Kahvitauko");
+                                              QT_TR_NOOP("Coffee"));
                         break;
                     case custom:
                         view.model.changeType(view.currentRow,
@@ -318,35 +318,35 @@ Item {
             RadioButton {
                 id: change
                 anchors.margins: 3
-                text: "Vaihto"
+                text: qsTr("Change")
                 exclusiveGroup: itemType
             }
             RadioButton {
                 id: lunch
                 anchors.top: change.bottom
                 anchors.margins: 3
-                text: "Lounas"
+                text: qsTr("Lunch")
                 exclusiveGroup: itemType
             }
             RadioButton {
                 id: dinner
                 anchors.top: lunch.bottom
                 anchors.margins: 3
-                text: "Päivällinen"
+                text: qsTr("Dinner")
                 exclusiveGroup: itemType
             }
             RadioButton {
                 id: coffee
                 anchors.top: dinner.bottom
                 anchors.margins: 3
-                text: "Kahvitauko"
+                text: qsTr("Coffee")
                 exclusiveGroup: itemType
             }
             RadioButton {
                 id: custom
                 anchors.top: coffee.bottom
                 anchors.margins: 3
-                text: "Muu:"
+                text: qsTr("Custom:")
                 exclusiveGroup: itemType
             }
             TextField {
@@ -405,12 +405,12 @@ Item {
         model: timeController.model
         TableViewColumn {
             role: "start";
-            title: "Alku";
+            title: qsTr("Begin", "The time of begin of round");
             width: 70;
         }
         TableViewColumn {
             role: "name";
-            title: "Tapahtuma";
+            title: qsTr("Happening", "The header for name of round or break");
             width: 83;
         }
 

@@ -46,6 +46,10 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     setenv("LD_LIBRARY_PATH", path, 1);
 #endif
 
+    QTranslator trans;
+    trans.load(QLocale::system(), "locale/BridgeClock_");
+    app.installTranslator(&trans);
+
     QCoreApplication::setOrganizationDomain("bridgefinland.fi");
     QCoreApplication::setOrganizationName("SBL");
     QCoreApplication::setApplicationName("BridgeClock");

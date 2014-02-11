@@ -32,7 +32,7 @@ Item {
         anchors.margins: 5
         anchors.top: parent.top
         anchors.horizontalCenter: parent.horizontalCenter
-        text: "Kilpailun pituus"
+        text: qsTr("Kilpailun pituus")
         font.pixelSize: 20
     }
 
@@ -41,7 +41,7 @@ Item {
         anchors.verticalCenter: roundsText.verticalCenter
         anchors.left: parent.left
         anchors.margins: 5
-        text: "Kierroksia"
+        text: qsTr("Kierroksia")
     }
     TextField {
         id: roundsText
@@ -77,7 +77,7 @@ Item {
         anchors.verticalCenter: timeText.verticalCenter
         anchors.left: parent.left
         anchors.margins: 5
-        text: "Kierrosaika"
+        text: qsTr("Kierrosaika")
     }
     TextField {
         id: timeText
@@ -96,7 +96,7 @@ Item {
         anchors.verticalCenter: timeText.verticalCenter
         anchors.left: timeText.right
         anchors.margins: 5
-        text: "minuuttia"
+        text: qsTr("minuuttia")
     }
     Slider {
         anchors.top: timeText.bottom
@@ -121,7 +121,7 @@ Item {
         anchors.verticalCenter: breaksText.verticalCenter
         anchors.left: parent.left
         anchors.margins: 5
-        text: "Vaihtoaika"
+        text: qsTr("Vaihtoaika")
     }
     TextField {
         id: breaksText
@@ -139,7 +139,7 @@ Item {
         anchors.verticalCenter: breaksText.verticalCenter
         anchors.left: breaksText.right
         anchors.margins: 5
-        text: "minuuttia"
+        text: qsTr("minuuttia")
     }
     Slider {
         anchors.top: breaksText.bottom
@@ -164,11 +164,11 @@ Item {
         anchors.horizontalCenter: parent.horizontalCenter
         Text {
             anchors.verticalCenter: parent.verticalCenter
-            text: "Alkamisaika"
+            text: qsTr("Alkamisaika")
             font.pixelSize: 16
         }
         Button {
-            text: "Nyt"
+            text: qsTr("Nyt")
             width: 30
             onClicked: {
                 var time = new Date();
@@ -198,7 +198,7 @@ Item {
         id: resetTime
         anchors.left: parent.left
         anchors.bottom: parent.bottom
-        text: "Aloita uusi kilpailu"
+        text: qsTr("Aloita uusi kilpailu")
         onPressedChanged: if (pressed) timeController.resetModel();
     }
 

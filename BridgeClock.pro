@@ -16,6 +16,22 @@ SOURCES += main.cpp \
     mouseevent.cpp \
     versionchecker.cpp
 
+lupdate_only {
+SOURCES += qml/BridgeClock/*.qml
+}
+
+TRANSLATIONS = locale/BridgeClock_en.ts \
+	locale/BridgeClock_fi.ts \
+	locale/BridgeClock_sv.ts
+
+update.commands = lupdate $$PWD/BridgeClock.pro -locations relative
+update.depends = $$SOURES $$HEADERS $$OTHER_FILES
+release.commands = cd $$PWD && lrelease BridgeClock.pro
+release.depends = $$join($$TRANSLATIONS, "", $$PWD)
+
+QMAKE_EXTRA_TARGETS += update release
+
+
 # Installation path
 # target.path =
 

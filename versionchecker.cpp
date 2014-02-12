@@ -57,8 +57,9 @@ VersionCheckerPrivate::VersionCheckerPrivate(VersionChecker *p, QString version)
 {
 	QSettings settings;
 	QDateTime lastcheck = settings.value("upgradecheck", QDateTime()).value<QDateTime>();
+	bool newversion = settings.value("newversion", false).value<bool>();
 
-	if (lastcheck.isValid() && lastcheck.daysTo(QDateTime::currentDateTime()) < 7) {
+	if (!newversion && lastcheck.isValid() && lastcheck.daysTo(QDateTime::currentDateTime()) < 7) {
 		p_->deleteLater();
 		return;
 	}
@@ -120,13 +121,18 @@ void VersionChecker::downloaded(QNetworkReply *reply)
 
 		versions.sort([](const version &a, const version &b) {return a.version > b.version;});
 
-		if (versions.front().version > d->oldversion_)
+		QSettings settings;
+
+		if (versions.front().version > d->oldversion_) {
 #if defined(WIN32) || defined(__WIN32)
 			emit newversion(versions.front().win32, versions.front().version);
 #else
 			emit newversion(versions.front().linux, versions.front().version);
 #endif
-		QSettings settings;
+			settings.setValue("newversion", true);
+		} else {
+			settings.setValue("newversion", false);
+		}
 
 		settings.setValue("upgradecheck", QDateTime::currentDateTime());
 	} else {

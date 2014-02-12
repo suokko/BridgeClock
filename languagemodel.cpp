@@ -60,8 +60,11 @@ LanguageModel::LanguageModel()
     if (!perfect.isEmpty())
         lang = perfect;
 
-    if (settings.contains("locale"))
-        lang = settings.value("locale").toString();
+    if (settings.contains("locale")) {
+        QString saved = settings.value("locale").toString();
+        if (translations_.contains(saved))
+            lang = saved;
+    }
 
     std::sort(translations_.begin(), translations_.end(),
             [](const QString &a, const QString &b) {

@@ -209,7 +209,7 @@ Item {
         anchors.margins: 3
         radius: 5
 
-        width: 150
+        width: languages.contentItem.childrenRect.width
         height: selection.height
 
         states: State {
@@ -299,24 +299,29 @@ Item {
             clip: true
 
             height: parent.height
+            width: parent.width
 
             currentIndex: lang.selectedId
 
             focus: true
 
             model: lang
-            highlight: Rectangle { color: "lightsteelblue"; radius: 5 }
+            highlight: Rectangle { color: "lightsteelblue"; radius: 5; width: languages.width }
             delegate: Rectangle {
 
                 color: "transparent"
 
                 height: langText.height + 6
-                width: languages.width
+                width: langText.width + 6
 
                 visible: languages.visible
 
                 MouseArea {
-                    anchors.fill: parent
+                    anchors.top: parent.top
+                    anchors.left: parent.left
+                    anchors.bottom: parent.bottom
+
+                    width: languages.width
 
                     onClicked: {
                         lang.selectedId = index

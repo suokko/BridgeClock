@@ -1,0 +1,107 @@
+
+                       BridgeClock
+
+What is it?
+-----------
+
+The BridgeClock is a simple application to show time information and online
+results in a contract bridge tournament. It probably could be used for other
+games where playing time is limited by short rounds. But user interface is
+designed for bridge.
+
+The Latest Version
+------------------
+
+Because BridgeClock is an open source project you can find the latest source
+code from https://github.com/suokko/BridgeClock. The latest release binaries are
+available from https://googledrive.com/host/0B4izKEmfNQIBajhOOGZqR2JmNXM.
+
+Documentation
+-------------
+
+So far this README is all documentation. That makes any good documentation very
+welcome contribution.
+
+Installation
+------------
+
+* Windows
+
+Binary installation can be done using BridgeClock.msi found from
+https://googledrive.com/host/0B4izKEmfNQIBajhOOGZqR2JmNXM. The installer will
+copy all program files to your program files directory and setup desktop and
+start menu shortcuts.
+
+* Linux
+
+BridgeClock-linux-<version>.tar.gz can be extracted to any directory. The
+package provides all required files to run the software on most common Linux
+distributions. The BridgeClock binary needs to be run from extraction directory
+so it can find all required files.
+
+* From sources
+
+Qt (http://qt-project.org/) is only dependency for BridgeClock. But code is
+written to use the latest qml features provided in Qt 5.2 or later. Qt 5.2.2 or
+later is recomended because there is an crash issue in Qt 5.2.0 and 5.2.1 that is
+fixed in 5.2.2.
+
+  # Fetch the sources
+  git clone https://github.com/suokko/BridgeClock.git
+  cd BridgeClock
+  # Setup makefiles from qt project
+  qmake
+  # Compile sources 
+  make
+  # Generate runtime translation files
+  make release
+  # Run the BridgeClock
+  ./BridgeClock
+
+BridgeClock.pro project file is still missing installation rules which makes it
+tricky to install self compiled version to the system. Binary packaging code is
+included in wix subdirectory. But that requires windows cross compilation
+environment and chroot for linux binaries.
+
+Licensing
+---------
+
+Please see the file called LICENSE. Also LICENSE.QT.LGPL includes terms Qt
+binary distribution.
+
+Bug reports
+-----------
+
+If you find issues or need a new feature they can be reported to
+https://github.com/suokko/BridgeClock/issues. Good reports are more likely to be
+addressed faster.
+
+* Good reports
+
+Good reports include detailed step to reproduce the issue. If that isn't
+possible then some screen capture and detailed explanation what happened will
+help understand what is the issue. Without picture it is very common that
+developer and user would be talking about different matter.
+
+Contributing changes
+--------------------
+
+The project is open source so you are free to make any changes you wish. If you
+want to contribute your changes back to project preferred method is a github pull
+request (https://github.com/suokko/BridgeClock/pulls).
+
+To make pull request you need:
+- Have your changes committed to your local git repository
+- Create a fork of BridgeClock in github
+- Push your changes to the fork
+- Make a pull request using github website
+
+Useful links:
+https://git.wiki.kernel.org/index.php/GitSvnCrashCourse
+https://help.github.com/articles/fork-a-repo
+
+Translations
+------------
+
+TODO: Write documentation how to translate to a new language
+

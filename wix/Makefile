@@ -47,6 +47,7 @@ COMMONQML := \
 COMMONSRC := BridgeClock80.png \
 	LICENSE \
 	LICENSE.QT.LGPL \
+	README \
 	$(subst ../,,$(wildcard ../qml/BridgeClock/*)) \
 	$(subst ../,,$(wildcard ../locale/*.qm))
 

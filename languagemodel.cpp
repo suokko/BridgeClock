@@ -39,6 +39,7 @@ LanguageModel::LanguageModel()
     QStringList files = localepath.entryList(filter);
 
     QString lang = "en";
+    QString perfect = "";
 
     QSettings settings;
 
@@ -48,10 +49,16 @@ LanguageModel::LanguageModel()
             QString l = rx.cap(1);
             translations_.append(l);
             QLocale loc(l);
-            if (loc.language() == QLocale::system().language())
+            if (loc.language() == QLocale::system().language()) {
                 lang = l;
+                if (loc.country() == QLocale::system().country())
+                    perfect = l;
+            }
         }
     }
+
+    if (!perfect.isEmpty())
+        lang = perfect;
 
     if (settings.contains("locale"))
         lang = settings.value("locale").toString();
@@ -73,8 +80,6 @@ LanguageModel::LanguageModel()
     trans_.load("locale/BridgeClock_" + lang);
     qApp->installTranslator(&trans_);
 }
-
-#include <QDebug>
 
 QHash<int, QByteArray> LanguageModel::roleNames() const
 {

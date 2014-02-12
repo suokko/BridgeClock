@@ -21,9 +21,24 @@ lupdate_only {
 SOURCES += qml/BridgeClock/*.qml
 }
 
-TRANSLATIONS = locale/BridgeClock_en.ts \
-	locale/BridgeClock_fi.ts \
-	locale/BridgeClock_sv.ts
+TRANSLATIONS = \
+	locale/BridgeClock_da_DK.ts \
+	locale/BridgeClock_de_DE.ts \
+	locale/BridgeClock_en_US.ts \
+	locale/BridgeClock_es_ES.ts \
+	locale/BridgeClock_et_EE.ts \
+	locale/BridgeClock_fi_FI.ts \
+	locale/BridgeClock_fr_FR.ts \
+	locale/BridgeClock_he_IL.ts \
+	locale/BridgeClock_it_IT.ts \
+	locale/BridgeClock_lv_LV.ts \
+	locale/BridgeClock_nb_NO.ts \
+	locale/BridgeClock_nl_NL.ts \
+	locale/BridgeClock_pl_PL.ts \
+	locale/BridgeClock_ru_RU.ts \
+	locale/BridgeClock_sv_SE.ts \
+	locale/BridgeClock_zh_CN.ts \
+# End of list comment
 
 update.commands = lupdate $$PWD/BridgeClock.pro -locations relative
 update.depends = $$SOURES $$HEADERS $$OTHER_FILES

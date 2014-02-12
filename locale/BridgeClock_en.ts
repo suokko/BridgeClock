@@ -205,11 +205,14 @@
         <source>Round time</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message numerus="yes">
         <location line="+19"/>
         <location line="+43"/>
-        <source>minutes</source>
-        <translation type="unfinished"></translation>
+        <source>minute(s)</source>
+        <translation>
+            <numerusform>minute</numerusform>
+            <numerusform>minutes</numerusform>
+        </translation>
     </message>
     <message>
         <location line="-18"/>

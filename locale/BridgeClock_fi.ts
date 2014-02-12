@@ -197,11 +197,18 @@
         <source>Round time</source>
         <translation>Kierrosaika</translation>
     </message>
-    <message>
+    <message numerus="yes">
         <location line="+19"/>
         <location line="+43"/>
+        <source>minute(s)</source>
+        <translation>
+            <numerusform>minuutti</numerusform>
+            <numerusform>minuuttia</numerusform>
+        </translation>
+    </message>
+    <message>
         <source>minutes</source>
-        <translation>minuuttia</translation>
+        <translation type="vanished">minuuttia</translation>
     </message>
     <message>
         <location line="-18"/>

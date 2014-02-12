@@ -180,11 +180,18 @@
         <source>Round time</source>
         <translation>Rund tid</translation>
     </message>
-    <message>
+    <message numerus="yes">
         <location line="+19"/>
         <location line="+43"/>
+        <source>minute(s)</source>
+        <translation>
+            <numerusform>minut</numerusform>
+            <numerusform>minuter</numerusform>
+        </translation>
+    </message>
+    <message>
         <source>minutes</source>
-        <translation>minuter</translation>
+        <translation type="vanished">minuter</translation>
     </message>
     <message>
         <location line="-18"/>

@@ -96,7 +96,7 @@ Item {
         anchors.verticalCenter: timeText.verticalCenter
         anchors.left: timeText.right
         anchors.margins: 5
-        text: qsTr("minutes") + lang.lang
+        text: qsTr("minute(s)","", time.value) + lang.lang
     }
     Slider {
         anchors.top: timeText.bottom
@@ -139,7 +139,7 @@ Item {
         anchors.verticalCenter: breaksText.verticalCenter
         anchors.left: breaksText.right
         anchors.margins: 5
-        text: qsTr("minutes") + lang.lang
+        text: qsTr("minute(s)","", breaks.value) + lang.lang
     }
     Slider {
         anchors.top: breaksText.bottom

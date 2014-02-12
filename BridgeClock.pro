@@ -14,7 +14,8 @@ SOURCES += main.cpp \
     roundinfo.cpp \
     globalmousearea.cpp \
     mouseevent.cpp \
-    versionchecker.cpp
+    versionchecker.cpp \
+    languagemodel.cpp
 
 lupdate_only {
 SOURCES += qml/BridgeClock/*.qml
@@ -61,4 +62,5 @@ HEADERS += \
     roundinfo.h \
     globalmousearea.h \
     mouseevent.h \
-    versionchecker.h
+    versionchecker.h \
+    languagemodel.h

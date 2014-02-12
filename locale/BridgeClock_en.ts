@@ -31,13 +31,13 @@
         <location line="-49"/>
         <location line="+28"/>
         <location filename="../timemodel.cpp" line="+142"/>
-        <location line="+242"/>
+        <location line="+246"/>
         <source>Change</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../timemodel.cpp" line="-235"/>
-        <location line="+237"/>
+        <location filename="../timemodel.cpp" line="-239"/>
+        <location line="+241"/>
         <source>Round %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -45,6 +45,11 @@
         <location line="+3"/>
         <source>End</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../timecontroller.cpp" line="+230"/>
+        <source>Tournament begins</source>
+        <translation>To begin</translation>
     </message>
 </context>
 <context>
@@ -81,17 +86,9 @@
     </message>
 </context>
 <context>
-    <name>TimeController</name>
-    <message>
-        <location filename="../timecontroller.cpp" line="+228"/>
-        <source>Tournament begins</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>TimeModel</name>
     <message>
-        <location filename="../timemodel.cpp" line="-344"/>
+        <location filename="../timemodel.cpp" line="-348"/>
         <source>Begin</source>
         <translation type="unfinished"></translation>
     </message>
@@ -154,7 +151,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+0"/>
+        <location line="+1"/>
         <source>All files (*)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -230,7 +227,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+28"/>
+        <location line="+29"/>
         <source>Start a new tournament</source>
         <translation type="unfinished"></translation>
     </message>

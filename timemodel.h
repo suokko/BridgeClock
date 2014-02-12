@@ -77,6 +77,8 @@ signals:
 public slots:
     void onDataChangeTimeout();
 
+    void languageChange();
+
 private:
     unsigned rounds_ : 8;
     unsigned roundTime_ : 8;

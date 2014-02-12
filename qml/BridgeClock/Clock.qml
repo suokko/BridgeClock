@@ -30,7 +30,7 @@ Window {
     width: 640
     height: 480
     visible: true
-    title: qsTr("The time view")
+    title: qsTr("The time view") + lang.lang
     flags: Qt.WindowStaysOnTopHint + Qt.CustomizeWindowHint /*+ Qt.FramelessWindowHint + Qt.X11BypassWindowManagerHint */
 
     /* The state of scrolling animation */
@@ -255,7 +255,7 @@ Window {
             anchors.left: current.left
             id: endHeading
             visible: true
-            text: qsTr("Tournamen will end: ")
+            text: qsTr("Tournamen will end: ") + lang.lang
             font.pixelSize: 25*zoomFactor
             font.weight: Font.Light
         }
@@ -297,7 +297,7 @@ Window {
 
             id: nextHeading
             visible: timeController.roundInfo.playing < 2
-            text: qsTr("The next break: ")
+            text: qsTr("The next break: ") + lang.lang
             font.pixelSize: 25*zoomFactor
             font.weight: Font.Light
         }
@@ -322,7 +322,7 @@ Window {
             timeController.roundInfo.nextBreakStart != ""
             text: timeController.roundInfo.nextBreakStart.replace(/:[^:]*$/,'') + 
             (timeController.roundInfo.nextBreakEnd != "" ? qsTr(" - ") + 
-            timeController.roundInfo.nextBreakEnd.replace(/:[^:]*$/,'') : "");
+            timeController.roundInfo.nextBreakEnd.replace(/:[^:]*$/,'') : "") + lang.lang;
             font.pixelSize: 40*zoomFactor
             font.weight: Font.Light;
         }
@@ -396,9 +396,9 @@ Window {
                     id: fullScreenHelp
                     opacity: 1.0
                     font.pixelSize: 20*zoomFactor
-                    text: clockWindow.visibility !== Qt.WindowFullScreen
+                    text: (clockWindow.visibility !== Qt.WindowFullScreen
                           ? qsTr("Double click to make fullscreen") :
-                            qsTr("Double click to restore back to window");
+                            qsTr("Double click to restore back to window"))  + lang.lang;
                 }
             }
         }

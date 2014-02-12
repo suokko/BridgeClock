@@ -617,6 +617,11 @@ void TimeModel::deleteTimeItem(int start, int end)
     settings_.endArray();
 }
 
+void TimeModel::languageChange()
+{
+    emit dataChanged(index(0), index(list_.size() - 1));
+}
+
 void TimeModel::reset()
 {
     int i = 0;

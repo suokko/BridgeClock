@@ -39,10 +39,10 @@ Item {
 
         Text {
             id: header
-            text: timeController.roundInfo.playing === 0 ?
+            text: (timeController.roundInfo.playing === 0 ?
                       (timeController.roundInfo.name + qsTr(" -> ") +
                        timeController.roundInfo.nextName) :
-                      timeController.roundInfo.name
+                      timeController.roundInfo.name) + lang.lang
             font.pixelSize: timeController.roundInfo.playing === 0 ? 18 : 24
             height: 24
             anchors.top: parent.top
@@ -55,7 +55,7 @@ Item {
             anchors.verticalCenter: timeLeft.verticalCenter
             anchors.left: parent.left
             visible: timeController.roundInfo.playing < 2
-            text: qsTr("Remaining:")
+            text: qsTr("Remaining:") + lang.lang
         }
         Text {
             id: timeLeft
@@ -72,7 +72,7 @@ Item {
             anchors.margins: 5
             visible: timeController.roundInfo.playing < 2
             id: pause
-            text: qsTr("Stop the clock")
+            text: qsTr("Stop the clock") + lang.lang
             checked: false
             style: CheckBoxStyle {
                 label: Text {
@@ -106,32 +106,32 @@ Item {
             }
 
             Button {
-                text: qsTr("+10s")
+                text: qsTr("+10s") + lang.lang
                 Layout.fillWidth: true
                 onPressedChanged: if (pressed) roundGrid.appendTime(10*1000);
             }
             Button {
-                text: qsTr("+1m")
+                text: qsTr("+1m") + lang.lang
                 Layout.fillWidth: true
                 onPressedChanged: if (pressed) roundGrid.appendTime(60*1000);
             }
             Button {
-                text: qsTr("+5m")
+                text: qsTr("+5m") + lang.lang
                 Layout.fillWidth: true
                 onPressedChanged: if (pressed) roundGrid.appendTime(5*60*1000);
             }
             Button {
-                text: qsTr("-10s")
+                text: qsTr("-10s") + lang.lang
                 Layout.fillWidth: true
                 onPressedChanged: if (pressed) roundGrid.appendTime(-10*1000);
             }
             Button {
-                text: qsTr("-1m")
+                text: qsTr("-1m") + lang.lang
                 Layout.fillWidth: true
                 onPressedChanged: if (pressed) roundGrid.appendTime(-60*1000);
             }
             Button {
-                text: qsTr("-5m")
+                text: qsTr("-5m") + lang.lang
                 Layout.fillWidth: true
                 onPressedChanged: if (pressed) roundGrid.appendTime(-5*60*1000);
             }
@@ -155,9 +155,9 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             visible: view.currentRow != -1
             font.pixelSize: 20
-            text: view.currentRow != -1 ?
+            text: (view.currentRow != -1 ?
                       view.model.qmlData(view.currentRow, "name").value :
-                      qsTr("No choice")
+                      qsTr("No choice")) + lang.lang
         }
         Label {
             id: startLabel
@@ -165,7 +165,7 @@ Item {
             anchors.top: selectionHeader.bottom
             anchors.left: parent.left
             visible: view.currentRow != -1
-            text: qsTr("Begin:")
+            text: qsTr("Begin:") + lang.lang
         }
         Text {
             id: start
@@ -173,9 +173,9 @@ Item {
             anchors.left: startLabel.right
             anchors.margins: 3
             visible: view.currentRow != -1
-            text: view.currentRow != -1 ?
+            text: (view.currentRow != -1 ?
                       view.model.qmlData(view.currentRow, "start").value :
-                      qsTr("No choice")
+                      qsTr("No choice")) + lang.lang
         }
         Label {
             id: endLabel
@@ -183,7 +183,7 @@ Item {
             anchors.top: startLabel.bottom
             anchors.left: parent.left
             visible: view.currentRow != -1
-            text: qsTr("End:")
+            text: qsTr("End:") + lang.lang
         }
         Text {
             id: end
@@ -191,9 +191,9 @@ Item {
             anchors.left: endLabel.right
             anchors.margins: 3
             visible: view.currentRow != -1
-            text: view.currentRow != -1 ?
+            text: (view.currentRow != -1 ?
                       view.model.qmlData(view.currentRow, "end").value :
-                      qsTr("No choice")
+                      qsTr("No choice")) + lang.lang
         }
         Label {
             id: timeLabel
@@ -201,7 +201,7 @@ Item {
             anchors.top: selectionHeader.bottom
             x: parent.width/2
             visible: view.currentRow != -1
-            text: qsTr("Length:")
+            text: qsTr("Length:") + lang.lang
         }
         Text {
             id: time
@@ -209,9 +209,9 @@ Item {
             anchors.left: timeLabel.right
             anchors.margins: 3
             visible: view.currentRow != -1
-            text: view.currentRow != -1 ?
+            text: (view.currentRow != -1 ?
                       view.model.qmlData(view.currentRow, "length").value :
-                      qsTr("No choice")
+                      qsTr("No choice")) + lang.lang
         }
         Label {
             id: prevLabel
@@ -219,7 +219,7 @@ Item {
             anchors.top: timeLabel.bottom
             x: parent.width/2
             visible: view.currentRow != -1
-            text: qsTr("Previous:")
+            text: qsTr("Previous:") + lang.lang
         }
         Text {
             id: prev
@@ -227,9 +227,9 @@ Item {
             anchors.left: prevLabel.right
             anchors.margins: 3
             visible: view.currentRow != -1
-            text: view.currentRow != -1 ?
+            text: (view.currentRow != -1 ?
                       view.model.qmlData(view.currentRow, "previous").value :
-                      qsTr("No choice")
+                      qsTr("No choice")) + lang.lang
         }
 
         GroupBox {
@@ -318,35 +318,35 @@ Item {
             RadioButton {
                 id: change
                 anchors.margins: 3
-                text: qsTranslate("Break","Change")
+                text: qsTranslate("Break","Change") + lang.lang
                 exclusiveGroup: itemType
             }
             RadioButton {
                 id: lunch
                 anchors.top: change.bottom
                 anchors.margins: 3
-                text: qsTranslate("Break","Lunch")
+                text: qsTranslate("Break","Lunch") + lang.lang
                 exclusiveGroup: itemType
             }
             RadioButton {
                 id: dinner
                 anchors.top: lunch.bottom
                 anchors.margins: 3
-                text: qsTranslate("Break","Dinner")
+                text: qsTranslate("Break","Dinner") + lang.lang
                 exclusiveGroup: itemType
             }
             RadioButton {
                 id: coffee
                 anchors.top: dinner.bottom
                 anchors.margins: 3
-                text: qsTranslate("Break","Coffee")
+                text: qsTranslate("Break","Coffee") + lang.lang
                 exclusiveGroup: itemType
             }
             RadioButton {
                 id: custom
                 anchors.top: coffee.bottom
                 anchors.margins: 3
-                text: qsTr("Custom:")
+                text: qsTr("Custom:") + lang.lang
                 exclusiveGroup: itemType
             }
             TextField {
@@ -405,12 +405,12 @@ Item {
         model: timeController.model
         TableViewColumn {
             role: "start";
-            title: qsTr("Begin");
+            title: qsTr("Begin") + lang.lang
             width: 70;
         }
         TableViewColumn {
             role: "name";
-            title: qsTr("Happening");
+            title: qsTr("Happening") + lang.lang
             width: 83;
         }
 

@@ -32,8 +32,8 @@ Item {
         anchors.margins: 5
         anchors.top: parent.top
         anchors.horizontalCenter: parent.horizontalCenter
-        text: qsTr("Tournament time")
-        font.pixelSize: 20
+        text: qsTr("Tournament time") + lang.lang
+        font.pointSize: 20
     }
 
     Text {
@@ -41,7 +41,7 @@ Item {
         anchors.verticalCenter: roundsText.verticalCenter
         anchors.left: parent.left
         anchors.margins: 5
-        text: qsTr("Number of rounds")
+        text: qsTr("Number of rounds") + lang.lang
     }
     TextField {
         id: roundsText
@@ -77,7 +77,7 @@ Item {
         anchors.verticalCenter: timeText.verticalCenter
         anchors.left: parent.left
         anchors.margins: 5
-        text: qsTr("Round time")
+        text: qsTr("Round time") + lang.lang
     }
     TextField {
         id: timeText
@@ -96,7 +96,7 @@ Item {
         anchors.verticalCenter: timeText.verticalCenter
         anchors.left: timeText.right
         anchors.margins: 5
-        text: qsTr("minutes")
+        text: qsTr("minutes") + lang.lang
     }
     Slider {
         anchors.top: timeText.bottom
@@ -121,7 +121,7 @@ Item {
         anchors.verticalCenter: breaksText.verticalCenter
         anchors.left: parent.left
         anchors.margins: 5
-        text: qsTr("Change time")
+        text: qsTr("Change time") + lang.lang
     }
     TextField {
         id: breaksText
@@ -139,7 +139,7 @@ Item {
         anchors.verticalCenter: breaksText.verticalCenter
         anchors.left: breaksText.right
         anchors.margins: 5
-        text: qsTr("minutes")
+        text: qsTr("minutes") + lang.lang
     }
     Slider {
         anchors.top: breaksText.bottom
@@ -162,14 +162,14 @@ Item {
         id: startHeader
         anchors.top: breaks.bottom
         anchors.horizontalCenter: parent.horizontalCenter
-        text: qsTr("Start time")
-        font.pixelSize: 16
+        text: qsTr("Start time") + lang.lang
+        font.pointSize: 16
     }
     Button {
         anchors.top: startHeader.top
         anchors.left: startHeader.right
         anchors.leftMargin: 20
-        text: qsTr("Now")
+        text: qsTr("Now") + lang.lang
         onClicked: {
             var time = new Date();
             startTime.hour = time.getHours();
@@ -197,8 +197,142 @@ Item {
         id: resetTime
         anchors.left: parent.left
         anchors.bottom: parent.bottom
-        text: qsTr("Start a new tournament")
+        anchors.margins: 3
+        text: qsTr("Start a new tournament") + lang.lang
         onPressedChanged: if (pressed) timeController.resetModel();
+    }
+
+    Rectangle {
+        id: langSelector
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+        anchors.margins: 3
+        radius: 5
+
+        width: 150
+        height: selection.height
+
+        states: State {
+            name: "open"
+            PropertyChanges {
+                target: selection
+                visible: false
+            }
+
+            PropertyChanges {
+                target: languages
+                visible: true
+            }
+
+            PropertyChanges {
+                target: langSelector
+                height: parent.height/2
+            }
+        }
+
+        transitions: [
+            Transition {
+                to: "open"
+                SequentialAnimation {
+                    PropertyAction {
+                        targets: [selection,languages]
+                        property: "visible"
+                    }
+
+                    PropertyAnimation {
+                        target: langSelector
+                        properties: "height"
+                        duration: 2000
+                        easing.type: Easing.InOutCubic
+                    }
+                }
+            },
+            Transition {
+                from: "open"
+                SequentialAnimation {
+                    PropertyAnimation {
+                        target: langSelector
+                        properties: "height"
+                        duration: 1200
+                        easing.type: Easing.InOutCubic
+                    }
+
+                    PropertyAction {
+                        targets: [selection,languages]
+                        property: "visible"
+                    }
+                }
+            }
+        ]
+
+        Rectangle {
+            id: selection
+            anchors.bottom: parent.bottom
+            anchors.left: parent.left
+            anchors.right: parent.right
+
+            height: selectionText.height + 6
+            color: "lightsteelblue"
+            radius: 5
+
+            MouseArea {
+                anchors.fill: parent
+
+                onClicked: langSelector.state = "open"
+            }
+
+            Text {
+                id: selectionText
+                x: 3
+                y: 3
+
+                text: lang.selectedNative;
+
+                font.pointSize: 14
+            }
+        }
+
+        ListView {
+            id: languages
+            anchors.fill: parent
+            visible: false
+            clip: true
+
+            height: parent.height
+
+            currentIndex: lang.selectedId
+
+            focus: true
+
+            model: lang
+            highlight: Rectangle { color: "lightsteelblue"; radius: 5 }
+            delegate: Rectangle {
+
+                color: "transparent"
+
+                height: langText.height + 6
+                width: languages.width
+
+                visible: languages.visible
+
+                MouseArea {
+                    anchors.fill: parent
+
+                    onClicked: {
+                        lang.selectedId = index
+                        langSelector.state = ""
+                    }
+                }
+
+                Text {
+                    y: 3
+                    x: 3
+                    id: langText
+                    text: name
+                    font.pointSize: 14
+                }
+            }
+        }
     }
 
     Binding {

@@ -30,7 +30,7 @@ Window {
     height: 640
     visible: true
     //: The window header including version number as parameter %1
-    title: qsTr("Bridge clock %1").arg(timeController.version)
+    title: qsTr("Bridge clock %1").arg(timeController.version) + lang.lang
     readonly property string version: "$(VERSION)"
     property string newversion: ""
     property string versionurl: ""
@@ -65,7 +65,7 @@ Window {
                 //: The parameter is a new version number with download link
                 qsTr("A new version of bridge clock %1 is available for download.").arg(
                 "<a href='" + versionurl +"'>" + newversion + "</a>") + "</span>" +
-                "<br />\n<a href='" + versionurl + "' style=\"font-size:small\">" + versionurl + "</a></html>"
+                "<br />\n<a href='" + versionurl + "' style=\"font-size:small\">" + versionurl + "</a></html>"  + lang.lang
 
             textFormat: Text.RichText
             onLinkActivated: {
@@ -105,7 +105,7 @@ Window {
         anchors.topMargin: versiondlg.visible ? versiondlg.anchors.margins : 0
 
         Tab {
-            title: qsTr("Start")
+            title: qsTr("Start") + lang.lang
             Item {
                 anchors.fill: parent
 
@@ -117,7 +117,7 @@ Window {
             }
         }
         Tab {
-            title: qsTr("Time")
+            title: qsTr("Time") + lang.lang
             Item {
                 anchors.fill: parent
 
@@ -128,7 +128,7 @@ Window {
             }
         }
         Tab {
-            title: qsTr("Results")
+            title: qsTr("Results") + lang.lang
             Item {
                 anchors.fill: parent
 

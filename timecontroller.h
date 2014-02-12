@@ -92,10 +92,14 @@ signals:
     void startTimeChanged();
 
     void newversion(const QString &url, const QString &version);
+    void languageChanged();
+
 public slots:
     void urlUpdate();
     void fileChanged(const QString &path);
     void updateRoundInfo();
+
+    void languageChange();
 
 private:
     class TimeControllerPrivate *d;

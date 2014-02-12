@@ -31,13 +31,13 @@
         <location line="-49"/>
         <location line="+28"/>
         <location filename="../timemodel.cpp" line="+142"/>
-        <location line="+242"/>
+        <location line="+246"/>
         <source>Change</source>
         <translation>Vaihto</translation>
     </message>
     <message>
-        <location filename="../timemodel.cpp" line="-235"/>
-        <location line="+237"/>
+        <location filename="../timemodel.cpp" line="-239"/>
+        <location line="+241"/>
         <source>Round %1</source>
         <translation>Kierros %1</translation>
     </message>
@@ -45,6 +45,11 @@
         <location line="+3"/>
         <source>End</source>
         <translation>Loppu</translation>
+    </message>
+    <message>
+        <location filename="../timecontroller.cpp" line="+230"/>
+        <source>Tournament begins</source>
+        <translation>Kilpailun alkuun</translation>
     </message>
 </context>
 <context>
@@ -83,15 +88,14 @@
 <context>
     <name>TimeController</name>
     <message>
-        <location filename="../timecontroller.cpp" line="+228"/>
         <source>Tournament begins</source>
-        <translation>Kilpailun alkuun</translation>
+        <translation type="vanished">Kilpailun alkuun</translation>
     </message>
 </context>
 <context>
     <name>TimeModel</name>
     <message>
-        <location filename="../timemodel.cpp" line="-344"/>
+        <location filename="../timemodel.cpp" line="-348"/>
         <source>Begin</source>
         <translation>Alku</translation>
     </message>
@@ -166,7 +170,7 @@
         <translation>HTML-tiedostot (*.htm *html)</translation>
     </message>
     <message>
-        <location line="+0"/>
+        <location line="+1"/>
         <source>All files (*)</source>
         <translation>Kaikki (*)</translation>
     </message>
@@ -210,7 +214,7 @@
         <translation>Nyt</translation>
     </message>
     <message>
-        <location line="+28"/>
+        <location line="+29"/>
         <source>Start a new tournament</source>
         <translation>Aloita uusi kilpailu</translation>
     </message>

@@ -76,6 +76,8 @@ TimeController::TimeController() :
     connect(d->model_, SIGNAL(roundBreakChanged()), SIGNAL(roundBreakChanged()));
     connect(d->model_, SIGNAL(startTimeChanged()), SIGNAL(startTimeChanged()));
 
+    d->model_->connect(this, SIGNAL(languageChanged()), SLOT(languageChange()));
+
     urlUpdate();
 }
 
@@ -225,7 +227,7 @@ void TimeController::updateRoundInfo()
 
         if (item[0].start_ >= cur) {
             end = item[0].start_;
-            name = QT_TR_NOOP("Tournament begins");
+            name = QT_TRANSLATE_NOOP("Break","Tournament begins");
             nr = -1;
         }
     } else {
@@ -345,6 +347,11 @@ void TimeController::fileChanged(const QString &path)
         }
     }
     d->urlTimer_->start(100);
+}
+
+void TimeController::languageChange()
+{
+    emit languageChanged();
 }
 
 void TimeController::setResultUrl(const QString &url)

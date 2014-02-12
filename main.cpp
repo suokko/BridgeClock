@@ -30,6 +30,7 @@ THE SOFTWARE.
 #include "roundinfo.h"
 #include "globalmousearea.h"
 #include "mouseevent.h"
+#include "languagemodel.h"
 #include <stdlib.h>
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
@@ -46,13 +47,11 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     setenv("LD_LIBRARY_PATH", path, 1);
 #endif
 
-    QTranslator trans;
-    trans.load(QLocale::system(), "locale/BridgeClock_");
-    app.installTranslator(&trans);
-
     QCoreApplication::setOrganizationDomain("bridgefinland.fi");
     QCoreApplication::setOrganizationName("SBL");
     QCoreApplication::setApplicationName("BridgeClock");
+
+    LanguageModel lang;
 
     qmlRegisterType<RoundInfo>();
     qmlRegisterType<TimeModel>("org.bridgeClock", 1, 0, "TimeModel");
@@ -61,8 +60,11 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     qmlRegisterType<TimeModelVariant>();
 
     TimeController timeController;
+    timeController.connect(&lang,SIGNAL(selectedChanged()),SLOT(languageChange()));
+
     QQmlApplicationEngine eng;
     eng.rootContext()->setContextProperty("timeController", &timeController);
+    eng.rootContext()->setContextProperty("lang", &lang);
     eng.load("qml/BridgeClock/main.qml");
 
     return app.exec();

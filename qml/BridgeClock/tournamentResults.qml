@@ -48,7 +48,7 @@ Item {
             anchors.top: parent.top
             id: showResults
             checked: timeController.showResults
-            text: qsTr("Show results")
+            text: qsTr("Show results") + lang.lang
         }
 
         Text {
@@ -56,12 +56,12 @@ Item {
             anchors.left: parent.left
             opacity: showResults.checked ? 1 : 0.5
             id: head
-            text: qsTr("Result address: ")
+            text: qsTr("Result address: ") + lang.lang
             font.pixelSize: 16
         }
         Button {
             id: resultButton
-            text: qsTr("Browse files")
+            text: qsTr("Browse files") + lang.lang
             anchors.top: showResults.bottom
             anchors.left: head.right
             onClicked: loadResults.open()
@@ -264,9 +264,10 @@ Item {
     FileDialog {
         id: loadResults
         /*        folder: "/tmp"*/
-        title: qsTr("Select a file to be shown in result view")
+        title: qsTr("Select a file to be shown in result view") + lang.lang
         selectMultiple: false
-        nameFilters: [ qsTr("HTML-files (*.htm *.html)"), qsTr("All files (*)") ]
+        nameFilters: [ qsTr("HTML-files (*.htm *.html)") + lang.lang,
+                       qsTr("All files (*)") + lang.lang ]
 
         onAccepted: { resultFile.text = fileUrl }
     }

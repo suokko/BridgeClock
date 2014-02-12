@@ -254,7 +254,7 @@ Window {
             anchors.top: current.bottom
             anchors.left: current.left
             id: endHeading
-            visible: true
+            visible: timeController.roundInfo.playing < 2
             text: qsTr("Tournamen will end: ") + lang.lang
             font.pixelSize: 25*zoomFactor
             font.weight: Font.Light
@@ -264,7 +264,7 @@ Window {
             anchors.top: current.bottom
             anchors.left: endHeading.right
             id: end
-            visible: true
+            visible: timeController.roundInfo.playing < 2
             text: timeController.tournamentEnd.replace(/:[^:]*$/,'')
             font.pixelSize: 30*zoomFactor
             font.weight: Font.Light;

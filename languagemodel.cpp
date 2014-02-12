@@ -60,7 +60,7 @@ LanguageModel::LanguageModel()
             [](const QString &a, const QString &b) {
                 QLocale al(a);
                 QLocale bl(b);
-                return al.nativeLanguageName() < bl.nativeLanguageName();
+                return QString::compare(al.nativeLanguageName(), bl.nativeLanguageName(), Qt::CaseInsensitive) < 0;
             });
     selected_ = 0;
 

@@ -20,7 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import QtQuick 2.1
+import QtQuick 2.2
 import QtQuick.Controls 1.0
 import QtQuick.Window 2.1
 
@@ -68,6 +68,13 @@ Window {
                 "<br />\n<a href='" + versionurl + "' style=\"font-size:small\">" + versionurl + "</a></html>"  + lang.lang
 
             textFormat: Text.RichText
+
+            MouseArea {
+                anchors.fill: parent
+
+                cursorShape: parent.hoveredLink != "" ? Qt.PointingHandCursor : undefined
+            }
+
             onLinkActivated: {
                 if (link != "#ignore") {
                     Qt.openUrlExternally(link)

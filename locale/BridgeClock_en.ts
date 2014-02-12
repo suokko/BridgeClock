@@ -103,12 +103,12 @@
     </message>
     <message>
         <location line="+33"/>
-        <source>A new version of bridge clock %1 is available for download.</source>
-        <extracomment>The parameter is a new version number with download link</extracomment>
-        <translation type="unfinished"></translation>
+        <source>A new version of bridge clock %1 is available for download.&lt;br/&gt;%2Ignore%3</source>
+        <extracomment>%1 is version number with downloadable link %2 &amp; %3 html code for ignore link</extracomment>
+        <translation>A new version of bridge clock %1 is available for download.&lt;br/&gt;%2Remind later%3</translation>
     </message>
     <message>
-        <location line="+42"/>
+        <location line="+44"/>
         <source>Start</source>
         <translation type="unfinished"></translation>
     </message>

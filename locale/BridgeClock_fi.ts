@@ -121,13 +121,18 @@
         <translation>Bridgekello %1</translation>
     </message>
     <message>
-        <location line="+33"/>
         <source>A new version of bridge clock %1 is available for download.</source>
         <extracomment>The parameter is a new version number with download link</extracomment>
-        <translation>Bridgekello uusi versio %1 on ladattavissa.</translation>
+        <translation type="vanished">Bridgekello uusi versio %1 on ladattavissa.</translation>
     </message>
     <message>
-        <location line="+42"/>
+        <location line="+33"/>
+        <source>A new version of bridge clock %1 is available for download.&lt;br/&gt;%2Ignore%3</source>
+        <extracomment>%1 is version number with downloadable link %2 &amp; %3 html code for ignore link</extracomment>
+        <translation>Bridgekello uusi versio %1 on ladattavissa.&lt;br/&gt;%2Muistuta myöhemmin%3</translation>
+    </message>
+    <message>
+        <location line="+44"/>
         <source>Start</source>
         <translation>Aloitus</translation>
     </message>

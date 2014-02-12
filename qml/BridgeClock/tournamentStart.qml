@@ -210,18 +210,15 @@ Item {
         radius: 5
 
         width: languages.contentItem.childrenRect.width
-        height: selection.height
+        height: languages.currentItem ? languages.currentItem.height : 20
 
         states: State {
             name: "open"
             PropertyChanges {
-                target: selection
-                visible: false
-            }
-
-            PropertyChanges {
                 target: languages
                 visible: true
+                contentY: languages.currentItem ? Math.min(Math.max(languages.currentItem.y - (langSelector.height - languages.currentItem.height)/2, 0),
+                                   languages.contentItem.childrenRect.height - langSelector.height) : 0;
             }
 
             PropertyChanges {
@@ -232,70 +229,27 @@ Item {
 
         transitions: [
             Transition {
-                to: "open"
-                SequentialAnimation {
-                    PropertyAction {
-                        targets: [selection,languages]
-                        property: "visible"
-                    }
-
+                ParallelAnimation {
                     PropertyAnimation {
                         target: langSelector
                         properties: "height"
-                        duration: 2000
+                        duration: 800
                         easing.type: Easing.InOutCubic
                     }
-                }
-            },
-            Transition {
-                from: "open"
-                SequentialAnimation {
                     PropertyAnimation {
-                        target: langSelector
-                        properties: "height"
-                        duration: 1200
+                        target: languages
+                        properties: "contentY"
+                        duration: 1500
                         easing.type: Easing.InOutCubic
-                    }
-
-                    PropertyAction {
-                        targets: [selection,languages]
-                        property: "visible"
                     }
                 }
             }
         ]
 
-        Rectangle {
-            id: selection
-            anchors.bottom: parent.bottom
-            anchors.left: parent.left
-            anchors.right: parent.right
-
-            height: selectionText.height + 6
-            color: "lightsteelblue"
-            radius: 5
-
-            MouseArea {
-                anchors.fill: parent
-
-                onClicked: langSelector.state = "open"
-            }
-
-            Text {
-                id: selectionText
-                x: 3
-                y: 3
-
-                text: lang.selectedNative;
-
-                font.pointSize: 14
-            }
-        }
-
         ListView {
             id: languages
             anchors.fill: parent
-            visible: false
+            visible: true
             clip: true
 
             height: parent.height
@@ -303,14 +257,13 @@ Item {
 
             currentIndex: lang.selectedId
 
+            contentY: currentItem ? currentItem.y : 0
+
             focus: true
 
             model: lang
             highlight: Rectangle { color: "lightsteelblue"; radius: 5; width: languages.width }
-            delegate: Rectangle {
-
-                color: "transparent"
-
+            delegate: Item {
                 height: langText.height + 6
                 width: langText.width + 6
 
@@ -324,8 +277,12 @@ Item {
                     width: languages.width
 
                     onClicked: {
-                        lang.selectedId = index
-                        langSelector.state = ""
+                        if (langSelector.state == "") {
+                            langSelector.state = "open"
+                        } else {
+                            lang.selectedId = index
+                            langSelector.state = ""
+                        }
                     }
                 }
 

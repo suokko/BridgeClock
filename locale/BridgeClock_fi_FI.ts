@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
 <TS version="2.1" language="fi_FI">
 <context>
@@ -157,7 +156,7 @@
     <message>
         <location line="+8"/>
         <source>Result address: </source>
-        <translation>Tulosten osoite:</translation>
+        <translation>Tulosten osoite: </translation>
     </message>
     <message>
         <location line="+5"/>
@@ -325,12 +324,12 @@
     <message>
         <source>Begin:</source>
         <comment>The time of begin of round</comment>
-        <translation type="vanished">Alku: </translation>
+        <translation>Alku:</translation>
     </message>
     <message>
         <source>End:</source>
         <comment>The time of end of round</comment>
-        <translation type="vanished">Loppu: </translation>
+        <translation>Loppu:</translation>
     </message>
     <message>
         <source>Length:</source>

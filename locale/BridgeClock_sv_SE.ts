@@ -276,7 +276,7 @@
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="222"/>
         <source>Previous:</source>
-        <translation/>
+        <translation>Föregående:</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="408"/>

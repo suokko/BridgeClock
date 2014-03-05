@@ -86,30 +86,11 @@
     </message>
 </context>
 <context>
-    <name>TimeController</name>
-    <message>
-        <source>Tournament begins</source>
-        <translation type="obsolete">Kilpailun alkuun</translation>
-    </message>
-</context>
-<context>
     <name>TimeModel</name>
     <message>
         <location filename="../timemodel.cpp" line="292"/>
         <source>Begin</source>
         <translation>Alku</translation>
-    </message>
-    <message>
-        <source>Change</source>
-        <translation type="obsolete">Vaihto</translation>
-    </message>
-    <message>
-        <source>Round %1</source>
-        <translation type="obsolete">Kierros %1</translation>
-    </message>
-    <message>
-        <source>End</source>
-        <translation type="obsolete">Loppu</translation>
     </message>
 </context>
 <context>
@@ -119,11 +100,6 @@
         <source>Bridge clock %1</source>
         <extracomment>The window header including version number as parameter %1</extracomment>
         <translation>Bridgekello %1</translation>
-    </message>
-    <message>
-        <source>A new version of bridge clock %1 is available for download.</source>
-        <extracomment>The parameter is a new version number with download link</extracomment>
-        <translation type="obsolete">Bridgekello uusi versio %1 on ladattavissa.</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/main.qml" line="66"/>
@@ -207,10 +183,6 @@
         </translation>
     </message>
     <message>
-        <source>minutes</source>
-        <translation type="obsolete">minuuttia</translation>
-    </message>
-    <message>
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="124"/>
         <source>Change time</source>
         <translation>Vaihtoaika</translation>
@@ -237,11 +209,6 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="43"/>
         <source> -&gt; </source>
         <translation> -&gt; </translation>
-    </message>
-    <message>
-        <source>Remaining:</source>
-        <comment>The time remaining</comment>
-        <translation type="obsolete">Jäljellä:</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="58"/>
@@ -323,55 +290,9 @@
         <translation>Tapahtuma</translation>
     </message>
     <message>
-        <source>Begin:</source>
-        <comment>The time of begin of round</comment>
-        <translation type="obsolete">Alku: </translation>
-    </message>
-    <message>
-        <source>End:</source>
-        <comment>The time of end of round</comment>
-        <translation type="obsolete">Loppu: </translation>
-    </message>
-    <message>
-        <source>Length:</source>
-        <comment>The lenght of round</comment>
-        <translation type="obsolete">Kesto:</translation>
-    </message>
-    <message>
-        <source>Previous:</source>
-        <comment>The previous round</comment>
-        <translation type="obsolete">Edellinen:</translation>
-    </message>
-    <message>
-        <source>Lunch</source>
-        <translation type="obsolete">Lounas</translation>
-    </message>
-    <message>
-        <source>Dinner</source>
-        <translation type="obsolete">Päivällinen</translation>
-    </message>
-    <message>
-        <source>Coffee</source>
-        <translation type="obsolete">Kahvitauko</translation>
-    </message>
-    <message>
-        <source>Change</source>
-        <translation type="obsolete">Vaihto</translation>
-    </message>
-    <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="349"/>
         <source>Custom:</source>
         <translation>Muu:</translation>
-    </message>
-    <message>
-        <source>Begin</source>
-        <comment>The time of begin of round</comment>
-        <translation type="obsolete">Alku</translation>
-    </message>
-    <message>
-        <source>Happening</source>
-        <comment>The header for name of round or break</comment>
-        <translation type="obsolete">Tapahtuma</translation>
     </message>
 </context>
 </TS>

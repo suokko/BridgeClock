@@ -86,13 +86,6 @@
     </message>
 </context>
 <context>
-    <name>TimeController</name>
-    <message>
-        <source>Tournament begins</source>
-        <translation type="obsolete">Turneringen ska Börjar</translation>
-    </message>
-</context>
-<context>
     <name>TimeModel</name>
     <message>
         <location filename="../timemodel.cpp" line="292"/>
@@ -188,10 +181,6 @@
             <numerusform>minut</numerusform>
             <numerusform>minuter</numerusform>
         </translation>
-    </message>
-    <message>
-        <source>minutes</source>
-        <translation type="obsolete">minuter</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="124"/>

@@ -159,38 +159,6 @@
 <context>
     <name>tournamentStart</name>
     <message>
-        <source>Kilpailun pituus</source>
-        <translation type="obsolete">Number of rounds</translation>
-    </message>
-    <message>
-        <source>Kierroksia</source>
-        <translation type="obsolete">Rounds</translation>
-    </message>
-    <message>
-        <source>Kierrosaika</source>
-        <translation type="obsolete">Round time</translation>
-    </message>
-    <message>
-        <source>minuuttia</source>
-        <translation type="obsolete">minutes</translation>
-    </message>
-    <message>
-        <source>Vaihtoaika</source>
-        <translation type="obsolete">Change time</translation>
-    </message>
-    <message>
-        <source>Alkamisaika</source>
-        <translation type="obsolete">Start time</translation>
-    </message>
-    <message>
-        <source>Nyt</source>
-        <translation type="obsolete">Now</translation>
-    </message>
-    <message>
-        <source>Aloita uusi kilpailu</source>
-        <translation type="obsolete">Start a new competition</translation>
-    </message>
-    <message>
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="35"/>
         <source>Tournament time</source>
         <translation type="unfinished"></translation>

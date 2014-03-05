@@ -8,7 +8,7 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="328"/>
         <location filename="../timemodel.cpp" line="245"/>
         <source>Lunch</source>
-        <translation type="unfinished">Lunch</translation>
+        <translation>Lunch</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="268"/>
@@ -16,7 +16,7 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="335"/>
         <location filename="../timemodel.cpp" line="246"/>
         <source>Dinner</source>
-        <translation type="unfinished">Dinner</translation>
+        <translation>Dinner</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="270"/>
@@ -38,7 +38,7 @@
         <location filename="../timemodel.cpp" line="396"/>
         <location filename="../timemodel.cpp" line="637"/>
         <source>Round %1</source>
-        <translation type="unfinished">Round %1</translation>
+        <translation>Round %1</translation>
     </message>
     <message>
         <location filename="../timemodel.cpp" line="640"/>
@@ -48,7 +48,7 @@
     <message>
         <location filename="../timecontroller.cpp" line="230"/>
         <source>Tournament begins</source>
-        <translation type="unfinished">Tournament begins</translation>
+        <translation>Tournament begins</translation>
     </message>
 </context>
 <context>
@@ -61,12 +61,12 @@
     <message>
         <location filename="../qml/BridgeClock/Clock.qml" line="258"/>
         <source>Tournamen will end: </source>
-        <translation type="unfinished">Tournamen will end: </translation>
+        <translation>Tournament will end: </translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/Clock.qml" line="300"/>
         <source>The next break: </source>
-        <translation type="unfinished">The next break: </translation>
+        <translation>The next break: </translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/Clock.qml" line="324"/>
@@ -76,7 +76,7 @@
     <message>
         <location filename="../qml/BridgeClock/Clock.qml" line="400"/>
         <source>Double click to make fullscreen</source>
-        <translation type="unfinished">Double click to make fullscreen</translation>
+        <translation>Double click to make fullscreen</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/Clock.qml" line="401"/>

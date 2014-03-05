@@ -1,4 +1,3 @@
-
 # User.mk has to set following
 WIN32QMAKE :=
 GCCLIBPATH := 
@@ -68,7 +67,7 @@ $(wildcard ../locale/*.ts): ../locale/stamp.update
 
 ../locale/stamp.update: ../BridgeClock.pro $(wildcard ../*.cpp ../qml/BridgeClock/*.qml)
 	touch $@.tmp
-	lupdate -locations relative $<
+	lupdate -locations absolute $<
 	mv $@.tmp $@
 
 # msi packaging

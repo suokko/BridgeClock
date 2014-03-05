@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
 <TS version="2.1" language="sv_SE">
 <context>
@@ -62,7 +61,7 @@
     <message>
         <location line="+225"/>
         <source>Tournamen will end: </source>
-        <translation>Turnering ska slutas</translation>
+        <translation>Turnering ska slutas: </translation>
     </message>
     <message>
         <location line="+42"/>
@@ -112,7 +111,7 @@
         <location line="+33"/>
         <source>A new version of bridge clock %1 is available for download.&lt;br/&gt;%2Ignore%3</source>
         <extracomment>%1 is version number with downloadable link %2 &amp; %3 html code for ignore link</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location line="+44"/>
@@ -140,7 +139,7 @@
     <message>
         <location line="+8"/>
         <source>Result address: </source>
-        <translation>De resultat adress:</translation>
+        <translation>De resultat adress: </translation>
     </message>
     <message>
         <location line="+5"/>
@@ -150,17 +149,17 @@
     <message>
         <location line="+203"/>
         <source>Select a file to be shown in result view</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location line="+2"/>
         <source>HTML-files (*.htm *.html)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location line="+1"/>
         <source>All files (*)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -224,7 +223,7 @@
     <message>
         <location line="+15"/>
         <source>Remaining:</source>
-        <translation>Återstående</translation>
+        <translation>Återstående:</translation>
     </message>
     <message>
         <location line="+17"/>
@@ -278,17 +277,17 @@
     <message>
         <location line="+18"/>
         <source>End:</source>
-        <translation>Slut: </translation>
+        <translation>Slut:</translation>
     </message>
     <message>
         <location line="+18"/>
         <source>Length:</source>
-        <translation>Längd</translation>
+        <translation>Längd:</translation>
     </message>
     <message>
         <location line="+18"/>
         <source>Previous:</source>
-        <translation></translation>
+        <translation/>
     </message>
     <message>
         <location line="+186"/>

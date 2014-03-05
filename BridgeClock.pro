@@ -40,7 +40,7 @@ TRANSLATIONS = \
 	locale/BridgeClock_zh_CN.ts \
 # End of list comment
 
-update.commands = lupdate $$PWD/BridgeClock.pro -locations relative
+update.commands = lupdate $$PWD/BridgeClock.pro -locations absolute
 update.depends = $$SOURES $$HEADERS $$OTHER_FILES
 release.commands = cd $$PWD && lrelease BridgeClock.pro
 release.depends = $$join($$TRANSLATIONS, "", $$PWD)

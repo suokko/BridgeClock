@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
 <TS version="2.1" language="sv_SE">
 <context>
@@ -62,7 +61,7 @@
     <message>
         <location filename="../qml/BridgeClock/Clock.qml" line="258"/>
         <source>Tournamen will end: </source>
-        <translation>Turnering ska slutas</translation>
+        <translation>Turnering ska slutas: </translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/Clock.qml" line="300"/>
@@ -105,7 +104,7 @@
         <location filename="../qml/BridgeClock/main.qml" line="66"/>
         <source>A new version of bridge clock %1 is available for download.&lt;br/&gt;%2Ignore%3</source>
         <extracomment>%1 is version number with downloadable link %2 &amp; %3 html code for ignore link</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/BridgeClock/main.qml" line="117"/>
@@ -133,7 +132,7 @@
     <message>
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="59"/>
         <source>Result address: </source>
-        <translation>De resultat adress:</translation>
+        <translation>De resultat adress: </translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="64"/>
@@ -143,17 +142,17 @@
     <message>
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="267"/>
         <source>Select a file to be shown in result view</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="269"/>
         <source>HTML-files (*.htm *.html)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="270"/>
         <source>All files (*)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -213,7 +212,7 @@
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="58"/>
         <source>Remaining:</source>
-        <translation>Återstående</translation>
+        <translation>Återstående:</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="75"/>
@@ -267,17 +266,17 @@
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="186"/>
         <source>End:</source>
-        <translation>Slut: </translation>
+        <translation>Slut:</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="204"/>
         <source>Length:</source>
-        <translation>Längd</translation>
+        <translation>Längd:</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="222"/>
         <source>Previous:</source>
-        <translation></translation>
+        <translation/>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="408"/>

@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
 <TS version="2.1" language="fi_FI">
 <context>
@@ -133,7 +132,7 @@
     <message>
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="59"/>
         <source>Result address: </source>
-        <translation>Tulosten osoite:</translation>
+        <translation>Tulosten osoite: </translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="64"/>

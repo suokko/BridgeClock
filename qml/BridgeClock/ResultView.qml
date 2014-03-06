@@ -114,7 +114,8 @@ WebView {
                 hide.start();
             }
         } else {
-            /* We have to be below current results to appear smoothly durring animation */
+            /* The new page has to be in same y position to appear smoothly */
+            view.contentY = clockWindow.ypos;
         }
         view.loadTarget = !view.loadTarget
     }

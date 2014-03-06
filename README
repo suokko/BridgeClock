@@ -105,5 +105,51 @@ http://tortoisegit.org/
 Translations
 ------------
 
-TODO: Write documentation how to translate to a new language
+Translations are stored in xml files but there is no need to modify those files
+directly. Translations can be done using Weblate web interface that knows how to
+write correct xml files.
+
+* Translations using Weblate
+
+Detailed documentation for Weblate can be found from the Weblate project page.
+http://weblate.org/
+
+The translation interface van be found from
+https://hosted.weblate.org/projects/bridgeclock/master/
+
+First step is to create a Weblate account. The information that you provide
+during registration will be used to credit your translations changes.
+
+With the new account translation process can begin. First step from the project
+view is to select the language you want to translate. The language link leads to
+the language specific information page. There is links to different groups of
+items under the "Strings to check" header.
+
+Select a translation group like "untranslated strings" leads to actual
+translation interface. Each string has its own page with next and back buttons
+in top for browsing between strings.
+
+Source: An English text that is used if no translation is provided for the language.
+Context: Context is used to group translations based on file the appear or using
+	key provided by programmer.
+Translation: The text box for translated string that will be shown.
+Fuzzy: The checkbox is automatically selected if English source has changed
+	slightly after translation. It indicates that translation needs to be
+	checked if it still has same meaning. After check and possible fix 
+	the checkbox should be cleared to let other know that check was done.
+Comment: Extra information trying to help select correct word from alternatives
+	with similar meaning.
+Used in: Links to source code files where this translation is used.
+
+* Testing your translation changes
+
+Too bad there isn't any simple way to test translations. Only possible way
+currently is to compile the application from sources. See Instalation from
+sources for details.
+
+* Adding a new language
+
+If your language isn't yet listed as possible translation you can request
+addition using https://github.com/suokko/BridgeClock/issues. A new language is
+simple to add so any request wil lhave high priority.
 

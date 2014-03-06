@@ -68,8 +68,7 @@ OTHER_FILES += \
     qml/BridgeClock/main.qml \
     qml/BridgeClock/DatePicker.qml \
     qml/BridgeClock/Clock.qml \
-    qml/BridgeClock/CircularSlider.qml \
-    user.settings.pri
+    qml/BridgeClock/CircularSlider.qml
 
 HEADERS += \
     timecontroller.h \

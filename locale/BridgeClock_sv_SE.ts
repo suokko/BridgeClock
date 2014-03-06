@@ -1,93 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
 <TS version="2.1" language="sv_SE">
 <context>
     <name>Break</name>
     <message>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="266"/>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="298"/>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="328"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="284"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="316"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="348"/>
         <location filename="../timemodel.cpp" line="245"/>
         <source>Lunch</source>
+        <extracomment>A short text visible to players telling that now or soon is a Lunch break</extracomment>
         <translation>Lunch</translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="268"/>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="303"/>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="335"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="286"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="321"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="356"/>
         <location filename="../timemodel.cpp" line="246"/>
         <source>Dinner</source>
+        <extracomment>A short text visible to players telling that now or soon is a Dinner break</extracomment>
         <translation>Middag</translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="270"/>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="308"/>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="342"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="288"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="326"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="364"/>
         <location filename="../timemodel.cpp" line="247"/>
         <source>Coffee</source>
+        <extracomment>A short text visible to players telling that now or soon is a short coffee break</extracomment>
         <translation>Kaffepause</translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="293"/>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="321"/>
-        <location filename="../timemodel.cpp" line="389"/>
-        <location filename="../timemodel.cpp" line="635"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="311"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="340"/>
+        <location filename="../timemodel.cpp" line="390"/>
+        <location filename="../timemodel.cpp" line="637"/>
         <source>Change</source>
+        <extracomment>A short text visible to players telling that now is a change between rounds</extracomment>
         <translation>Byte</translation>
     </message>
     <message>
-        <location filename="../timemodel.cpp" line="396"/>
-        <location filename="../timemodel.cpp" line="637"/>
+        <location filename="../timemodel.cpp" line="398"/>
+        <location filename="../timemodel.cpp" line="639"/>
         <source>Round %1</source>
+        <extracomment>The name of round. %1 is the number of round.</extracomment>
         <translation>Rund %1</translation>
     </message>
     <message>
-        <location filename="../timemodel.cpp" line="640"/>
+        <location filename="../timemodel.cpp" line="642"/>
         <source>End</source>
         <translation>Slut</translation>
     </message>
     <message>
-        <location filename="../timecontroller.cpp" line="230"/>
+        <location filename="../timecontroller.cpp" line="231"/>
         <source>Tournament begins</source>
+        <extracomment>The player visible text when count down shows time to begin of tournament. This should be fairly short text if possible.</extracomment>
         <translation>Till start</translation>
     </message>
 </context>
 <context>
     <name>Clock</name>
     <message>
-        <location filename="../qml/BridgeClock/Clock.qml" line="33"/>
+        <location filename="../qml/BridgeClock/Clock.qml" line="34"/>
         <source>The time view</source>
+        <extracomment>The tile of window that shows the time and result information for players.</extracomment>
         <translation>Tiden vy</translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/Clock.qml" line="258"/>
+        <location filename="../qml/BridgeClock/Clock.qml" line="260"/>
         <source>Tournamen will end: </source>
+        <extracomment>Label visible to players before or above the tournament end time</extracomment>
         <translation>Turnering ska slutas: </translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/Clock.qml" line="300"/>
+        <location filename="../qml/BridgeClock/Clock.qml" line="303"/>
         <source>The next break: </source>
+        <extracomment>The player visible label before or above next break name, start time and end time</extracomment>
         <translation>Nästa paus: </translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/Clock.qml" line="324"/>
+        <location filename="../qml/BridgeClock/Clock.qml" line="328"/>
         <source> - </source>
+        <extracomment>A character between start and end time of the next break (visible to players)</extracomment>
         <translation> - </translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/Clock.qml" line="400"/>
+        <location filename="../qml/BridgeClock/Clock.qml" line="405"/>
         <source>Double click to make fullscreen</source>
+        <extracomment>Tooltip help telling to double click the player visible window to make it fullscreen</extracomment>
         <translation>Dubbelklicka på helskärm</translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/Clock.qml" line="401"/>
+        <location filename="../qml/BridgeClock/Clock.qml" line="407"/>
         <source>Double click to restore back to window</source>
+        <extracomment>Tooltip help telling to double click the player visible window to restore window from fullscreen mode</extracomment>
         <translation>Dubbelklicka för att återställa fönstret till</translation>
     </message>
 </context>
 <context>
     <name>TimeModel</name>
     <message>
-        <location filename="../timemodel.cpp" line="292"/>
+        <location filename="../timemodel.cpp" line="293"/>
         <source>Begin</source>
         <translation>Börjar</translation>
     </message>
@@ -104,193 +117,227 @@
         <location filename="../qml/BridgeClock/main.qml" line="66"/>
         <source>A new version of bridge clock %1 is available for download.&lt;br/&gt;%2Ignore%3</source>
         <extracomment>%1 is version number with downloadable link %2 &amp; %3 html code for ignore link</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/main.qml" line="117"/>
+        <location filename="../qml/BridgeClock/main.qml" line="118"/>
         <source>Start</source>
+        <extracomment>The title for initial setup tab with round number and length settings</extracomment>
         <translation>Början</translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/main.qml" line="129"/>
+        <location filename="../qml/BridgeClock/main.qml" line="131"/>
         <source>Time</source>
+        <extracomment>The title for time settings tab to setup breaks and modify length of rounds</extracomment>
         <translation>Tid</translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/main.qml" line="140"/>
+        <location filename="../qml/BridgeClock/main.qml" line="143"/>
         <source>Results</source>
+        <extracomment>The title for result view settings tab to select the visible result file and limit the visible area</extracomment>
         <translation>Resultat</translation>
     </message>
 </context>
 <context>
     <name>tournamentResults</name>
     <message>
-        <location filename="../qml/BridgeClock/tournamentResults.qml" line="51"/>
+        <location filename="../qml/BridgeClock/tournamentResults.qml" line="52"/>
         <source>Show results</source>
+        <extracomment>The label text for checkbox that selects if results are shown under the clock</extracomment>
         <translation>Visa resultat</translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/tournamentResults.qml" line="59"/>
+        <location filename="../qml/BridgeClock/tournamentResults.qml" line="61"/>
         <source>Result address: </source>
+        <extracomment>The label text above url text input for result file</extracomment>
         <translation>De resultat adress: </translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/tournamentResults.qml" line="64"/>
+        <location filename="../qml/BridgeClock/tournamentResults.qml" line="67"/>
         <source>Browse files</source>
+        <extracomment>Button to open file browser to find the results to be shown</extracomment>
         <translation>Sök bland filer</translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/tournamentResults.qml" line="267"/>
-        <source>Select a file to be shown in result view</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../qml/BridgeClock/tournamentResults.qml" line="269"/>
-        <source>HTML-files (*.htm *.html)</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="270"/>
+        <source>Select a file to be shown in result view</source>
+        <extracomment>File chooser dialog title shown when user is searching for a result file</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/BridgeClock/tournamentResults.qml" line="273"/>
+        <source>HTML-files (*.htm *.html)</source>
+        <extracomment>File filter entry that lets users hide all files except html files</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/BridgeClock/tournamentResults.qml" line="275"/>
         <source>All files (*)</source>
-        <translation type="unfinished"/>
+        <extracomment>File filter entry that lets users to show all files</extracomment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>tournamentStart</name>
     <message>
-        <location filename="../qml/BridgeClock/tournamentStart.qml" line="35"/>
+        <location filename="../qml/BridgeClock/tournamentStart.qml" line="36"/>
         <source>Tournament time</source>
+        <extracomment>The header text for initial setup</extracomment>
         <translation>Turnering tidtabell</translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/tournamentStart.qml" line="44"/>
+        <location filename="../qml/BridgeClock/tournamentStart.qml" line="46"/>
         <source>Number of rounds</source>
+        <extracomment>Label for number of rounds slider and input box</extracomment>
         <translation>Antal runden</translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/tournamentStart.qml" line="80"/>
+        <location filename="../qml/BridgeClock/tournamentStart.qml" line="83"/>
         <source>Round time</source>
+        <extracomment>Label for length of round in minutes</extracomment>
         <translation>Rund tid</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/BridgeClock/tournamentStart.qml" line="99"/>
-        <location filename="../qml/BridgeClock/tournamentStart.qml" line="142"/>
+        <location filename="../qml/BridgeClock/tournamentStart.qml" line="103"/>
+        <location filename="../qml/BridgeClock/tournamentStart.qml" line="148"/>
         <source>minute(s)</source>
+        <extracomment>Label after input box accepting minutes</extracomment>
         <translation>
             <numerusform>minut</numerusform>
             <numerusform>minuter</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/tournamentStart.qml" line="124"/>
+        <location filename="../qml/BridgeClock/tournamentStart.qml" line="129"/>
         <source>Change time</source>
+        <extracomment>Label before slider and text input for length of change between round in minutest</extracomment>
         <translation>Byte tid</translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/tournamentStart.qml" line="165"/>
+        <location filename="../qml/BridgeClock/tournamentStart.qml" line="172"/>
         <source>Start time</source>
+        <extracomment>Subheader before the tournament start time selector</extracomment>
         <translation>Starttid</translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/tournamentStart.qml" line="172"/>
+        <location filename="../qml/BridgeClock/tournamentStart.qml" line="180"/>
         <source>Now</source>
+        <extracomment>The button text that sets tournament start time to be now</extracomment>
         <translation>Ny</translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/tournamentStart.qml" line="201"/>
+        <location filename="../qml/BridgeClock/tournamentStart.qml" line="210"/>
         <source>Start a new tournament</source>
+        <extracomment>The button text that resets round and break modifications to start a new tournament</extracomment>
         <translation>Börja en ny tournering</translation>
     </message>
 </context>
 <context>
     <name>tournamentTime</name>
     <message>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="43"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="44"/>
         <source> -&gt; </source>
+        <extracomment>Arrow between break and next round name in time settings tab.</extracomment>
         <translation> -&gt; </translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="58"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="60"/>
         <source>Remaining:</source>
+        <extracomment>Label before count down to the end of current round or break</extracomment>
         <translation>Återstående:</translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="75"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="78"/>
         <source>Stop the clock</source>
+        <extracomment>The label for checkbox that stops count down in time settings tab.</extracomment>
         <translation>Stoppa klockan</translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="109"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="113"/>
         <source>+10s</source>
+        <extracomment>The text for button that adds ten seconds to current round or break in time settings tab.</extracomment>
         <translation>+10s</translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="114"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="119"/>
         <source>+1m</source>
+        <extracomment>The text for button that adds a minute to current round or break in time settings tab.</extracomment>
         <translation>+1m</translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="119"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="125"/>
         <source>+5m</source>
+        <extracomment>The text for button that adds five minutes to current round or break in time settings tab.</extracomment>
         <translation>+5m</translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="124"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="131"/>
         <source>-10s</source>
+        <extracomment>The text for button that subtracts ten seconds from current round or break in time settings tab.</extracomment>
         <translation>-10s</translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="129"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="137"/>
         <source>-1m</source>
+        <extracomment>The text for button that subtracts a minute from current round or break in time settings tab.</extracomment>
         <translation>-1m</translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="134"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="143"/>
         <source>-5m</source>
+        <extracomment>The text for button that subtracts five minutes from current round or break in time settings tab.</extracomment>
         <translation>-5m</translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="160"/>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="178"/>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="196"/>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="214"/>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="232"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="170"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="190"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="210"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="230"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="250"/>
         <source>No choice</source>
+        <extracomment>Place holder text that shouldn&apos;t ever be visible to user</extracomment>
         <translation>Inget val</translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="168"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="179"/>
         <source>Begin:</source>
+        <extracomment>The label before the begin time of round or break in time settings tab</extracomment>
         <translation>Början:</translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="186"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="199"/>
         <source>End:</source>
+        <extracomment>The label before the end time of round or break in time settings tab</extracomment>
         <translation>Slut:</translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="204"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="219"/>
         <source>Length:</source>
+        <extracomment>The label before the length of round or break in hours and minutes</extracomment>
         <translation>Längd:</translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="222"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="239"/>
         <source>Previous:</source>
+        <extracomment>Label before text showing the name of previous round or break in settings tab.</extracomment>
         <translation>Föregående:</translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="408"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="432"/>
         <source>Begin</source>
+        <extracomment>The column header showing the begin time of round or break in time settings tab.</extracomment>
         <translation>Början</translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="413"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="438"/>
         <source>Happening</source>
+        <extracomment>The column header showing the name of round or break in time settings tab.</extracomment>
         <translation>Händelse</translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="349"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="372"/>
         <source>Custom:</source>
+        <extracomment>Label before text input for custom round break name</extracomment>
         <translation>Andra:</translation>
     </message>
 </context>

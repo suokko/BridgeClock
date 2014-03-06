@@ -78,8 +78,13 @@ BridgeClock.msi: files.wixobj BridgeClock.wixobj
 %.wixobj: %.wxs
 	WINEDEBUG=fixme-all candle.exe $<
 
-BridgeClock.wxs Bridgeclock-versions.xml: %: %.in vars.sh varsub
+BridgeClock.wxs BridgeClock-versions.xml: %: %.in vars.sh varsub date.stamp
 	(sh < vars.sh; cat $<) | ./varsub > $@
+
+.PHONY: date.stamp
+date.stamp:
+	( [ -e $@ ] && STAMPDATE=$$(date --date="`stat -c '%y' $@`" +'%Y.%m.%d') && CURDATE=$$(date  +'%Y.%m.%d') && \
+		  [ $$STAMPDATE = $$CURDATE ] ) || touch $@
 
 DEST= \
       $(wildcard win/*) \
@@ -178,7 +183,7 @@ win/qml/%: ${WIN32PATH}/qml/%
 win/qt.conf: qt.conf
 	sed 's/\(Lib\|Binaries\).*/\1 = ./' < $< > $@
 
-win/BridgeClock.exe: win-build/BridgeClock.exe $(addprefix win/,$(WIN32ALL))
+win/BridgeClock.exe: win-build/BridgeClock.exe $(addprefix win/,$(WIN32ALL)) date.stamp
 	mkdir -p $(dir $@)
 	cp $< $@
 	sed -i 's/\$$(VERSION)/$(VERSION)/' $(dir $@)/qml/BridgeClock/main.qml
@@ -192,7 +197,7 @@ win-build/BridgeClock.exe:
 
 
 #Linux package
-BridgeClock-linux-${VERSION}.tar.gz: linux/BridgeClock
+BridgeClock-linux-${VERSION}.tar.gz: linux/BridgeClock date.stamp
 	find $(dir $<) -type f -perm /u+x -exec strip {} +;
 	find $(dir $<) -name "*.so*" -exec strip {} +;
 	find $(dir $<) -name "*.debug" -delete
@@ -265,7 +270,7 @@ linux/qt.conf: qt.conf
 	mkdir -p $(dir $@)
 	[ -d $< ] || cp $< $@
 
-linux/BridgeClock: linux-build/BridgeClock ldddeps $(addprefix linux/,$(LINUXALL))
+linux/BridgeClock: linux-build/BridgeClock ldddeps $(addprefix linux/,$(LINUXALL)) date.stamp
 	mkdir -p $(dir $@)
 	cp $< $@
 	sed -i 's/\$$(VERSION)/$(VERSION)/' $(dir $@)/qml/BridgeClock/main.qml

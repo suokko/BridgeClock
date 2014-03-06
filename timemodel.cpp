@@ -289,6 +289,7 @@ QVariant TimeModel::data(const QModelIndex &index, int role) const
     }
     case PreviousNameRole:
         if (index.row() == 0)
+            //: Text visible in settings tab for previous round when first round is selected. Meaning the begin of tournament
             return tr("Begin");
         if (list_[index.row() - 1].nr_ >= 0)
             return qApp->translate("Break",list_[index.row() - 1].name_.c_str()).arg(list_[index.row() - 1].nr_);
@@ -393,6 +394,7 @@ void TimeModel::setRounds(unsigned v)
         for (r = 0; r < nr; r++) {
             list_.push_back(TimeItem(Change, start, vaihto));
             start.setTime(start.time().addSecs(30 * roundBreak_));
+            //: The name of round. %1 is the number of round.
             list_.push_back(TimeItem(Play, start, QT_TRANSLATE_NOOP("Break","Round %1"), (r + rounds_ + 1)));
             start.setTime(start.time().addSecs(30 * roundTime_));
         }

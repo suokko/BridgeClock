@@ -32,6 +32,7 @@ Item {
         anchors.margins: 5
         anchors.top: parent.top
         anchors.horizontalCenter: parent.horizontalCenter
+        //: The header text for initial setup
         text: qsTr("Tournament time") + lang.lang
         font.pointSize: 20
     }
@@ -41,6 +42,7 @@ Item {
         anchors.verticalCenter: roundsText.verticalCenter
         anchors.left: parent.left
         anchors.margins: 5
+        //: Label for number of rounds slider and input box
         text: qsTr("Number of rounds") + lang.lang
     }
     TextField {
@@ -77,6 +79,7 @@ Item {
         anchors.verticalCenter: timeText.verticalCenter
         anchors.left: parent.left
         anchors.margins: 5
+        //: Label for length of round in minutes
         text: qsTr("Round time") + lang.lang
     }
     TextField {
@@ -96,6 +99,7 @@ Item {
         anchors.verticalCenter: timeText.verticalCenter
         anchors.left: timeText.right
         anchors.margins: 5
+        //: Label after input box accepting minutes
         text: qsTr("minute(s)","", time.value) + lang.lang
     }
     Slider {
@@ -121,6 +125,7 @@ Item {
         anchors.verticalCenter: breaksText.verticalCenter
         anchors.left: parent.left
         anchors.margins: 5
+        //: Label before slider and text input for length of change between round in minutest
         text: qsTr("Change time") + lang.lang
     }
     TextField {
@@ -139,6 +144,7 @@ Item {
         anchors.verticalCenter: breaksText.verticalCenter
         anchors.left: breaksText.right
         anchors.margins: 5
+        //: Label after input box accepting minutes
         text: qsTr("minute(s)","", breaks.value) + lang.lang
     }
     Slider {
@@ -162,6 +168,7 @@ Item {
         id: startHeader
         anchors.top: breaks.bottom
         anchors.horizontalCenter: parent.horizontalCenter
+        //: Subheader before the tournament start time selector
         text: qsTr("Start time") + lang.lang
         font.pointSize: 16
     }
@@ -169,6 +176,7 @@ Item {
         anchors.top: startHeader.top
         anchors.left: startHeader.right
         anchors.leftMargin: 20
+        //: The button text that sets tournament start time to be now
         text: qsTr("Now") + lang.lang
         onClicked: {
             var time = new Date();
@@ -198,6 +206,7 @@ Item {
         anchors.left: parent.left
         anchors.bottom: parent.bottom
         anchors.margins: 3
+        //: The button text that resets round and break modifications to start a new tournament
         text: qsTr("Start a new tournament") + lang.lang
         onPressedChanged: if (pressed) timeController.resetModel();
     }

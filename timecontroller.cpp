@@ -227,6 +227,7 @@ void TimeController::updateRoundInfo()
 
         if (item[0].start_ >= cur) {
             end = item[0].start_;
+            //: The player visible text when count down shows time to begin of tournament. This should be fairly short text if possible.
             name = QT_TRANSLATE_NOOP("Break","Tournament begins");
             nr = -1;
         }

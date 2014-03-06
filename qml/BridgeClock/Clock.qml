@@ -30,6 +30,7 @@ Window {
     width: 640
     height: 480
     visible: true
+    //: The tile of window that shows the time and result information for players.
     title: qsTr("The time view") + lang.lang
     flags: Qt.WindowStaysOnTopHint + Qt.CustomizeWindowHint /*+ Qt.FramelessWindowHint + Qt.X11BypassWindowManagerHint */
 
@@ -255,6 +256,7 @@ Window {
             anchors.left: current.left
             id: endHeading
             visible: timeController.roundInfo.playing < 2
+            //: Label visible to players before or above the tournament end time
             text: qsTr("Tournamen will end: ") + lang.lang
             font.pixelSize: 25*zoomFactor
             font.weight: Font.Light
@@ -297,6 +299,7 @@ Window {
 
             id: nextHeading
             visible: timeController.roundInfo.playing < 2
+            //: The player visible label before or above next break name, start time and end time
             text: qsTr("The next break: ") + lang.lang
             font.pixelSize: 25*zoomFactor
             font.weight: Font.Light
@@ -321,6 +324,7 @@ Window {
             visible: timeController.roundInfo.playing < 2 &&
             timeController.roundInfo.nextBreakStart != ""
             text: timeController.roundInfo.nextBreakStart.replace(/:[^:]*$/,'') + 
+            //: A character between start and end time of the next break (visible to players)
             (timeController.roundInfo.nextBreakEnd != "" ? qsTr(" - ") + 
             timeController.roundInfo.nextBreakEnd.replace(/:[^:]*$/,'') : "") + lang.lang;
             font.pixelSize: 40*zoomFactor
@@ -397,7 +401,9 @@ Window {
                     opacity: 1.0
                     font.pixelSize: 20*zoomFactor
                     text: (clockWindow.visibility !== Qt.WindowFullScreen
+                    //: Tooltip help telling to double click the player visible window to make it fullscreen 
                           ? qsTr("Double click to make fullscreen") :
+                    //: Tooltip help telling to double click the player visible window to restore window from fullscreen mode
                             qsTr("Double click to restore back to window"))  + lang.lang;
                 }
             }

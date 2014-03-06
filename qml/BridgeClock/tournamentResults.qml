@@ -48,6 +48,7 @@ Item {
             anchors.top: parent.top
             id: showResults
             checked: timeController.showResults
+            //: The label text for checkbox that selects if results are shown under the clock
             text: qsTr("Show results") + lang.lang
         }
 
@@ -56,11 +57,13 @@ Item {
             anchors.left: parent.left
             opacity: showResults.checked ? 1 : 0.5
             id: head
+            //: The label text above url text input for result file
             text: qsTr("Result address: ") + lang.lang
             font.pixelSize: 16
         }
         Button {
             id: resultButton
+            //: Button to open file browser to find the results to be shown
             text: qsTr("Browse files") + lang.lang
             anchors.top: showResults.bottom
             anchors.left: head.right
@@ -263,10 +266,12 @@ Item {
 
     FileDialog {
         id: loadResults
-        /*        folder: "/tmp"*/
+        //: File chooser dialog title shown when user is searching for a result file
         title: qsTr("Select a file to be shown in result view") + lang.lang
         selectMultiple: false
+        //: File filter entry that lets users hide all files except html files
         nameFilters: [ qsTr("HTML-files (*.htm *.html)") + lang.lang,
+        //: File filter entry that lets users to show all files
                        qsTr("All files (*)") + lang.lang ]
 
         onAccepted: { resultFile.text = fileUrl }

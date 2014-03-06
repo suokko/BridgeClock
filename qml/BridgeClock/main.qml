@@ -114,6 +114,7 @@ Window {
         anchors.topMargin: versiondlg.visible ? versiondlg.anchors.margins : 0
 
         Tab {
+            //: The title for initial setup tab with round number and length settings
             title: qsTr("Start") + lang.lang
             Item {
                 anchors.fill: parent
@@ -126,6 +127,7 @@ Window {
             }
         }
         Tab {
+            //: The title for time settings tab to setup breaks and modify length of rounds 
             title: qsTr("Time") + lang.lang
             Item {
                 anchors.fill: parent
@@ -137,6 +139,7 @@ Window {
             }
         }
         Tab {
+            //: The title for result view settings tab to select the visible result file and limit the visible area
             title: qsTr("Results") + lang.lang
             Item {
                 anchors.fill: parent

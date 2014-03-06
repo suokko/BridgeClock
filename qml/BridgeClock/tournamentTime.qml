@@ -40,6 +40,7 @@ Item {
         Text {
             id: header
             text: (timeController.roundInfo.playing === 0 ?
+            //: Arrow between break and next round name in time settings tab.
                       (timeController.roundInfo.name + qsTr(" -> ") +
                        timeController.roundInfo.nextName) :
                       timeController.roundInfo.name) + lang.lang
@@ -55,6 +56,7 @@ Item {
             anchors.verticalCenter: timeLeft.verticalCenter
             anchors.left: parent.left
             visible: timeController.roundInfo.playing < 2
+            //: Label before count down to the end of current round or break
             text: qsTr("Remaining:") + lang.lang
         }
         Text {
@@ -72,6 +74,7 @@ Item {
             anchors.margins: 5
             visible: timeController.roundInfo.playing < 2
             id: pause
+            //: The label for checkbox that stops count down in time settings tab.
             text: qsTr("Stop the clock") + lang.lang
             checked: false
             style: CheckBoxStyle {
@@ -106,31 +109,37 @@ Item {
             }
 
             Button {
+                //: The text for button that adds ten seconds to current round or break in time settings tab.
                 text: qsTr("+10s") + lang.lang
                 Layout.fillWidth: true
                 onPressedChanged: if (pressed) roundGrid.appendTime(10*1000);
             }
             Button {
+                //: The text for button that adds a minute to current round or break in time settings tab.
                 text: qsTr("+1m") + lang.lang
                 Layout.fillWidth: true
                 onPressedChanged: if (pressed) roundGrid.appendTime(60*1000);
             }
             Button {
+                //: The text for button that adds five minutes to current round or break in time settings tab.
                 text: qsTr("+5m") + lang.lang
                 Layout.fillWidth: true
                 onPressedChanged: if (pressed) roundGrid.appendTime(5*60*1000);
             }
             Button {
+                //: The text for button that subtracts ten seconds from current round or break in time settings tab.
                 text: qsTr("-10s") + lang.lang
                 Layout.fillWidth: true
                 onPressedChanged: if (pressed) roundGrid.appendTime(-10*1000);
             }
             Button {
+                //: The text for button that subtracts a minute from current round or break in time settings tab.
                 text: qsTr("-1m") + lang.lang
                 Layout.fillWidth: true
                 onPressedChanged: if (pressed) roundGrid.appendTime(-60*1000);
             }
             Button {
+                //: The text for button that subtracts five minutes from current round or break in time settings tab.
                 text: qsTr("-5m") + lang.lang
                 Layout.fillWidth: true
                 onPressedChanged: if (pressed) roundGrid.appendTime(-5*60*1000);
@@ -157,6 +166,7 @@ Item {
             font.pixelSize: 20
             text: (view.currentRow != -1 ?
                       view.model.qmlData(view.currentRow, "name").value :
+                      //: Place holder text that shouldn't ever be visible to user
                       qsTr("No choice")) + lang.lang
         }
         Label {
@@ -165,6 +175,7 @@ Item {
             anchors.top: selectionHeader.bottom
             anchors.left: parent.left
             visible: view.currentRow != -1
+            //: The label before the begin time of round or break in time settings tab
             text: qsTr("Begin:") + lang.lang
         }
         Text {
@@ -175,6 +186,7 @@ Item {
             visible: view.currentRow != -1
             text: (view.currentRow != -1 ?
                       view.model.qmlData(view.currentRow, "start").value :
+                      //: Place holder text that shouldn't ever be visible to user
                       qsTr("No choice")) + lang.lang
         }
         Label {
@@ -183,6 +195,7 @@ Item {
             anchors.top: startLabel.bottom
             anchors.left: parent.left
             visible: view.currentRow != -1
+            //: The label before the end time of round or break in time settings tab
             text: qsTr("End:") + lang.lang
         }
         Text {
@@ -193,6 +206,7 @@ Item {
             visible: view.currentRow != -1
             text: (view.currentRow != -1 ?
                       view.model.qmlData(view.currentRow, "end").value :
+                      //: Place holder text that shouldn't ever be visible to user
                       qsTr("No choice")) + lang.lang
         }
         Label {
@@ -201,6 +215,7 @@ Item {
             anchors.top: selectionHeader.bottom
             x: parent.width/2
             visible: view.currentRow != -1
+            //: The label before the length of round or break in hours and minutes
             text: qsTr("Length:") + lang.lang
         }
         Text {
@@ -211,6 +226,7 @@ Item {
             visible: view.currentRow != -1
             text: (view.currentRow != -1 ?
                       view.model.qmlData(view.currentRow, "length").value :
+                      //: Place holder text that shouldn't ever be visible to user
                       qsTr("No choice")) + lang.lang
         }
         Label {
@@ -219,6 +235,7 @@ Item {
             anchors.top: timeLabel.bottom
             x: parent.width/2
             visible: view.currentRow != -1
+            //: Label before text showing the name of previous round or break in settings tab.
             text: qsTr("Previous:") + lang.lang
         }
         Text {
@@ -229,6 +246,7 @@ Item {
             visible: view.currentRow != -1
             text: (view.currentRow != -1 ?
                       view.model.qmlData(view.currentRow, "previous").value :
+                      //: Place holder text that shouldn't ever be visible to user
                       qsTr("No choice")) + lang.lang
         }
 
@@ -318,6 +336,7 @@ Item {
             RadioButton {
                 id: change
                 anchors.margins: 3
+                //: A short text visible to players telling that now is a change between rounds
                 text: qsTranslate("Break","Change") + lang.lang
                 exclusiveGroup: itemType
             }
@@ -325,6 +344,7 @@ Item {
                 id: lunch
                 anchors.top: change.bottom
                 anchors.margins: 3
+                //: A short text visible to players telling that now or soon is a Lunch break 
                 text: qsTranslate("Break","Lunch") + lang.lang
                 exclusiveGroup: itemType
             }
@@ -332,6 +352,7 @@ Item {
                 id: dinner
                 anchors.top: lunch.bottom
                 anchors.margins: 3
+                //: A short text visible to players telling that now or soon is a Dinner break 
                 text: qsTranslate("Break","Dinner") + lang.lang
                 exclusiveGroup: itemType
             }
@@ -339,6 +360,7 @@ Item {
                 id: coffee
                 anchors.top: dinner.bottom
                 anchors.margins: 3
+                //: A short text visible to players telling that now or soon is a short coffee break 
                 text: qsTranslate("Break","Coffee") + lang.lang
                 exclusiveGroup: itemType
             }
@@ -346,6 +368,7 @@ Item {
                 id: custom
                 anchors.top: coffee.bottom
                 anchors.margins: 3
+                //: Label before text input for custom round break name 
                 text: qsTr("Custom:") + lang.lang
                 exclusiveGroup: itemType
             }
@@ -405,11 +428,13 @@ Item {
         model: timeController.model
         TableViewColumn {
             role: "start";
+            //: The column header showing the begin time of round or break in time settings tab.
             title: qsTr("Begin") + lang.lang
             width: 70;
         }
         TableViewColumn {
             role: "name";
+            //: The column header showing the name of round or break in time settings tab.
             title: qsTr("Happening") + lang.lang
             width: 83;
         }

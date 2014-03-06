@@ -40,12 +40,12 @@ TRANSLATIONS = \
 	locale/BridgeClock_zh_CN.ts \
 # End of list comment
 
-update.commands = lupdate $$PWD/BridgeClock.pro -locations absolute
-update.depends = $$SOURES $$HEADERS $$OTHER_FILES
-release.commands = cd $$PWD && lrelease BridgeClock.pro
-release.depends = $$join($$TRANSLATIONS, "", $$PWD)
+lupdate.commands = lupdate $$PWD/BridgeClock.pro -locations absolute
+lupdate.depends = $$SOURES $$HEADERS $$OTHER_FILES
+lrelease.commands = cd $$PWD && lrelease BridgeClock.pro
+lrelease.depends = $$join($$TRANSLATIONS, "", $$PWD)
 
-QMAKE_EXTRA_TARGETS += update release
+QMAKE_EXTRA_TARGETS += lupdate lrelease
 
 
 # Installation path

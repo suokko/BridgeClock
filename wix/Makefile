@@ -60,7 +60,7 @@ $(wildcard ../locale/*.qm): ../locale/stamp.release
 
 ../locale/stamp.release: ../BridgeClock.pro $(wildcard ../locale/*.ts)
 	touch $@.tmp
-	cd .. && lrelease $<
+	cd .. && lrelease $(notdir $<)
 	mv $@.tmp $@
 
 $(wildcard ../locale/*.ts): ../locale/stamp.update

@@ -170,11 +170,19 @@ void TimeModel::readSettings()
     dt.setTime(startTime);
     setStartTime(dt);
     int size = settings_.beginReadArray("timeItems");
+    std::vector<TimeItem> list;
+    list.resize(size);
     for (int i = 0; i < size; i++) {
         settings_.setArrayIndex(i);
-        list_[i] = settings_.value("item").value<TimeItem>();
+        list[i] = settings_.value("item").value<TimeItem>();
+        if (list[i].type_ < Play || list[i].type_ > End) {
+            list.clear();
+            break;
+        }
     }
     settings_.endArray();
+    if (!list.empty())
+        list_.swap(list);
     timeFixUp();
 }
 

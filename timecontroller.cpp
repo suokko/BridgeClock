@@ -203,11 +203,13 @@ void TimeController::updateRoundInfo()
     std::string name = item[0].name_;
     int nr = item[0].nr_;
     int playing = item[0].type_ == TimeModel::Play ? 1 : 0;
-    int next = 1;
+    int next = row >= 0 ? 1 : 0;
     end = cur;
 
 
     if (item[0].type_ != TimeModel::End) {
+        /* row is -1 before start so that needs to be fixed here for data access */
+        int startIdx = row >= 0 ? row : 0;
 
         while (item[next].type_ == TimeModel::Change)
             next++;
@@ -220,10 +222,10 @@ void TimeController::updateRoundInfo()
         nrBreak = item[next].nr_;
         end = item[1].start_;
         if (item[next].type_ == TimeModel::Break)
-            nextBreakEnd = d->model_->data(d->model_->index(row + next), EndRole).toString();
+            nextBreakEnd = d->model_->data(d->model_->index(startIdx + next), EndRole).toString();
         if (item[next].type_ == TimeModel::Break ||
                 item[next].type_ == TimeModel::End)
-            nextBreakStart = d->model_->data(d->model_->index(row + next), StartRole).toString();
+            nextBreakStart = d->model_->data(d->model_->index(startIdx + next), StartRole).toString();
 
         if (item[0].start_ >= cur) {
             end = item[0].start_;

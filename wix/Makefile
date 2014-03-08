@@ -183,10 +183,12 @@ win/qml/%: ${WIN32PATH}/qml/%
 win/qt.conf: qt.conf
 	sed 's/\(Lib\|Binaries\).*/\1 = ./' < $< > $@
 
-win/BridgeClock.exe: win-build/BridgeClock.exe $(addprefix win/,$(WIN32ALL)) date.stamp
+win/qml/BridgeClock/main.qml: ../qml/BridgeClock/main.qml date.stamp
+	sed 's/\$$(VERSION)/$(VERSION)/' < $< > $@
+
+win/BridgeClock.exe: win-build/BridgeClock.exe $(addprefix win/,$(WIN32ALL))
 	mkdir -p $(dir $@)
 	cp $< $@
-	sed -i 's/\$$(VERSION)/$(VERSION)/' $(dir $@)/qml/BridgeClock/main.qml
 
 # Always try rebuild the binary
 .PHONY: win-build/BridgeClock.exe
@@ -270,10 +272,12 @@ linux/qt.conf: qt.conf
 	mkdir -p $(dir $@)
 	[ -d $< ] || cp $< $@
 
-linux/BridgeClock: linux-build/BridgeClock ldddeps $(addprefix linux/,$(LINUXALL)) date.stamp
+linux/qml/BridgeClock/main.qml: ../qml/BridgeClock/main.qml date.stamp
+	sed 's/\$$(VERSION)/$(VERSION)/' < $< > $@
+
+linux/BridgeClock: linux-build/BridgeClock ldddeps $(addprefix linux/,$(LINUXALL))
 	mkdir -p $(dir $@)
 	cp $< $@
-	sed -i 's/\$$(VERSION)/$(VERSION)/' $(dir $@)/qml/BridgeClock/main.qml
 
 ldddeps: linux-build/BridgeClock
 	mkdir -p linux/lib/
@@ -291,7 +295,7 @@ linux-build/BridgeClock:
 # Source package generation
 source: BridgeClock-src-$(VERSION).tar.gz
 
-BridgeClock-src-$(VERSION).tar.gz: BridgeClock-src-$(VERSION) ../.git/refs/heads/master
+BridgeClock-src-$(VERSION).tar.gz: BridgeClock-src-$(VERSION) ../.git/refs/heads/master date.stamp
 	cd $< && git fetch origin && git reset --hard origin/master
 	sed -i 's/\$$(VERSION)/$(VERSION)/' $</qml/BridgeClock/main.qml
 	tar --exclude-vcs -cf - $< | pigz -c -9 > $@

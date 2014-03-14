@@ -257,7 +257,7 @@ Window {
             id: endHeading
             visible: timeController.roundInfo.playing < 2
             //: Label visible to players before or above the tournament end time
-            text: qsTr("Tournamen will end: ") + lang.lang
+            text: qsTr("Tournament will end: ") + lang.lang
             font.pixelSize: 25*zoomFactor
             font.weight: Font.Light
         }

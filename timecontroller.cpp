@@ -324,6 +324,8 @@ void TimeController::urlUpdate()
         d->watcher_->addPath(path.absoluteFilePath());
         connect(d->watcher_, SIGNAL(fileChanged(QString)), SLOT(fileChanged(QString)));
         connect(d->watcher_, SIGNAL(directoryChanged(QString)), SLOT(fileChanged(QString)));
+    } else {
+        d->urlTimer_->start(60000);
     }
     emit updateResults(d->resultUrl_);
 }

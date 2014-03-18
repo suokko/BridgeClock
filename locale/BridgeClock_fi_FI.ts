@@ -7,7 +7,7 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="284"/>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="316"/>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="348"/>
-        <location filename="../timemodel.cpp" line="245"/>
+        <location filename="../timemodel.cpp" line="253"/>
         <source>Lunch</source>
         <extracomment>A short text visible to players telling that now or soon is a Lunch break</extracomment>
         <translation>Lounas</translation>
@@ -16,7 +16,7 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="286"/>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="321"/>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="356"/>
-        <location filename="../timemodel.cpp" line="246"/>
+        <location filename="../timemodel.cpp" line="254"/>
         <source>Dinner</source>
         <extracomment>A short text visible to players telling that now or soon is a Dinner break</extracomment>
         <translation>Päivällinen</translation>
@@ -25,7 +25,7 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="288"/>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="326"/>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="364"/>
-        <location filename="../timemodel.cpp" line="247"/>
+        <location filename="../timemodel.cpp" line="255"/>
         <source>Coffee</source>
         <extracomment>A short text visible to players telling that now or soon is a short coffee break</extracomment>
         <translation>Kahvitauko</translation>
@@ -33,26 +33,26 @@
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="311"/>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="340"/>
-        <location filename="../timemodel.cpp" line="390"/>
-        <location filename="../timemodel.cpp" line="637"/>
+        <location filename="../timemodel.cpp" line="398"/>
+        <location filename="../timemodel.cpp" line="645"/>
         <source>Change</source>
         <extracomment>A short text visible to players telling that now is a change between rounds</extracomment>
         <translation>Vaihto</translation>
     </message>
     <message>
-        <location filename="../timemodel.cpp" line="398"/>
-        <location filename="../timemodel.cpp" line="639"/>
+        <location filename="../timemodel.cpp" line="406"/>
+        <location filename="../timemodel.cpp" line="647"/>
         <source>Round %1</source>
         <extracomment>The name of round. %1 is the number of round.</extracomment>
         <translation>Kierros %1</translation>
     </message>
     <message>
-        <location filename="../timemodel.cpp" line="642"/>
+        <location filename="../timemodel.cpp" line="650"/>
         <source>End</source>
         <translation>Loppu</translation>
     </message>
     <message>
-        <location filename="../timecontroller.cpp" line="231"/>
+        <location filename="../timecontroller.cpp" line="233"/>
         <source>Tournament begins</source>
         <extracomment>The player visible text when count down shows time to begin of tournament. This should be fairly short text if possible.</extracomment>
         <translation>Kilpailun alkuun</translation>
@@ -67,10 +67,15 @@
         <translation>Aikanäkymä</translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/Clock.qml" line="260"/>
         <source>Tournamen will end: </source>
         <extracomment>Label visible to players before or above the tournament end time</extracomment>
-        <translation>Kilpailu loppuu: </translation>
+        <translation type="vanished">Kilpailu loppuu: </translation>
+    </message>
+    <message>
+        <location filename="../qml/BridgeClock/Clock.qml" line="260"/>
+        <source>Tournament will end: </source>
+        <extracomment>Label visible to players before or above the tournament end time</extracomment>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/Clock.qml" line="303"/>
@@ -100,7 +105,7 @@
 <context>
     <name>TimeModel</name>
     <message>
-        <location filename="../timemodel.cpp" line="293"/>
+        <location filename="../timemodel.cpp" line="301"/>
         <source>Begin</source>
         <translation>Alku</translation>
     </message>

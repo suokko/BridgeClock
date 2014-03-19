@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
 <TS version="2.1" language="sv_SE">
 <context>
@@ -28,7 +27,7 @@
         <location filename="../timemodel.cpp" line="255"/>
         <source>Coffee</source>
         <extracomment>A short text visible to players telling that now or soon is a short coffee break</extracomment>
-        <translation>Kaffepause</translation>
+        <translation>Kaffepaus</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="311"/>
@@ -117,7 +116,7 @@
         <location filename="../qml/BridgeClock/main.qml" line="66"/>
         <source>A new version of bridge clock %1 is available for download.&lt;br/&gt;%2Ignore%3</source>
         <extracomment>%1 is version number with downloadable link %2 &amp; %3 html code for ignore link</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/BridgeClock/main.qml" line="118"/>
@@ -150,7 +149,7 @@
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="61"/>
         <source>Result address: </source>
         <extracomment>The label text above url text input for result file</extracomment>
-        <translation>De resultat adress: </translation>
+        <translation>Resultat adress: </translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="67"/>
@@ -162,19 +161,19 @@
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="270"/>
         <source>Select a file to be shown in result view</source>
         <extracomment>File chooser dialog title shown when user is searching for a result file</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="273"/>
         <source>HTML-files (*.htm *.html)</source>
         <extracomment>File filter entry that lets users hide all files except html files</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="275"/>
         <source>All files (*)</source>
         <extracomment>File filter entry that lets users to show all files</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -189,7 +188,7 @@
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="46"/>
         <source>Number of rounds</source>
         <extracomment>Label for number of rounds slider and input box</extracomment>
-        <translation>Antal runden</translation>
+        <translation>Antal rund</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="83"/>
@@ -295,7 +294,7 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="230"/>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="250"/>
         <source>No choice</source>
-        <extracomment>Place holder text that shouldn&apos;t ever be visible to user</extracomment>
+        <extracomment>Place holder text that shouldn't ever be visible to user</extracomment>
         <translation>Inget val</translation>
     </message>
     <message>

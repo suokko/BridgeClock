@@ -111,7 +111,11 @@ WIN32LIBS := \
 	ssleay32.dll \
 	Qt5Positioning.dll \
 	libwebp-5.dll \
+	libGLESv2.dll \
+	libEGL.dll \
 	Qt5WebKitWidgets.dll \
+	Qt5QuickParticles.dll \
+	Qt5XmlPatterns.dll \
 	Qt5MultimediaWidgets.dll \
 	Qt5OpenGL.dll \
 	Qt5PrintSupport.dll \

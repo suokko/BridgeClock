@@ -67,15 +67,10 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Tournamen will end: </source>
-        <extracomment>Label visible to players before or above the tournament end time</extracomment>
-        <translation type="vanished">Tournament will end: </translation>
-    </message>
-    <message>
         <location filename="../qml/BridgeClock/Clock.qml" line="260"/>
         <source>Tournament will end: </source>
         <extracomment>Label visible to players before or above the tournament end time</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>The end: </translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/Clock.qml" line="303"/>

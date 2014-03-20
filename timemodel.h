@@ -91,9 +91,9 @@ private:
 
     std::vector<TimeItem> list_;
 
-    void timeFixUp();
+    void timeFixUp(bool loading = false);
     void readSettings();
-    void writeTimeItem(int row, int end = -1);
+    void writeTimeItem();
     void deleteTimeItem(int row, int end = -1);
 
     QDateTime pauseTimeAdjust(QDateTime t) const;

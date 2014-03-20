@@ -113,6 +113,7 @@ WIN32LIBS := \
 	libwebp-5.dll \
 	libGLESv2.dll \
 	libEGL.dll \
+	d3dcompiler_46.dll \
 	Qt5WebKitWidgets.dll \
 	Qt5QuickParticles.dll \
 	Qt5XmlPatterns.dll \

@@ -4,37 +4,37 @@
 <context>
     <name>Break</name>
     <message>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="284"/>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="316"/>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="348"/>
-        <location filename="../timemodel.cpp" line="253"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="283"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="315"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="347"/>
+        <location filename="../timemodel.cpp" line="254"/>
         <source>Lunch</source>
         <extracomment>A short text visible to players telling that now or soon is a Lunch break</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="286"/>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="321"/>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="356"/>
-        <location filename="../timemodel.cpp" line="254"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="285"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="320"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="355"/>
+        <location filename="../timemodel.cpp" line="255"/>
         <source>Dinner</source>
         <extracomment>A short text visible to players telling that now or soon is a Dinner break</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="288"/>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="326"/>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="364"/>
-        <location filename="../timemodel.cpp" line="255"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="287"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="325"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="363"/>
+        <location filename="../timemodel.cpp" line="256"/>
         <source>Coffee</source>
         <extracomment>A short text visible to players telling that now or soon is a short coffee break</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="311"/>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="340"/>
-        <location filename="../timemodel.cpp" line="398"/>
-        <location filename="../timemodel.cpp" line="645"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="310"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="339"/>
+        <location filename="../timemodel.cpp" line="409"/>
+        <location filename="../timemodel.cpp" line="660"/>
         <source>Change</source>
         <extracomment>A short text visible to players telling that now is a change between rounds</extracomment>
         <translation type="unfinished"></translation>
@@ -46,14 +46,14 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../timemodel.cpp" line="406"/>
-        <location filename="../timemodel.cpp" line="647"/>
+        <location filename="../timemodel.cpp" line="417"/>
+        <location filename="../timemodel.cpp" line="662"/>
         <source>Round %1</source>
         <extracomment>The name of round. %1 is the number of round.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../timemodel.cpp" line="650"/>
+        <location filename="../timemodel.cpp" line="665"/>
         <source>End</source>
         <translation type="unfinished"></translation>
     </message>
@@ -100,7 +100,7 @@
 <context>
     <name>TimeModel</name>
     <message>
-        <location filename="../timemodel.cpp" line="301"/>
+        <location filename="../timemodel.cpp" line="302"/>
         <source>Begin</source>
         <translation type="unfinished"></translation>
     </message>
@@ -227,7 +227,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/tournamentStart.qml" line="210"/>
+        <location filename="../qml/BridgeClock/tournamentStart.qml" line="208"/>
         <source>Start a new tournament</source>
         <extracomment>The button text that resets round and break modifications to start a new tournament</extracomment>
         <translation type="unfinished"></translation>
@@ -324,19 +324,19 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="372"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="371"/>
         <source>Custom:</source>
         <extracomment>Label before text input for custom round break name</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="432"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="417"/>
         <source>Begin</source>
         <extracomment>The column header showing the begin time of round or break in time settings tab.</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="438"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="423"/>
         <source>Happening</source>
         <extracomment>The column header showing the name of round or break in time settings tab.</extracomment>
         <translation type="unfinished"></translation>

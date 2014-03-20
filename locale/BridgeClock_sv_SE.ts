@@ -1,52 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
 <TS version="2.1" language="sv_SE">
 <context>
     <name>Break</name>
     <message>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="284"/>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="316"/>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="348"/>
-        <location filename="../timemodel.cpp" line="253"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="283"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="315"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="347"/>
+        <location filename="../timemodel.cpp" line="254"/>
         <source>Lunch</source>
         <extracomment>A short text visible to players telling that now or soon is a Lunch break</extracomment>
         <translation>Lunch</translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="286"/>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="321"/>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="356"/>
-        <location filename="../timemodel.cpp" line="254"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="285"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="320"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="355"/>
+        <location filename="../timemodel.cpp" line="255"/>
         <source>Dinner</source>
         <extracomment>A short text visible to players telling that now or soon is a Dinner break</extracomment>
         <translation>Middag</translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="288"/>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="326"/>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="364"/>
-        <location filename="../timemodel.cpp" line="255"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="287"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="325"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="363"/>
+        <location filename="../timemodel.cpp" line="256"/>
         <source>Coffee</source>
         <extracomment>A short text visible to players telling that now or soon is a short coffee break</extracomment>
         <translation>Kaffepaus</translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="311"/>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="340"/>
-        <location filename="../timemodel.cpp" line="398"/>
-        <location filename="../timemodel.cpp" line="645"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="310"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="339"/>
+        <location filename="../timemodel.cpp" line="409"/>
+        <location filename="../timemodel.cpp" line="660"/>
         <source>Change</source>
         <extracomment>A short text visible to players telling that now is a change between rounds</extracomment>
         <translation>Byte</translation>
     </message>
     <message>
-        <location filename="../timemodel.cpp" line="406"/>
-        <location filename="../timemodel.cpp" line="647"/>
+        <location filename="../timemodel.cpp" line="417"/>
+        <location filename="../timemodel.cpp" line="662"/>
         <source>Round %1</source>
         <extracomment>The name of round. %1 is the number of round.</extracomment>
         <translation>Rund %1</translation>
     </message>
     <message>
-        <location filename="../timemodel.cpp" line="650"/>
+        <location filename="../timemodel.cpp" line="665"/>
         <source>End</source>
         <translation>Slut</translation>
     </message>
@@ -99,7 +100,7 @@
 <context>
     <name>TimeModel</name>
     <message>
-        <location filename="../timemodel.cpp" line="301"/>
+        <location filename="../timemodel.cpp" line="302"/>
         <source>Begin</source>
         <translation>Börjar</translation>
     </message>
@@ -116,7 +117,7 @@
         <location filename="../qml/BridgeClock/main.qml" line="66"/>
         <source>A new version of bridge clock %1 is available for download.&lt;br/&gt;%2Ignore%3</source>
         <extracomment>%1 is version number with downloadable link %2 &amp; %3 html code for ignore link</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/main.qml" line="118"/>
@@ -161,19 +162,19 @@
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="270"/>
         <source>Select a file to be shown in result view</source>
         <extracomment>File chooser dialog title shown when user is searching for a result file</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="273"/>
         <source>HTML-files (*.htm *.html)</source>
         <extracomment>File filter entry that lets users hide all files except html files</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="275"/>
         <source>All files (*)</source>
         <extracomment>File filter entry that lets users to show all files</extracomment>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -225,7 +226,7 @@
         <translation>Ny</translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/tournamentStart.qml" line="210"/>
+        <location filename="../qml/BridgeClock/tournamentStart.qml" line="208"/>
         <source>Start a new tournament</source>
         <extracomment>The button text that resets round and break modifications to start a new tournament</extracomment>
         <translation>Börja en ny tournering</translation>
@@ -294,7 +295,7 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="230"/>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="250"/>
         <source>No choice</source>
-        <extracomment>Place holder text that shouldn't ever be visible to user</extracomment>
+        <extracomment>Place holder text that shouldn&apos;t ever be visible to user</extracomment>
         <translation>Inget val</translation>
     </message>
     <message>
@@ -322,19 +323,19 @@
         <translation>Föregående:</translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="432"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="417"/>
         <source>Begin</source>
         <extracomment>The column header showing the begin time of round or break in time settings tab.</extracomment>
         <translation>Början</translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="438"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="423"/>
         <source>Happening</source>
         <extracomment>The column header showing the name of round or break in time settings tab.</extracomment>
         <translation>Händelse</translation>
     </message>
     <message>
-        <location filename="../qml/BridgeClock/tournamentTime.qml" line="372"/>
+        <location filename="../qml/BridgeClock/tournamentTime.qml" line="371"/>
         <source>Custom:</source>
         <extracomment>Label before text input for custom round break name</extracomment>
         <translation>Andra:</translation>

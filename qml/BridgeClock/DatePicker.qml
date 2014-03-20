@@ -4,35 +4,48 @@ import QtQuick 2.0
 Rectangle {
     width: height
     color: "transparent"
-    property alias hour : csH.value
-    property alias minute : cs.value
-    property int prevMinutes : -1
+    property variant date : new Date()
+    property variant minDate : null
+    property int __DPupdatingUI : 0
+
+    onDateChanged: {
+            if (__DPupdatingUI) {
+                return;
+            }
+            __DPupdatingUI++;
+            cs.value = date.getMinutes();
+            csH.value = date.getHours();
+            __DPupdatingUI--;
+    }
+
     CircularSlider {
         id: cs
         minimumValue: 0
         maximumValue: 59
-        value: new Date().getMinutes()
+        value: date.getMinutes()
         width: parent.width
         height: parent.height
         onValueChanged: {
-            if (prevMinutes == -1 ||
-                (prevMinutes > 10 && prevMinutes < 50)) {
-                prevMinutes = value
+            if (__DPupdatingUI) {
                 return;
             }
-            if (prevMinutes >= 50 && value <= 10) {
-                var hour = csH.value + 1;
-                if (hour > csH.maximumValue)
-                    hour = csH.minimumValue;
-                csH.value = hour;
-            } else if (prevMinutes <= 10 && value >= 50) {
-                var hour = csH.value - 1;
-                if (hour < csH.minimumValue)
-                    hour = csH.maximumValue;
-                csH.value = hour;
+            __DPupdatingUI++;
+            var newDate = date;
+            if (date.getMinutes() <= 10 && value >= 50) {
+                newDate.setTime(newDate.getTime() - 1000 * 3600);
+            } else if (date.getMinutes() >= 50 && value <= 10) {
+                newDate.setTime(newDate.getTime() + 1000 * 3600);
             }
-            prevMinutes = value
-
+            newDate.setMinutes(value);
+            if (minDate != null) {
+                while (minDate > newDate) {
+                    newDate.setTime(newDate.getTime() + 1000 * 60);
+                }
+            }
+            date = newDate;
+            cs.value = date.getMinutes();
+            csH.value = date.getHours();
+            __DPupdatingUI--;
         }
     }
     CircularSlider {
@@ -40,10 +53,32 @@ Rectangle {
         rounds: 2
         minimumValue: 0
         maximumValue: 23
-        value: new Date().getHours()
+        value: date.getHours()
         width: parent.width*0.6
         height: parent.width*0.6
         anchors.centerIn: parent
+        onValueChanged: {
+            if (__DPupdatingUI) {
+                return;
+            }
+            __DPupdatingUI++;
+            var newDate = date;
+            if (date.getHours() < 3 && value > 9) {
+                newDate.setTime(newDate.getTime() - 1000 * 3600 * 24);
+            } else if (date.getHours() > 9 && value < 3) {
+                newDate.setTime(newDate.getTime() + 1000 * 3600 * 24);
+            }
+            newDate.setHours(value);
+            if (minDate != null) {
+                while (minDate > newDate) {
+                    newDate.setTime(newDate.getTime() + 1000 * 3600);
+                }
+            }
+            date = newDate;
+            cs.value = date.getMinutes();
+            csH.value = date.getHours();
+            __DPupdatingUI--;
+        }
     }
     Row {
         anchors.centerIn: parent

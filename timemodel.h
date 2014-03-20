@@ -140,6 +140,7 @@ enum Roles {
     PreviousNameRole,
     EndMinuteRole,
     EndHourRole,
+    EndTimeRole,
     TypeRole,
     StartTimeRole,
     NameRawRole,

@@ -24,6 +24,7 @@ SOURCES += qml/BridgeClock/*.qml
 TRANSLATIONS = \
 	locale/BridgeClock_da_DK.ts \
 	locale/BridgeClock_de_DE.ts \
+	locale/BridgeClock_cs_CZ.ts \
 	locale/BridgeClock_en_US.ts \
 	locale/BridgeClock_es_ES.ts \
 	locale/BridgeClock_et_EE.ts \

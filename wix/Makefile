@@ -25,7 +25,7 @@ ifeq ($(LINUXQTPATH),)
 $(error "Linux qt path not set in user.mk")
 endif
 
-ifneq ($(shell git ls-files -m),)
+ifneq ($(shell cd .. && git ls-files -m),)
 $(error "All changes has to be commited to the git")
 endif
 

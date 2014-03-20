@@ -176,7 +176,7 @@ $(addprefix win/plugins/,$(WIN32PLUGINS)): win/plugins/%.dll: ${WIN32PATH}/plugi
 	mkdir -p $(dir $@)
 	cp $< $@
 
-$(addprefix win/,$(COMMONSRC)): win/%: ../%
+$(addprefix win/,$(filter-out %main.qml,$(COMMONSRC))): win/%: ../%
 	mkdir -p $(dir $@)
 	cp $< $@
 
@@ -188,6 +188,7 @@ win/qt.conf: qt.conf
 	sed 's/\(Lib\|Binaries\).*/\1 = ./' < $< > $@
 
 win/qml/BridgeClock/main.qml: ../qml/BridgeClock/main.qml date.stamp
+	mkdir -p $(dir $@)
 	sed 's/\$$(VERSION)/$(VERSION)/' < $< > $@
 
 win/BridgeClock.exe: win-build/BridgeClock.exe $(addprefix win/,$(WIN32ALL))

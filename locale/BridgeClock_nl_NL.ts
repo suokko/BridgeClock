@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
 <TS version="2.1" language="nl_NL">
 <context>
@@ -293,50 +292,50 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="230"/>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="250"/>
         <source>No choice</source>
-        <extracomment>Place holder text that shouldn&apos;t ever be visible to user</extracomment>
-        <translation type="unfinished"></translation>
+        <extracomment>Place holder text that shouldn't ever be visible to user</extracomment>
+        <translation>Geen keuze</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="179"/>
         <source>Begin:</source>
         <extracomment>The label before the begin time of round or break in time settings tab</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Begin :</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="199"/>
         <source>End:</source>
         <extracomment>The label before the end time of round or break in time settings tab</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Einde :</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="219"/>
         <source>Length:</source>
         <extracomment>The label before the length of round or break in hours and minutes</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Duur :</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="239"/>
         <source>Previous:</source>
         <extracomment>Label before text showing the name of previous round or break in settings tab.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Vorige :</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="372"/>
         <source>Custom:</source>
         <extracomment>Label before text input for custom round break name</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Aangepast :</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="432"/>
         <source>Begin</source>
         <extracomment>The column header showing the begin time of round or break in time settings tab.</extracomment>
-        <translation type="unfinished">Begin</translation>
+        <translation>Begin</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="438"/>
         <source>Happening</source>
         <extracomment>The column header showing the name of round or break in time settings tab.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Evenement</translation>
     </message>
 </context>
 </TS>

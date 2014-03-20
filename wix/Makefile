@@ -53,7 +53,7 @@ COMMONSRC := BridgeClock80.png \
 LINUXCHROOTPATH := $(shell schroot -i -c $(LINUXCHROOT) | grep "^[ \t]*Directory" | sed 's/^[^\/]*//')
 VERSION := $(shell date +'%Y.%m.%d')
 
-all: BridgeClock.msi BridgeClock-linux-${VERSION}.tar.gz BridgeClock-src-$(VERSION).tar.gz BridgeClock-versions.xml
+all: BridgeClock-${VERSION}.msi BridgeClock-linux-${VERSION}.tar.gz BridgeClock-src-$(VERSION).tar.gz BridgeClock-versions.xml
 
 #Localization rules
 $(wildcard ../locale/*.qm): ../locale/stamp.release
@@ -71,9 +71,9 @@ $(wildcard ../locale/*.ts): ../locale/stamp.update
 	mv $@.tmp $@
 
 # msi packaging
-BridgeClock.msi: files.wixobj BridgeClock.wixobj
-	WINEDEBUG=fixme-all light.exe -b win -sval BridgeClock.wixobj files.wixobj -o BridgeClock.msi
-	chmod 0644 BridgeClock.msi
+BridgeClock-${VERSION}.msi: files.wixobj BridgeClock.wixobj
+	WINEDEBUG=fixme-all light.exe -b win -sval BridgeClock.wixobj files.wixobj -o $@
+	chmod 0644 $@
 
 %.wixobj: %.wxs
 	WINEDEBUG=fixme-all candle.exe $<
@@ -308,5 +308,5 @@ BridgeClock-src-$(VERSION):
 	git clone ../.git BridgeClock-src-$(VERSION)
 
 clean:
-	rm -f varsub *.wxs *.wixobj *.wixpdb BridgeClock.msi
+	rm -f varsub *.wxs *.wixobj *.wixpdb BridgeClock*.msi
 	rm -rf win win-build BridgeClock-src-* BridgeClock-linux* linux linux-build

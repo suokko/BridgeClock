@@ -2,10 +2,31 @@
 <Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'>
 	<Product Name='BridgeClock ${VERSIONFULL}' Id='${PRODUCT_UUID}' UpgradeCode='${UPGRADE_UUID}'
 		Language='1033' Version='${VERSION}' Manufacturer='SBL ry'>
-	
+
 		<Package Id='*' Keywords='Installer' Description="BridgeClock ${VERSIONFULL} Installer"
 			Comments='BridgeClock is provided as is without any warranty.' Manufacturer='SBL ry'
 			Languages='1033' InstallerVersion='100' Compressed='yes' />
+
+		<Upgrade Id='${UPGRADE_UUID}'>
+			<UpgradeVersion OnlyDetect='yes' Property='SELFFOUND'
+				Minimum='${VERSION}' IncludeMinimum='yes'
+				Maximum='${VERSION}' IncludeMaximum='yes' />
+			<UpgradeVersion OnlyDetect='yes' Property='NEWERFOUND'
+				Minimum='${VERSION}' IncludeMinimum='no' />
+			<UpgradeVersion OnlyDetect='no' Property='PREVIOUSFOUND'
+				Minimum='14.01.01' IncludeMinimum='yes'
+				Maximum='${VERSION}' IncludeMaximum='no' />
+		</Upgrade>
+
+		<CustomAction Id='AlreadyUpdated' Error='[ProductName] is already installed.' />
+		<CustomAction Id='NoDowngrade' Error='A newer version of [ProductName] is already installed.' />
+
+		<InstallExecuteSequence>
+			<Custom Action='AlreadyUpdated' After='FindRelatedProducts'>SELFFOUND</Custom>
+			<Custom Action='NoDowngrade' After='FindRelatedProducts'>NEWERFOUND</Custom>
+			<RemoveExistingProducts After="InstallInitialize" />
+		</InstallExecuteSequence>
+
 		<Media Id='1' Cabinet='BridgeClock.cab' EmbedCab='yes' DiskPrompt='CD-ROM #1' />
 		<Property Id='DiskPrompt' Value='BridgeClock ${VERSIONFULL} Instalation [1]' />
 
@@ -35,12 +56,13 @@
 			<Directory Id='DesktopFolder' Name="Desktop" />
 		</Directory>
 
-        <Feature Id='Complete' Level='1'>
-            <ComponentRef Id='BridgeClockBinary' />
-	    <ComponentRef Id='ProgramMenuDir' />
-	    <ComponentGroupRef Id='bcall' />
-        </Feature>
+		<Feature Id='Complete' Level='1'>
+			<ComponentRef Id='BridgeClockBinary' />
+			<ComponentRef Id='ProgramMenuDir' />
+			<ComponentGroupRef Id='bcall' />
+		</Feature>
 
-        <Icon Id='BridgeClock80.png' SourceFile='BridgeClock80.png' />
+		<Icon Id='BridgeClock80.png' SourceFile='BridgeClock80.png' />
 	</Product>
+
 </Wix>

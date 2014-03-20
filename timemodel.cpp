@@ -460,6 +460,11 @@ void TimeModel::timeFixUp()
         }
         switch (list_[r].type_) {
         case Break:
+            /* Breaks have fixed end time */
+            if (start > list_[r + 1].start_)
+                list_[r + 1].start_ = start;
+            list_[r].timeDiff_ = start.secsTo(list_[r + 1].start_) - 30 * roundBreak_;
+            writeTimeItem(r);
         case Change:
             start = start.addSecs(30 * roundBreak_ + list_[r].timeDiff_);
             break;
@@ -601,8 +606,7 @@ void TimeModel::changeEnd(int row, QDateTime end)
     }
     set = set || end == list_[row].start_;
     if (set || list_[row + 1].start_ != end) {
-        list_[row].appendTime(list_[row + 1].start_.secsTo(end));
-        writeTimeItem(row);
+        list_[row + 1].start_ = end;
         timeFixUp();
     }
 }

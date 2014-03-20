@@ -179,9 +179,9 @@ Item {
         //: The button text that sets tournament start time to be now
         text: qsTr("Now") + lang.lang
         onClicked: {
-            var time = new Date();
-            startTime.hour = time.getHours();
-            startTime.minute = time.getMinutes();
+            var now = new Date();
+            startTime.date = now;
+            timeController.startTime = now;
         }
     }
 
@@ -191,13 +191,11 @@ Item {
         height: Math.min(parent.width, resetTime.y - startTime.y - 5)
         anchors.margins: 5
         anchors.horizontalCenter: parent.horizontalCenter
-        hour: timeController.startTime.getHours()
-        minute: timeController.startTime.getMinutes()
+        date: timeController.startTime
 
         Component.onCompleted: {
-            /* Break the bidning loop */
-            hour = timeController.startTime.getHours()
-            minute = timeController.startTime.getMinutes()
+            /* Break the binding loop */
+            date = timeController.startTime
         }
     }
 
@@ -328,9 +326,7 @@ Item {
         target: timeController
         property: "startTime"
         value: {
-            var date = new Date();
-            date.setHours(Math.floor(startTime.hour));
-            date.setMinutes(Math.floor(startTime.minute));
+            var date = startTime.date;
             date.setSeconds(0);
             date.setMilliseconds(0);
             return date;

@@ -25,7 +25,7 @@ ifeq ($(LINUXQTPATH),)
 $(error "Linux qt path not set in user.mk")
 endif
 
-ifneq ($(shell git ls-files -m),)
+ifneq ($(shell cd .. && git ls-files -m),)
 $(error "All changes has to be commited to the git")
 endif
 
@@ -53,7 +53,7 @@ COMMONSRC := BridgeClock80.png \
 LINUXCHROOTPATH := $(shell schroot -i -c $(LINUXCHROOT) | grep "^[ \t]*Directory" | sed 's/^[^\/]*//')
 VERSION := $(shell date +'%Y.%m.%d')
 
-all: BridgeClock.msi BridgeClock-linux-${VERSION}.tar.gz BridgeClock-src-$(VERSION).tar.gz BridgeClock-versions.xml
+all: BridgeClock-${VERSION}.msi BridgeClock-linux-${VERSION}.tar.gz BridgeClock-src-$(VERSION).tar.gz BridgeClock-versions.xml
 
 #Localization rules
 $(wildcard ../locale/*.qm): ../locale/stamp.release
@@ -71,9 +71,9 @@ $(wildcard ../locale/*.ts): ../locale/stamp.update
 	mv $@.tmp $@
 
 # msi packaging
-BridgeClock.msi: files.wixobj BridgeClock.wixobj
-	WINEDEBUG=fixme-all light.exe -b win -sval BridgeClock.wixobj files.wixobj -o BridgeClock.msi
-	chmod 0644 BridgeClock.msi
+BridgeClock-${VERSION}.msi: files.wixobj BridgeClock.wixobj
+	WINEDEBUG=fixme-all light.exe -b win -sval BridgeClock.wixobj files.wixobj -o $@
+	chmod 0644 $@
 
 %.wixobj: %.wxs
 	WINEDEBUG=fixme-all candle.exe $<
@@ -113,6 +113,7 @@ WIN32LIBS := \
 	libwebp-5.dll \
 	libGLESv2.dll \
 	libEGL.dll \
+	d3dcompiler_46.dll \
 	Qt5WebKitWidgets.dll \
 	Qt5QuickParticles.dll \
 	Qt5XmlPatterns.dll \
@@ -176,7 +177,7 @@ $(addprefix win/plugins/,$(WIN32PLUGINS)): win/plugins/%.dll: ${WIN32PATH}/plugi
 	mkdir -p $(dir $@)
 	cp $< $@
 
-$(addprefix win/,$(COMMONSRC)): win/%: ../%
+$(addprefix win/,$(filter-out %main.qml,$(COMMONSRC))): win/%: ../%
 	mkdir -p $(dir $@)
 	cp $< $@
 
@@ -188,6 +189,7 @@ win/qt.conf: qt.conf
 	sed 's/\(Lib\|Binaries\).*/\1 = ./' < $< > $@
 
 win/qml/BridgeClock/main.qml: ../qml/BridgeClock/main.qml date.stamp
+	mkdir -p $(dir $@)
 	sed 's/\$$(VERSION)/$(VERSION)/' < $< > $@
 
 win/BridgeClock.exe: win-build/BridgeClock.exe $(addprefix win/,$(WIN32ALL))
@@ -308,5 +310,5 @@ BridgeClock-src-$(VERSION):
 	git clone ../.git BridgeClock-src-$(VERSION)
 
 clean:
-	rm -f varsub *.wxs *.wixobj *.wixpdb BridgeClock.msi
+	rm -f varsub *.wxs *.wixobj *.wixpdb BridgeClock*.msi date.stamp
 	rm -rf win win-build BridgeClock-src-* BridgeClock-linux* linux linux-build

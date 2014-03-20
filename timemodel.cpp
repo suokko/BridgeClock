@@ -116,6 +116,7 @@ QHash<int, QByteArray> TimeModel::roleNames() const
         names[PreviousNameRole] = "previous";
         names[EndMinuteRole] = "endMinute";
         names[EndHourRole] = "endHour";
+        names[EndTimeRole] = "endTime";
         names[TypeRole] = "type";
         names[StartTimeRole] = "startTime";
         names[NameRawRole] = "nameRaw";
@@ -160,15 +161,15 @@ TimeModel::TimeModel() :
 void TimeModel::readSettings()
 {
     int rounds = settings_.value("rounds", rounds_).toInt();
-    setRounds(rounds);
+    rounds_ = rounds;
     int roundTime = settings_.value("roundTime", roundTime_).toInt();
-    setRoundTime(roundTime);
+    roundTime_ = roundTime;
     int roundBreak = settings_.value("roundBreak", roundBreak_).toInt();
-    setRoundBreak(roundBreak);
+    roundBreak_ = roundBreak;
     QTime startTime = settings_.value("startTime", startTime_).toTime();
     QDateTime dt = QDateTime::currentDateTime();
     dt.setTime(startTime);
-    setStartTime(dt);
+    startTime_ = dt;
     int size = settings_.beginReadArray("timeItems");
     std::vector<TimeItem> list;
     list.resize(size);
@@ -183,7 +184,7 @@ void TimeModel::readSettings()
     settings_.endArray();
     if (!list.empty())
         list_.swap(list);
-    timeFixUp();
+    timeFixUp(true);
 }
 
 void TimeModel::onDataChangeTimeout()
@@ -323,6 +324,16 @@ QVariant TimeModel::data(const QModelIndex &index, int role) const
         start = pauseTimeAdjust(start);
         return start.time().hour();
     }
+    case EndTimeRole:
+    {
+        QDateTime start;
+        if (index.row() + 1 == (int)list_.size())
+            start = list_[index.row()].start_;
+        else
+            start = list_[index.row() + 1].start_;
+        start = pauseTimeAdjust(start);
+        return start;
+    }
     case TypeRole:
         return list_[index.row()].type_;
     case StartTimeRole:
@@ -409,7 +420,7 @@ void TimeModel::setRounds(unsigned v)
         list_.push_back(end);
         endInsertRows();
         endrow = list_.size() - 1;
-        writeTimeItem(begin, endrow);
+        writeTimeItem();
         timeFixUp();
     } else if (v < rounds_) {
         /* Delete */
@@ -425,7 +436,7 @@ void TimeModel::setRounds(unsigned v)
         list_.push_back(end);
         endRemoveRows();
         deleteTimeItem(size -  toDelete + 1, size);
-        writeTimeItem(size - toDelete);
+        writeTimeItem();
         timeFixUp();
     } else
         return;
@@ -434,7 +445,7 @@ void TimeModel::setRounds(unsigned v)
     emit roundsChanged();
 }
 
-void TimeModel::timeFixUp()
+void TimeModel::timeFixUp(bool loading)
 {
     QDateTime start = startTime_;
     unsigned r;
@@ -449,6 +460,12 @@ void TimeModel::timeFixUp()
         }
         switch (list_[r].type_) {
         case Break:
+            /* Breaks have fixed end time */
+            if (!loading) {
+                if (start > list_[r + 1].start_)
+                    list_[r + 1].start_ = start;
+                list_[r].timeDiff_ = start.secsTo(list_[r + 1].start_) - 30 * roundBreak_;
+            }
         case Change:
             start = start.addSecs(30 * roundBreak_ + list_[r].timeDiff_);
             break;
@@ -476,6 +493,7 @@ void TimeModel::setRoundTime(unsigned v)
         return;
     roundTime_ = v;
     timeFixUp();
+    writeTimeItem();
     settings_.setValue("roundTime", v);
     emit roundTimeChanged();
 }
@@ -486,6 +504,7 @@ void TimeModel::setRoundBreak(unsigned v)
         return;
     roundBreak_ = v;
     timeFixUp();
+    writeTimeItem();
     settings_.setValue("roundBreak", v);
     emit roundBreakChanged();
 }
@@ -496,6 +515,7 @@ void TimeModel::setStartTime(const QDateTime &v)
         return;
     startTime_ = v;
     timeFixUp();
+    writeTimeItem();
     settings_.setValue("startTime", v.time());
     emit startTimeChanged();
 }
@@ -540,9 +560,9 @@ void TimeModel::changeType(int row, TimeModel::Type type,
         list_[row].name_ = name.toUtf8().data();
         if (type == Change)
             list_[row].timeDiff_ = 0;
-        writeTimeItem(row);
-        emit dataChanged(index(row), index(row));
         timeFixUp();
+        writeTimeItem();
+        emit dataChanged(index(row), index(row));
     }
 }
 
@@ -590,26 +610,21 @@ void TimeModel::changeEnd(int row, QDateTime end)
     }
     set = set || end == list_[row].start_;
     if (set || list_[row + 1].start_ != end) {
-        list_[row].appendTime(list_[row + 1].start_.secsTo(end));
-        writeTimeItem(row);
+        list_[row + 1].start_ = end;
         timeFixUp();
+        writeTimeItem();
     }
 }
 
-void TimeModel::writeTimeItem(int start, int end)
+void TimeModel::writeTimeItem()
 {
-    if (end == -1)
-        end = start + 1;
-    else
-        end++;
     settings_.beginWriteArray("timeItems");
-    for (int row = start; row < end; row++) {
+    for (int row = 0; row < list_.size(); row++) {
         settings_.setArrayIndex(row);
         QVariant v;
         v.setValue(list_[row]);
         settings_.setValue("item", v);
     }
-    settings_.setArrayIndex(list_.size() - 1);
     settings_.endArray();
 }
 
@@ -657,5 +672,6 @@ void TimeModel::reset()
     settings_.endArray();
     QModelIndex end;
     timeFixUp();
+    writeTimeItem();
     emit dataChanged(index(0), index(list_.size() - 1));
 }

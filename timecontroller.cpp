@@ -318,7 +318,11 @@ const QString &TimeController::resultUrl() const
 void TimeController::urlUpdate()
 {
     if (d->resultUrl_.startsWith("file://")) {
+#ifndef __WIN32__
         QFileInfo path = d->resultUrl_.right(d->resultUrl_.size() - 7);
+#else
+        QFileInfo path = d->resultUrl_.right(d->resultUrl_.size() - 8);
+#endif
         d->watcher_ = new QFileSystemWatcher(this);
 //        watcher_->addPath(path.absolutePath());
         d->watcher_->addPath(path.absoluteFilePath());

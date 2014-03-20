@@ -269,8 +269,7 @@ Item {
                 var model = view.model;
                 var type = model.qmlData(view.currentRow, "type").value;
                 var name = model.qmlData(view.currentRow, "nameRaw").value;
-                breakEndTime.hour = model.qmlData(view.currentRow, "endHour").value;
-                breakEndTime.minute = model.qmlData(view.currentRow, "endMinute").value;
+                breakEndTime.date = model.qmlData(view.currentRow, "endTime").value;
                 customName.text = "";
                 switch (type) {
                 case TimeModel.Play:
@@ -387,32 +386,18 @@ Item {
                 opacity: enabled ? 1 : 0.5
                 anchors.top: custom.bottom
                 height: Math.min(parent.width, itemTypeBox.parent.height - itemTypeBox.y - y - 22)
+                minDate: view.currentRow != -1 ? view.model.qmlData(view.currentRow, "startTime").value :
+                    new Date();
 
-                function updateEnd() {
+                onDateChanged: {
                     if (view.currentRow == -1 || __updatingUI > 0)
                         return;
-                    var startSecs = view.model.qmlData(view.currentRow, "startTime").value;
-                    var end = new Date();
-                    var start = new Date();
-                    start.setTime(startSecs);
-                    end.setHours(breakEndTime.hour);
-                    end.setMinutes(breakEndTime.minute);
+                    var end = date;
                     end.setSeconds(0);
                     end.setMilliseconds(0);
 
-                    if (end.getTime() < start.getTime()) {
-                        if (start.getTime() - end.getTime() < 3600*1000)
-                            end.setTime(end.getTime() + 3600*1000);
-                        else if (start.getTime() - end.getTime() < 6*3600*1000)
-                            end = start;
-                        else
-                            end.setTime(end.getTime() + 24*3600*1000);
-                    }
                     view.model.changeEnd(view.currentRow, end);
                 }
-
-                onHourChanged: updateEnd();
-                onMinuteChanged: updateEnd();
             }
         }
     }

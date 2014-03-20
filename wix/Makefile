@@ -309,5 +309,5 @@ BridgeClock-src-$(VERSION):
 	git clone ../.git BridgeClock-src-$(VERSION)
 
 clean:
-	rm -f varsub *.wxs *.wixobj *.wixpdb BridgeClock*.msi
+	rm -f varsub *.wxs *.wixobj *.wixpdb BridgeClock*.msi date.stamp
 	rm -rf win win-build BridgeClock-src-* BridgeClock-linux* linux linux-build

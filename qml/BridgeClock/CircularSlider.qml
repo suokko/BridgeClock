@@ -86,7 +86,7 @@ BorderImage {
                 max = Math.floor(range * (currentRound + 1) + minimumValue - 1)
                 min = Math.floor(range * currentRound + minimumValue)
 
-                value = max - currentAngle* range + 1;
+                value = Math.round(max - currentAngle* range + 1);
             }
         }
         function contains(x, y) {

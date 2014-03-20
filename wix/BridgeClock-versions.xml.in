@@ -2,6 +2,6 @@
 <BridgeClock>
 	<build version="$(VERSIONFULL)">
 		<Linux file="https://googledrive.com/host/0B4izKEmfNQIBajhOOGZqR2JmNXM/BridgeClock-linux-$(VERSIONFULL).tar.gz" />
-		<Windows file="https://googledrive.com/host/0B4izKEmfNQIBajhOOGZqR2JmNXM/BridgeClock.msi" />
+		<Windows file="https://googledrive.com/host/0B4izKEmfNQIBajhOOGZqR2JmNXM/BridgeClock-$(VERSIONFULL).msi" />
 	</build>
 </BridgeClock>

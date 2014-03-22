@@ -73,6 +73,9 @@ Window {
                 anchors.fill: parent
 
                 cursorShape: parent.hoveredLink != "" ? Qt.PointingHandCursor : undefined
+                propagateComposedEvents: true
+
+                onPressed: mouse.accepted = false
             }
 
             onLinkActivated: {

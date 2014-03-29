@@ -581,7 +581,7 @@ void TimeModel::setPaused(bool v)
         QDateTime end;
         if (row + 1 != (int)list_.size()) {
             int elapsed = pauseTime_.elapsed();
-            end = item[0].start_;
+            end = item[1].start_;
             end = end.addMSecs(elapsed);
             changeEnd(row, end);
         }
@@ -610,7 +610,10 @@ void TimeModel::changeEnd(int row, QDateTime end)
     }
     set = set || end == list_[row].start_;
     if (set || list_[row + 1].start_ != end) {
-        list_[row + 1].start_ = end;
+        if (list_[row].type_ == Break)
+            list_[row + 1].start_ = end;
+        else
+            list_[row].appendTime(list_[row + 1].start_.secsTo(end));
         timeFixUp();
         writeTimeItem();
     }

@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
 <TS version="2.1" language="fi_FI">
 <context>
@@ -94,7 +93,7 @@
         <location filename="../qml/BridgeClock/Clock.qml" line="407"/>
         <source>Double click to restore back to window</source>
         <extracomment>Tooltip help telling to double click the player visible window to restore window from fullscreen mode</extracomment>
-        <translation>Kaksoisnäpäytyksellä taikasin ikkunaksi</translation>
+        <translation>Kaksoisnäpäytyksellä takaisin ikkunaksi</translation>
     </message>
 </context>
 <context>
@@ -295,7 +294,7 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="230"/>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="250"/>
         <source>No choice</source>
-        <extracomment>Place holder text that shouldn&apos;t ever be visible to user</extracomment>
+        <extracomment>Place holder text that shouldn't ever be visible to user</extracomment>
         <translation>Ei valintaa</translation>
     </message>
     <message>

@@ -1,3 +1,4 @@
+<?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE TS>
 <TS version="2.1" language="es_ES">
 <context>
@@ -27,7 +28,7 @@
         <location filename="../timemodel.cpp" line="256"/>
         <source>Coffee</source>
         <extracomment>A short text visible to players telling that now or soon is a short coffee break</extracomment>
-        <translation type="unfinished"/>
+        <translation>Café</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="310"/>
@@ -49,12 +50,12 @@
         <location filename="../timemodel.cpp" line="662"/>
         <source>Round %1</source>
         <extracomment>The name of round. %1 is the number of round.</extracomment>
-        <translation>Turno %1</translation>
+        <translation>Ronda %1</translation>
     </message>
     <message>
         <location filename="../timemodel.cpp" line="665"/>
         <source>End</source>
-        <translation>El fin</translation>
+        <translation>Final</translation>
     </message>
 </context>
 <context>
@@ -69,13 +70,13 @@
         <location filename="../qml/BridgeClock/Clock.qml" line="260"/>
         <source>Tournament will end: </source>
         <extracomment>Label visible to players before or above the tournament end time</extracomment>
-        <translation>Final: </translation>
+        <translation>Final del torneo: </translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/Clock.qml" line="303"/>
         <source>The next break: </source>
         <extracomment>The player visible label before or above next break name, start time and end time</extracomment>
-        <translation>El próximo tiempo libre: </translation>
+        <translation>Próximo tiempo libre: </translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/Clock.qml" line="328"/>
@@ -110,13 +111,13 @@
         <location filename="../qml/BridgeClock/main.qml" line="33"/>
         <source>Bridge clock %1</source>
         <extracomment>The window header including version number as parameter %1</extracomment>
-        <translation>Reloj del puente de mando</translation>
+        <translation>Bridge clock %1</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/main.qml" line="66"/>
         <source>A new version of bridge clock %1 is available for download.&lt;br/&gt;%2Ignore%3</source>
         <extracomment>%1 is version number with downloadable link %2 &amp; %3 html code for ignore link</extracomment>
-        <translation>Un nueva versión del reloj del puente de mando %1 se encuentra disponible para descargarse. &lt;br/&gt;%2Recordar luego%3</translation>
+        <translation>Existe una nueva versión (%1) de BridgeClock disponible para descargar. &lt;br/&gt;%2Ignorar%3</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/main.qml" line="118"/>
@@ -149,25 +150,25 @@
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="61"/>
         <source>Result address: </source>
         <extracomment>The label text above url text input for result file</extracomment>
-        <translation>Resultado de dirección: </translation>
+        <translation>Dirección del resultado: </translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="67"/>
         <source>Browse files</source>
         <extracomment>Button to open file browser to find the results to be shown</extracomment>
-        <translation>Navegar archivos</translation>
+        <translation>Explorar archivos</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="270"/>
         <source>Select a file to be shown in result view</source>
         <extracomment>File chooser dialog title shown when user is searching for a result file</extracomment>
-        <translation>Selecione un archivo para ser mostrado en la vista de resultado</translation>
+        <translation>Selecione un archivo para mostrar en la vista de resultados</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="273"/>
         <source>HTML-files (*.htm *.html)</source>
         <extracomment>File filter entry that lets users hide all files except html files</extracomment>
-        <translation>archivos-HTML (*.htm *.html)</translation>
+        <translation>Archivos HTML (*.htm *.html)</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="275"/>
@@ -188,13 +189,13 @@
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="46"/>
         <source>Number of rounds</source>
         <extracomment>Label for number of rounds slider and input box</extracomment>
-        <translation>Número de turnos</translation>
+        <translation>Cantidad de rondas</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="83"/>
         <source>Round time</source>
         <extracomment>Label for length of round in minutes</extracomment>
-        <translation>Tiempo de turno</translation>
+        <translation>Duración de cada ronda</translation>
     </message>
     <message numerus="yes">
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="103"/>
@@ -208,13 +209,13 @@
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="129"/>
         <source>Change time</source>
         <extracomment>Label before slider and text input for length of change between round in minutest</extracomment>
-        <translation>Tiempo de cambio</translation>
+        <translation>Duración del cambio</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="172"/>
         <source>Start time</source>
         <extracomment>Subheader before the tournament start time selector</extracomment>
-        <translation>Comienzo de tiempo</translation>
+        <translation>Hora de comienzo</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="180"/>

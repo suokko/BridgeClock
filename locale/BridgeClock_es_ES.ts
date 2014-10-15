@@ -300,19 +300,19 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="179"/>
         <source>Begin:</source>
         <extracomment>The label before the begin time of round or break in time settings tab</extracomment>
-        <translation>Comienza:</translation>
+        <translation>Comienzo:</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="199"/>
         <source>End:</source>
         <extracomment>The label before the end time of round or break in time settings tab</extracomment>
-        <translation>Finaliza:</translation>
+        <translation>Final:</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="219"/>
         <source>Length:</source>
         <extracomment>The label before the length of round or break in hours and minutes</extracomment>
-        <translation>Longitud:</translation>
+        <translation>Duración:</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="239"/>
@@ -336,7 +336,7 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="423"/>
         <source>Happening</source>
         <extracomment>The column header showing the name of round or break in time settings tab.</extracomment>
-        <translation>Sucediendo</translation>
+        <translation>En curso</translation>
     </message>
 </context>
 </TS>

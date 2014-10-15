@@ -294,7 +294,7 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="250"/>
         <source>No choice</source>
         <extracomment>Place holder text that shouldn't ever be visible to user</extracomment>
-        <translation type="unfinished"/>
+        <translation>Ninguna opción</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="179"/>

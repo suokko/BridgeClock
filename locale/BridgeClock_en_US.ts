@@ -1,3 +1,4 @@
+<?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE TS>
 <TS version="2.1" language="en_US">
 <context>
@@ -36,7 +37,7 @@
         <location filename="../timemodel.cpp" line="660"/>
         <source>Change</source>
         <extracomment>A short text visible to players telling that now is a change between rounds</extracomment>
-        <translation type="unfinished"/>
+        <translation>Mudar</translation>
     </message>
     <message>
         <location filename="../timemodel.cpp" line="417"/>

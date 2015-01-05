@@ -202,12 +202,10 @@
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="148"/>
         <source>minute(s)</source>
         <extracomment>Label after input box accepting minutes</extracomment>
-        <translation type="unfinished">
-            <numerusform/>
-            <numerusform/>
-            <numerusform/>
-        </translation>
-    </message>
+        <translation><numerusform>минута</numerusform>
+        <numerusform>минуты</numerusform>
+        <numerusform>минут</numerusform>
+        </translation></message>
     <message>
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="129"/>
         <source>Change time</source>
@@ -224,7 +222,7 @@
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="180"/>
         <source>Now</source>
         <extracomment>The button text that sets tournament start time to be now</extracomment>
-        <translation type="unfinished"/>
+        <translation>Сейчас</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="208"/>
@@ -239,7 +237,7 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="44"/>
         <source> -&gt; </source>
         <extracomment>Arrow between break and next round name in time settings tab.</extracomment>
-        <translation type="unfinished"/>
+        <translation> -&gt; </translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="60"/>
@@ -257,13 +255,13 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="113"/>
         <source>+10s</source>
         <extracomment>The text for button that adds ten seconds to current round or break in time settings tab.</extracomment>
-        <translation type="unfinished"/>
+        <translation>+10с</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="119"/>
         <source>+1m</source>
         <extracomment>The text for button that adds a minute to current round or break in time settings tab.</extracomment>
-        <translation type="unfinished"/>
+        <translation>+1м</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="125"/>

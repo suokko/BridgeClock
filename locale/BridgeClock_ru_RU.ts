@@ -243,7 +243,7 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="60"/>
         <source>Remaining:</source>
         <extracomment>Label before count down to the end of current round or break</extracomment>
-        <translation type="unfinished"/>
+        <translation>Осталось:</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="78"/>
@@ -273,19 +273,19 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="131"/>
         <source>-10s</source>
         <extracomment>The text for button that subtracts ten seconds from current round or break in time settings tab.</extracomment>
-        <translation type="unfinished"/>
+        <translation>-10c</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="137"/>
         <source>-1m</source>
         <extracomment>The text for button that subtracts a minute from current round or break in time settings tab.</extracomment>
-        <translation type="unfinished"/>
+        <translation>-1м</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="143"/>
         <source>-5m</source>
         <extracomment>The text for button that subtracts five minutes from current round or break in time settings tab.</extracomment>
-        <translation type="unfinished"/>
+        <translation>-5м</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="170"/>
@@ -295,25 +295,25 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="250"/>
         <source>No choice</source>
         <extracomment>Place holder text that shouldn't ever be visible to user</extracomment>
-        <translation type="unfinished"/>
+        <translation>Нет выбора</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="179"/>
         <source>Begin:</source>
         <extracomment>The label before the begin time of round or break in time settings tab</extracomment>
-        <translation type="unfinished"/>
+        <translation>Начало:</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="199"/>
         <source>End:</source>
         <extracomment>The label before the end time of round or break in time settings tab</extracomment>
-        <translation type="unfinished"/>
+        <translation>Конец:</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="219"/>
         <source>Length:</source>
         <extracomment>The label before the length of round or break in hours and minutes</extracomment>
-        <translation type="unfinished"/>
+        <translation>Продолжительность:</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="239"/>

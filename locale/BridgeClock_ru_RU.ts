@@ -37,7 +37,7 @@
         <location filename="../timemodel.cpp" line="660"/>
         <source>Change</source>
         <extracomment>A short text visible to players telling that now is a change between rounds</extracomment>
-        <translation type="unfinished"/>
+        <translation>Изменение</translation>
     </message>
     <message>
         <location filename="../timecontroller.cpp" line="233"/>
@@ -50,7 +50,7 @@
         <location filename="../timemodel.cpp" line="662"/>
         <source>Round %1</source>
         <extracomment>The name of round. %1 is the number of round.</extracomment>
-        <translation type="unfinished"/>
+        <translation>Круг %1</translation>
     </message>
     <message>
         <location filename="../timemodel.cpp" line="665"/>
@@ -64,7 +64,7 @@
         <location filename="../qml/BridgeClock/Clock.qml" line="34"/>
         <source>The time view</source>
         <extracomment>The tile of window that shows the time and result information for players.</extracomment>
-        <translation type="unfinished"/>
+        <translation>Просмотр времени</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/Clock.qml" line="260"/>

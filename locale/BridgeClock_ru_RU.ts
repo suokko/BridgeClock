@@ -88,7 +88,7 @@
         <location filename="../qml/BridgeClock/Clock.qml" line="405"/>
         <source>Double click to make fullscreen</source>
         <extracomment>Tooltip help telling to double click the player visible window to make it fullscreen</extracomment>
-        <translation type="unfinished">Двойной щелчок мышкой для полно-экранного режима</translation>
+        <translation>Двойной щелчок для перехода в полно-экранный режим</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/Clock.qml" line="407"/>
@@ -156,7 +156,7 @@
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="67"/>
         <source>Browse files</source>
         <extracomment>Button to open file browser to find the results to be shown</extracomment>
-        <translation type="unfinished"/>
+        <translation>Обзор файлов</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="270"/>
@@ -249,7 +249,7 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="78"/>
         <source>Stop the clock</source>
         <extracomment>The label for checkbox that stops count down in time settings tab.</extracomment>
-        <translation type="unfinished"/>
+        <translation>Остановить часы</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="113"/>

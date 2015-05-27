@@ -35,7 +35,7 @@ Window {
     flags: Qt.WindowStaysOnTopHint + Qt.CustomizeWindowHint /*+ Qt.FramelessWindowHint + Qt.X11BypassWindowManagerHint */
 
     /* The state of scrolling animation */
-    readonly property double msForAPixel: 45
+    readonly property double msForAPixel: 60
     property bool animationDown: true
     property double ypos: -1
     property bool firstLoad: true

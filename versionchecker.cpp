@@ -80,6 +80,13 @@ typedef std::list<version> verlist;
 
 void VersionChecker::downloaded(QNetworkReply *reply)
 {
+	/* Handle http redirect */
+	QVariant redirect = reply->header(QNetworkRequest::LocationHeader);
+	if (redirect.isValid()) {
+		QNetworkRequest req(redirect.toUrl());
+		d->net_.get(req);
+		return;
+	}
 	if (reply->error() == QNetworkReply::NoError) {
 		QXmlStreamReader xml(reply);
 		QXmlStreamReader::TokenType token;
@@ -123,7 +130,7 @@ void VersionChecker::downloaded(QNetworkReply *reply)
 
 		QSettings settings;
 
-		if (versions.front().version > d->oldversion_) {
+		if (!versions.empty() && versions.front().version > d->oldversion_) {
 #if defined(WIN32) || defined(__WIN32)
 			emit newversion(versions.front().win32, versions.front().version);
 #else
@@ -134,7 +141,8 @@ void VersionChecker::downloaded(QNetworkReply *reply)
 			settings.setValue("newversion", false);
 		}
 
-		settings.setValue("upgradecheck", QDateTime::currentDateTime());
+		if (!versions.empty())
+			settings.setValue("upgradecheck", QDateTime::currentDateTime());
 	} else {
 		qWarning() << "Failed to load" << url << "with error" << reply->error();
 	}

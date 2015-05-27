@@ -230,7 +230,7 @@ Item {
 
             PropertyChanges {
                 target: langSelector
-                height: parent.height/2
+                height: parent.height
             }
         }
 

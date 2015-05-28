@@ -33,8 +33,33 @@ THE SOFTWARE.
 #include "languagemodel.h"
 #include <stdlib.h>
 
+#if defined(WIN32) || defined(__WIN32)
+#include <stdio.h>
+void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
+{
+    QByteArray localMsg = msg.toLocal8Bit();
+    switch (type) {
+        case QtDebugMsg:
+            fprintf(stderr, "Debug: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line, context.function);
+            break;
+        case QtWarningMsg:
+            fprintf(stderr, "Warning: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line, context.function);
+            break;
+        case QtCriticalMsg:
+            fprintf(stderr, "Critical: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line, context.function);
+            break;
+        case QtFatalMsg:
+            fprintf(stderr, "Fatal: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line, context.function);
+            abort();
+    }
+}
+#endif
+
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
+#if defined(WIN32) || defined(__WIN32)
+    qInstallMessageHandler(myMessageOutput);
+#endif
     QGuiApplication app(argc, argv);
 
 #if !defined(WIN32) && !defined(__WIN32)

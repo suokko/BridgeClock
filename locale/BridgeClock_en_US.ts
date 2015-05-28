@@ -37,7 +37,7 @@
         <location filename="../timemodel.cpp" line="660"/>
         <source>Change</source>
         <extracomment>A short text visible to players telling that now is a change between rounds</extracomment>
-        <translation>Mudar</translation>
+        <translation>Change</translation>
     </message>
     <message>
         <location filename="../timemodel.cpp" line="417"/>

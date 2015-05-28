@@ -108,7 +108,7 @@ Item {
             id: view
             clip: true
             pixelAligned: false
-            interactive: false
+            interactive: true
             opacity: showResults.checked ? 1 : 0.7
             visible: true
             z: -1
@@ -149,11 +149,14 @@ Item {
             }
         }
         MouseArea {
+            id: resultLimiter
             anchors.top: resultFile.bottom
             anchors.bottom: parent.bottom
             anchors.left: parent.left
             anchors.right: parent.right
-            id: resultLimiter
+            anchors.margins: 5
+
+            clip: true
             hoverEnabled: true
             property string direction: ""
             property variant panstart: Qt.point(0, 0)
@@ -197,6 +200,16 @@ Item {
                             (resultLimiterBorder.y + view.contentY)/scale,
                             resultLimiterBorder.width/scale,
                             resultLimiterBorder.height/scale);
+                    } else {
+                        var dx = pressloc.x - mouse.x;
+                        var dy = pressloc.y - mouse.y;
+                        dx = dx*dx;
+                        dy = dy*dy;
+                        /* Check if movement is less than 5 pixels */
+                        if (dx+dy < 25) {
+                            /* Simulate the click */
+                            timeController.click(view, Qt.point(mouse.x, mouse.y));
+                        }
                     }
                 }
             }

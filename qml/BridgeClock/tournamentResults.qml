@@ -79,11 +79,29 @@ Item {
             text: timeController.resultUrl
 
             onTextChanged: {
-                if (settingsUrl !== undefined && text != settingsUrl)
+                if (settingsUrl !== undefined && text != settingsUrl) {
                     initialLoad = false;
+                }
+                if (text != view.url) {
+                    if (view.url == "") {
+                        view.url = text
+                    } else {
+                        loadurltimer.restart()
+                    }
+                }
             }
 
             Component.onCompleted: {text = timeController.resultUrl}
+        }
+        Timer {
+            id: loadurltimer
+            running: false
+            repeat: false
+            interval: 1000
+            onTriggered: {
+                if (resultFile.text != view.url)
+                    view.url = resultFile.text
+            }
         }
         WebView {
             anchors.fill: resultLimiter
@@ -94,7 +112,6 @@ Item {
             opacity: showResults.checked ? 1 : 0.7
             visible: true
             z: -1
-            url: resultFile.text
             function setSize() {
                 var scale = view.experimental.test.contentsScale;
                 if (initialLoad && settingsZoomLimit.x != -1) {
@@ -116,6 +133,13 @@ Item {
             }
             onContentHeightChanged: setSize()
             onContentWidthChanged: setSize()
+            onLoadingChanged: {
+                if (loadRequest.status == WebView.LoadSucceededStatus &&
+                        resultFile.text != loadRequest.url) {
+                    resultFile.text = loadRequest.url
+                    loadurltimer.stop();
+                }
+            }
             Component.onCompleted: {
                 view.experimental.preferences.javascriptEnabled = false;
             }

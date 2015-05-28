@@ -8,6 +8,13 @@ LINUXQTPATH :=
 
 include user.mk
 
+WIN32QMAKE:=$(strip $(WIN32QMAKE))
+GCCLIBPATH:=$(strip $(GCCLIBPATH))
+MINGWLIBPATH:=$(strip $(MINGWLIBPATH))
+WIN32PATH:=$(strip $(WIN32PATH))
+LINUXCHROOT:=$(strip $(LINUXCHROOT))
+LINUXQTPATH:=$(strip $(LINUXQTPATH))
+
 ifeq ($(WIN32QMAKE),)
 $(error "Win32 qmake path not set in user.mk")
 endif
@@ -74,11 +81,11 @@ $(wildcard ../locale/*.ts): ../locale/stamp.update
 
 # msi packaging
 BridgeClock-${VERSION}.msi: files.wixobj BridgeClock.wixobj
-	WINEDEBUG=fixme-all light.exe -b win -sval BridgeClock.wixobj files.wixobj -o $@
+	WINEDEBUG=fixme-all wine $$(which light.exe) -b win -sval BridgeClock.wixobj files.wixobj -o $@
 	chmod 0644 $@
 
 %.wixobj: %.wxs
-	WINEDEBUG=fixme-all candle.exe $<
+	WINEDEBUG=fixme-all wine $$(which candle.exe) $<
 
 BridgeClock.wxs BridgeClock-versions.xml: %: %.in vars.sh varsub date.stamp
 	(sh < vars.sh; cat $<) | ./varsub > $@
@@ -94,9 +101,11 @@ DEST= \
       $(wildcard win/*/*/*)
 
 files.wxs: win $(DEST) win/BridgeClock.exe
-	WINEDEBUG=fixme-all heat.exe dir $< -gg -sfrag -srd -cg bcall -dr INSTALLDIR -o $@
+	WINEDEBUG=fixme-all wine $$(which heat.exe) dir $< -gg -sfrag -srd -cg bcall -dr INSTALLDIR -o $@
 
 win:
+	
+win32: BridgeClock-${VERSION}.msi
 
 varsub: varsub.cpp
 	${CXX} -O2 -g $^ -o $@
@@ -112,7 +121,6 @@ WIN32LIBS := \
 	libeay32.dll \
 	ssleay32.dll \
 	Qt5Positioning.dll \
-	libwebp-5.dll \
 	libGLESv2.dll \
 	libEGL.dll \
 	d3dcompiler_46.dll \
@@ -122,11 +130,9 @@ WIN32LIBS := \
 	Qt5MultimediaWidgets.dll \
 	Qt5OpenGL.dll \
 	Qt5PrintSupport.dll \
-	libjpeg-9.dll \
-	libpng16-16.dll \
-	icudt51.dll \
-	icuin51.dll \
-	icuuc51.dll \
+	icudt55.dll \
+	icuin55.dll \
+	icuuc55.dll \
 	Qt5Core.dll \
 	Qt5Gui.dll \
 	Qt5Multimedia.dll \
@@ -136,6 +142,7 @@ WIN32LIBS := \
 	Qt5Sensors.dll \
 	Qt5Sql.dll \
 	Qt5WebKit.dll \
+	Qt5WebChannel.dll \
 	Qt5Widgets.dll
 
 WIN32BIN := QtWebProcess.exe
@@ -171,7 +178,7 @@ $(addprefix win/,$(WIN32BIN)): win/%.exe: ${WIN32PATH}/bin/%.exe
 	mkdir -p $(dir $@)
 	cp $< $@
 
-$(addprefix win/,$(WIN32LIBS)): win/%.dll: $(WIN32PATH)/lib/%.dll
+$(addprefix win/,$(WIN32LIBS)): win/%.dll: $(WIN32PATH)/bin/%.dll
 	mkdir -p $(dir $@)
 	cp $< $@
 
@@ -219,24 +226,22 @@ BridgeClock-linux-${VERSION}.tar.gz: linux/BridgeClock date.stamp
 LINUXBIN := QtWebProcess
 
 LINUXLIBS := \
-	libQt5Core.so.5.4.0 \
-	libQt5DBus.so.5.4.0 \
-	libQt5Gui.so.5.4.0 \
-	libQt5Network.so.5.4.0 \
-	libQt5OpenGL.so.5.4.0 \
-	libQt5Positioning.so.5.4.0 \
-	libQt5PrintSupport.so.5.4.0 \
-	libQt5Qml.so.5.4.0 \
-	libQt5Quick.so.5.4.0 \
-	libQt5Sql.so.5.4.0 \
-	libQt5Svg.so.5.4.0 \
-	libQt5WebKit.so.5.4.0 \
-	libQt5WebKitWidgets.so.5.4.0 \
-	libQt5Widgets.so.5.4.0 \
-	libQt5Xml.so.5.4.0
+	libQt5Core.so.5 \
+	libQt5DBus.so.5 \
+	libQt5Gui.so.5 \
+	libQt5Svg.so.5 \
+	libQt5Sql.so.5 \
+	libQt5Network.so.5 \
+	libQt5OpenGL.so.5 \
+	libQt5PrintSupport.so.5 \
+	libQt5Qml.so.5 \
+	libQt5Quick.so.5 \
+	libQt5WebKit.so.5 \
+	libQt5WebKitWidgets.so.5 \
+	libQt5Widgets.so.5 \
+	libQt5Xml.so.5
 
 LINUXPLUGINS := \
-	bearer/libqconnmanbearer.so \
 	bearer/libqgenericbearer.so \
 	bearer/libqnmbearer.so \
 	imageformats/libqgif.so \
@@ -254,7 +259,7 @@ LINUXPLUGINS := \
 	platformthemes/libqgtk2.so \
 	sqldrivers/libqsqlite.so
 
-LINUXQML := $(subst $(LINUXQTPATH)/qml/,,$(wildcard $(addprefix $(LINUXQTPATH)/qml/,$(COMMONQML))))
+LINUXQML := $(subst $(LINUXCHROOTPATH)/$(LINUXQTPATH)/qt5/qml/,,$(wildcard $(addprefix $(LINUXCHROOTPATH)/$(LINUXQTPATH)/qt5/qml/,$(COMMONQML))))
 
 LINUXALL := $(addprefix lib/,$(LINUXLIBS)) \
 	$(LINUXBIN) \
@@ -263,11 +268,19 @@ LINUXALL := $(addprefix lib/,$(LINUXLIBS)) \
 	$(COMMONSRC) \
 	qt.conf
 
-linux/%: $(LINUXQTPATH)/%
+linux/lib/%: $(LINUXCHROOTPATH)/$(LINUXQTPATH)/%
 	mkdir -p $(dir $@)
 	[ -d $< ] || cp $< $@
 
-linux/%: $(LINUXQTPATH)/libexec/%
+linux/%: $(LINUXCHROOTPATH)/$(LINUXQTPATH)/%
+	mkdir -p $(dir $@)
+	[ -d $< ] || cp $< $@
+
+linux/%: $(LINUXCHROOTPATH)/$(LINUXQTPATH)/qt5/%
+	mkdir -p $(dir $@)
+	[ -d $< ] || cp $< $@
+
+linux/%: $(LINUXCHROOTPATH)/$(LINUXQTPATH)/qt5/libexec/%
 	mkdir -p $(dir $@)
 	cp $< $@
 
@@ -286,10 +299,10 @@ linux/BridgeClock: linux-build/BridgeClock ldddeps $(addprefix linux/,$(LINUXALL
 	mkdir -p $(dir $@)
 	cp $< $@
 
-ldddeps: linux-build/BridgeClock
+ldddeps: linux-build/BridgeClock $(addprefix linux/plugins/,$(LINUXPLUGINS))
 	mkdir -p linux/lib/
-	CHROOTLIBS=`echo "ldd linux-build/BridgeClock" | schroot -c stable`; \
-	MISSING=`ldd $< | grep "not found" | sed 's/^[\t ]*\([^=]*\) .*$$/\1/'`; \
+	CHROOTLIBS=`echo "ldd $^" | schroot -c stable`; \
+	MISSING=`ldd $^ | grep "not found" | sed 's/^[\t ]*\([^=]*\) .*$$/\1/'`; \
 	for F in $$MISSING; do \
 		echo $$CHROOTLIBS | sed "s#^.* \(\/[^ ]*$$F\).*\$$#cp $(LINUXCHROOTPATH)\1 linux/lib/$$F#" | sh; \
 	done
@@ -297,7 +310,7 @@ ldddeps: linux-build/BridgeClock
 .PHONY: linux-build/BridgeClock
 linux-build/BridgeClock:
 	mkdir -p $(dir $@)
-	echo "cd $(dir $@) && $(LINUXQTPATH)/bin/qmake ../../BridgeClock.pro && make -j4" | schroot -c $(LINUXCHROOT) /bin/bash
+	echo "cd $(dir $@) && $(LINUXQTPATH)/qt5/bin/qmake ../../BridgeClock.pro && make -j4" | schroot -c $(LINUXCHROOT) /bin/bash
 
 # Source package generation
 source: BridgeClock-src-$(VERSION).tar.gz

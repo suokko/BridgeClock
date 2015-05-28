@@ -5,7 +5,7 @@ linux: QMAKE_LFLAGS += -Wl,--rpath=\\\$\$ORIGIN/lib
 
 QMAKE_CXXFLAGS += -std=c++11 -g
 
-QT += quick webkit
+QT += quick webkit gui
 
 # The .cpp file which was generated for your project. Feel free to hack it.
 SOURCES += main.cpp \

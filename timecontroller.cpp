@@ -30,6 +30,7 @@ THE SOFTWARE.
 #include <QTimer>
 
 #include <QFileSystemWatcher>
+#include <QMouseEvent>
 
 #include <QDebug>
 
@@ -305,6 +306,34 @@ void TimeController::setItemCursor(QQuickItem *obj, const QString &cursor)
     else if (cursor == "TL" || cursor == "BR")
         shape = Qt::SizeFDiagCursor;
     obj->setCursor(QCursor(shape));
+}
+
+void TimeController::mmove(QQuickItem *obj, const QPointF &point)
+{
+    QQuickWindow *win = obj->window();
+    QPointF screen(win->x() + point.x(), win->y() + point.y());
+    QMouseEvent moveEvent(QEvent::MouseMove, point, screen,
+            Qt::NoButton, Qt::NoButton, Qt::NoModifier);
+    win->sendEvent(obj, &moveEvent);
+#if 0
+    QHoverEvent hoverEvent(QEvent::HoverMove, point.localPos(), point.localPos(),
+            Qt::NoModifier);
+    win->sendEvent(obj, &hoverEvent);
+#endif
+}
+
+void TimeController::click(QQuickItem *obj, const QPointF &point)
+{
+    QQuickWindow *win = obj->window();
+    QPointF screen(win->x() + point.x(), win->y() + point.y());
+
+    QMouseEvent pressEvent(QEvent::MouseButtonPress, point, screen,
+            Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+    win->sendEvent(obj, &pressEvent);
+
+    QMouseEvent releaseEvent(QEvent::MouseButtonRelease, point, screen,
+            Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+    win->sendEvent(obj, &releaseEvent);
 }
 
 const QString &TimeController::resultUrl() const

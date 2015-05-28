@@ -29,6 +29,7 @@ class RoundInfo;
 class QQuickItem;
 class QFileSystemWatcher;
 class QQuickWindow;
+class QMouseEvent;
 
 class TimeController : public QObject
 {
@@ -75,6 +76,8 @@ public:
     Q_INVOKABLE void resetModel();
     Q_INVOKABLE RoundInfo *getRoundInfo();
     Q_INVOKABLE void setItemCursor(QQuickItem *obj, const QString &cursor);
+    Q_INVOKABLE void click(QQuickItem *obj, const QPointF &point);
+    Q_INVOKABLE void mmove(QQuickItem *obj, const QPointF &point);
 
 signals:
     void updateResults(const QString &url);

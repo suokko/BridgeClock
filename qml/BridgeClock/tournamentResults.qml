@@ -91,7 +91,7 @@ Item {
             clip: true
             pixelAligned: false
             interactive: false
-            opacity: showResults.checked ? 1 : 0.5
+            opacity: showResults.checked ? 1 : 0.7
             visible: true
             z: -1
             url: resultFile.text
@@ -137,7 +137,7 @@ Item {
                 y: timeController.zoomLimit.y
                 width: timeController.zoomLimit.width
                 height: timeController.zoomLimit.height
-                opacity: showResults.checked ? 1 : 0.5
+                opacity: showResults.checked ? 1 : 0.7
                 border.width: 2
                 border.color: "black"
                 color: "transparent"

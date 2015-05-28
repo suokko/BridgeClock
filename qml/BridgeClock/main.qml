@@ -60,14 +60,16 @@ Window {
         Text {
             x: versiondlg.radius
             y: versiondlg.radius
+            width: parent.width - parent.radius*2
             id: msg
-            text: "<html><span style=\"font-size:large\">" +
+            text: "<html><p style=\"font-size:large\">" +
                 //: %1 is version number with downloadable link %2 & %3 html code for ignore link
                 qsTr("A new version of bridge clock %1 is available for download.<br/>%2Ignore%3").arg(
-                "<a href='" + versionurl +"'>" + newversion + "</a>").arg("<a href='#ignore'>").arg("</a>") + "</span>" +
-                "<br />\n<a href='" + versionurl + "' style=\"font-size:small\">" + versionurl + "</a></html>"  + lang.lang
+                "<a href='" + versionurl +"'>" + newversion + "</a>").arg("<a href='#ignore'>").arg("</a>") + "</p>" +
+                "\n<a href='" + versionurl + "' style=\"font-size:small\">" + versionurl + "</a></html>"  + lang.lang
 
             textFormat: Text.RichText
+            wrapMode: Text.Wrap
 
             MouseArea {
                 anchors.fill: parent

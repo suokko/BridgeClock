@@ -126,7 +126,6 @@ Window {
 
                 Loader {
                     anchors.fill: parent
-                    asynchronous: true
                     source: "tournamentStart.qml"
                 }
             }
@@ -151,7 +150,6 @@ Window {
 
                 Loader {
                     anchors.fill: parent
-                    asynchronous: true
                     source: "tournamentResults.qml"
                 }
             }

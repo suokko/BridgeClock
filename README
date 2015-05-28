@@ -63,6 +63,18 @@ tricky to install self compiled version to the system. Binary packaging code is
 included in wix subdirectory. But that requires windows cross compilation
 environment and chroot for linux binaries.
 
+* Library dependecies
+
+  libqt5webkit
+  libqt5qml
+  libqt5gui
+  libqt5webkit
+  qml-module-qtquick2
+  qml-module-qtquick-window2
+  qml-module-qtquick-controls
+  qml-module-qtquick-dialogs
+  qml-module-qtquick-layouts
+
 Licensing
 ---------
 

@@ -157,12 +157,12 @@ Window {
             AnchorChanges {
                 target: current
                 anchors.horizontalCenter: undefined
-                anchors.left: parent.left
+                anchors.left: timeView.left
             }
             PropertyChanges {
                 target: current
                 anchors.leftMargin: 2*zoomFactor
-                anchors.topMargin: (parent.height - (height + endHeading.height +  end.height))/2
+                anchors.topMargin: (timeView.height - (current.height + endHeading.height +  end.height))/2
                 font.pixelSize: 35*zoomFactor
             }
             PropertyChanges {
@@ -188,9 +188,9 @@ Window {
             AnchorChanges {
                 target: nextHeading
                 anchors.bottom: undefined
-                anchors.top: parent.top
+                anchors.top: timeView.top
                 anchors.left: undefined
-                anchors.right: parent.right
+                anchors.right: timeView.right
             }
             PropertyChanges {
                 target: nextHeading
@@ -198,7 +198,7 @@ Window {
 
                 anchors.bottomMargin: undefined
                 anchors.leftMargin: undefined
-                anchors.topMargin: (parent.height - (height + next.height + nextBreakEnd.height))/2
+                anchors.topMargin: (timeView.height - (nextHeading.height + next.height + nextBreakEnd.height))/2
                 anchors.rightMargin: 3*zoomFactor + Math.max(Math.max(next.width - width, nextBreakEnd.width - width), 0);
             }
             AnchorChanges {

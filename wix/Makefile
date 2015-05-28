@@ -3,6 +3,8 @@ WIN32QMAKE :=
 GCCLIBPATH := 
 MINGWLIBPATH :=
 WIN32PATH :=
+LINUXCHROOT :=
+LINUXQTPATH :=
 
 include user.mk
 
@@ -217,22 +219,21 @@ BridgeClock-linux-${VERSION}.tar.gz: linux/BridgeClock date.stamp
 LINUXBIN := QtWebProcess
 
 LINUXLIBS := \
-	libQt5Core.so.5.3.0 \
-	libQt5DBus.so.5.3.0 \
-	libQt5Gui.so.5.3.0 \
-	libQt5Network.so.5.3.0 \
-	libQt5OpenGL.so.5.3.0 \
-	libQt5Positioning.so.5.3.0 \
-	libQt5PrintSupport.so.5.3.0 \
-	libQt5Qml.so.5.3.0 \
-	libQt5Quick.so.5.3.0 \
-	libQt5Sensors.so.5.3.0 \
-	libQt5Sql.so.5.3.0 \
-	libQt5Svg.so.5.3.0 \
-	libQt5WebKit.so.5.3.0 \
-	libQt5WebKitWidgets.so.5.3.0 \
-	libQt5Widgets.so.5.3.0 \
-	libQt5Xml.so.5.3.0
+	libQt5Core.so.5.4.0 \
+	libQt5DBus.so.5.4.0 \
+	libQt5Gui.so.5.4.0 \
+	libQt5Network.so.5.4.0 \
+	libQt5OpenGL.so.5.4.0 \
+	libQt5Positioning.so.5.4.0 \
+	libQt5PrintSupport.so.5.4.0 \
+	libQt5Qml.so.5.4.0 \
+	libQt5Quick.so.5.4.0 \
+	libQt5Sql.so.5.4.0 \
+	libQt5Svg.so.5.4.0 \
+	libQt5WebKit.so.5.4.0 \
+	libQt5WebKitWidgets.so.5.4.0 \
+	libQt5Widgets.so.5.4.0 \
+	libQt5Xml.so.5.4.0
 
 LINUXPLUGINS := \
 	bearer/libqconnmanbearer.so \

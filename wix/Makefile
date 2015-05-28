@@ -43,6 +43,8 @@ COMMONQML := \
 	QtQuick/Controls/Private/* \
 	QtQuick/Controls/* \
 	QtQuick/Window.2/* \
+	Qt/labs/settings/* \
+	Qt/labs/folderlistmodel/* \
 	QtWebKit/experimental/* \
 	QtWebKit/* \
 	QtQuick/Controls/Styles/Private/* \
@@ -50,6 +52,7 @@ COMMONQML := \
 	QtQuick/Controls/Styles/Base/images/* \
 	QtQuick/Controls/Styles/* \
 	QtQuick/Dialogs/* \
+	QtQuick/Dialogs/Private/* \
 	QtQuick/Layouts/*
 
 COMMONSRC := BridgeClock80.png \

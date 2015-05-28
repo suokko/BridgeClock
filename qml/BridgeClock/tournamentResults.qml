@@ -114,7 +114,11 @@ Item {
             z: -1
             function setSize() {
                 var scale = view.experimental.test.contentsScale;
-                if (initialLoad && settingsZoomLimit.x != -1) {
+                if (initialLoad
+                        && settingsZoomLimit.x > -1
+                        && settingsZoomLimit.y > -1
+                        && settingsZoomLimit.width > -1
+                        && settingsZoomLimit.height > -1) {
                     resultLimiterBorder.x = settingsZoomLimit.x * scale
                     resultLimiterBorder.y = settingsZoomLimit.y * scale
                     resultLimiterBorder.width = settingsZoomLimit.width * scale
@@ -153,6 +157,7 @@ Item {
             hoverEnabled: true
             property string direction: ""
             property variant panstart: Qt.point(0, 0)
+            property variant pressloc: Qt.point(0, 0)
             property bool directionLock: false
 
             Rectangle {
@@ -177,15 +182,16 @@ Item {
             onPressed: {
                 if (mouse.buttons == Qt.LeftButton) {
                     directionLock = true;
-                    panstart = Qt.point(mouse.x + view.contentX, mouse.y + view.contentY);
+                    panstart = Qt.point(mouse.x, mouse.y);
+                    pressloc = Qt.point(mouse.x, mouse.y);
                 }
             }
 
             onReleased: {
                 if (mouse.buttons != Qt.LeftButton) {
                     directionLock = false;
-                    var scale = view.experimental.test.contentsScale;
                     if (direction != "") {
+                        var scale = view.experimental.test.contentsScale;
                         timeController.zoomLimit = Qt.rect(
                             (resultLimiterBorder.x + view.contentX)/scale,
                             (resultLimiterBorder.y + view.contentY)/scale,
@@ -193,6 +199,30 @@ Item {
                             resultLimiterBorder.height/scale);
                     }
                 }
+            }
+
+            onWheel: {
+                /* TODO: Use pixelDelta if available */
+                pan(wheel.angleDelta.x, wheel.angleDelta.y);
+            }
+
+            function pan(dx, dy) {
+                if (view.contentY + dy < 0) {
+                    dy = -view.contentY
+                } else if (view.contentHeight - view.contentY - dy < view.height)  {
+                    dy = Math.floor(view.contentHeight - view.contentY - view.height);
+                }
+
+                view.contentY += dy;
+                resultLimiterBorder.y -= dy;
+
+                if (view.contentX + dx/scale < 0) {
+                    dx = -view.contentX*scale
+                } else if (view.contentWidth - view.contentX - dx < view.width)  {
+                    dx = Math.floor(view.contentWidth - view.contentX - view.width);
+                }
+                view.contentX += dx;
+                resultLimiterBorder.x -= dx;
             }
 
             onPositionChanged: {
@@ -208,7 +238,7 @@ Item {
                 var right = Math.abs(mouse.x - rw);
                 var top = Math.abs(mouse.y - ry);
                 var bottom = Math.abs(mouse.y - rh);
-                var activeArea = 30;
+                var activeArea = 15;
                 if (top < bottom && top < activeArea) {
                     dir = dir + "T";
                 } else if (top > bottom && bottom < activeArea) {
@@ -222,26 +252,21 @@ Item {
                 if (dir != direction && !directionLock) {
                     direction = dir;
                     timeController.setItemCursor(resultLimiter, direction);
-                    if (direction != "")
+                    if (direction != "") {
                         resultLimiterBorder.border.color = "blue"
-                    else
+                    } else {
                         resultLimiterBorder.border.color = "black"
+                    }
+                } else if (!directionLock && dir != "") {
+                    /* Mouse move simulation failing but why? */
+                    //timeController.mmove(view, Qt.point(mouse.x, mouse.y));
                 } else if (directionLock && direction == "") {
-                    var dy = panstart.y - (mouse.y + view.contentY)
-                    if (dy < -view.contentY)
-                        dy = -view.contentY;
-                    else if (view.contentY + dy > view.contentHeight - view.height)
-                        dy = (view.contentHeight - view.height) - view.contentY;
-                    view.contentY += dy;
-                    resultLimiterBorder.y -= dy;
+                    var dy = panstart.y - mouse.y;
+                    var dx = panstart.x - mouse.x;
 
-                    var dx = panstart.x - (mouse.x + view.contentX)
-                    if (dx < -view.contentX)
-                        dx = -view.contentX;
-                    else if (view.contentX + dx > view.contentWidth - view.width)
-                        dx = (view.contentWidth - view.width) - view.contentX;
-                    view.contentX += dx;
-                    resultLimiterBorder.x -= dx;
+                    pan(dx, dy);
+                    panstart.y = mouse.y
+                    panstart.x = mouse.x
                 } else if (directionLock) {
                     var y = mouse.y;
                     var x = mouse.x;

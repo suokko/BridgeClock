@@ -226,50 +226,19 @@ BridgeClock-linux-${VERSION}.tar.gz: linux/BridgeClock date.stamp
 
 #Linux chroot build
 
-LINUXBIN := QtWebProcess
+LINUXBIN :=
 
-LINUXLIBS := \
-	libQt5Core.so.5 \
-	libQt5DBus.so.5 \
-	libQt5Gui.so.5 \
-	libQt5Svg.so.5 \
-	libQt5Sql.so.5 \
-	libQt5Network.so.5 \
-	libQt5OpenGL.so.5 \
-	libQt5PrintSupport.so.5 \
-	libQt5Qml.so.5 \
-	libQt5Quick.so.5 \
-	libQt5WebKit.so.5 \
-	libQt5WebKitWidgets.so.5 \
-	libQt5Widgets.so.5 \
-	libQt5Xml.so.5
+LINUXLIBS :=
 
-LINUXPLUGINS := \
-	bearer/libqgenericbearer.so \
-	bearer/libqnmbearer.so \
-	imageformats/libqgif.so \
-	imageformats/libqico.so \
-	imageformats/libqjpeg.so \
-	imageformats/libqmng.so \
-	imageformats/libqsvg.so \
-	imageformats/libqtga.so \
-	imageformats/libqtiff.so \
-	imageformats/libqwbmp.so \
-	platforminputcontexts/libcomposeplatforminputcontextplugin.so \
-	platforminputcontexts/libibusplatforminputcontextplugin.so \
-	platforms/libqlinuxfb.so \
-	platforms/libqxcb.so \
-	platformthemes/libqgtk2.so \
-	sqldrivers/libqsqlite.so
+LINUXPLUGINS :=
 
-LINUXQML := $(subst $(LINUXCHROOTPATH)/$(LINUXQTPATH)/qt5/qml/,,$(wildcard $(addprefix $(LINUXCHROOTPATH)/$(LINUXQTPATH)/qt5/qml/,$(COMMONQML))))
+LINUXQML :=
 
 LINUXALL := $(addprefix lib/,$(LINUXLIBS)) \
 	$(LINUXBIN) \
 	$(addprefix plugins/,$(LINUXPLUGINS)) \
 	$(addprefix qml/,$(LINUXQML)) \
-	$(COMMONSRC) \
-	qt.conf
+	$(COMMONSRC)
 
 linux/lib/%: $(LINUXCHROOTPATH)/$(LINUXQTPATH)/%
 	mkdir -p $(dir $@)

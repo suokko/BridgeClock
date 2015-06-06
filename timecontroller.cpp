@@ -226,10 +226,10 @@ void TimeController::updateRoundInfo()
         nrBreak = item[next].nr_;
         end = item[1].start_;
         if (item[next].type_ == TimeModel::Break)
-            nextBreakEnd = d->model_->data(d->model_->index(startIdx + next), EndRole).toString();
+            nextBreakEnd = d->model_->data(d->model_->index(startIdx + next), TimeModel::EndRole).toString();
         if (item[next].type_ == TimeModel::Break ||
                 item[next].type_ == TimeModel::End)
-            nextBreakStart = d->model_->data(d->model_->index(startIdx + next), StartRole).toString();
+            nextBreakStart = d->model_->data(d->model_->index(startIdx + next), TimeModel::StartRole).toString();
 
         if (item[0].start_ >= cur) {
             end = item[0].start_;
@@ -245,7 +245,7 @@ void TimeController::updateRoundInfo()
                 d->model_->index(
                     row + 1 < d->model_->rowCount(QModelIndex()) ?
                         row + 1 : row),
-                StartTimeRole).toULongLong() / 1000;
+                TimeModel::StartTimeRole).toULongLong() / 1000;
     d->roundInfo_->setEnd(e);
     d->roundInfo_->setName(nr >= 0 ? qApp->translate("Break",name.c_str()).arg(nr) : qApp->translate("Break",name.c_str()));
     d->roundInfo_->setNextName(nrNext >= 0 ? qApp->translate("Break",nextName.c_str()).arg(nrNext) : qApp->translate("Break",nextName.c_str()));
@@ -270,7 +270,7 @@ RoundInfo *TimeController::getRoundInfo()
 QString TimeController::tournamentEnd() const
 {
     return d->model_->data(d->model_->index(d->model_->rowCount(QModelIndex()) - 1),
-            StartRole).toString();
+            TimeModel::StartRole).toString();
 }
 
 TimeModel * TimeController::getModel()

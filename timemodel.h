@@ -36,11 +36,12 @@ class TimeModel : public QAbstractListModel
 {
     Q_OBJECT
     Q_ENUMS(Type)
+    Q_ENUMS(Roles)
 public:
     explicit TimeModel();
     ~TimeModel();
-    int rowCount(const QModelIndex &parent) const;
-    Q_INVOKABLE QVariant data(const QModelIndex &index, int role) const;
+    Q_INVOKABLE int rowCount(const QModelIndex &parent) const;
+    QVariant data(const QModelIndex &index, int role) const;
 
     enum Type {
         None,
@@ -48,6 +49,20 @@ public:
         Change,
         Break,
         End,
+    };
+
+    enum Roles {
+        NameRole = Qt::UserRole+1,
+        StartRole,
+        EndRole,
+        PreviousNameRole,
+        EndMinuteRole,
+        EndHourRole,
+        EndTimeRole,
+        TypeRole,
+        StartTimeRole,
+        NameRawRole,
+        LengthRole,
     };
 
     void reset();
@@ -133,17 +148,4 @@ struct TimeItem {
 
 Q_DECLARE_METATYPE(TimeItem);
 
-enum Roles {
-    NameRole = Qt::UserRole+1,
-    StartRole,
-    EndRole,
-    PreviousNameRole,
-    EndMinuteRole,
-    EndHourRole,
-    EndTimeRole,
-    TypeRole,
-    StartTimeRole,
-    NameRawRole,
-    LengthRole,
-};
 

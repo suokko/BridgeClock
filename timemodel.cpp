@@ -409,7 +409,7 @@ void TimeModel::setRounds(unsigned v)
         /* Append */
         unsigned nr = v - rounds_;
         list_.reserve(v*2 + 2);
-        unsigned r, begin = list_.size() - 2, endrow;
+        unsigned r;
         QDateTime start = startTime_;
         const std::string vaihto = QT_TRANSLATE_NOOP("Break","Change");
         TimeItem end = list_.back();
@@ -424,7 +424,6 @@ void TimeModel::setRounds(unsigned v)
         }
         list_.push_back(end);
         endInsertRows();
-        endrow = list_.size() - 1;
         writeTimeItem();
         timeFixUp();
     } else if (v < rounds_) {
@@ -627,7 +626,7 @@ void TimeModel::changeEnd(int row, QDateTime end)
 void TimeModel::writeTimeItem()
 {
     settings_.beginWriteArray("timeItems");
-    for (int row = 0; row < list_.size(); row++) {
+    for (unsigned row = 0; row < list_.size(); row++) {
         settings_.setArrayIndex(row);
         QVariant v;
         v.setValue(list_[row]);

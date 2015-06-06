@@ -85,6 +85,7 @@ void VersionChecker::downloaded(QNetworkReply *reply)
 	if (redirect.isValid()) {
 		QNetworkRequest req(redirect.toUrl());
 		d->net_.get(req);
+        reply->deleteLater();
 		return;
 	}
 	if (reply->error() == QNetworkReply::NoError) {

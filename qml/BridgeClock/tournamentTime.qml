@@ -22,7 +22,7 @@ THE SOFTWARE.
 
 import QtQuick 2.0
 import QtQuick.Layouts 1.0
-import QtQuick.Controls 1.0
+import QtQuick.Controls 1.2
 import QtQuick.Controls.Styles 1.0
 import org.bridgeClock 1.0
 
@@ -409,19 +409,19 @@ Item {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         anchors.margins: 3
-        width: 172
+        width: 190
         model: timeController.model
         TableViewColumn {
-            role: "start";
+            role: "startNoSec";
             //: The column header showing the begin time of round or break in time settings tab.
             title: qsTr("Begin") + lang.lang
-            width: 70;
+            width: 65;
         }
         TableViewColumn {
             role: "name";
             //: The column header showing the name of round or break in time settings tab.
             title: qsTr("Happening") + lang.lang
-            width: 83;
+            width: view.width - 65 - 25;
         }
 
         onCurrentRowChanged: itemTypeBox.updateSelection();

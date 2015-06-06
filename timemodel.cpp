@@ -112,6 +112,7 @@ QHash<int, QByteArray> TimeModel::roleNames() const
     if (names.empty()) {
         names[NameRole] = "name";
         names[StartRole] = "start";
+        names[StartNoSecRole] = "startNoSec";
         names[EndRole] = "end";
         names[PreviousNameRole] = "previous";
         names[EndMinuteRole] = "endMinute";
@@ -273,7 +274,11 @@ QVariant TimeModel::data(const QModelIndex &index, int role) const
         return translate;
     }
     case StartRole:
+    case StartNoSecRole:
     {
+        const char *format = "HH:mm:ss";
+        if (role == StartNoSecRole)
+            format = "HH:mm";
         QDateTime start = list_[index.row()].start_;
         start = pauseTimeAdjust(start);
         QDateTime dt = QDateTime::currentDateTime();
@@ -282,9 +287,9 @@ QVariant TimeModel::data(const QModelIndex &index, int role) const
         if (index.row() + 1 < (int)list_.size() &&
                 list_[index.row()].start_ < dt &&
                 list_[index.row() + 1].start_ > dt) {
-            return QString("<b>") + start.toString("HH:mm:ss") + QString("</b>");
+            return QString("<b>") + start.toString(format) + QString("</b>");
         }
-        return start.toString("HH:mm:ss");
+        return start.toString(format);
     }
     case EndRole:
     {

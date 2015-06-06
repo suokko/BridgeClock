@@ -54,6 +54,7 @@ public:
     enum Roles {
         NameRole = Qt::UserRole+1,
         StartRole,
+        StartNoSecRole,
         EndRole,
         PreviousNameRole,
         EndMinuteRole,

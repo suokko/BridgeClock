@@ -86,6 +86,9 @@ TimeController::~TimeController()
 {
     delete d->model_;
     delete d->urlTimer_;
+    delete d->watcher_;
+    delete d->roundInfo_;
+    delete d;
 }
 
 unsigned TimeController::rounds() const

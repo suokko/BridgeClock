@@ -49,6 +49,11 @@ GlobalMouseArea::GlobalMouseArea(QQuickItem *parent) :
     setFiltersChildMouseEvents(true);
 }
 
+GlobalMouseArea::~GlobalMouseArea()
+{
+    delete d;
+}
+
 bool GlobalMouseArea::enabled() const
 {
     return d->enabled_;

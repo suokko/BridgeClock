@@ -37,6 +37,7 @@ class GlobalMouseArea : public QQuickItem
 
 public:
     explicit GlobalMouseArea(QQuickItem *parent = 0);
+    ~GlobalMouseArea();
 
     bool enabled() const;
     bool containsMouse() const;

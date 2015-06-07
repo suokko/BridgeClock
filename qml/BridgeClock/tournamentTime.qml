@@ -35,7 +35,8 @@ Item {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         anchors.left: parent.left
-        anchors.right: view.left
+        anchors.right: viewHolder.left
+        anchors.rightMargin: 5
 
         Text {
             id: header
@@ -162,10 +163,10 @@ Item {
             anchors.top: splitLine.bottom
             anchors.topMargin: 5
             anchors.horizontalCenter: parent.horizontalCenter
-            visible: view.currentRow != -1
+            visible: view.currentIndex != -1
             font.pixelSize: 20
-            text: (view.currentRow != -1 ?
-                      view.model.qmlData(view.currentRow, "name").value :
+            text: (view.currentIndex != -1 ?
+                      view.model.qmlData(view.currentIndex, "name").value :
                       //: Place holder text that shouldn't ever be visible to user
                       qsTr("No choice")) + lang.lang
         }
@@ -174,7 +175,7 @@ Item {
             anchors.margins: 3
             anchors.top: selectionHeader.bottom
             anchors.left: parent.left
-            visible: view.currentRow != -1
+            visible: view.currentIndex != -1
             //: The label before the begin time of round or break in time settings tab
             text: qsTr("Begin:") + lang.lang
         }
@@ -183,9 +184,9 @@ Item {
             anchors.verticalCenter: startLabel.verticalCenter
             anchors.left: startLabel.right
             anchors.margins: 3
-            visible: view.currentRow != -1
-            text: (view.currentRow != -1 ?
-                      view.model.qmlData(view.currentRow, "start").value :
+            visible: view.currentIndex != -1
+            text: (view.currentIndex != -1 ?
+                      view.model.qmlData(view.currentIndex, "start").value :
                       //: Place holder text that shouldn't ever be visible to user
                       qsTr("No choice")) + lang.lang
         }
@@ -194,7 +195,7 @@ Item {
             anchors.margins: 3
             anchors.top: startLabel.bottom
             anchors.left: parent.left
-            visible: view.currentRow != -1
+            visible: view.currentIndex != -1
             //: The label before the end time of round or break in time settings tab
             text: qsTr("End:") + lang.lang
         }
@@ -203,9 +204,9 @@ Item {
             anchors.verticalCenter: endLabel.verticalCenter
             anchors.left: endLabel.right
             anchors.margins: 3
-            visible: view.currentRow != -1
-            text: (view.currentRow != -1 ?
-                      view.model.qmlData(view.currentRow, "end").value :
+            visible: view.currentIndex != -1
+            text: (view.currentIndex != -1 ?
+                      view.model.qmlData(view.currentIndex, "end").value :
                       //: Place holder text that shouldn't ever be visible to user
                       qsTr("No choice")) + lang.lang
         }
@@ -214,7 +215,7 @@ Item {
             anchors.margins: 3
             anchors.top: selectionHeader.bottom
             x: parent.width/2
-            visible: view.currentRow != -1
+            visible: view.currentIndex != -1
             //: The label before the length of round or break in hours and minutes
             text: qsTr("Length:") + lang.lang
         }
@@ -223,9 +224,9 @@ Item {
             anchors.verticalCenter: timeLabel.verticalCenter
             anchors.left: timeLabel.right
             anchors.margins: 3
-            visible: view.currentRow != -1
-            text: (view.currentRow != -1 ?
-                      view.model.qmlData(view.currentRow, "length").value :
+            visible: view.currentIndex != -1
+            text: (view.currentIndex != -1 ?
+                      view.model.qmlData(view.currentIndex, "length").value :
                       //: Place holder text that shouldn't ever be visible to user
                       qsTr("No choice")) + lang.lang
         }
@@ -234,7 +235,7 @@ Item {
             anchors.margins: 3
             anchors.top: timeLabel.bottom
             x: parent.width/2
-            visible: view.currentRow != -1
+            visible: view.currentIndex != -1
             //: Label before text showing the name of previous round or break in settings tab.
             text: qsTr("Previous:") + lang.lang
         }
@@ -243,9 +244,9 @@ Item {
             anchors.verticalCenter: prevLabel.verticalCenter
             anchors.left: prevLabel.right
             anchors.margins: 3
-            visible: view.currentRow != -1
-            text: (view.currentRow != -1 ?
-                      view.model.qmlData(view.currentRow, "previous").value :
+            visible: view.currentIndex != -1
+            text: (view.currentIndex != -1 ?
+                      view.model.qmlData(view.currentIndex, "previous").value :
                       //: Place holder text that shouldn't ever be visible to user
                       qsTr("No choice")) + lang.lang
         }
@@ -253,23 +254,23 @@ Item {
         GroupBox {
             id: itemTypeBox
             anchors.top: prev.bottom
-            enabled: view.currentRow != -1 ?
-                         view.model.qmlData(view.currentRow, "type").value === TimeModel.Break ||
-                         view.model.qmlData(view.currentRow, "type").value === TimeModel.Change :
+            enabled: view.currentIndex != -1 ?
+                         view.model.qmlData(view.currentIndex, "type").value === TimeModel.Break ||
+                         view.model.qmlData(view.currentIndex, "type").value === TimeModel.Change :
                          false
-            visible: view.currentRow != -1
+            visible: view.currentIndex != -1
             width: parent.width - 6
 
             function updateSelection() {
-                if (view.currentRow == -1 || view.currentRow >= view.rowCount)
+                if (view.currentIndex == -1 || view.currentIndex >= view.count)
                     return;
                 __updatingUI++;
                 if (itemType.current)
                     itemType.current.checked = false
                 var model = view.model;
-                var type = model.qmlData(view.currentRow, "type").value;
-                var name = model.qmlData(view.currentRow, "nameRaw").value;
-                breakEndTime.date = model.qmlData(view.currentRow, "endTime").value;
+                var type = model.qmlData(view.currentIndex, "type").value;
+                var name = model.qmlData(view.currentIndex, "nameRaw").value;
+                breakEndTime.date = model.qmlData(view.currentIndex, "endTime").value;
                 customName.text = "";
                 switch (type) {
                 case TimeModel.Play:
@@ -305,27 +306,27 @@ Item {
                         return;
                     switch (itemType.current) {
                     case change:
-                        view.model.changeType(view.currentRow,
+                        view.model.changeType(view.currentIndex,
                                               TimeModel.Change,
                                               QT_TRANSLATE_NOOP("Break","Change"));
                         break;
                     case lunch:
-                        view.model.changeType(view.currentRow,
+                        view.model.changeType(view.currentIndex,
                                               TimeModel.Break,
                                               QT_TRANSLATE_NOOP("Break","Lunch"));
                         break;
                     case dinner:
-                        view.model.changeType(view.currentRow,
+                        view.model.changeType(view.currentIndex,
                                               TimeModel.Break,
                                               QT_TRANSLATE_NOOP("Break","Dinner"));
                         break;
                     case coffee:
-                        view.model.changeType(view.currentRow,
+                        view.model.changeType(view.currentIndex,
                                               TimeModel.Break,
                                               QT_TRANSLATE_NOOP("Break","Coffee"));
                         break;
                     case custom:
-                        view.model.changeType(view.currentRow,
+                        view.model.changeType(view.currentIndex,
                                               TimeModel.Break,
                                               customName.text);
                         break;
@@ -386,45 +387,174 @@ Item {
                 opacity: enabled ? 1 : 0.5
                 anchors.top: custom.bottom
                 height: Math.min(parent.width, itemTypeBox.parent.height - itemTypeBox.y - y - 22)
-                minDate: view.currentRow != -1 ? view.model.qmlData(view.currentRow, "startTime").value :
+                minDate: view.currentIndex != -1 ? view.model.qmlData(view.currentIndex, "startTime").value :
                     new Date();
 
                 onDateChanged: {
-                    if (view.currentRow == -1 || __updatingUI > 0)
+                    if (view.currentIndex == -1 || __updatingUI > 0)
                         return;
                     var end = date;
                     end.setSeconds(0);
                     end.setMilliseconds(0);
 
-                    view.model.changeEnd(view.currentRow, end);
+                    view.model.changeEnd(view.currentIndex, end);
                 }
             }
         }
     }
 
+    Item {
+        id: viewHolder
+        anchors.right: parent.right
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
 
-    TableView {
+        width: view.widthList['name'] + view.anchors.margins*2 + 4
+    }
+
+    MouseArea {
+        id: outside
+        z: 20
+        anchors.fill: parent
+
+        onPressed: {
+            var point = mapToItem(view, mouse.x, mouse.y)
+            if (!view.contains(Qt.point(point.x, point.y)))
+                view.active = false
+            mouse.accepted = false
+        }
+
+        propagateComposedEvents: true
+    }
+
+    ResizeListView {
         id: view
         anchors.right: parent.right
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-        anchors.margins: 3
-        width: 190
+        property bool active: false
+        width: active ? totalWidth + 12 : viewHolder.width - anchors.margins
         model: timeController.model
-        TableViewColumn {
-            role: "startNoSec";
-            //: The column header showing the begin time of round or break in time settings tab.
-            title: qsTr("Begin") + lang.lang
-            width: 65;
-        }
-        TableViewColumn {
-            role: "name";
-            //: The column header showing the name of round or break in time settings tab.
-            title: qsTr("Happening") + lang.lang
-            width: view.width - 65 - 25;
+
+        Timer {
+            id: fixContentXBinding
+            running: false
+            interval: 100
+            onTriggered:  view.contentX = Qt.binding(
+                              function() {
+                                  return Math.max(-4, view.totalWidth - view.width + 8)
+                              });
         }
 
-        onCurrentRowChanged: itemTypeBox.updateSelection();
+        Component.onCompleted: fixContentXBinding.running = true
+
+        currentIndex: -1
+
+        Behavior on width {
+            NumberAnimation { duration: 200 }
+        }
+
+        MouseArea {
+            id: activity
+
+            z: 0
+
+            anchors.fill: parent
+            hoverEnabled: true
+            propagateComposedEvents: true
+            onHoveredChanged: view.active = containsMouse
+        }
+
+        onDraggingChanged: if (dragging) active = true
+
+        delegate: MouseArea {
+            anchors.left: parent.left
+
+            x: 0
+            width: view.totalWidth + 8
+
+            onWidthChanged: width = view.totalWidth + 8
+            height: viewName.contentHeight
+
+            onClicked: {
+                view.currentIndex = index
+                view.active = true
+                mouse.accepted = false;
+            }
+
+            Rectangle {
+                z: -6
+                visible: index % 2 == 1 && view.currentIndex != index
+                anchors.fill: parent
+                opacity: 0.06
+                color: "#000000"
+            }
+
+            Text {
+                id: viewTime
+                z: -2
+                anchors.left: parent.left
+                anchors.bottom: viewName.bottom
+                text: startNoSec
+                font.pointSize: 11
+                onContentWidthChanged: view.columnWidth('time', contentWidth)
+                width: view.widthList['time']
+            }
+            Text {
+                id: viewName
+                z: -2
+                anchors.left: viewTime.right
+                anchors.leftMargin: 2
+                text: name
+                font.pointSize: 13
+                font.bold: type == TimeModel.Break
+                onContentWidthChanged: view.columnWidth('name', contentWidth)
+                width: view.widthList['name']
+            }
+        }
+
+        headerPositioning: ListView.OverlayHeader
+
+        header: Rectangle {
+            border.width: 2
+            border.color: "gray"
+            radius: 5
+            color: "white"
+            clip: true
+            height: hbegin.contentHeight
+            x: view.contentX
+            width: view.totalWidth + 8 - x
+            z: 4
+            Text {
+                id: hbegin
+                //: The column header showing the begin time of round or break in time settings tab.
+                text: qsTr("Begin") + lang.lang
+                x: -parent.x
+                font.pointSize: 14
+                onContentWidthChanged: view.columnWidth('time', contentWidth)
+                width: view.widthList['time']
+            }
+            Rectangle {
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+                anchors.right: hname.left
+                width: parent.border.width
+                color: parent.border.color
+            }
+
+            Text {
+                id: hname
+                //: The column header showing the name of round or break in time settings tab.
+                text: qsTr("Happening") + lang.lang
+                font.pointSize: 14
+                anchors.left: hbegin.right
+                anchors.leftMargin: 2
+                onContentWidthChanged: view.columnWidth('name', contentWidth)
+                width: Math.max(view.widthList['name'], contentWidth)
+            }
+        }
+
+        onCurrentIndexChanged: itemTypeBox.updateSelection();
         Connections {
             target: view.model
             onDataChanged: {

@@ -199,7 +199,7 @@ Window {
                 anchors.bottomMargin: undefined
                 anchors.leftMargin: undefined
                 anchors.topMargin: (timeView.height - (nextHeading.height + next.height + nextBreakEnd.height))/2
-                anchors.rightMargin: 3*zoomFactor + Math.max(Math.max(next.width - width, nextBreakEnd.width - width), 0);
+                anchors.rightMargin: 3*zoomFactor + Math.max(Math.max(next.width - nextHeading.width, nextBreakEnd.width - nextHeading.width), 0);
             }
             AnchorChanges {
                 target: next

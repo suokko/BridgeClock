@@ -306,7 +306,7 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="199"/>
         <source>End:</source>
         <extracomment>The label before the end time of round or break in time settings tab</extracomment>
-        <translation>Fine</translation>
+        <translation>Fine:</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="219"/>

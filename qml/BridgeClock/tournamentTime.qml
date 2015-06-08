@@ -368,6 +368,7 @@ Item {
                 id: custom
                 anchors.top: coffee.bottom
                 anchors.margins: 3
+                height: Math.max(implicitHeight, customName.height)
                 //: Label before text input for custom round break name 
                 text: qsTr("Custom:") + lang.lang
                 exclusiveGroup: itemType

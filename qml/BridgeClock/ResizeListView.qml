@@ -8,16 +8,28 @@ ListView {
     anchors.margins: 2
 
     Rectangle {
-        id: background
+        id: backgroundBorder
 
         anchors.fill: parent
         radius: 5
         z: -3
-        clip: true
 
         color: "white"
         border.width: 2
         border.color: "gray"
+        Rectangle {
+            id: backgroundDraw
+            clip: true
+            radius: 5
+            anchors.margins: 2
+            anchors.fill: parent
+            color: "white"
+            Item {
+                id: background
+                anchors.margins: -2
+                anchors.fill: parent
+            }
+        }
     }
 
     Item {

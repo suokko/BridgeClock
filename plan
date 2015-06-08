@@ -6,9 +6,8 @@
 * Macigin tietokannan lukeminen
 
 UI:
-* aika näkymän loppukellon aika keskitettynä
-* aika näkymän tekstipoksi menee tekstien päälle
 * kello näkymän tekstien zoomauksen laatu
 * Kieletyn aluen visualisointi tauon lopetus ajassa
+* Alkajan yli meneminen rikko bindaksen kierroksen loppuajasta
 * Rajausivun akttiviset aluet eivät laajene yli rajana
 * Aika näkymään ylös ja alas nuolinäpäimille käsittelijät

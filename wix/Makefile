@@ -34,6 +34,10 @@ ifeq ($(LINUXQTPATH),)
 $(error "Linux qt path not set in user.mk")
 endif
 
+ifeq ($(shell which heat.exe),)
+$(error "Wix executables must be in path (heat.exe, light.exe and candle.exe)")
+endif
+
 ifneq ($(shell cd .. && git ls-files -m),)
 $(error "All changes has to be commited to the git")
 endif

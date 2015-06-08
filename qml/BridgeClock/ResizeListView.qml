@@ -5,8 +5,7 @@ import QtQuick.Controls 1.1
 ListView {
     id: view
     
-    anchors.margins: 4
-    clip: true
+    anchors.margins: 2
 
     Rectangle {
         id: background
@@ -21,13 +20,25 @@ ListView {
         border.color: "gray"
     }
 
+    Item {
+        id: reparent
+        states: State {
+            name: "reparent"
+            ParentChange {
+                target: view.contentItem
+                parent: background
+            }
+        }
+        Component.onCompleted: state = "reparent"
+    }
+
     highlight: Rectangle {
-        x: 2
+        x: view.anchors.margins + 2
         color: "lightsteelblue";
         radius: 5;
         width: totalWidth
 
-        onWidthChanged: width = totalWidth
+        onWidthChanged: width = Qt.binding(function() { return totalWidth; })
     }
 
     property variant widthList: []

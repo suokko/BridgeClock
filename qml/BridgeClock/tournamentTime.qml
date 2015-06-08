@@ -409,7 +409,7 @@ Item {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
 
-        width: view.widthList['name'] + view.anchors.margins*2 + 4
+        width: view.widthList['name'] + view.anchors.margins*2
     }
 
     MouseArea {
@@ -433,7 +433,7 @@ Item {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         property bool active: false
-        width: active ? totalWidth + 12 : viewHolder.width - anchors.margins
+        width: active ? totalWidth + 8 : viewHolder.width - anchors.margins
         model: timeController.model
 
         Timer {
@@ -442,7 +442,7 @@ Item {
             interval: 100
             onTriggered:  view.contentX = Qt.binding(
                               function() {
-                                  return Math.max(-4, view.totalWidth - view.width + 8)
+                                  return Math.max(0, view.totalWidth - view.width + 8)
                               });
         }
 
@@ -473,7 +473,7 @@ Item {
             x: 0
             width: view.totalWidth + 8
 
-            onWidthChanged: width = view.totalWidth + 8
+            onWidthChanged: width = Qt.binding(function() { return view.totalWidth + 8; })
             height: viewName.contentHeight
 
             onClicked: {
@@ -494,7 +494,8 @@ Item {
                 id: viewTime
                 z: -2
                 anchors.left: parent.left
-                anchors.bottom: viewName.bottom
+                anchors.leftMargin: 4
+                anchors.verticalCenter: viewName.verticalCenter
                 text: startNoSec
                 font.pointSize: 11
                 onContentWidthChanged: view.columnWidth('time', contentWidth)
@@ -506,7 +507,7 @@ Item {
                 anchors.left: viewTime.right
                 anchors.leftMargin: 2
                 text: name
-                font.pointSize: 13
+                font.pointSize: 14
                 font.bold: type == TimeModel.Break
                 onContentWidthChanged: view.columnWidth('name', contentWidth)
                 width: view.widthList['name']
@@ -529,7 +530,7 @@ Item {
                 id: hbegin
                 //: The column header showing the begin time of round or break in time settings tab.
                 text: qsTr("Begin") + lang.lang
-                x: -parent.x
+                x: -parent.x + 4
                 font.pointSize: 14
                 onContentWidthChanged: view.columnWidth('time', contentWidth)
                 width: view.widthList['time']

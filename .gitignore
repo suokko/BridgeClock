@@ -5,7 +5,6 @@ wix/win
 wix/win-build
 wix/*.wixobj
 .clang_complete
-wix/BridgeClock.msi
 wix/*.wixpdb
 wix/*.wxs
 *.swp
@@ -16,5 +15,8 @@ wix/linux
 wix/linux-build
 wix/BridgeClock-linux*
 wix/BridgeClock-src*
+wix/BridgeClock*.msi
+wix/date.stamp
 wix/BridgeClock-versions.xml
 locale/*.qm
+locale/stamp.*

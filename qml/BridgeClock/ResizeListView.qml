@@ -1,5 +1,6 @@
 
 import QtQuick 2.4
+import QtQml 2.2
 import QtQuick.Controls 1.1
 
 ListView {
@@ -57,6 +58,24 @@ ListView {
     property int totalWidth: 0
     property bool __complete: false
 
+    signal recalculate();
+
+    Timer {
+        id: __recalculate
+        running: false
+        interval: 100
+
+        onTriggered: {
+            widthList = []
+            totalWidth = 0
+            __complete = false
+            recalculate()
+            __complete = true
+            view.widthListChanged();
+            view.totalWidthChanged();
+        }
+    }
+
     function columnWidth(col, width) {
         if (widthList[col] >= width)
             return;
@@ -69,6 +88,11 @@ ListView {
             view.widthListChanged();
             view.totalWidthChanged();
         }
+    }
+
+    Connections {
+        target: lang
+        onLangChanged: __recalculate.start()
     }
 
     Component.onCompleted: {

@@ -500,6 +500,10 @@ Item {
                 font.pointSize: 11
                 onContentWidthChanged: view.columnWidth('time', contentWidth)
                 width: view.widthList['time']
+                Connections {
+                    target: view
+                    onRecalculate:  view.columnWidth('time', viewTime.contentWidth)
+                }
             }
             Text {
                 id: viewName
@@ -511,6 +515,10 @@ Item {
                 font.bold: type == TimeModel.Break
                 onContentWidthChanged: view.columnWidth('name', contentWidth)
                 width: view.widthList['name']
+                Connections {
+                    target: view
+                    onRecalculate:  view.columnWidth('name', viewName.contentWidth)
+                }
             }
         }
 
@@ -534,6 +542,10 @@ Item {
                 font.pointSize: 14
                 onContentWidthChanged: view.columnWidth('time', contentWidth)
                 width: view.widthList['time']
+                Connections {
+                    target: view
+                    onRecalculate:  view.columnWidth('time', hbegin.contentWidth)
+                }
             }
             Rectangle {
                 anchors.top: parent.top
@@ -552,6 +564,10 @@ Item {
                 anchors.leftMargin: 2
                 onContentWidthChanged: view.columnWidth('name', contentWidth)
                 width: Math.max(view.widthList['name'], contentWidth)
+                Connections {
+                    target: view
+                    onRecalculate: view.columnWidth('name', hname.contentWidth)
+                }
             }
         }
 

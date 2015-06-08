@@ -1,7 +1,14 @@
 * Windwos cursorin ongelma
 * Windows webkit skaalaus ongelma
 * Tulosten rajaussivun liikuminen muuten kuin panamällä
-* Käännökset
 * Kellon ja tulosten jako toisille koneille sisäverkossa
 * Kellon ja tulosten jako toisille koneille palvelimen kautta
 * Macigin tietokannan lukeminen
+
+UI:
+* aika näkymän loppukellon aika keskitettynä
+* aika näkymän tekstipoksi menee tekstien päälle
+* kello näkymän tekstien zoomauksen laatu
+* Kieletyn aluen visualisointi tauon lopetus ajassa
+* Rajausivun akttiviset aluet eivät laajene yli rajana
+* Aika näkymään ylös ja alas nuolinäpäimille käsittelijät

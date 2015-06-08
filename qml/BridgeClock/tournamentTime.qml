@@ -385,7 +385,7 @@ Item {
                 anchors.margins: 5
                 anchors.horizontalCenter: parent.horizontalCenter
                 enabled: parent.enabled && !change.checked
-                opacity: enabled ? 1 : 0.5
+                opacity: enabled ? 1 : 0.3
                 anchors.top: custom.bottom
                 height: Math.min(parent.width, itemTypeBox.parent.height - itemTypeBox.y - y - 22)
                 minDate: view.currentIndex != -1 ? view.model.qmlData(view.currentIndex, "startTime").value :

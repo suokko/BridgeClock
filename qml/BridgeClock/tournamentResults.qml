@@ -216,7 +216,7 @@ Item {
 
             onWheel: {
                 /* TODO: Use pixelDelta if available */
-                pan(wheel.angleDelta.x, wheel.angleDelta.y);
+                pan(-wheel.angleDelta.x, -wheel.angleDelta.y);
             }
 
             function pan(dx, dy) {

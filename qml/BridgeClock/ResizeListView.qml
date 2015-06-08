@@ -1,38 +1,80 @@
 
 import QtQuick 2.4
+import QtQml 2.2
 import QtQuick.Controls 1.1
 
 ListView {
     id: view
     
-    anchors.margins: 4
-    clip: true
+    anchors.margins: 2
 
     Rectangle {
-        id: background
+        id: backgroundBorder
 
         anchors.fill: parent
         radius: 5
         z: -3
-        clip: true
 
         color: "white"
         border.width: 2
         border.color: "gray"
+        Rectangle {
+            id: backgroundDraw
+            clip: true
+            radius: 5
+            anchors.margins: 2
+            anchors.fill: parent
+            color: "white"
+            Item {
+                id: background
+                anchors.margins: -2
+                anchors.fill: parent
+            }
+        }
+    }
+
+    Item {
+        id: reparent
+        states: State {
+            name: "reparent"
+            ParentChange {
+                target: view.contentItem
+                parent: background
+            }
+        }
+        Component.onCompleted: state = "reparent"
     }
 
     highlight: Rectangle {
-        x: 2
+        x: view.anchors.margins + 2
         color: "lightsteelblue";
         radius: 5;
         width: totalWidth
 
-        onWidthChanged: width = totalWidth
+        onWidthChanged: width = Qt.binding(function() { return totalWidth; })
     }
 
     property variant widthList: []
     property int totalWidth: 0
     property bool __complete: false
+
+    signal recalculate();
+
+    Timer {
+        id: __recalculate
+        running: false
+        interval: 100
+
+        onTriggered: {
+            widthList = []
+            totalWidth = 0
+            __complete = false
+            recalculate()
+            __complete = true
+            view.widthListChanged();
+            view.totalWidthChanged();
+        }
+    }
 
     function columnWidth(col, width) {
         if (widthList[col] >= width)
@@ -46,6 +88,11 @@ ListView {
             view.widthListChanged();
             view.totalWidthChanged();
         }
+    }
+
+    Connections {
+        target: lang
+        onLangChanged: __recalculate.start()
     }
 
     Component.onCompleted: {

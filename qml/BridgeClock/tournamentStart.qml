@@ -230,12 +230,13 @@ Item {
 
             PropertyChanges {
                 target: langSelector
-                height: parent.height
+                height: Math.min(parent.height, languages.contentHeight)
             }
         }
 
         transitions: [
             Transition {
+                from: "open"
                 ParallelAnimation {
                     PropertyAnimation {
                         target: langSelector
@@ -247,6 +248,23 @@ Item {
                         target: languages
                         properties: "contentY"
                         duration: 1500
+                        easing.type: Easing.InOutCubic
+                    }
+                }
+            },
+            Transition {
+                to: "open"
+                ParallelAnimation {
+                    PropertyAnimation {
+                        target: langSelector
+                        properties: "height"
+                        duration: 800
+                        easing.type: Easing.InOutCubic
+                    }
+                    PropertyAnimation {
+                        target: languages
+                        properties: "contentY"
+                        duration: 600
                         easing.type: Easing.InOutCubic
                     }
                 }
@@ -269,7 +287,12 @@ Item {
             focus: true
 
             model: lang
-            highlight: Rectangle { color: "lightsteelblue"; radius: 5; width: languages.width }
+            highlight: Rectangle {
+                color: "lightsteelblue";
+                radius: 5;
+                width: languages.width
+                onWidthChanged: width = languages.width
+            }
             delegate: Item {
                 height: langText.height + 6
                 width: langText.width + 6

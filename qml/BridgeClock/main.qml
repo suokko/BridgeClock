@@ -122,28 +122,18 @@ Window {
             //: The title for initial setup tab with round number and length settings
             title: qsTr("Start") + lang.lang
 
-                Loader {
-                    anchors.fill: parent
-                    source: "tournamentStart.qml"
-                }
+            source: "tournamentStart.qml"
         }
         Tab {
             //: The title for time settings tab to setup breaks and modify length of rounds 
             title: qsTr("Time") + lang.lang
 
-                Loader {
-                    anchors.fill: parent
-                    source: "tournamentTime.qml"
-                }
+            source: "tournamentTime.qml"
         }
         Tab {
             //: The title for result view settings tab to select the visible result file and limit the visible area
             title: qsTr("Results") + lang.lang
-
-                Loader {
-                    anchors.fill: parent
-                    source: "tournamentResults.qml"
-                }
+            source: "tournamentResults.qml"
         }
     }
     Loader {

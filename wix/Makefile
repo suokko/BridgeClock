@@ -34,8 +34,14 @@ ifeq ($(LINUXQTPATH),)
 $(error "Linux qt path not set in user.mk")
 endif
 
+ifeq ($(shell which heat.exe),)
+$(error "Wix executables must be in path (heat.exe, light.exe and candle.exe)")
+endif
+
+ifneq ($(MAKECMDGOALS),clean_tr)
 ifneq ($(shell cd .. && git ls-files -m),)
 $(error "All changes has to be commited to the git")
+endif
 endif
 
 COMMONQML := \
@@ -66,6 +72,7 @@ LINUXCHROOTPATH := $(shell schroot -i -c $(LINUXCHROOT) | grep "^[ \t]*Directory
 VERSION := $(shell date +'%Y.%m.%d')
 
 all: BridgeClock-${VERSION}.msi BridgeClock-linux-${VERSION}.tar.gz BridgeClock-src-$(VERSION).tar.gz BridgeClock-versions.xml
+	$(MAKE) clean_tr
 
 #Localization rules
 $(wildcard ../locale/*.qm): ../locale/stamp.release
@@ -295,6 +302,10 @@ BridgeClock-src-$(VERSION).tar.gz: BridgeClock-src-$(VERSION) ../.git/refs/heads
 BridgeClock-src-$(VERSION):
 	git clone ../.git BridgeClock-src-$(VERSION)
 
+clean_tr:
+	cd .. && git diff -- locale | git apply -R
+
 clean:
 	rm -f varsub *.wxs *.wixobj *.wixpdb BridgeClock*.msi date.stamp
 	rm -rf win win-build BridgeClock-src-* BridgeClock-linux* linux linux-build
+	rm -f  ../locale/stamp.*

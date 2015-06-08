@@ -383,6 +383,7 @@ Item {
             DatePicker {
                 id: breakEndTime
                 anchors.margins: 5
+                anchors.horizontalCenter: parent.horizontalCenter
                 enabled: parent.enabled && !change.checked
                 opacity: enabled ? 1 : 0.5
                 anchors.top: custom.bottom

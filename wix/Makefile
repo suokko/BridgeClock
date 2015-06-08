@@ -303,7 +303,7 @@ BridgeClock-src-$(VERSION):
 	git clone ../.git BridgeClock-src-$(VERSION)
 
 clean_tr:
-	cd .. && git diff -- locale | git apply -R
+	cd .. && git diff -- locale | git apply -R || true
 
 clean:
 	rm -f varsub *.wxs *.wixobj *.wixpdb BridgeClock*.msi date.stamp

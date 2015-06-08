@@ -513,11 +513,11 @@ Item {
                 text: name
                 font.pointSize: 14
                 font.bold: type == TimeModel.Break
-                onContentWidthChanged: view.columnWidth('name', contentWidth)
+                onContentWidthChanged: view.columnWidth('name', contentWidth + 2)
                 width: view.widthList['name']
                 Connections {
                     target: view
-                    onRecalculate:  view.columnWidth('name', viewName.contentWidth)
+                    onRecalculate:  view.columnWidth('name', viewName.contentWidth + 2)
                 }
             }
         }
@@ -562,11 +562,11 @@ Item {
                 font.pointSize: 14
                 anchors.left: hbegin.right
                 anchors.leftMargin: 2
-                onContentWidthChanged: view.columnWidth('name', contentWidth)
+                onContentWidthChanged: view.columnWidth('name', contentWidth + 4)
                 width: Math.max(view.widthList['name'], contentWidth)
                 Connections {
                     target: view
-                    onRecalculate: view.columnWidth('name', hname.contentWidth)
+                    onRecalculate: view.columnWidth('name', hname.contentWidth + 4)
                 }
             }
         }

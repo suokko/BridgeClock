@@ -183,7 +183,7 @@ Window {
             AnchorChanges {
                 target: nextHeading
                 anchors.bottom: undefined
-                anchors.top: timeView.top
+                anchors.top: currentTime.bottom
                 anchors.left: undefined
                 anchors.right: timeView.right
             }
@@ -193,7 +193,9 @@ Window {
 
                 anchors.bottomMargin: undefined
                 anchors.leftMargin: undefined
-                anchors.topMargin: (timeView.height - (nextHeading.height + next.height + nextBreakEnd.height))/2
+                anchors.topMargin: (timeView.height - (nextHeading.height + next.height +
+                                                       nextBreakEnd.height +
+                                                       currentTime.height + currentTime.anchors.margins*2))/2
                 anchors.rightMargin: 3*zoomFactor + Math.max(Math.max(next.width - nextHeading.width, nextBreakEnd.width - nextHeading.width), 0);
             }
             AnchorChanges {
@@ -284,6 +286,36 @@ Window {
             }
         }
 
+
+        Text {
+            id: currentTime
+            anchors.top: parent.top
+            anchors.right: parent.right
+            anchors.margins: 5
+
+            text: Qt.formatTime(new Date(), "h:mm")
+
+            font.pixelSize: 40*zoomFactor
+
+            Timer {
+                id: update
+                running: true
+                function inter() {
+                    var d = new Date();
+                    var ms = d.getMilliseconds();
+                    var s = d.getSeconds();
+                    return 1000 - ms + (59 - s)*1000;
+                }
+                interval: inter()
+
+                onTriggered: {
+                    interval = inter()
+                    start();
+                    currentTime.text = Qt.formatTime(new Date(), "h:mm")
+                }
+            }
+
+        }
 
         Text {
             anchors.bottom: parent.bottom

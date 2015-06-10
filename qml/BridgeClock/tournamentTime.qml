@@ -518,6 +518,8 @@ Item {
                 text: name
                 font.pointSize: 14
                 font.bold: type == TimeModel.Break
+                font.italic: inbetween(new Date().getTime(), startTime, endTime)
+
                 onContentWidthChanged: view.columnWidth('name', contentWidth + 2)
                 width: view.widthList['name']
                 Connections {

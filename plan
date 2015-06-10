@@ -1,6 +1,5 @@
 * Windwos cursorin ongelma
 * Windows webkit skaalaus ongelma
-* Tulosten rajaussivun liikuminen muuten kuin panamällä
 * Kellon ja tulosten jako toisille koneille sisäverkossa
 * Kellon ja tulosten jako toisille koneille palvelimen kautta
 * Macigin tietokannan lukeminen
@@ -9,5 +8,4 @@ UI:
 * kello näkymän tekstien zoomauksen laatu
 * Kieletyn aluen visualisointi tauon lopetus ajassa
 * Alkajan yli meneminen rikko bindaksen kierroksen loppuajasta
-* Rajausivun akttiviset aluet eivät laajene yli rajana
-* Aika näkymään ylös ja alas nuolinäpäimille käsittelijät
+* tabi tekstien sijoittelu kielen vaihdon jälkeen

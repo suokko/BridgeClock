@@ -31,6 +31,9 @@ Item {
 
     property int __updatingUI: 0
 
+    Keys.onUpPressed: {view.decrementCurrentIndex(); event.accepted = true;}
+    Keys.onDownPressed: {view.incrementCurrentIndex(); event.accepted = true;}
+
     Item {
         anchors.top: parent.top
         anchors.bottom: parent.bottom

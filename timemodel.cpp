@@ -585,7 +585,7 @@ void TimeModel::setPaused(bool v)
         QDateTime end;
         if (row + 1 != (int)list_.size()) {
             int elapsed = pauseTime_.elapsed();
-            end = item[1].start_;
+            end = item[row > -1 ? 1 : 0].start_;
             end = end.addMSecs(elapsed);
             changeEnd(row, end);
         }

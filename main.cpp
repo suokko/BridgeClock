@@ -33,6 +33,8 @@ THE SOFTWARE.
 #include "languagemodel.h"
 #include <stdlib.h>
 
+#include "iconprovider.h"
+
 #if defined(WIN32) || defined(__WIN32)
 #include <stdio.h>
 void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
@@ -93,6 +95,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     QQmlApplicationEngine eng;
     eng.rootContext()->setContextProperty("timeController", &timeController);
     eng.rootContext()->setContextProperty("lang", &lang);
+    eng.addImageProvider("icon", new IconProvider());
     eng.load("qml/BridgeClock/main.qml");
 
     return app.exec();

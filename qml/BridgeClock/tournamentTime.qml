@@ -414,7 +414,7 @@ Item {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
 
-        width: view.widthList['name'] + view.anchors.margins*2
+        width: view.widthList['name']*2/3 + view.anchors.margins*2
     }
 
     MouseArea {
@@ -514,11 +514,19 @@ Item {
                 id: viewName
                 z: -2
                 anchors.left: viewTime.right
-                anchors.leftMargin: 2
+                anchors.leftMargin: Math.max(2, view.active ? 2 : width - contentWidth - 2)
                 text: name
                 font.pointSize: 14
                 font.bold: type == TimeModel.Break
                 font.italic: inbetween(new Date().getTime(), startTime, endTime)
+
+                function inbetween(val, s, e) {
+                    return val >= s && val < e;
+                }
+
+                Behavior on anchors.leftMargin {
+                    NumberAnimation { duration: 200 }
+                }
 
                 onContentWidthChanged: view.columnWidth('name', contentWidth + 2)
                 width: view.widthList['name']

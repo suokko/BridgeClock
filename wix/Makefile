@@ -48,6 +48,7 @@ COMMONQML := \
 	QtQuick.2/* \
 	QtQuick/Controls/Private/* \
 	QtQuick/Controls/* \
+	QtQuick/PrivateWidgets/* \
 	QtQuick/Window.2/* \
 	Qt/labs/settings/* \
 	Qt/labs/folderlistmodel/* \

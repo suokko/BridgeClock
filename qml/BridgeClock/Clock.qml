@@ -38,14 +38,9 @@ Window {
     readonly property double msForAPixel: 60
     property bool animationDown: true
     property double ypos: -1
-    property bool firstLoad: true
 
     /* Calculate initial position */
     function pageLoaded(view) {
-        if (!firstLoad) {
-            return;
-        }
-        firstLoad = false;
         ypos = view.zoomLimity();
         view.contentY = view.zoomLimity();
         calculateAnimation();
@@ -360,10 +355,14 @@ Window {
     }
 
     ResultView {
+        anchors.fill: parent
+        anchors.topMargin: 132*zoomFactor
         id: results
     }
 
     ResultView {
+        anchors.fill: parent
+        anchors.topMargin: 132*zoomFactor
         id: resultsHidden
         loadTarget: true
     }

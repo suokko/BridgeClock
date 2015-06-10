@@ -216,6 +216,7 @@ Item {
 
             onWheel: {
                 /* TODO: Use pixelDelta if available */
+                /* TODO: Should this take into account page zoom? */
                 pan(-wheel.angleDelta.x, -wheel.angleDelta.y);
             }
 
@@ -252,14 +253,16 @@ Item {
                 var top = Math.abs(mouse.y - ry);
                 var bottom = Math.abs(mouse.y - rh);
                 var activeArea = 15;
-                if (top < bottom && top < activeArea) {
+                var hinbetween = mouse.x > rx - activeArea && mouse.x < rw + activeArea
+                var vinbetween = mouse.y > ry - activeArea && mouse.y < rh + activeArea
+                if (hinbetween && top < bottom && top < activeArea) {
                     dir = dir + "T";
-                } else if (top > bottom && bottom < activeArea) {
+                } else if (hinbetween && top > bottom && bottom < activeArea) {
                     dir = dir + "B";
                 }
-                if ( left < right && left < activeArea) {
+                if (vinbetween && left < right && left < activeArea) {
                     dir = dir + "L";
-                } else if ( left > right && right < activeArea) {
+                } else if (vinbetween && left > right && right < activeArea) {
                     dir = dir + "R";
                 }
                 if (dir != direction && !directionLock) {

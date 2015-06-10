@@ -39,7 +39,7 @@ class TimeController : public QObject
     Q_PROPERTY(unsigned roundTime READ roundTime WRITE setRoundTime NOTIFY roundTimeChanged())
     Q_PROPERTY(unsigned roundBreak READ roundBreak WRITE setRoundBreak NOTIFY roundBreakChanged())
     Q_PROPERTY(QDateTime startTime READ startTime WRITE setStartTime NOTIFY startTimeChanged())
-    Q_PROPERTY(QString resultUrl READ resultUrl WRITE setResultUrl)
+    Q_PROPERTY(QString resultUrl READ resultUrl WRITE setResultUrl NOTIFY updateResults)
     Q_PROPERTY(QString tournamentEnd READ tournamentEnd NOTIFY tournamentEndChanged)
     Q_PROPERTY(bool showResults READ showResults WRITE setShowResults NOTIFY showResultsChanged)
     Q_PROPERTY(bool paused READ paused WRITE setPaused NOTIFY pausedChanged)

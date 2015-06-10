@@ -28,7 +28,7 @@ import QtWebKit.experimental 1.0
 
 Item {
     anchors.fill: parent
-    property var settingsUrl: timeController.resultUrl
+    property string settingsUrl: timeController.resultUrl
     property var settingsZoomLimit: timeController.zoomLimit
     property bool initialLoad: true
     Component.onCompleted: {

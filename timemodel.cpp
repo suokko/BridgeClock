@@ -681,7 +681,6 @@ void TimeModel::reset()
         settings_.setValue("item", v);
     }
     settings_.endArray();
-    QModelIndex end;
     timeFixUp();
     writeTimeItem();
     emit dataChanged(index(0), index(list_.size() - 1));

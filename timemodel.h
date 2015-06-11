@@ -31,12 +31,15 @@ THE SOFTWARE.
 
 struct TimeItem;
 class TimeModelVariant;
+class CompactModel;
 
 class TimeModel : public QAbstractListModel
 {
     Q_OBJECT
     Q_ENUMS(Type)
     Q_ENUMS(Roles)
+
+    Q_PROPERTY(CompactModel *compact READ compact NOTIFY compactChanged)
 public:
     explicit TimeModel();
     ~TimeModel();
@@ -78,6 +81,8 @@ public:
     const QDateTime &startTime() const;
     const TimeItem *getCurrent(int &row) const;
 
+    CompactModel *compact() const;
+
     Q_INVOKABLE void changeType(int row, TimeModel::Type type,
                                 const QString &name);
     Q_INVOKABLE void changeEnd(int row, QDateTime end);
@@ -89,6 +94,7 @@ signals:
     void roundTimeChanged();
     void roundBreakChanged();
     void startTimeChanged();
+    void compactChanged();
 
 public slots:
     void onDataChangeTimeout();
@@ -107,12 +113,16 @@ private:
 
     std::vector<TimeItem> list_;
 
+    CompactModel *compact_;
+
     void timeFixUp(bool loading = false);
     void readSettings();
     void writeTimeItem();
     void deleteTimeItem(int row, int end = -1);
 
     QDateTime pauseTimeAdjust(QDateTime t) const;
+
+    friend class CompactModel;
 };
 
 class TimeModelVariant : public QObject

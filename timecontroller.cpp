@@ -38,6 +38,8 @@ THE SOFTWARE.
 #include <QQuickItem>
 #include <QQuickWindow>
 #include <QSettings>
+#include <QScreen>
+#include <QGuiApplication>
 
 class TimeControllerPrivate {
     bool showResults_ : 1;
@@ -52,6 +54,7 @@ class TimeControllerPrivate {
     QRect zoomLimit_;
     QSettings settings_;
     QString version_;
+    QScreen *secundaryScreen_;
     friend class TimeController;
 };
 
@@ -76,6 +79,9 @@ TimeController::TimeController() :
     connect(d->model_, SIGNAL(roundTimeChanged()), SIGNAL(roundTimeChanged()));
     connect(d->model_, SIGNAL(roundBreakChanged()), SIGNAL(roundBreakChanged()));
     connect(d->model_, SIGNAL(startTimeChanged()), SIGNAL(startTimeChanged()));
+
+    connect(qApp, &QGuiApplication::screenAdded, this, &TimeController::screenAdded);
+    connect(qApp, &QGuiApplication::screenRemoved, this, &TimeController::screenRemoved);
 
     d->model_->connect(this, SIGNAL(languageChanged()), SLOT(languageChange()));
 
@@ -403,4 +409,35 @@ void TimeController::setResultUrl(const QString &url)
     delete d->watcher_;
     d->watcher_ = NULL;
     d->urlTimer_->start(1000);
+}
+
+QRect TimeController::secundaryScreen()
+{
+    if (!d->secundaryScreen_) {
+        QList<QScreen*> list = QGuiApplication::screens();
+        qDebug() << list;
+        qDebug() << list.at(0)->name() << list.at(0)->geometry();
+        if (list.size() > 1) {
+            d->secundaryScreen_ = list.at(1);
+            qDebug() << d->secundaryScreen_->name() << d->secundaryScreen_->geometry();
+        }
+    }
+    if (d->secundaryScreen_)
+        return d->secundaryScreen_->geometry();
+    else
+        return QRect();
+}
+
+void TimeController::screenAdded(QScreen *)
+{
+    if (!d->secundaryScreen_)
+        emit secundaryScreenChanged();
+}
+
+void TimeController::screenRemoved(QScreen *screen)
+{
+    if (d->secundaryScreen_ == screen) {
+        d->secundaryScreen_ = nullptr;
+        emit secundaryScreenChanged();
+    }
 }

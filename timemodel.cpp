@@ -26,6 +26,8 @@ THE SOFTWARE.
 #include <QDebug>
 #include <QSettings>
 
+#include "compactmodel.h"
+
 #include <algorithm>
 
 #include <cassert>
@@ -129,6 +131,7 @@ QHash<int, QByteArray> TimeModel::roleNames() const
 TimeModel::~TimeModel()
 {
     delete dataChangeTimer_;
+    delete compact_;
 }
 
 TimeModel::TimeModel() :
@@ -138,7 +141,8 @@ TimeModel::TimeModel() :
     roundBreak_(2*2),
     paused_(false),
     startTime_(QDateTime::currentDateTime()),
-    dataChangeTimer_(new QTimer)
+    dataChangeTimer_(new QTimer),
+    compact_(nullptr)
 {
     dataChangeTimer_->setSingleShot(true);
     connect(dataChangeTimer_, SIGNAL(timeout()), SLOT(onDataChangeTimeout()));
@@ -681,4 +685,11 @@ void TimeModel::reset()
     timeFixUp();
     writeTimeItem();
     emit dataChanged(index(0), index(list_.size() - 1));
+}
+
+CompactModel *TimeModel::compact() const
+{
+    if (!compact_)
+        const_cast<TimeModel *>(this)->compact_ = new CompactModel(this);
+    return compact_;
 }

@@ -21,7 +21,7 @@ THE SOFTWARE.
 */
 
 import QtQuick 2.0
-import QtQuick.Window 2.0
+import QtQuick.Window 2.2
 import org.bridgeClock 1.0
 
 Window {
@@ -30,14 +30,64 @@ Window {
     width: 640
     height: 480
     visible: true
+    visibility: Window.Windowed
     //: The tile of window that shows the time and result information for players.
     title: qsTr("The time view") + lang.lang
     flags: Qt.WindowStaysOnTopHint + Qt.CustomizeWindowHint /*+ Qt.FramelessWindowHint + Qt.X11BypassWindowManagerHint */
 
     /* The state of scrolling animation */
-    readonly property double msForAPixel: 60
+    readonly property double msForAPixel: 50
     property bool animationDown: true
     property double ypos: -1
+
+    property var screen: timeController.secundaryScreen
+
+    onVisibilityChanged: mover.windowState()
+
+    Item {
+        id: stateHolder
+
+        Timer {
+            id: initTimeout
+            running: true
+            interval: 3000
+        }
+
+        states: [
+            State {
+                name: "screen2"
+                when: screen.width > 0 && !initTimeout.running
+                PropertyChanges {
+                    target: clockWindow
+                    x: screen.x
+                    y: screen.y
+                    width: screen.width
+                    height: screen.height
+                    visibility: Window.FullScreen
+                }
+            }
+        ]
+
+        transitions: [
+            Transition {
+                to: "screen2"
+                SequentialAnimation {
+                    PropertyAnimation { target: clockWindow; properties: "x,y"; duration: 2000; }
+                    PropertyAction { target: clockWindow; properties: "visibility,width,height" }
+                }
+            },
+            Transition {
+                from: "screen2"
+                SequentialAnimation {
+                    PropertyAction { target: clockWindow; properties: "visibility" }
+                    ParallelAnimation {
+                        PropertyAnimation { target: clockWindow; properties: "width,height"; duration: 10 }
+                        PropertyAnimation { target: clockWindow; properties: "x,y"; duration: 2000; }
+                    }
+                }
+            }
+        ]
+    }
 
     /* Calculate initial position */
     function pageLoaded(view) {
@@ -132,7 +182,7 @@ Window {
         scrollTimer.restart();
     }
 
-    readonly property int transduration: 5000
+    readonly property int transduration: 2000
     readonly property var transtype: Easing.InOutQuad
 
     Rectangle {
@@ -165,13 +215,11 @@ Window {
                 origin.x: 0;
                 xScale: (time.totalWidth <= clockWindow.width/2 ? 1 : (current.width - (time.totalWidth - clockWindow.width/2)/2)/current.width)
             }
-            PropertyChanges { target: endHeading; font.pixelSize: 15*zoomFactor; }
             AnchorChanges {
-                target: end
-                anchors.top: endHeading.bottom
-                anchors.left: current.left
+                target: time
+                anchors.verticalCenter: timeView.verticalCenter
+                anchors.top: undefined
             }
-            PropertyChanges { target: end; font.pixelSize: 25*zoomFactor; }
             PropertyChanges {
                 target: time
                 font.pixelSize: 120*zoomFactor
@@ -180,37 +228,10 @@ Window {
                 target: timeScale;
                 xScale: (time.totalWidth <= clockWindow.width/2 ? 1 : (time.width/2 - (time.totalWidth - clockWindow.width/2)/2)/(time.width/2))
             }
-            AnchorChanges {
-                target: nextHeading
-                anchors.bottom: undefined
-                anchors.top: currentTime.bottom
-                anchors.left: undefined
-                anchors.right: timeView.right
-            }
             PropertyChanges {
-                target: nextHeading
-                font.pixelSize: 15*zoomFactor
-
-                anchors.bottomMargin: undefined
-                anchors.leftMargin: undefined
-                anchors.topMargin: (timeView.height - (nextHeading.height + next.height +
-                                                       nextBreakEnd.height +
-                                                       currentTime.height + currentTime.anchors.margins*2))/2
-                anchors.rightMargin: 3*zoomFactor + Math.max(Math.max(next.width - nextHeading.width, nextBreakEnd.width - nextHeading.width), 0);
-            }
-            AnchorChanges {
-                target: next
-                anchors.top: nextHeading.bottom
-                anchors.left: nextHeading.left
-            }
-            PropertyChanges {
-                target: next
-                font.pixelSize: 25*zoomFactor
-                anchors.topMargin: undefined
-            }
-            PropertyChanges {
-                target: nextBreakEnd
-                font.pixelSize: 20*zoomFactor
+                target: timetable
+                y:  clockWindow.height + 3*zoomFactor
+                height: results.height*2/3
             }
         }
         transitions: [
@@ -230,15 +251,16 @@ Window {
             }
         ]
 
-        Text {
+        VisibleText {
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.topMargin: (time.y - height - Math.max(endHeading.height, end.height))/2
+            anchors.horizontalCenterOffset: Math.min(0, currentTime.x - ((clockWindow.width + width)/2 + 5*zoomFactor))
+            anchors.topMargin: 3*zoomFactor
             anchors.top: parent.top
 
-            visible: timeController.roundInfo.playing < 2
+            visibility: timeController.roundInfo.playing < 2
             id: current
             text: timeController.roundInfo.name;
-            font.pixelSize: 55*zoomFactor;
+            font.pixelSize: 45*zoomFactor;
             font.weight: Font.DemiBold;
             transform: Scale {
                 id: currentScale
@@ -248,36 +270,42 @@ Window {
                 : 1;
             }
         }
-        Text {
-            anchors.top: current.bottom
-            anchors.left: current.left
+        VisibleText {
+            anchors.bottom: end.top
+            anchors.left: parent.left
+            anchors.leftMargin: 3*zoomFactor
+            anchors.bottomMargin: 3*zoomFactor
             id: endHeading
-            visible: timeController.roundInfo.playing < 2
+
+            visibility: timeView.state == "showRes" &&
+                        timeController.roundInfo.playing < 2
+
             //: Label visible to players before or above the tournament end time
             text: qsTr("Tournament will end: ") + lang.lang
-            font.pixelSize: 25*zoomFactor
+            font.pixelSize: 15*zoomFactor
             font.weight: Font.Light
         }
 
-        Text {
-            anchors.top: current.bottom
-            anchors.left: endHeading.right
+        VisibleText {
+            y: results.y - contentHeight - 3*zoomFactor
+            anchors.left: endHeading.left
             id: end
-            visible: timeController.roundInfo.playing < 2
+
+            visibility: timeView.state == "showRes" &&
+                        timeController.roundInfo.playing < 2
             text: timeController.tournamentEnd.replace(/:[^:]*$/,'')
-            font.pixelSize: 30*zoomFactor
+            font.pixelSize: 25*zoomFactor
             font.weight: Font.Light;
         }
 
         Text {
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.margins: 3*zoomFactor
+            anchors.top: current.bottom
             id: time
             text: timeController.roundInfo.playing < 2 ?
             timeController.roundInfo.timeLeft :
             timeController.roundInfo.name;
-            font.pixelSize: 240*zoomFactor;
+            font.pixelSize: 180*zoomFactor;
             readonly property double totalWidth: width/2 + current.width;
             transform: Scale {
                 id: timeScale
@@ -317,44 +345,54 @@ Window {
 
         }
 
-        Text {
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: (clockWindow.height - (time.y + time.height) - Math.max(height, next.height + nextBreakEnd.height))/2 +
-            nextBreakEnd.height + (next.height - nextHeading.height)/2
-            anchors.left: parent.left
-            anchors.leftMargin: (clockWindow.width - (width + Math.max(next.width, nextBreakEnd.width)))/2
+        VisibleText {
+            anchors.top: currentTime.bottom
+
+            anchors.bottomMargin: undefined
+            anchors.leftMargin: undefined
+            anchors.right: parent.right
+            anchors.topMargin: (results.y - (nextHeading.height + next.height +
+                                                   nextBreakEnd.height +
+                                                   currentTime.height + currentTime.anchors.margins*2))/2
+            anchors.rightMargin: 3*zoomFactor + Math.max(Math.max(next.width - nextHeading.width, nextBreakEnd.width - nextHeading.width), 0);
 
             id: nextHeading
-            visible: timeController.roundInfo.playing < 2
+
+            visibility: timeView.state == "showRes" &&
+                        timeController.roundInfo.playing < 2
+
             //: The player visible label before or above next break name, start time and end time
             text: qsTr("The next break: ") + lang.lang
-            font.pixelSize: 25*zoomFactor
+
+            font.pixelSize: 15*zoomFactor
             font.weight: Font.Light
         }
-        Text {
-            anchors.top: nextHeading.top
-            anchors.topMargin: -(height - nextHeading.height)/2
-            anchors.left: nextHeading.right
+        VisibleText {
+            anchors.top: nextHeading.bottom
+            anchors.left: nextHeading.left
+
+            visibility: timeView.state == "showRes" &&
+                        timeController.roundInfo.playing < 2
 
             id: next
-            visible: timeController.roundInfo.playing < 2
             text: timeController.roundInfo.nextBreakName;
-            font.pixelSize: 40*zoomFactor
+            font.pixelSize: 25*zoomFactor
             font.italic: true;
             font.weight: Font.Light;
         }
 
-        Text {
+        VisibleText {
             anchors.top: next.bottom
             anchors.left: next.left
             id: nextBreakEnd
-            visible: timeController.roundInfo.playing < 2 &&
-            timeController.roundInfo.nextBreakStart != ""
+            visibility: timeView.state == "showRes" &&
+                        timeController.roundInfo.playing < 2 &&
+                        timeController.roundInfo.nextBreakStart != ""
             text: timeController.roundInfo.nextBreakStart.replace(/:[^:]*$/,'') + 
             //: A character between start and end time of the next break (visible to players)
             (timeController.roundInfo.nextBreakEnd != "" ? qsTr(" - ") + 
             timeController.roundInfo.nextBreakEnd.replace(/:[^:]*$/,'') : "") + lang.lang;
-            font.pixelSize: 40*zoomFactor
+            font.pixelSize: 20*zoomFactor
             font.weight: Font.Light;
         }
     }
@@ -399,6 +437,108 @@ Window {
         loadTarget: true
     }
 
+
+    GridView {
+        id: timetable
+        z: 2
+        y: time.y + time.height - 10*zoomFactor
+        anchors.horizontalCenter: results.horizontalCenter
+
+        height: clockWindow.height - y - 3*zoomFactor
+        width: columnCount(height, cellHeight, count) * cellWidth + 6*zoomFactor
+
+        cellHeight: currentItem ? currentItem.height + 3*zoomFactor : 0
+        cellWidth: widthList['total'] + 6*zoomFactor
+
+        function columnCount(h, cellh, count) {
+            var nc = Math.floor(h/cellh);
+            return Math.ceil(count/nc);
+        }
+
+        property var widthList: []
+
+        Rectangle {
+            id: background
+            anchors.fill: parent
+            color: "white"
+            radius: 3*zoomFactor
+            z: -4
+        }
+
+        flow: GridView.FlowTopToBottom
+
+        model: timeController.model.compact
+
+        delegate: Row {
+            Text {
+                id: timeCell
+                text: Qt.formatTime(model.start, "h:mm")
+                width: timetable.widthList['time']
+                height: contentHeight
+                font.pixelSize: 20*zoomFactor
+
+                onContentWidthChanged: parent.GridView.view.modified();
+
+                Connections {
+                    target: timetable
+                    onCalculateChilds: {
+                        timetable.childWidth('time', timeCell.contentWidth + 3*zoomFactor);
+                    }
+                }
+            }
+            Text {
+                id: nameCell
+                text: model.name
+                width: timetable.widthList['name']
+                height: contentHeight
+                font.pixelSize: 20*zoomFactor
+
+                onContentWidthChanged: parent.GridView.view.modified();
+
+                Connections {
+                    target: timetable
+                    onCalculateChilds: {
+                        timetable.childWidth('name', nameCell.contentWidth);
+                    }
+                }
+            }
+
+            Component.onCompleted: GridView.view.modified();
+        }
+
+        Timer {
+            id: mod
+            running: false
+            interval: 30
+
+            onTriggered: parent.recalculate();
+        }
+
+        signal calculateChilds()
+
+        function childWidth(name, width) {
+            if (widthList[name] > Math.floor(width))
+                return;
+
+            widthList[name] = width;
+        }
+
+        function recalculate() {
+            widthList = []
+            this.calculateChilds()
+
+            var total = 0;
+            for (var i in widthList)
+                total += widthList[i];
+            widthList['total'] = total;
+            this.widthListChanged();
+        }
+
+        function modified() {
+            mod.restart();
+        }
+    }
+
     GlobalMouseArea {
         id: mover
         z: 3
@@ -431,7 +571,7 @@ Window {
                     id: fullScreenHelp
                     opacity: 1.0
                     font.pixelSize: 20*zoomFactor
-                    text: (clockWindow.visibility !== Qt.WindowFullScreen
+                    text: (clockWindow.visibility != Window.FullScreen
                     //: Tooltip help telling to double click the player visible window to make it fullscreen 
                           ? qsTr("Double click to make fullscreen") :
                     //: Tooltip help telling to double click the player visible window to restore window from fullscreen mode
@@ -449,11 +589,10 @@ Window {
 
         signal windowState
         onDoubleClicked: {
-            if (clockWindow.visibility == Qt.WindowFullScreen)
-                clockWindow.visibility = Qt.WindowMaximized;
-            else
-                clockWindow.visibility = Qt.WindowFullScreen;
-            mover.windowState();
+            if (clockWindow.visibility == Window.FullScreen) {
+                clockWindow.showNormal();
+            } else
+                clockWindow.showFullScreen();
         }
         onPressed: {
             startPosition = Qt.point(mouse.x, mouse.y)

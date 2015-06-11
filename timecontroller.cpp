@@ -55,6 +55,7 @@ class TimeControllerPrivate {
     QSettings settings_;
     QString version_;
     QScreen *secundaryScreen_;
+    QBasicTimer timer_;
     friend class TimeController;
 };
 
@@ -81,9 +82,12 @@ TimeController::TimeController() :
     connect(d->model_, SIGNAL(startTimeChanged()), SIGNAL(startTimeChanged()));
 
     connect(qApp, &QGuiApplication::screenAdded, this, &TimeController::screenAdded);
+#if QT_VERSION >= QT_VERSION_CHECK(5,4,0)
     connect(qApp, &QGuiApplication::screenRemoved, this, &TimeController::screenRemoved);
+#endif
 
     d->model_->connect(this, SIGNAL(languageChanged()), SLOT(languageChange()));
+    d->secundaryScreen_ = nullptr;
 
     urlUpdate();
 }
@@ -413,6 +417,7 @@ void TimeController::setResultUrl(const QString &url)
 
 QRect TimeController::secundaryScreen()
 {
+#if QT_VERSION >= QT_VERSION_CHECK(5,4,0)
     if (!d->secundaryScreen_) {
         QList<QScreen*> list = QGuiApplication::screens();
         if (list.size() > 1)
@@ -422,7 +427,23 @@ QRect TimeController::secundaryScreen()
         return d->secundaryScreen_->geometry();
     else
         return QRect();
+#else
+    QList<QScreen*> list = QGuiApplication::screens();
+    if (list.size() > 1) {
+        d->timer_.start(1000, this);
+        return list.at(1)->geometry();
+    } else
+        return QRect();
+#endif
 }
+
+#if QT_VERSION < QT_VERSION_CHECK(5,4,0)
+void TimeController::timerEvent(QTimerEvent *ev)
+{
+    emit secundaryScreenChanged();
+    ev->accept();
+}
+#endif
 
 void TimeController::screenAdded(QScreen *)
 {

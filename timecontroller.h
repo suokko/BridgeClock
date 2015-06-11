@@ -83,6 +83,10 @@ public:
     Q_INVOKABLE void click(QQuickItem *obj, const QPointF &point);
     Q_INVOKABLE void mmove(QQuickItem *obj, const QPointF &point);
 
+#if QT_VERSION < QT_VERSION_CHECK(5,4,0)
+    void timerEvent(QTimerEvent *ev) override;
+#endif
+
 signals:
     void updateResults(const QString &url);
     void modelChanged();

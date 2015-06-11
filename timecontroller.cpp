@@ -415,12 +415,8 @@ QRect TimeController::secundaryScreen()
 {
     if (!d->secundaryScreen_) {
         QList<QScreen*> list = QGuiApplication::screens();
-        qDebug() << list;
-        qDebug() << list.at(0)->name() << list.at(0)->geometry();
-        if (list.size() > 1) {
+        if (list.size() > 1)
             d->secundaryScreen_ = list.at(1);
-            qDebug() << d->secundaryScreen_->name() << d->secundaryScreen_->geometry();
-        }
     }
     if (d->secundaryScreen_)
         return d->secundaryScreen_->geometry();

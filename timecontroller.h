@@ -30,6 +30,7 @@ class QQuickItem;
 class QFileSystemWatcher;
 class QQuickWindow;
 class QMouseEvent;
+class QScreen;
 
 class TimeController : public QObject
 {

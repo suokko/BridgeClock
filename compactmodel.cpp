@@ -58,6 +58,7 @@ QVariant CompactModel::data(const QModelIndex &index, int role) const
     case StartRole:
         return QVariant(time.start_);
     case NameRole:
+        //: Text shown to players in time table. This line correspounds to rounds from %1 to %2 inclusive
         const char *rounds = QT_TRANSLATE_NOOP("Break","Rounds %1-%2");
         if (item.first_ == item.last_) {
             if (time.nr_ > 0)

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE TS>
 <TS version="2.1" language="da_DK">
 <context>
@@ -60,7 +60,7 @@
     <message>
         <location filename="../compactmodel.cpp" line="61"/>
         <source>Rounds %1-%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Runde %1-%2</translation>
     </message>
 </context>
 <context>
@@ -300,7 +300,7 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="234"/>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="254"/>
         <source>No choice</source>
-        <extracomment>Place holder text that shouldn&apos;t ever be visible to user</extracomment>
+        <extracomment>Place holder text that shouldn't ever be visible to user</extracomment>
         <translation>Ingen valg</translation>
     </message>
     <message>

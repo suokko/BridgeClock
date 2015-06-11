@@ -16,7 +16,8 @@ SOURCES += main.cpp \
     mouseevent.cpp \
     versionchecker.cpp \
     languagemodel.cpp \
-    iconprovider.cpp
+    iconprovider.cpp \
+    compactmodel.cpp
 
 lupdate_only {
 SOURCES += qml/BridgeClock/*.qml
@@ -70,7 +71,8 @@ OTHER_FILES += \
     qml/BridgeClock/main.qml \
     qml/BridgeClock/DatePicker.qml \
     qml/BridgeClock/Clock.qml \
-    qml/BridgeClock/CircularSlider.qml
+    qml/BridgeClock/CircularSlider.qml \
+    qml/BridgeClock/VisibleText.qml
 
 HEADERS += \
     timecontroller.h \
@@ -80,4 +82,5 @@ HEADERS += \
     mouseevent.h \
     versionchecker.h \
     languagemodel.h \
-    iconprovider.h
+    iconprovider.h \
+    compactmodel.h

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2013 Pauli Nieminen <suokkos@gmail.com>
+Copyright (c) 2015 Pauli Nieminen <suokkos@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -20,15 +20,43 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-import QtQuick 2.0
+#pragma once
 
-ParallelAnimation {
-    NumberAnimation { target: timeView; properties: "height"; duration: transduration; easing.type: transtype }
-    AnchorAnimation { targets: [current, time]; duration: transduration; easing.type: transtype }
-    PropertyAnimation { target: current; properties: "font.pixelSize,anchors.leftMargin,anchors.topMargin"; duration: transduration; easing.type: transtype }
-    PropertyAnimation { target: currentScale; properties: "xScale"; duration: transduration; easing.type: transtype }
-    PropertyAnimation { target: time; properties: "font.pixelSize"; duration: transduration; easing.type: transtype }
-    PropertyAnimation { target: timeScale; properties: "xScale"; duration: transduration; easing.type: transtype }
-    PropertyAnimation { target: timetable; properties: "y,height"; duration: transduration; easing.type: transtype }
-}
+#include <QAbstractListModel>
+#include <QDateTime>
 
+class TimeModel;
+class RefItem;
+
+class CompactModel : public QAbstractListModel {
+    Q_OBJECT
+
+    const TimeModel *model_;
+    std::vector <RefItem> items_;
+    Q_ENUMS(Roles)
+
+    void pushRef(RefItem &i, int &j);
+
+public:
+    explicit CompactModel(const TimeModel *m = 0);
+
+    int rowCount(const QModelIndex &parent) const override;
+    QVariant data(const QModelIndex &index, int role) const override;
+
+    QHash<int, QByteArray> roleNames() const override;
+
+    enum Roles {
+        StartRole = Qt::UserRole + 1,
+        NameRole,
+    };
+public slots:
+    void updateRefs(QModelIndex tl, QModelIndex br);
+};
+
+struct RefItem {
+    int first_, last_;
+    QDateTime start_;
+    std::string name_;
+
+    bool operator!=(const RefItem &) const;
+};

@@ -31,6 +31,7 @@ THE SOFTWARE.
 #include "globalmousearea.h"
 #include "mouseevent.h"
 #include "languagemodel.h"
+#include "compactmodel.h"
 #include <stdlib.h>
 
 #include "iconprovider.h"
@@ -88,6 +89,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     qmlRegisterType<GlobalMouseArea>("org.bridgeClock", 1, 0, "GlobalMouseArea");
     qmlRegisterType<MouseEvent>();
     qmlRegisterType<TimeModelVariant>();
+    qmlRegisterType<CompactModel>("org.bridgeClock", 1, 0, "CompactModel");
 
     TimeController timeController;
     timeController.connect(&lang,SIGNAL(selectedChanged()),SLOT(languageChange()));

@@ -33,7 +33,7 @@ Window {
     visibility: Window.Windowed
     //: The tile of window that shows the time and result information for players.
     title: qsTr("The time view") + lang.lang
-    flags: Qt.WindowStaysOnTopHint + Qt.CustomizeWindowHint /*+ Qt.FramelessWindowHint + Qt.X11BypassWindowManagerHint */
+    flags: Qt.WindowStaysOnTopHint + Qt.CustomizeWindowHint + Qt.FramelessWindowHint /*+ Qt.X11BypassWindowManagerHint */
 
     /* The state of scrolling animation */
     readonly property double msForAPixel: 50

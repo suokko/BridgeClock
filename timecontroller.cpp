@@ -55,7 +55,9 @@ class TimeControllerPrivate {
     QSettings settings_;
     QString version_;
     QScreen *secundaryScreen_;
+#if QT_VERSION < QT_VERSION_CHECK(5,4,0)
     QBasicTimer timer_;
+#endif
     friend class TimeController;
 };
 

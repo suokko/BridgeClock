@@ -21,7 +21,7 @@ THE SOFTWARE.
 */
 
 import QtQuick 2.0
-import QtQuick.Window 2.0
+import QtQuick.Window 2.2
 import org.bridgeClock 1.0
 
 Window {
@@ -30,6 +30,7 @@ Window {
     width: 640
     height: 480
     visible: true
+    visibility: Window.Windowed
     //: The tile of window that shows the time and result information for players.
     title: qsTr("The time view") + lang.lang
     flags: Qt.WindowStaysOnTopHint + Qt.CustomizeWindowHint /*+ Qt.FramelessWindowHint + Qt.X11BypassWindowManagerHint */
@@ -38,6 +39,55 @@ Window {
     readonly property double msForAPixel: 60
     property bool animationDown: true
     property double ypos: -1
+
+    property var screen: timeController.secundaryScreen
+
+    onVisibilityChanged: mover.windowState()
+
+    Item {
+        id: stateHolder
+
+        Timer {
+            id: initTimeout
+            running: true
+            interval: 3000
+        }
+
+        states: [
+            State {
+                name: "screen2"
+                when: screen.width > 0 && !initTimeout.running
+                PropertyChanges {
+                    target: clockWindow
+                    x: screen.x
+                    y: screen.y
+                    width: screen.width
+                    height: screen.height
+                    visibility: Window.FullScreen
+                }
+            }
+        ]
+
+        transitions: [
+            Transition {
+                to: "screen2"
+                SequentialAnimation {
+                    PropertyAnimation { target: clockWindow; properties: "x,y"; duration: 2000; }
+                    PropertyAction { target: clockWindow; properties: "visibility,width,height" }
+                }
+            },
+            Transition {
+                from: "screen2"
+                SequentialAnimation {
+                    PropertyAction { target: clockWindow; properties: "visibility" }
+                    ParallelAnimation {
+                        PropertyAnimation { target: clockWindow; properties: "width,height"; duration: 10 }
+                        PropertyAnimation { target: clockWindow; properties: "x,y"; duration: 2000; }
+                    }
+                }
+            }
+        ]
+    }
 
     /* Calculate initial position */
     function pageLoaded(view) {
@@ -521,7 +571,7 @@ Window {
                     id: fullScreenHelp
                     opacity: 1.0
                     font.pixelSize: 20*zoomFactor
-                    text: (clockWindow.visibility !== Qt.WindowFullScreen
+                    text: (clockWindow.visibility != Window.FullScreen
                     //: Tooltip help telling to double click the player visible window to make it fullscreen 
                           ? qsTr("Double click to make fullscreen") :
                     //: Tooltip help telling to double click the player visible window to restore window from fullscreen mode
@@ -539,11 +589,10 @@ Window {
 
         signal windowState
         onDoubleClicked: {
-            if (clockWindow.visibility == Qt.WindowFullScreen)
-                clockWindow.visibility = Qt.WindowMaximized;
-            else
-                clockWindow.visibility = Qt.WindowFullScreen;
-            mover.windowState();
+            if (clockWindow.visibility == Window.FullScreen) {
+                clockWindow.showNormal();
+            } else
+                clockWindow.showFullScreen();
         }
         onPressed: {
             startPosition = Qt.point(mouse.x, mouse.y)

@@ -47,6 +47,7 @@ class TimeController : public QObject
     Q_PROPERTY(RoundInfo *roundInfo READ getRoundInfo NOTIFY roundInfoChanged)
     Q_PROPERTY(QRect zoomLimit READ getZoomLimit WRITE setZoomLimit NOTIFY zoomLimitChanged)
     Q_PROPERTY(QString version READ getVersion WRITE setVersion NOTIFY versionChanged)
+    Q_PROPERTY(QRect secundaryScreen READ secundaryScreen NOTIFY secundaryScreenChanged)
 public:
     explicit TimeController();
     ~TimeController();
@@ -68,6 +69,8 @@ public:
     QRect getZoomLimit() const;
     QString tournamentEnd() const;
     QString getVersion() const;
+
+    QRect secundaryScreen();
 
     const QString &resultUrl() const;
     void setResultUrl(const QString &url);
@@ -97,12 +100,17 @@ signals:
     void newversion(const QString &url, const QString &version);
     void languageChanged();
 
+    void secundaryScreenChanged();
+
 public slots:
     void urlUpdate();
     void fileChanged(const QString &path);
     void updateRoundInfo();
 
     void languageChange();
+
+    void screenAdded(QScreen *screen);
+    void screenRemoved(QScreen *screen);
 
 private:
     class TimeControllerPrivate *d;

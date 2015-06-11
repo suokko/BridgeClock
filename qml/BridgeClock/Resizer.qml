@@ -21,13 +21,14 @@ THE SOFTWARE.
 */
 
 import QtQuick 2.0
+import QtQuick.Window 2.2
 import org.bridgeClock 1.0
 
 GlobalMouseArea {
     id: resizer
     anchors.margins: 3
     hoverEnabled: true
-    enabled: clockWindow.visibility != Qt.WindowFullScreen
+    enabled: clockWindow.visibility != Window.FullScreen
     property string direction: ""
     property variant startPosition
     property variant windowPosition
@@ -52,7 +53,7 @@ GlobalMouseArea {
 
     function setCursor() {
         timeController.setItemCursor(resizer,
-                                     clockWindow.visibility == Qt.WindowFullScreen ?
+                                     clockWindow.visibility == Window.FullScreen ?
                                          "" : direction);
     }
 

@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>icons/BridgeClock64.png</file>
+        <file>icons/media-playback-pause.png</file>
+        <file>icons/media-playback-start.png</file>
     </qresource>
 </RCC>

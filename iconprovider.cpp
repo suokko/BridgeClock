@@ -7,14 +7,15 @@ IconProvider::IconProvider() :
     QQuickImageProvider(QQmlImageProviderBase::Pixmap,
         QQmlImageProviderBase::ForceAsynchronousImageLoading)
 {
-    /* Disable system icon source lookup to test windows behavior */
-    QStringList test; test << ":/icons";
-    QIcon::setThemeSearchPaths(test);
 }
 
 QPixmap IconProvider::requestPixmap(const QString &id, QSize *size, const QSize &requestedSize)
 {
-    QIcon icon = QIcon::fromTheme(id);
+#if 1
+    QIcon icon = QIcon::fromTheme(id, QIcon(":/icons/" + id + ".png"));
+#else
+    QIcon icon(":/icons/" + id + ".png");
+#endif
 
     QSize targetsize(24, 24);
 

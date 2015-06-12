@@ -72,21 +72,24 @@ Item {
             text: timeController.roundInfo.timeLeft
             font.pointSize: 14
         }
-        CheckBox {
-            anchors.top: header.bottom
-            anchors.right: parent.right
-            anchors.margins: 5
-            visible: timeController.roundInfo.playing < 2
+
+        Action {
             id: pause
-            //: The label for checkbox that stops count down in time settings tab.
-            text: qsTr("Stop the clock") + lang.lang
-            checked: false
-            style: CheckBoxStyle {
-                label: Text {
-                    text: control.text
-                    font.pointSize: 14
-                }
-            }
+            enabled: timeController.roundInfo.playing < 2
+            checkable: true
+            iconSource: checked ? "image://icons/media-playback-start" :
+                            "image://icons/media-playback-pause"
+            shortcut: "Ctrl+P"
+        }
+
+        Button {
+            visible: pause.enabled
+            anchors.right: parent.right
+            anchors.bottom: timeLeft.bottom
+            anchors.rightMargin: 5
+            height: implicitHeight*1.1
+            width: height*1.618
+            action: pause
         }
 
         Binding {

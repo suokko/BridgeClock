@@ -100,7 +100,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     QQmlApplicationEngine eng;
     eng.rootContext()->setContextProperty("timeController", &timeController);
     eng.rootContext()->setContextProperty("lang", &lang);
-    eng.addImageProvider("icon", new IconProvider());
+    eng.addImageProvider("icons", new IconProvider());
     eng.load("qml/BridgeClock/main.qml");
 
     return app.exec();

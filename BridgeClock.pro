@@ -23,6 +23,10 @@ lupdate_only {
 SOURCES += qml/BridgeClock/*.qml
 }
 
+RESOURCES = BridgeClock.qrc
+RC_ICONS = icons/BridgeClock64.ico
+ICON = icons/BridgeClock.icns
+
 TRANSLATIONS = \
 	locale/BridgeClock_da_DK.ts \
 	locale/BridgeClock_de_DE.ts \

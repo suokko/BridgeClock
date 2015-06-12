@@ -62,8 +62,7 @@ COMMONQML := \
 	QtQuick/Dialogs/Private/* \
 	QtQuick/Layouts/*
 
-COMMONSRC := BridgeClock80.png \
-	LICENSE \
+COMMONSRC := LICENSE \
 	LICENSE.QT.LGPL \
 	README \
 	$(subst ../,,$(wildcard ../qml/BridgeClock/*)) \
@@ -168,6 +167,10 @@ WIN32PLUGINS := \
 
 WIN32QML := $(subst $(WIN32PATH)/qml/,,$(wildcard $(addprefix $(WIN32PATH)/qml/,$(COMMONQML))))
 
+WIN32RES := \
+	icons/BridgeClock64.ico \
+#
+
 WIN32ALL := $(WIN32GCCLIBS) \
 	$(WIN32MINGWLIBS) \
 	$(WIN32LIBS) \
@@ -175,6 +178,7 @@ WIN32ALL := $(WIN32GCCLIBS) \
 	$(addprefix plugins/,$(WIN32PLUGINS)) \
 	$(addprefix qml/,$(WIN32QML)) \
 	$(COMMONSRC) \
+	$(WIN32RES) \
 	qt.conf
 
 $(addprefix win/,$(WIN32GCCLIBS)): win/%.dll: ${GCCLIBPATH}/%.dll
@@ -197,7 +201,7 @@ $(addprefix win/plugins/,$(WIN32PLUGINS)): win/plugins/%.dll: ${WIN32PATH}/plugi
 	mkdir -p $(dir $@)
 	cp $< $@
 
-$(addprefix win/,$(filter-out %main.qml,$(COMMONSRC))): win/%: ../%
+$(addprefix win/,$(filter-out %main.qml,$(COMMONSRC) $(WIN32RES))): win/%: ../%
 	mkdir -p $(dir $@)
 	cp $< $@
 
@@ -242,11 +246,17 @@ LINUXPLUGINS :=
 
 LINUXQML :=
 
+LINUXRES := \
+	BridgeClock.desktop \
+	icons/BridgeClock64.png \
+#
+
 LINUXALL := $(addprefix lib/,$(LINUXLIBS)) \
 	$(LINUXBIN) \
 	$(addprefix plugins/,$(LINUXPLUGINS)) \
 	$(addprefix qml/,$(LINUXQML)) \
-	$(COMMONSRC)
+	$(COMMONSRC) \
+	$(LINUXRES)
 
 linux/lib/%: $(LINUXCHROOTPATH)/$(LINUXQTPATH)/%
 	mkdir -p $(dir $@)

@@ -36,6 +36,8 @@ THE SOFTWARE.
 
 #include "iconprovider.h"
 
+#include <QIcon>
+
 #if defined(WIN32) || defined(__WIN32)
 #include <stdio.h>
 void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
@@ -81,6 +83,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     QCoreApplication::setOrganizationDomain("bridgefinland.fi");
     QCoreApplication::setOrganizationName("SBL");
     QCoreApplication::setApplicationName("BridgeClock");
+    app.setWindowIcon(QIcon(":/icons/BridgeClock64.png"));
 
     LanguageModel lang;
 

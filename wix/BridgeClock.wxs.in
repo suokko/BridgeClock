@@ -36,9 +36,9 @@
 					<Component Id='BridgeClockBinary' Guid='${MAINBIN_UUID}'>
 						<File Id='BridgeClockEXE' Name='BridgeClock.exe' DiskId='1' Source='BridgeClock.exe' KeyPath='yes'>
 							<Shortcut Id='startmenuBridgeClock' Directory='ProgramMenuDir' Name='BridgeClock ${VERSIONFULL}'
-								WorkingDirectory='INSTALLDIR' Icon='BridgeClock80.png' IconIndex='0' Advertise='yes' />
+								WorkingDirectory='INSTALLDIR' Icon='BridgeClock64.ico' IconIndex='0' Advertise='yes' />
 							<Shortcut Id='desktopBridgeClock' Directory='DesktopFolder' Name='BridgeClock ${VERSIONFULL}'
-								WorkingDirectory='INSTALLDIR' Icon='BridgeClock80.png' IconIndex='0' Advertise='yes' />
+								WorkingDirectory='INSTALLDIR' Icon='BridgeClock64.ico' IconIndex='0' Advertise='yes' />
 						</File>
 					</Component>
 				</Directory>
@@ -62,7 +62,8 @@
 			<ComponentGroupRef Id='bcall' />
 		</Feature>
 
-		<Icon Id='BridgeClock80.png' SourceFile='BridgeClock80.png' />
+		<Icon Id='BridgeClock64.ico' SourceFile='icons/BridgeClock64.ico' />
+		<Property Id="ARPPRODUCTICON" Value="BridgeClock64.ico" />
 	</Product>
 
 </Wix>

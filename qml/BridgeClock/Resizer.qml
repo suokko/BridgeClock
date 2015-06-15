@@ -62,7 +62,7 @@ GlobalMouseArea {
         windowPosition = Qt.rect(clockWindow.x, clockWindow.y, clockWindow.width, clockWindow.height);
     }
     onPositionChanged: {
-        if (mouse.buttons == Qt.LeftButton && !parent.fullScreen) {
+        if (mouse.buttons === Qt.LeftButton && !parent.fullScreen) {
             var dx = mouse.x - startPosition.x
             var dy = mouse.y - startPosition.y
 

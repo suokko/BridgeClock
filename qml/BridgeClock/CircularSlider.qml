@@ -8,9 +8,9 @@ BorderImage {
     property int rounds : 1
     property int currentRound : Math.floor((value - minimumValue) / (maximumValue - minimumValue + 1) * rounds)
     property real minimumValue: 0
-    property variant maximumValue : 12
-    property variant value : topValueMax?maximumValue:minimumValue
-    property variant pressed : handle.pressed
+    property int maximumValue : 12
+    property int value : topValueMax?maximumValue:minimumValue
+    property bool pressed : handle.pressed
     width: 350
     height: 350
 

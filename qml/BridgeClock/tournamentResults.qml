@@ -29,7 +29,7 @@ import QtWebKit.experimental 1.0
 Item {
     anchors.fill: parent
     property string settingsUrl: timeController.resultUrl
-    property var settingsZoomLimit: timeController.zoomLimit
+    property rect settingsZoomLimit: timeController.zoomLimit
     property bool initialLoad: true
     Component.onCompleted: {
         settingsUrl = timeController.resultUrl
@@ -159,8 +159,8 @@ Item {
             clip: true
             hoverEnabled: true
             property string direction: ""
-            property variant panstart: Qt.point(0, 0)
-            property variant pressloc: Qt.point(0, 0)
+            property point panstart: Qt.point(0, 0)
+            property point pressloc: Qt.point(0, 0)
             property bool directionLock: false
 
             Rectangle {

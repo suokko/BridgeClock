@@ -40,7 +40,7 @@ Window {
     property bool animationDown: true
     property double ypos: -1
 
-    property var screen: timeController.secundaryScreen
+    property rect screen: timeController.secundaryScreen
 
     onVisibilityChanged: mover.windowState()
 
@@ -183,7 +183,7 @@ Window {
     }
 
     readonly property int transduration: 2000
-    readonly property var transtype: Easing.InOutQuad
+    readonly property real transtype: Easing.InOutQuad
 
     Rectangle {
         id: resultBlender
@@ -440,10 +440,10 @@ Window {
             id: nextBreakEnd
             visibility: timeView.state == "showRes" &&
                         timeController.roundInfo.playing < 2 &&
-                        timeController.roundInfo.nextBreakStart != ""
+                        timeController.roundInfo.nextBreakStart !== ""
             text: timeController.roundInfo.nextBreakStart.replace(/:[^:]*$/,'') + 
             //: A character between start and end time of the next break (visible to players)
-            (timeController.roundInfo.nextBreakEnd != "" ? qsTr(" - ") + 
+            (timeController.roundInfo.nextBreakEnd !== "" ? qsTr(" - ") +
             timeController.roundInfo.nextBreakEnd.replace(/:[^:]*$/,'') : "") + lang.lang;
             font.pixelSize: 20*zoomFactor
             font.weight: Font.Light;
@@ -656,7 +656,7 @@ Window {
             windowPosition = Qt.point(clockWindow.x, clockWindow.y);
         }
         onPositionChanged: {
-            if (mouse.buttons == Qt.LeftButton) {
+            if (mouse.buttons === Qt.LeftButton) {
                 var dx = mouse.x - startPosition.x
                 var dy = mouse.y - startPosition.y
                 clockWindow.x = windowPosition.x + dx;

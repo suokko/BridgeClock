@@ -444,15 +444,19 @@ Window {
         y: time.y + time.height - 10*zoomFactor
         anchors.horizontalCenter: results.horizontalCenter
 
+        clip: true
+
         height: clockWindow.height - y - 3*zoomFactor
-        width: columnCount(height, cellHeight, count) * cellWidth + 6*zoomFactor
+        width: columnCount(height, cellHeight, count, parent.width - 3*zoomFactor, cellWidth) + 3*zoomFactor
 
         cellHeight: currentItem ? currentItem.height + 3*zoomFactor : 0
         cellWidth: widthList['total'] + 6*zoomFactor
 
-        function columnCount(h, cellh, count) {
+        function columnCount(h, cellh, count, maxwidth, cw) {
             var nc = Math.floor(h/cellh);
-            return Math.ceil(count/nc);
+            var maxcols = Math.floor(maxwidth/cw);
+            var width = Math.ceil(count/nc);
+            return Math.min(maxcols, width) * cw;
         }
 
         property var widthList: []

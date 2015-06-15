@@ -186,6 +186,59 @@ Window {
     readonly property var transtype: Easing.InOutQuad
 
     Rectangle {
+        id: resultBlender
+        anchors.top: timeView.bottom
+        anchors.right: parent.right
+        anchors.left: parent.left
+        height: results.height
+        z: 1
+
+        visible: false
+
+        gradient: Gradient {
+            GradientStop { position: 0.0; color: "#FFFFFFFF" }
+            GradientStop { position: 0.25; color: "#D8FFFFFF" }
+            GradientStop { position: 1.0; color: "#00FFFFFF" }
+        }
+
+        states: [
+            State {
+                name: "showRes";
+                when: timeView.state == "showRes"
+                PropertyChanges {
+                    target: resultBlender
+                    height: 0
+                }
+            }
+        ]
+        transitions: [
+            Transition {
+                to: "showRes"
+                SequentialAnimation {
+                    PropertyAction { target: resultBlender; property: "visible"; value: true }
+                    NumberAnimation { target: resultBlender;
+                        properties: "height";
+                        duration: transduration
+                        easing.type: Easing.InCubic
+                    }
+                    PropertyAction { target: resultBlender; property: "visible"; value: false }
+                }
+            },
+            Transition {
+                from: "showRes"
+                SequentialAnimation {
+                    PropertyAction { target: resultBlender; property: "visible"; value: true }
+                    NumberAnimation { target: resultBlender;
+                        properties: "height";
+                        duration: transduration
+                        easing.type: Easing.OutCubic
+                    }
+                    PropertyAction { target: resultBlender; property: "visible"; value: false }
+                }
+            }
+        ]
+    }
+    Rectangle {
         id: timeView
         anchors.left: parent.left
         anchors.right: parent.right

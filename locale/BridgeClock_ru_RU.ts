@@ -60,7 +60,7 @@
     <message>
         <location filename="../compactmodel.cpp" line="61"/>
         <source>Rounds %1-%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Раунды %1-%2</translation>
     </message>
 </context>
 <context>
@@ -75,7 +75,7 @@
         <location filename="../qml/BridgeClock/Clock.qml" line="284"/>
         <source>Tournament will end: </source>
         <extracomment>Label visible to players before or above the tournament end time</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Турнир закончится: </translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/Clock.qml" line="365"/>
@@ -99,7 +99,7 @@
         <location filename="../qml/BridgeClock/Clock.qml" line="578"/>
         <source>Double click to restore back to window</source>
         <extracomment>Tooltip help telling to double click the player visible window to restore window from fullscreen mode</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Двойной щелчок, чтобы восстановить обратно в окно</translation>
     </message>
 </context>
 <context>
@@ -107,7 +107,7 @@
     <message>
         <location filename="../timemodel.cpp" line="311"/>
         <source>Begin</source>
-        <translation type="unfinished"></translation>
+        <translation>начать</translation>
     </message>
 </context>
 <context>
@@ -116,13 +116,14 @@
         <location filename="../qml/BridgeClock/main.qml" line="33"/>
         <source>Bridge clock %1</source>
         <extracomment>The window header including version number as parameter %1</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Мост часы %1</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/main.qml" line="67"/>
         <source>A new version of bridge clock %1 is available for download.&lt;br/&gt;%2Ignore%3</source>
         <extracomment>%1 is version number with downloadable link %2 &amp; %3 html code for ignore link</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Новая версия мост часы %1 доступна для загрузки.
+на 1 %2Ignore%3</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/main.qml" line="123"/>
@@ -155,7 +156,7 @@
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="61"/>
         <source>Result address: </source>
         <extracomment>The label text above url text input for result file</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Адрес результата: </translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="67"/>
@@ -167,13 +168,13 @@
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="335"/>
         <source>Select a file to be shown in result view</source>
         <extracomment>File chooser dialog title shown when user is searching for a result file</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Выберите файл, который будет показан в результате</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="338"/>
         <source>HTML-files (*.htm *.html)</source>
         <extracomment>File filter entry that lets users hide all files except html files</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>HTML-файлы (*.htm *.html)</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="340"/>
@@ -217,13 +218,13 @@
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="129"/>
         <source>Change time</source>
         <extracomment>Label before slider and text input for length of change between round in minutest</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Время перемен</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="172"/>
         <source>Start time</source>
         <extracomment>Subheader before the tournament start time selector</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Время начала</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="180"/>
@@ -235,7 +236,7 @@
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="208"/>
         <source>Start a new tournament</source>
         <extracomment>The button text that resets round and break modifications to start a new tournament</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Начать новый турнир</translation>
     </message>
 </context>
 <context>
@@ -274,7 +275,7 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="129"/>
         <source>+5m</source>
         <extracomment>The text for button that adds five minutes to current round or break in time settings tab.</extracomment>
-        <translation type="unfinished">+1м {5m?}</translation>
+        <translation>+5м</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="135"/>
@@ -301,7 +302,7 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="234"/>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="254"/>
         <source>No choice</source>
-        <extracomment>Place holder text that shouldn&apos;t ever be visible to user</extracomment>
+        <extracomment>Place holder text that shouldn't ever be visible to user</extracomment>
         <translation>Нет выбора</translation>
     </message>
     <message>
@@ -326,25 +327,25 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="243"/>
         <source>Previous:</source>
         <extracomment>Label before text showing the name of previous round or break in settings tab.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>предыдущий:</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="376"/>
         <source>Custom:</source>
         <extracomment>Label before text input for custom round break name</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>обычай:</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="555"/>
         <source>Begin</source>
         <extracomment>The column header showing the begin time of round or break in time settings tab.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Начало</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="576"/>
         <source>Happening</source>
         <extracomment>The column header showing the name of round or break in time settings tab.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>происшествие</translation>
     </message>
 </context>
 </TS>

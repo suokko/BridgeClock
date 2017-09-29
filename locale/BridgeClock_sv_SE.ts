@@ -122,7 +122,7 @@
         <location filename="../qml/BridgeClock/main.qml" line="67"/>
         <source>A new version of bridge clock %1 is available for download.&lt;br/&gt;%2Ignore%3</source>
         <extracomment>%1 is version number with downloadable link %2 &amp; %3 html code for ignore link</extracomment>
-        <translation type="unfinished">En ny version av bridgeklocka %1 finns tillgänglig för hämtning.&lt;br/&gt;%2Ignore%3</translation>
+        <translation>En ny version av bridgeklocka %1 finns tillgänglig för hämtning.&lt;br/&gt;%2Ignore%3</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/main.qml" line="123"/>

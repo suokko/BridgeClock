@@ -44,7 +44,7 @@
         <location filename="../timemodel.cpp" line="673"/>
         <source>Round %1</source>
         <extracomment>The name of round. %1 is the number of round.</extracomment>
-        <translation>Rund %1</translation>
+        <translation>Runda %1</translation>
     </message>
     <message>
         <location filename="../timemodel.cpp" line="676"/>
@@ -60,7 +60,7 @@
     <message>
         <location filename="../compactmodel.cpp" line="61"/>
         <source>Rounds %1-%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Runda %1-%2</translation>
     </message>
 </context>
 <context>
@@ -69,7 +69,7 @@
         <location filename="../qml/BridgeClock/Clock.qml" line="35"/>
         <source>The time view</source>
         <extracomment>The tile of window that shows the time and result information for players.</extracomment>
-        <translation>Tiden vy</translation>
+        <translation>Tidsvyn</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/Clock.qml" line="284"/>
@@ -93,13 +93,13 @@
         <location filename="../qml/BridgeClock/Clock.qml" line="576"/>
         <source>Double click to make fullscreen</source>
         <extracomment>Tooltip help telling to double click the player visible window to make it fullscreen</extracomment>
-        <translation>Dubbelklicka på helskärm</translation>
+        <translation>Dubbelklicka för helskärm</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/Clock.qml" line="578"/>
         <source>Double click to restore back to window</source>
         <extracomment>Tooltip help telling to double click the player visible window to restore window from fullscreen mode</extracomment>
-        <translation>Dubbelklicka för att återställa fönstret till</translation>
+        <translation>Dubbelklicka för att återgå till fönsterläge</translation>
     </message>
 </context>
 <context>
@@ -116,13 +116,13 @@
         <location filename="../qml/BridgeClock/main.qml" line="33"/>
         <source>Bridge clock %1</source>
         <extracomment>The window header including version number as parameter %1</extracomment>
-        <translation>Bridge klocka %1</translation>
+        <translation>Bridgeklocka %1</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/main.qml" line="67"/>
         <source>A new version of bridge clock %1 is available for download.&lt;br/&gt;%2Ignore%3</source>
         <extracomment>%1 is version number with downloadable link %2 &amp; %3 html code for ignore link</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">En ny version av bridgeklocka %1 finns tillgänglig för hämtning.&lt;br/&gt;%2Ignore%3</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/main.qml" line="123"/>
@@ -155,7 +155,7 @@
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="61"/>
         <source>Result address: </source>
         <extracomment>The label text above url text input for result file</extracomment>
-        <translation>Resultat adress: </translation>
+        <translation>Resultatadress: </translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="67"/>
@@ -167,19 +167,19 @@
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="335"/>
         <source>Select a file to be shown in result view</source>
         <extracomment>File chooser dialog title shown when user is searching for a result file</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Välj en fil som ska visas i resultatvyn</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="338"/>
         <source>HTML-files (*.htm *.html)</source>
         <extracomment>File filter entry that lets users hide all files except html files</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>HTML-filer (*.htm *.html)</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="340"/>
         <source>All files (*)</source>
         <extracomment>File filter entry that lets users to show all files</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Alla filer (*)</translation>
     </message>
 </context>
 <context>
@@ -194,13 +194,13 @@
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="46"/>
         <source>Number of rounds</source>
         <extracomment>Label for number of rounds slider and input box</extracomment>
-        <translation>Antal rund</translation>
+        <translation>Antal rundor</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="83"/>
         <source>Round time</source>
         <extracomment>Label for length of round in minutes</extracomment>
-        <translation>Rund tid</translation>
+        <translation>Tid för runda</translation>
     </message>
     <message numerus="yes">
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="103"/>
@@ -228,13 +228,13 @@
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="180"/>
         <source>Now</source>
         <extracomment>The button text that sets tournament start time to be now</extracomment>
-        <translation>Ny</translation>
+        <translation>Nu</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="208"/>
         <source>Start a new tournament</source>
         <extracomment>The button text that resets round and break modifications to start a new tournament</extracomment>
-        <translation>Börja en ny tournering</translation>
+        <translation>Börja en ny turnering</translation>
     </message>
 </context>
 <context>

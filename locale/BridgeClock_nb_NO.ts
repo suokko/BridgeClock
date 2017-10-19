@@ -93,13 +93,13 @@
         <location filename="../qml/BridgeClock/Clock.qml" line="576"/>
         <source>Double click to make fullscreen</source>
         <extracomment>Tooltip help telling to double click the player visible window to make it fullscreen</extracomment>
-        <translation>Dobbelklikk for fullskjerm</translation>
+        <translation>Dobbelklikk for fullskjermsvisning</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/Clock.qml" line="578"/>
         <source>Double click to restore back to window</source>
         <extracomment>Tooltip help telling to double click the player visible window to restore window from fullscreen mode</extracomment>
-        <translation>Dobbelklikk for å tilbakestille til vindu</translation>
+        <translation>Dobbelklikk for å gå tilbake til vindusvisning</translation>
     </message>
 </context>
 <context>
@@ -122,7 +122,7 @@
         <location filename="../qml/BridgeClock/main.qml" line="67"/>
         <source>A new version of bridge clock %1 is available for download.&lt;br/&gt;%2Ignore%3</source>
         <extracomment>%1 is version number with downloadable link %2 &amp; %3 html code for ignore link</extracomment>
-        <translation>En ny versjon av Bridgeklokke %1 er tilgjengelig for nedlasting&lt;br/&gt; %2Ignore%3</translation>
+        <translation>En ny versjon av Bridgeklokke (%1) er tilgjengelig for nedlasting&lt;br/&gt; %2Ignore%3</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/main.qml" line="123"/>

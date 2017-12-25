@@ -99,7 +99,7 @@
         <location filename="../qml/BridgeClock/Clock.qml" line="578"/>
         <source>Double click to restore back to window</source>
         <extracomment>Tooltip help telling to double click the player visible window to restore window from fullscreen mode</extracomment>
-        <translation>Doppelklick um zum Fenster zurückzukehren</translation>
+        <translation>Doppelklick, um zum Fenster zurückzukehren</translation>
     </message>
 </context>
 <context>
@@ -149,7 +149,7 @@
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="52"/>
         <source>Show results</source>
         <extracomment>The label text for checkbox that selects if results are shown under the clock</extracomment>
-        <translation>Zeige Ergebnisse</translation>
+        <translation>Ergebnisse anzeigen</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="61"/>
@@ -161,13 +161,13 @@
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="67"/>
         <source>Browse files</source>
         <extracomment>Button to open file browser to find the results to be shown</extracomment>
-        <translation>Durchsuche Dateien</translation>
+        <translation>Dateien durchsuchen</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="335"/>
         <source>Select a file to be shown in result view</source>
         <extracomment>File chooser dialog title shown when user is searching for a result file</extracomment>
-        <translation>Eine Datei auswählen, um sie in der Ergebnisansicht zu zeigen</translation>
+        <translation>Eine Datei auswählen, um sie in der Ergebnisansicht anzuzeigen</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="338"/>
@@ -255,7 +255,7 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="82"/>
         <source>Stop the clock</source>
         <extracomment>The label for checkbox that stops count down in time settings tab.</extracomment>
-        <translation>Die Uhr anhalten</translation>
+        <translation>Uhr anhalten</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="117"/>

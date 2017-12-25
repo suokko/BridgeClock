@@ -60,7 +60,7 @@
     <message>
         <location filename="../compactmodel.cpp" line="61"/>
         <source>Rounds %1-%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Runden %1-%2</translation>
     </message>
 </context>
 <context>
@@ -87,7 +87,7 @@
         <location filename="../qml/BridgeClock/Clock.qml" line="393"/>
         <source> - </source>
         <extracomment>A character between start and end time of the next break (visible to players)</extracomment>
-        <translation type="unfinished"> - </translation>
+        <translation> - </translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/Clock.qml" line="576"/>
@@ -243,7 +243,7 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="48"/>
         <source> -&gt; </source>
         <extracomment>Arrow between break and next round name in time settings tab.</extracomment>
-        <translation type="unfinished"> -&gt; </translation>
+        <translation> ➜ </translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="64"/>

@@ -116,7 +116,7 @@
         <location filename="../qml/BridgeClock/main.qml" line="33"/>
         <source>Bridge clock %1</source>
         <extracomment>The window header including version number as parameter %1</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>桥时钟%1</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/main.qml" line="67"/>
@@ -299,7 +299,7 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="234"/>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="254"/>
         <source>No choice</source>
-        <extracomment>Place holder text that shouldn't ever be visible to user</extracomment>
+        <extracomment>Place holder text that shouldn&apos;t ever be visible to user</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>

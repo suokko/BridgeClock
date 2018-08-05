@@ -209,6 +209,8 @@
         <extracomment>Label after input box accepting minutes</extracomment>
         <translation><numerusform>דקה</numerusform>
         <numerusform>דקות</numerusform>
+        <numerusform>דקות</numerusform>
+        <numerusform>דקות</numerusform>
         </translation></message>
     <message>
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="129"/>

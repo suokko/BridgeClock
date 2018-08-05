@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
 <TS version="2.1" language="he_IL">
 <context>
@@ -116,13 +116,13 @@
         <location filename="../qml/BridgeClock/main.qml" line="33"/>
         <source>Bridge clock %1</source>
         <extracomment>The window header including version number as parameter %1</extracomment>
-        <translation type="unfinished"/>
+        <translation>שעון ברידג׳ %1</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/main.qml" line="67"/>
         <source>A new version of bridge clock %1 is available for download.&lt;br/&gt;%2Ignore%3</source>
         <extracomment>%1 is version number with downloadable link %2 &amp; %3 html code for ignore link</extracomment>
-        <translation type="unfinished"/>
+        <translation>גרסה חדשה של שעון ברידג׳ %1 זמינה להורדה.&lt;br/&gt;%2התעלמות%3</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/main.qml" line="123"/>
@@ -298,7 +298,7 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="234"/>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="254"/>
         <source>No choice</source>
-        <extracomment>Place holder text that shouldn't ever be visible to user</extracomment>
+        <extracomment>Place holder text that shouldn&apos;t ever be visible to user</extracomment>
         <translation>אין בחירה</translation>
     </message>
     <message>

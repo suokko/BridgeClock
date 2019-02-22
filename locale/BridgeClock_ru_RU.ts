@@ -122,7 +122,7 @@
         <location filename="../qml/BridgeClock/main.qml" line="67"/>
         <source>A new version of bridge clock %1 is available for download.&lt;br/&gt;%2Ignore%3</source>
         <extracomment>%1 is version number with downloadable link %2 &amp; %3 html code for ignore link</extracomment>
-        <translation>Новая версия мост часы %1 доступна для загрузки.
+        <translation type="unfinished">Новая версия мост часы %1 доступна для загрузки.&lt;br/&gt;
 на 1 %2Ignore%3</translation>
     </message>
     <message>
@@ -302,7 +302,7 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="234"/>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="254"/>
         <source>No choice</source>
-        <extracomment>Place holder text that shouldn't ever be visible to user</extracomment>
+        <extracomment>Place holder text that shouldn&apos;t ever be visible to user</extracomment>
         <translation>Нет выбора</translation>
     </message>
     <message>

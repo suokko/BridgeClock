@@ -128,13 +128,13 @@
         <location filename="../qml/BridgeClock/main.qml" line="123"/>
         <source>Start</source>
         <extracomment>The title for initial setup tab with round number and length settings</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>开始</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/main.qml" line="129"/>
         <source>Time</source>
         <extracomment>The title for time settings tab to setup breaks and modify length of rounds</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>时间</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/main.qml" line="135"/>
@@ -227,7 +227,7 @@
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="180"/>
         <source>Now</source>
         <extracomment>The button text that sets tournament start time to be now</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>现在</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="208"/>
@@ -242,7 +242,7 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="48"/>
         <source> -&gt; </source>
         <extracomment>Arrow between break and next round name in time settings tab.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation> —&gt; </translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="64"/>
@@ -266,13 +266,13 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="123"/>
         <source>+1m</source>
         <extracomment>The text for button that adds a minute to current round or break in time settings tab.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>+一分钟</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="129"/>
         <source>+5m</source>
         <extracomment>The text for button that adds five minutes to current round or break in time settings tab.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>+五分钟</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="135"/>
@@ -284,13 +284,13 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="141"/>
         <source>-1m</source>
         <extracomment>The text for button that subtracts a minute from current round or break in time settings tab.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>－一分钟</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="147"/>
         <source>-5m</source>
         <extracomment>The text for button that subtracts five minutes from current round or break in time settings tab.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>－五分钟</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="174"/>
@@ -306,7 +306,7 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="183"/>
         <source>Begin:</source>
         <extracomment>The label before the begin time of round or break in time settings tab</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>开始：</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="203"/>
@@ -336,7 +336,7 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="555"/>
         <source>Begin</source>
         <extracomment>The column header showing the begin time of round or break in time settings tab.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>开始</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="576"/>

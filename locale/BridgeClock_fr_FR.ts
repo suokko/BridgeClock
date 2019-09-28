@@ -50,7 +50,7 @@
         <location filename="../timemodel.cpp" line="673"/>
         <source>Round %1</source>
         <extracomment>The name of round. %1 is the number of round.</extracomment>
-        <translation>Ronde %1</translation>
+        <translation>Tour %1</translation>
     </message>
     <message>
         <location filename="../timemodel.cpp" line="676"/>
@@ -60,7 +60,7 @@
     <message>
         <location filename="../compactmodel.cpp" line="61"/>
         <source>Rounds %1-%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Tours %1 - %2</translation>
     </message>
 </context>
 <context>
@@ -194,13 +194,13 @@
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="46"/>
         <source>Number of rounds</source>
         <extracomment>Label for number of rounds slider and input box</extracomment>
-        <translation>Nombre de rondes</translation>
+        <translation>Nombre de tours</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="83"/>
         <source>Round time</source>
         <extracomment>Label for length of round in minutes</extracomment>
-        <translation>Durée de la ronde</translation>
+        <translation>Durée de tour</translation>
     </message>
     <message numerus="yes">
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="103"/>

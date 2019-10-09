@@ -331,7 +331,7 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="555"/>
         <source>Begin</source>
         <extracomment>The column header showing the begin time of round or break in time settings tab.</extracomment>
-        <translation type="unfinished">Begin</translation>
+        <translation>Başlangıç</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="576"/>

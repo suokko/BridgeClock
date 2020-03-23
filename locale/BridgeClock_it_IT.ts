@@ -43,7 +43,7 @@
         <location filename="../timecontroller.cpp" line="243"/>
         <source>Tournament begins</source>
         <extracomment>The player visible text when count down shows time to begin of tournament. This should be fairly short text if possible.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Il torneo inizia</translation>
     </message>
     <message>
         <location filename="../timemodel.cpp" line="426"/>

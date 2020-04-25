@@ -261,37 +261,37 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="117"/>
         <source>+10s</source>
         <extracomment>The text for button that adds ten seconds to current round or break in time settings tab.</extracomment>
-        <translation>+10s</translation>
+        <translation>+10 s</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="123"/>
         <source>+1m</source>
         <extracomment>The text for button that adds a minute to current round or break in time settings tab.</extracomment>
-        <translation>+1m</translation>
+        <translation>+1 min</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="129"/>
         <source>+5m</source>
         <extracomment>The text for button that adds five minutes to current round or break in time settings tab.</extracomment>
-        <translation>+5m</translation>
+        <translation>+5 min</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="135"/>
         <source>-10s</source>
         <extracomment>The text for button that subtracts ten seconds from current round or break in time settings tab.</extracomment>
-        <translation>-10s</translation>
+        <translation>-10 s</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="141"/>
         <source>-1m</source>
         <extracomment>The text for button that subtracts a minute from current round or break in time settings tab.</extracomment>
-        <translation>-1m</translation>
+        <translation>-1 min</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="147"/>
         <source>-5m</source>
         <extracomment>The text for button that subtracts five minutes from current round or break in time settings tab.</extracomment>
-        <translation>-5m</translation>
+        <translation>-5 min</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="174"/>

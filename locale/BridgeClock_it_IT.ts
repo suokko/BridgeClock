@@ -50,7 +50,7 @@
         <location filename="../timemodel.cpp" line="673"/>
         <source>Round %1</source>
         <extracomment>The name of round. %1 is the number of round.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Turno %1</translation>
     </message>
     <message>
         <location filename="../timemodel.cpp" line="676"/>
@@ -60,7 +60,7 @@
     <message>
         <location filename="../compactmodel.cpp" line="61"/>
         <source>Rounds %1-%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Turni %1-%2</translation>
     </message>
 </context>
 <context>
@@ -87,7 +87,7 @@
         <location filename="../qml/BridgeClock/Clock.qml" line="393"/>
         <source> - </source>
         <extracomment>A character between start and end time of the next break (visible to players)</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"> - </translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/Clock.qml" line="576"/>
@@ -116,13 +116,13 @@
         <location filename="../qml/BridgeClock/main.qml" line="33"/>
         <source>Bridge clock %1</source>
         <extracomment>The window header including version number as parameter %1</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Bridge clock %1</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/main.qml" line="67"/>
         <source>A new version of bridge clock %1 is available for download.&lt;br/&gt;%2Ignore%3</source>
         <extracomment>%1 is version number with downloadable link %2 &amp; %3 html code for ignore link</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Nuova versione di bridge clock %1 disponibile per il download.&lt;br/&gt;%2Ignore%3</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/main.qml" line="123"/>
@@ -161,13 +161,13 @@
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="67"/>
         <source>Browse files</source>
         <extracomment>Button to open file browser to find the results to be shown</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Esplora file</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="335"/>
         <source>Select a file to be shown in result view</source>
         <extracomment>File chooser dialog title shown when user is searching for a result file</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona il file da mostrare nella finestra risultati</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="338"/>
@@ -188,19 +188,19 @@
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="36"/>
         <source>Tournament time</source>
         <extracomment>The header text for initial setup</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Durata torneo</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="46"/>
         <source>Number of rounds</source>
         <extracomment>Label for number of rounds slider and input box</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Numero di turni</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="83"/>
         <source>Round time</source>
         <extracomment>Label for length of round in minutes</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Durata turno</translation>
     </message>
     <message numerus="yes">
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="103"/>

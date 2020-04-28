@@ -116,13 +116,13 @@
         <location filename="../qml/BridgeClock/main.qml" line="33"/>
         <source>Bridge clock %1</source>
         <extracomment>The window header including version number as parameter %1</extracomment>
-        <translation>Horloge de bridge %1</translation>
+        <translation>Bridge clock %1</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/main.qml" line="67"/>
         <source>A new version of bridge clock %1 is available for download.&lt;br/&gt;%2Ignore%3</source>
         <extracomment>%1 is version number with downloadable link %2 &amp; %3 html code for ignore link</extracomment>
-        <translation>Une nouvelle version de l&apos;horloge de bridge %1 est disponible au téléchargement.&lt;br/&gt;%2Ignore%3</translation>
+        <translation>Une nouvelle version de Bridge clock %1 est disponible au téléchargement.&lt;br/&gt;%2Ignorer%3</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/main.qml" line="123"/>

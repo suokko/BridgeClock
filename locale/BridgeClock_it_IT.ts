@@ -87,7 +87,7 @@
         <location filename="../qml/BridgeClock/Clock.qml" line="393"/>
         <source> - </source>
         <extracomment>A character between start and end time of the next break (visible to players)</extracomment>
-        <translation type="unfinished"> - </translation>
+        <translation> - </translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/Clock.qml" line="576"/>
@@ -116,7 +116,7 @@
         <location filename="../qml/BridgeClock/main.qml" line="33"/>
         <source>Bridge clock %1</source>
         <extracomment>The window header including version number as parameter %1</extracomment>
-        <translation type="unfinished">Bridge clock %1</translation>
+        <translation>Bridge clock %1</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/main.qml" line="67"/>
@@ -222,7 +222,7 @@
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="172"/>
         <source>Start time</source>
         <extracomment>Subheader before the tournament start time selector</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Ora di inizio</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="180"/>
@@ -234,7 +234,7 @@
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="208"/>
         <source>Start a new tournament</source>
         <extracomment>The button text that resets round and break modifications to start a new tournament</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Inizia un nuovo torneo</translation>
     </message>
 </context>
 <context>
@@ -243,13 +243,13 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="48"/>
         <source> -&gt; </source>
         <extracomment>Arrow between break and next round name in time settings tab.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation> ➜ </translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="64"/>
         <source>Remaining:</source>
         <extracomment>Label before count down to the end of current round or break</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Rimanente:</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="82"/>
@@ -337,13 +337,13 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="555"/>
         <source>Begin</source>
         <extracomment>The column header showing the begin time of round or break in time settings tab.</extracomment>
-        <translation type="unfinished">Inizio</translation>
+        <translation>Inizio</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="576"/>
         <source>Happening</source>
         <extracomment>The column header showing the name of round or break in time settings tab.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>In corso</translation>
     </message>
 </context>
 </TS>

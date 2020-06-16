@@ -60,7 +60,7 @@
     <message>
         <location filename="../compactmodel.cpp" line="61"/>
         <source>Rounds %1-%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Rounds %1-%2</translation>
     </message>
 </context>
 <context>

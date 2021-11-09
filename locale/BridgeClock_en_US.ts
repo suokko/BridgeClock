@@ -161,7 +161,7 @@
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="67"/>
         <source>Browse files</source>
         <extracomment>Button to open file browser to find the results to be shown</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Browse files</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="335"/>

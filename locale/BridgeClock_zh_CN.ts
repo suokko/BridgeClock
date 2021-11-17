@@ -122,7 +122,7 @@
         <location filename="../qml/BridgeClock/main.qml" line="67"/>
         <source>A new version of bridge clock %1 is available for download.&lt;br/&gt;%2Ignore%3</source>
         <extracomment>%1 is version number with downloadable link %2 &amp; %3 html code for ignore link</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>桥时钟%1的新版本可以下载。&lt;br/&gt;%2Ignore%3</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/main.qml" line="123"/>
@@ -140,7 +140,7 @@
         <location filename="../qml/BridgeClock/main.qml" line="135"/>
         <source>Results</source>
         <extracomment>The title for result view settings tab to select the visible result file and limit the visible area</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>结果，成绩</translation>
     </message>
 </context>
 <context>
@@ -149,37 +149,37 @@
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="52"/>
         <source>Show results</source>
         <extracomment>The label text for checkbox that selects if results are shown under the clock</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>显示结果</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="61"/>
         <source>Result address: </source>
         <extracomment>The label text above url text input for result file</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>结果地址 </translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="67"/>
         <source>Browse files</source>
         <extracomment>Button to open file browser to find the results to be shown</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>浏览文件</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="335"/>
         <source>Select a file to be shown in result view</source>
         <extracomment>File chooser dialog title shown when user is searching for a result file</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>选择要在结果视图中显示的文件</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="338"/>
         <source>HTML-files (*.htm *.html)</source>
         <extracomment>File filter entry that lets users hide all files except html files</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>html文件(*.htm *.html)</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentResults.qml" line="340"/>
         <source>All files (*)</source>
         <extracomment>File filter entry that lets users to show all files</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>所有的文件</translation>
     </message>
 </context>
 <context>
@@ -188,19 +188,19 @@
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="36"/>
         <source>Tournament time</source>
         <extracomment>The header text for initial setup</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>比赛时间</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="46"/>
         <source>Number of rounds</source>
         <extracomment>Label for number of rounds slider and input box</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>回合数</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="83"/>
         <source>Round time</source>
         <extracomment>Label for length of round in minutes</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>回合时间</translation>
     </message>
     <message numerus="yes">
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="103"/>
@@ -215,13 +215,13 @@
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="129"/>
         <source>Change time</source>
         <extracomment>Label before slider and text input for length of change between round in minutest</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>改变时代</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="172"/>
         <source>Start time</source>
         <extracomment>Subheader before the tournament start time selector</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>启动时间</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="180"/>
@@ -233,7 +233,7 @@
         <location filename="../qml/BridgeClock/tournamentStart.qml" line="208"/>
         <source>Start a new tournament</source>
         <extracomment>The button text that resets round and break modifications to start a new tournament</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>开始新的比赛</translation>
     </message>
 </context>
 <context>
@@ -248,19 +248,19 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="64"/>
         <source>Remaining:</source>
         <extracomment>Label before count down to the end of current round or break</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>剩余的；还需处理的：</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="82"/>
         <source>Stop the clock</source>
         <extracomment>The label for checkbox that stops count down in time settings tab.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>停止计时</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="117"/>
         <source>+10s</source>
         <extracomment>The text for button that adds ten seconds to current round or break in time settings tab.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>增加10秒</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="123"/>
@@ -278,7 +278,7 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="135"/>
         <source>-10s</source>
         <extracomment>The text for button that subtracts ten seconds from current round or break in time settings tab.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>减少10秒</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="141"/>
@@ -300,7 +300,7 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="254"/>
         <source>No choice</source>
         <extracomment>Place holder text that shouldn&apos;t ever be visible to user</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>别无选择；无奈的选择</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="183"/>
@@ -312,25 +312,25 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="203"/>
         <source>End:</source>
         <extracomment>The label before the end time of round or break in time settings tab</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>结束：</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="223"/>
         <source>Length:</source>
         <extracomment>The label before the length of round or break in hours and minutes</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>长度尺寸：</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="243"/>
         <source>Previous:</source>
         <extracomment>Label before text showing the name of previous round or break in settings tab.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>以前的，先前的：</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="376"/>
         <source>Custom:</source>
         <extracomment>Label before text input for custom round break name</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>定制，习惯，自定义：</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="555"/>
@@ -342,7 +342,7 @@
         <location filename="../qml/BridgeClock/tournamentTime.qml" line="576"/>
         <source>Happening</source>
         <extracomment>The column header showing the name of round or break in time settings tab.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>事件，意外发生的事</translation>
     </message>
 </context>
 </TS>

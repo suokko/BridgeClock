@@ -69,7 +69,7 @@
         <location filename="../qml/BridgeClock/Clock.qml" line="35"/>
         <source>The time view</source>
         <extracomment>The tile of window that shows the time and result information for players.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>La vista de tiempo</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/Clock.qml" line="284"/>
@@ -87,7 +87,7 @@
         <location filename="../qml/BridgeClock/Clock.qml" line="393"/>
         <source> - </source>
         <extracomment>A character between start and end time of the next break (visible to players)</extracomment>
-        <translation type="unfinished"></translation>
+        <translation> -_- </translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/Clock.qml" line="576"/>
@@ -116,7 +116,7 @@
         <location filename="../qml/BridgeClock/main.qml" line="33"/>
         <source>Bridge clock %1</source>
         <extracomment>The window header including version number as parameter %1</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Bridge clock %1</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/main.qml" line="67"/>
@@ -128,19 +128,19 @@
         <location filename="../qml/BridgeClock/main.qml" line="123"/>
         <source>Start</source>
         <extracomment>The title for initial setup tab with round number and length settings</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Start</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/main.qml" line="129"/>
         <source>Time</source>
         <extracomment>The title for time settings tab to setup breaks and modify length of rounds</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Time</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/main.qml" line="135"/>
         <source>Results</source>
         <extracomment>The title for result view settings tab to select the visible result file and limit the visible area</extracomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Results</translation>
     </message>
 </context>
 <context>

@@ -128,7 +128,7 @@
         <location filename="../qml/BridgeClock/main.qml" line="123"/>
         <source>Start</source>
         <extracomment>The title for initial setup tab with round number and length settings</extracomment>
-        <translation>Comienzo</translation>
+        <translation>Inicio</translation>
     </message>
     <message>
         <location filename="../qml/BridgeClock/main.qml" line="129"/>

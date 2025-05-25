@@ -37,7 +37,7 @@
         <location filename="../timemodel.cpp" line="671"/>
         <source>Change</source>
         <extracomment>A short text visible to players telling that now is a change between rounds</extracomment>
-        <translation>Перерыв</translation>
+        <translation>Смена</translation>
     </message>
     <message>
         <location filename="../timecontroller.cpp" line="243"/>
